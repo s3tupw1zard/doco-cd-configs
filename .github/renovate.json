@@ -124,9 +124,6 @@
                 "mariadb"
             ],
             "allowedVersions": "11",
-            "matchUpdateTypes": [
-                "digest"
-            ],
             "automerge": true,
             "automergeType": "pr",
             "platformAutomerge": true
@@ -447,10 +444,6 @@
                 "ghcr.io/immich-app/postgres"
             ],
             "allowedVersions": "/^14-.+$/",
-            "matchUpdateTypes": [
-                "pin",
-                "digest"
-            ],
             "automerge": true,
             "automergeType": "pr",
             "platformAutomerge": true
