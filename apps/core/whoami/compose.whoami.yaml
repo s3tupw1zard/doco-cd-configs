@@ -1,0 +1,31 @@
+services:
+  whoami:
+    image: traefik/whoami:v1.10.4
+    container_name: whoami
+    hostname: whoami
+    restart: unless-stopped
+    environment:
+      TEST_VAR: ${TEST_VAR}
+    networks:
+      - bw-services
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      #- traefik.http.routers.whoami.middlewares=traefik-dashboard-oidc
+      - "traefik.http.routers.whoami.middlewares=crowdsec@file"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik"
+      - "test.label=65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/traefik/TEST_VAR"
+      - "test.label2=${TEST_VAR}"
+      - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
+      - "bunkerweb.USE_REVERSE_PROXY=yes"
+      - "bunkerweb.REVERSE_PROXY_URL=/"
+      - "bunkerweb.REVERSE_PROXY_HOST=http://whoami_whoami:80"
+
+networks:
+  bw-services:
+    external: true

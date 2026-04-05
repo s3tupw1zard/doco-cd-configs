@@ -1,0 +1,46 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    hostname: n8n
+    restart: unless-stopped
+    networks:
+      - traefik
+    #ports:
+    #  - "127.0.0.1:5678:5678"
+    environment:
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+      N8N_HOST: ${N8N_HOST}
+      N8N_PORT: "5678"
+      N8N_PROTOCOL: "https"
+      N8N_RUNNERS_ENABLED: "true"
+      NODE_ENV: "production"
+      WEBHOOK_URL: ${WEBHOOK_URL}
+      GENERIC_TIMEZONE: "Europe/Berlin"
+      TZ: "Europe/Berlin"
+      EXTERNAL_HOOK_FILES: "/home/node/.n8n/hooks.js"
+      N8N_TRUST_PROXY: "true"
+      OIDC_ISSUER_URL: ${OIDC_ISSUER_URL}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI}
+      N8N_PROXY_HOPS: "1"
+      EXTERNAL_FRONTEND_HOOKS_URLS: "/assets/oidc-frontend-hook.js"
+      N8N_ADDITIONAL_NON_UI_ROUTES: "auth"
+    volumes:
+      - /mnt/ssd/automation/n8n/data:/home/node/.n8n
+      - /mnt/ssd/automation/n8n/hook.js:/home/node/.n8n/hooks.js
+      - /mnt/ssd/automation/n8n/local-files:/files
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=5678"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true

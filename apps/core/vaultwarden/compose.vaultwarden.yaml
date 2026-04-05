@@ -1,0 +1,46 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:1.35.4-alpine
+    container_name: vaultwarden
+    hostname: vaultwarden
+#    ports:
+#      - 8000:80
+    volumes:
+      - /mnt/ssd/core/vaultwarden/data:/data:rw
+    networks:
+      - traefik
+    environment:
+      DOMAIN: ${DOMAIN}
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
+      EXPERIMENTAL_CLIENT_FEATURE_FLAGS: ${EXPERIMENTAL_CLIENT_FEATURE_FLAGS}
+      WEBSOCKET_ENABLED: "true"
+      SIGNUPS_ALLOWED: "false"
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_FROM: ${SMTP_FROM}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_SECURITY: "force_tls"
+      SMTP_USERNAME: ${SMTP_USERNAME}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SSO_ENABLED: "true"
+      SSO_ONLY: "false"
+      SSO_SIGNUPS_MATCH_EMAIL: "true"
+      SSO_AUTHORITY: ${SSO_AUTHORITY}
+      SSO_SCOPES: "email profile groups"
+      SSO_PKCE: "true"
+      SSO_CLIENT_ID: ${SSO_CLIENT_ID}
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+      SSO_MASTER_PASSWORD_POLICY: '{"enforceOnLogin":false,"minComplexity":3,"minLength":10,"requireLower":true,"requireNumbers":true,"requireSpecial":true,"requireUpper":true}'
+      SSO_AUTH_ONLY_NOT_SESSION: "false"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true

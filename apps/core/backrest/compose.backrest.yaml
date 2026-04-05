@@ -1,0 +1,39 @@
+services:
+  backrest:
+    image: ghcr.io/garethgeorge/backrest:v1.12.0
+    container_name: backrest
+    hostname: backrest
+    restart: unless-stopped
+    volumes:
+      - /mnt/ssd/core/backrest/data:/data
+      - /mnt/ssd/core/backrest/config:/config
+      - /mnt/ssd/core/backrest/cache:/cache
+      - /mnt/ssd/core/backrest/tmp:/tmp
+      - /mnt/ssd/core/backrest/rclone:/root/.config/rclone # Mount for rclone config (needed when using rclone remotes)
+      - /mnt:/userdata
+      #- /path/to/local/repos:/repos     # Mount local repos (optional for remote storage)
+    environment:
+      BACKREST_DATA: "/data"
+      BACKREST_CONFIG: "/config/config.json"
+      XDG_CACHE_HOME: "/cache"
+      TMPDIR: "/tmp"
+      TZ: "Europe/Berlin"
+      BACKUP_USER: "${BACKUP_USER}"
+      BACKUP_PASS: "${BACKUP_PASS}"
+#    ports:
+#      - "9898:9898"
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=9898"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true

@@ -1,0 +1,543 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended"
+    ],
+    "enabledManagers": [
+        "docker-compose"
+    ],
+    "includePaths": [
+        "apps/**"
+    ],
+    "labels": [
+        "dependencies",
+        "renovate"
+    ],
+    "packageRules": [
+        {
+            "description": "Default for all Compose-Stacks",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchDatasources": [
+                "docker"
+            ],
+            "pinDigests": true,
+            "separateMinorPatch": true
+        },
+        {
+            "description": "n8n",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/automation/n8n/**"
+            ],
+            "matchPackageNames": [
+                "n8nio/n8n"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "n8n",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "automation"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "Backrest",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/core/backrest/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/garethgeorge/backrest"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "backrest",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "core"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "BunkerWeb",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/core/bunkerweb/**"
+            ],
+            "matchPackageNames": [
+                "bunkerity/bunkerweb",
+                "bunkerity/bunkerweb-ui",
+                "bunkerity/bunkerweb-autoconf",
+                "bunkerity/bunkerweb-scheduler"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "bunkerweb",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "core",
+                "security"
+            ],
+            "minimumReleaseAge": "14 days",
+            "internalChecksFilter": "strict",
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "BunkerWeb MariaDB: same Major but Digest/Patch",
+            "matchFileNames": [
+                "apps/core/bunkerweb/**"
+            ],
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackageNames": [
+                "mariadb"
+            ],
+            "matchUpdateTypes": [
+                "digest",
+                "patch"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "BunkerWeb Docker Socket Proxy: Only digests",
+            "matchFileNames": [
+                "apps/core/bunkerweb/**"
+            ],
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackageNames": [
+                "tecnativa/docker-socket-proxy"
+            ],
+            "matchUpdateTypes": [
+                "digest"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "BunkerWeb Redis: same Major but Digest/Patch",
+            "matchFileNames": [
+                "apps/core/bunkerweb/**"
+            ],
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackageNames": [
+                "redis"
+            ],
+            "matchUpdateTypes": [
+                "digest",
+                "patch"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "cloudflared",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/core/cloudflared/**"
+            ],
+            "matchPackageNames": [
+                "cloudflare/cloudflared"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "cloudflared",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "core",
+                "network"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "Traefik",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/core/traefik/**"
+            ],
+            "matchPackageNames": [
+                "traefik"
+            ],
+            "matchUpdateTypes": [
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "traefik",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "core",
+                "network"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "Vaultwarden",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/core/vaultwarden/**"
+            ],
+            "matchPackageNames": [
+                "vaultwarden/server"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "vaultwarden",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "core",
+                "security"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "whoami",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/core/whoami/**"
+            ],
+            "matchPackageNames": [
+                "traefik/whoami"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "whoami",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "core"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "Speedtest Tracker",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/monitoring/speedtest-tracker/**"
+            ],
+            "matchPackageNames": [
+                "lscr.io/linuxserver/speedtest-tracker",
+                "linuxserver/speedtest-tracker"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "speedtest-tracker",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "monitoring"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "Forgejo",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ops/forgejo/**"
+            ],
+            "matchPackageNames": [
+                "codeberg.org/forgejo/forgejo"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "forgejo",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "ops"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "CrowdSec",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/security/crowdsec/**"
+            ],
+            "matchPackageNames": [
+                "crowdsec/crowdsec"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "crowdsec",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "security"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "Pocket ID",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/security/pocket-id/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/pocket-id/pocket-id"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "pocket-id",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "security"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "Immich",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/storage/immich/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/immich-app/immich-server",
+                "ghcr.io/immich-app/immich-machine-learning"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "immich",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "storage"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "automerge Immich Valkey Digest",
+            "matchFileNames": [
+                "apps/storage/immich/**"
+            ],
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackageNames": [
+                "valkey/valkey"
+            ],
+            "matchUpdateTypes": [
+                "digest"
+            ],
+            "automerge": true,
+            "automergeType": "pr-comment",
+            "automergeComment": "bors: r+"
+        },
+        {
+            "description": "Immich PostgreSQL",
+            "matchFileNames": [
+                "apps/core/bunkerweb/**"
+            ],
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/immich-app/postgres"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "Homebox",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/tools/homebox/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/sysadminsmedia/homebox"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "homebox",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "tools"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "ntfy",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/tools/ntfy/**"
+            ],
+            "matchPackageNames": [
+                "binwiederhier/ntfy"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "ntfy",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "tools"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "doco-cd",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/core/doco-cd/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/kimdre/doco-cd"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "doco-cd",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "core",
+                "gitops"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        }
+    ]
+}

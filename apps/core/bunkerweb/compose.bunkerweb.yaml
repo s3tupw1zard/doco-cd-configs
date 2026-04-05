@@ -1,0 +1,130 @@
+x-ui-env: &bw-ui-env
+  # We anchor the environment variables to avoid duplication
+  AUTOCONF_MODE: "yes"
+  DATABASE_URI: "${BUNKERWEB_DATABASE_URI}" # Remember to set a stronger password for the database
+
+services:
+  bunkerweb:
+    image: bunkerity/bunkerweb:1.6.9
+    container_name: bunkerweb
+    hostname: bunkerweb
+    ports:
+      - "80:8080/tcp"
+      - "443:8443/tcp"
+      - "443:8443/udp" # For QUIC / HTTP3 support
+    labels:
+      - "bunkerweb.INSTANCE=yes" # We set the instance label to allow the autoconf to detect the instance
+    environment:
+      AUTOCONF_MODE: "yes"
+      API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.0.0.0/21"
+    restart: "unless-stopped"
+    networks:
+      - bw-universe
+      - bw-services
+
+  bw-scheduler:
+    image: bunkerity/bunkerweb-scheduler:1.6.9
+    container_name: bw-scheduler
+    hostname: bw-scheduler
+    environment:
+      <<: *bw-ui-env
+      BUNKERWEB_INSTANCES: ""
+      SERVER_NAME: ""
+      API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.0.0.0/21"
+      MULTISITE: "yes"
+      UI_HOST: "http://bw-ui:7000" # Change it if needed
+      USE_REDIS: "yes"
+      REDIS_HOST: "redis"
+    volumes:
+      - /mnt/ssd/core/bunkerweb/storage:/data # This is used to persist the cache and other data like the backups
+    restart: "unless-stopped"
+    networks:
+      - bw-universe
+      - bw-db
+
+  bw-autoconf:
+    image: bunkerity/bunkerweb-autoconf:1.6.9
+    container_name: bw-autoconf
+    hostname: bw-autoconf
+    depends_on:
+      - bw-docker
+    environment:
+      <<: *bw-ui-env
+      DOCKER_HOST: "tcp://bw-docker:2375"
+    restart: "unless-stopped"
+    networks:
+      - bw-universe
+      - bw-docker
+      - bw-db
+
+  bw-docker:
+    image: tecnativa/docker-socket-proxy:nightly
+    container_name: bw-docker
+    hostname: bw-docker
+    restart: "unless-stopped"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      CONTAINERS: "1"
+      LOG_LEVEL: "warning"
+    networks:
+      - bw-docker
+
+  bw-ui:
+    image: bunkerity/bunkerweb-ui:1.6.9
+    container_name: bw-ui
+    hostname: bw-ui
+    environment:
+      <<: *bw-ui-env
+      TOTP_ENCRYPTION_KEYS: "${TOTP_ENCRYPTION_KEYS}" # Remember to set a stronger secret key (see the Prerequisites section)
+    restart: "unless-stopped"
+    networks:
+      - bw-universe
+      - bw-db
+
+  bw-db:
+    image: mariadb:11
+    container_name: bw-db
+    hostname: bw-db
+    # We set the max allowed packet size to avoid issues with large queries
+    command: --max-allowed-packet=67108864
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: "db"
+      MYSQL_USER: "bunkerweb"
+      MYSQL_PASSWORD: "${BUNKERWEB_DB_PASSWORD}" # Remember to set a stronger password for the database
+    volumes:
+      - /mnt/ssd/core/bunkerweb/db-data:/var/lib/mysql
+    restart: "unless-stopped"
+    networks:
+      - bw-db
+
+  redis: # Redis service for the persistence of reports/bans/stats
+    image: redis:8-alpine
+    container_name: bw-redis
+    hostname: redis
+    command: >
+      redis-server
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --save 60 1000
+      --appendonly yes
+    volumes:
+      - /mnt/ssd/core/bunkerweb/redis-data:/data
+    restart: "unless-stopped"
+    networks:
+      - bw-universe
+
+networks:
+  bw-universe:
+    name: bw-universe
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.20.30.0/24
+  bw-services:
+    name: bw-services
+  bw-docker:
+    name: bw-docker
+  bw-db:
+    name: bw-db

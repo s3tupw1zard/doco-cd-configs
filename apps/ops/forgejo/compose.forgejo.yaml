@@ -1,0 +1,56 @@
+services:
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:14.0.3
+    container_name: forgejo
+    hostname: forgejo
+    restart: unless-stopped
+    volumes:
+      - /mnt/ssd/ops/forgejo/data:/data
+      - /mnt/hdd/ops/forgejo/data/gitea/packages:/data/gitea/packages
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      TZ: "Europe/Berlin"
+      USER_UID: "1000"
+      USER_GID: "1000"
+      FORGEJO_server_DOMAIN: ${DOMAIN}
+      FORGEJO_server_SSH_DOMAIN: ${SSH_DOMAIN}
+      FORGEJO_server_ROOT_URL: ${ROOT_URL}
+      FORGEJO_service_DISABLE_REGISTRATION: "true"
+      FORGEJO_service_REQUIRE_SIGNIN_VIEW: "true"
+      FORGEJO_service_REGISTER_EMAIL_CONFIRM: "true"
+      FORGEJO_service_ENABLE_CAPTCHA: "true"
+      FORGEJO_service_CAPTCHA_TYPE: "cfturnstile"
+      FORGEJO_service_CAPTCHA_CFTURNSTILE_SITEKEY: ${CF_CAPTCHA_SITEKEY}
+      FORGEJO_service_CAPTCHA_CFTURNSTILE_SECRET: ${CF_CAPTCHA_SECRET}
+      # FORGEJO_service_ALLOW_ONLY_EXTERNAL_REGISTRATION: "true"
+      FORGEJO__mailer__ENABLED: "true"
+      FORGEJO__mailer__FROM: ${MAIL_FROM}
+      FORGEJO__mailer__PROTOCOL: "smtps"
+      FORGEJO__mailer__SMTP_ADDR: ${MAIL_HOST}
+      FORGEJO__mailer__SMTP_PORT: "465"
+      FORGEJO__mailer__USER: ${MAIL_USER}
+      FORGEJO__mailer__PASSWD: ${MAIL_PASSWD}
+    networks:
+      - traefik
+      - forgejo
+    ports:
+      - 22:22
+    logging:
+        options:
+            max-size: 50m
+            max-file: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=3000"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true
+  forgejo:
+    external: true

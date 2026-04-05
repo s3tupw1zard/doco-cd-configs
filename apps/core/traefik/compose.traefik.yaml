@@ -1,0 +1,118 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v3.6
+    container_name: traefik
+    hostname: traefik
+    restart: unless-stopped
+    labels:
+      - traefik.http.middlewares.to-https.redirectscheme.scheme=https
+      - traefik.http.routers.to-https.entrypoints=web
+      - traefik.http.routers.to-https.middlewares=to-https
+      - traefik.http.routers.to-https.rule=HostRegexp(`{host:.+}`)
+
+      #- traefik.http.routers.traefik-callback.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/oauth2`)
+      #- traefik.http.routers.traefik-callback.entrypoints=websecure
+      #- traefik.http.routers.traefik-callback.service=traefik
+      #- traefik.http.routers.traefik-callback.tls.certresolver=cloudflare
+
+      - traefik.http.routers.${SERVICE_NAME}-dashboard.rule=Host(`${SERVICE_DOMAIN}`)
+      - traefik.http.routers.${SERVICE_NAME}-dashboard.entrypoints=websecure
+      - traefik.http.routers.${SERVICE_NAME}-dashboard.middlewares=cloudflarewarp@file,crowdsec@file #traefik-dashboard-oidc
+      - traefik.http.routers.${SERVICE_NAME}-dashboard.service=${SERVICE_NAME}-dashboard
+      - "traefik.http.services.${SERVICE_NAME}-dashboard.loadbalancer.server.port=8080"
+      - traefik.http.routers.${SERVICE_NAME}-dashboard.tls.certresolver=cloudflare
+
+      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.enablePKCE=true
+      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.providerURL=https://${OIDC_SERVICE_DOMAIN}
+      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.clientID=${TRAEFIK_OIDC_CLIENT_ID}
+      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.clientSecret=${TRAEFIK_OIDC_CLIENT_SECRET}
+      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.sessionEncryptionKey=${TRAEFIK_OIDC_SESSION_ENCRYPTION_KEY}
+      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.callbackURL=/oauth2/callback
+      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.logoutURL=/oauth2/logout
+      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.scopes=openid,profile,email,groups
+      - "traefik.docker.network=public"
+    command:
+      - --api=true
+      - --api.insecure=true
+      - --api.dashboard=true
+      - --entrypoints.websecure.http.tls=true
+      - --entrypoints.websecure.http.tls.certresolver=cloudflare
+      - --certificatesresolvers.cloudflare.acme.dnschallenge.delaybeforecheck=30
+      - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
+      - --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53
+      - --certificatesresolvers.cloudflare.acme.dnschallenge=true
+      - --certificatesresolvers.cloudflare.acme.email=${CLOUDFLARE_API_EMAIL}
+      - --certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json
+      - --entryPoints.websecure.http.tls.domains[0].main=${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[0].sans=*.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[1].main=${CATEGORY_SUB_DOMAIN_1}
+      - --entryPoints.websecure.http.tls.domains[1].sans=*.${CATEGORY_SUB_DOMAIN_1}
+      - --entryPoints.websecure.http.tls.domains[2].main=${CATEGORY_SUB_DOMAIN_2}
+      - --entryPoints.websecure.http.tls.domains[2].sans=*.${CATEGORY_SUB_DOMAIN_2}
+      - --entryPoints.websecure.http.tls.domains[3].main=${CATEGORY_SUB_DOMAIN_3}
+      - --entryPoints.websecure.http.tls.domains[3].sans=*.${CATEGORY_SUB_DOMAIN_3}
+      - --entryPoints.websecure.http.tls.domains[4].main=${CATEGORY_SUB_DOMAIN_4}
+      - --entryPoints.websecure.http.tls.domains[4].sans=*.${CATEGORY_SUB_DOMAIN_4}
+      - --entryPoints.websecure.http.tls.domains[5].main=${CATEGORY_SUB_DOMAIN_5}
+      - --entryPoints.websecure.http.tls.domains[5].sans=*.${CATEGORY_SUB_DOMAIN_5}
+      - --entryPoints.websecure.http.tls.domains[6].main=${CATEGORY_SUB_DOMAIN_6}
+      - --entryPoints.websecure.http.tls.domains[6].sans=*.${CATEGORY_SUB_DOMAIN_6}
+      - --entryPoints.websecure.http.tls.domains[7].main=${CATEGORY_SUB_DOMAIN_7}
+      - --entryPoints.websecure.http.tls.domains[7].sans=*.${CATEGORY_SUB_DOMAIN_7}
+      - --entryPoints.websecure.http.tls.domains[8].main=${CATEGORY_SUB_DOMAIN_8}
+      - --entryPoints.websecure.http.tls.domains[8].sans=*.${CATEGORY_SUB_DOMAIN_8}
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.forwardedHeaders.trustedIPs=103.21.244.0/22,103.22.200.0/22,103.31.4.0/22,104.16.0.0/13,104.24.0.0/14,108.162.192.0/18,131.0.72.0/22,141.101.64.0/18,162.158.0.0/15,172.64.0.0/13,173.245.48.0/20,188.114.96.0/20,190.93.240.0/20,197.234.240.0/22,198.41.128.0/17,2400:cb00::/32,2606:4700::/32,2803:f800::/32,2405:b500::/32,2405:8100::/32,2a06:98c0::/29,2c0f:f248::/32
+      - --entrypoints.websecure.address=:443
+      - --entryPoints.websecure.http3
+      - --entryPoints.websecure.http3.advertisedport=443
+      - --providers.docker=true
+      - --log.level=INFO
+      - --log.format=common
+      - --log.filePath=/var/log/traefik/traefik.log
+      - --accesslog=true
+      - --accesslog.format=json
+      - --accesslog.filePath=/var/log/traefik/access.log
+      - --accesslog.filters.statusCodes=200-299,400-599 # log successful http requests and all failed http requests
+      - --accesslog.bufferingsize=0
+      - --accesslog.fields.headers.defaultmode=drop
+      - --accesslog.fields.headers.names.User-Agent=keep
+      - --providers.file.directory=/dynamic
+      - --providers.file.watch=true
+      # !!! IMPORTANT! Comment out or delete next line in production! !!!
+      # - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      - --experimental.plugins.oidc.moduleName=github.com/lukaszraczylo/traefikoidc
+      - --experimental.plugins.oidc.version=v0.8.24
+      - --experimental.plugins.bouncer.moduleName=github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin
+      - --experimental.plugins.bouncer.version=v1.5.1
+      - --experimental.plugins.cloudflarewarp.moduleName=github.com/n8n-io/traefik-cloudflarewarp-plugin
+      - --experimental.plugins.cloudflarewarp.version=v1.4.1
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+    environment:
+      - CLOUDFLARE_API_EMAIL=${CLOUDFLARE_API_EMAIL}
+      - CF_DNS_API_TOKEN=${CLOUDFLARE_DNS_API_TOKEN}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/ssd/core/traefik:/data
+      - /mnt/ssd/core/traefik/dynamic:/dynamic
+      - /mnt/ssd/core/traefik/letsencrypt:/letsencrypt
+      - /mnt/hdd/logs/traefik/traefik.log:/var/log/traefik/traefik.log
+      - /mnt/hdd/logs/traefik/traefik.access.log:/var/log/traefik/access.log
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true

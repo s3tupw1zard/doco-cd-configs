@@ -1,0 +1,41 @@
+services:
+  pocket-id:
+    image: ghcr.io/pocket-id/pocket-id:v2.4.0
+    container_name: pocket-id
+    hostname: pocket-id
+    restart: unless-stopped
+    environment:
+      APP_URL: ${APP_URL}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      MAXMIND_LICENSE_KEY: ${MAXMIND_LICENSE_KEY}
+      TRUST_PROXY: "true"
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Berlin"
+#    ports:
+#      - 1411:1411
+    volumes:
+      - "/mnt/ssd/security/pocket-id/data:/app/data"
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - traefik
+    # Optional healthcheck
+    healthcheck:
+      test: [ "CMD", "/app/pocket-id", "healthcheck" ]
+      interval: 1m30s
+      timeout: 5s
+      retries: 2
+      start_period: 10s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=1411"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true
