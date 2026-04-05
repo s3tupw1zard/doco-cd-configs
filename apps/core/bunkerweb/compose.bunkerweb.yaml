@@ -193,7 +193,7 @@ services:
     environment:
       <<: *bw-ui-env
       SERVER_NAME: ${SERVICE_DOMAIN}
-      TOTP_ENCRYPTION_KEYS: "${TOTP_ENCRYPTION_KEYS}" # Remember to set a stronger secret key (see the Prerequisites section)
+      TOTP_ENCRYPTION_KEYS: "${TOTP_ENCRYPTION_KEYS}"
     restart: "unless-stopped"
     networks:
       - bw-universe
