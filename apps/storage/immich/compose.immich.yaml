@@ -98,4 +98,4 @@ networks:
   traefik:
     external: true
   immich:
-    driver: overlay
+    driver: bridge
