@@ -14,6 +14,7 @@ services:
       SECRET_PROVIDER_CLIENT_SECRET: ${SECRET_PROVIDER_CLIENT_SECRET}
       GIT_ACCESS_TOKEN: ${GIT_ACCESS_TOKEN}
       TZ: Europe/Berlin
+      DOCKER_SWARM_FEATURES: "false"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /mnt/ssd/core/doco-cd/data:/data
