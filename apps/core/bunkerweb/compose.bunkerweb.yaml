@@ -5,7 +5,7 @@ x-ui-env: &bw-ui-env
 
 services:
   bunkerweb:
-    image: bunkerity/bunkerweb:1.6.9
+    image: bunkerity/bunkerweb:1.6.9@sha256:67e45857583378d3e0e5aaa473a4d8405da685dc143d4e43d7636b17e4646082
     container_name: bunkerweb
     hostname: bunkerweb
     ports:
@@ -23,7 +23,7 @@ services:
       - bw-services
 
   bw-scheduler:
-    image: bunkerity/bunkerweb-scheduler:1.6.9
+    image: bunkerity/bunkerweb-scheduler:1.6.9@sha256:2e23c66f14759c6ab69911a028278ff573a05ae826900772d2dc2398811c0926
     container_name: bw-scheduler
     hostname: bw-scheduler
     environment:
@@ -43,7 +43,7 @@ services:
       - bw-db
 
   bw-autoconf:
-    image: bunkerity/bunkerweb-autoconf:1.6.9
+    image: bunkerity/bunkerweb-autoconf:1.6.9@sha256:ed26a72999b8e7b5c8fe21394d97a30cb8a5d191ec6110ea187c5d598a8840d8
     container_name: bw-autoconf
     hostname: bw-autoconf
     depends_on:
@@ -58,7 +58,7 @@ services:
       - bw-db
 
   bw-docker:
-    image: tecnativa/docker-socket-proxy:nightly
+    image: tecnativa/docker-socket-proxy:nightly@sha256:37ada773f5d32a05bcac17a5aa1335bbaf4bdd96ae20a342b02f678a156d389f
     container_name: bw-docker
     hostname: bw-docker
     restart: "unless-stopped"
@@ -71,7 +71,7 @@ services:
       - bw-docker
 
   bw-ui:
-    image: bunkerity/bunkerweb-ui:1.6.9
+    image: bunkerity/bunkerweb-ui:1.6.9@sha256:447ef5c0e8215e36262b2cf072934b23f7e19d77e1520343a94244c80dafb79a
     container_name: bw-ui
     hostname: bw-ui
     environment:
@@ -83,7 +83,7 @@ services:
       - bw-db
 
   bw-db:
-    image: mariadb:11
+    image: mariadb:11@sha256:31c1aa20ba2d78c4cbc45b2675e40ffd6a3cd59897a9767ce88fc284309f55ab
     container_name: bw-db
     hostname: bw-db
     # We set the max allowed packet size to avoid issues with large queries
@@ -100,7 +100,7 @@ services:
       - bw-db
 
   redis: # Redis service for the persistence of reports/bans/stats
-    image: redis:8-alpine
+    image: redis:8-alpine@sha256:81b6f81d6a6c5b9019231a2e8eb10085e3a139a34f833dcc965a8a959b040b72
     container_name: bw-redis
     hostname: redis
     command: >
