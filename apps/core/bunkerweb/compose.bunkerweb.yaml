@@ -200,7 +200,7 @@ services:
       - bw-db
 
   bunkerweb-db:
-    image: mariadb:11
+    image: mariadb:12
     container_name: bunkerweb-db
     hostname: bunkerweb-db
     # We set the max allowed packet size to avoid issues with large queries
