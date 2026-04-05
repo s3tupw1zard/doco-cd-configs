@@ -203,7 +203,12 @@ services:
     container_name: bunkerweb-db
     hostname: bunkerweb-db
     # We set the max allowed packet size to avoid issues with large queries
-    command: --max-allowed-packet=67108864
+    command: >
+      --max-allowed-packet=67108864
+      --wait_timeout=300
+      --interactive_timeout=300
+      --net_read_timeout=60
+      --net_write_timeout=60
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MYSQL_DATABASE: "db"
