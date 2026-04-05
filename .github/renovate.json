@@ -445,6 +445,7 @@
             "matchPackageNames": [
                 "ghcr.io/immich-app/postgres"
             ],
+            "allowedVersions": "/^14-.+$/",
             "matchUpdateTypes": [
                 "pin",
                 "digest"
