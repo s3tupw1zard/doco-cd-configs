@@ -29,15 +29,10 @@ services:
     hostname: bunkerweb-scheduler
     environment:
       <<: *bw-ui-env
-      BUNKERWEB_INSTANCES: ""
-      SERVER_NAME: ""
-      API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.0.0.0/21"
-      MULTISITE: "yes"
-      UI_HOST: "http://bunkerweb-ui:7000" # Change it if needed
-      USE_REDIS: "yes"
-      REDIS_HOST: "bunkerweb-redis"
+      ${CONFIG_SECRET}
     volumes:
-      - /mnt/ssd/core/bunkerweb/storage:/data # This is used to persist the cache and other data like the backups
+      - /mnt/ssd/core/bunkerweb/storage:/data # This is used to persist the cache and other data
+      - /mnt/hdd/core/bunkerweb/backups:/var/lib/bunkerweb/backups # This is used to persist the backups
     restart: "unless-stopped"
     networks:
       - bw-universe
