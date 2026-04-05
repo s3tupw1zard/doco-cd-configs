@@ -29,7 +29,127 @@ services:
     hostname: bunkerweb-scheduler
     environment:
       <<: *bw-ui-env
-      ${CONFIG_SECRET}
+      BUNKERWEB_INSTANCES: ""
+      SERVER_NAME: ""
+      API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.8.0.0/21"
+      MULTISITE: "yes"
+      USE_UI: "yes"
+      UI_HOST: "https://bunkerweb.core.s3tupw1zard.ovh" # Change it if needed
+      USE_REDIS: "yes"
+      REDIS_HOST: "bunkerweb-redis"
+      SECURITY_MODE: "detect"
+      USE_BACKUP=: "yes"
+      BACKUP_SCHEDULE: "daily"
+      BACKUP_ROTATION: "90"
+      BACKUP_DIRECTORY: "/var/lib/bunkerweb/backups"
+      USE_BAD_BEHAVIOR: "yes"
+      BAD_BEHAVIOR_STATUS_CODES: "400 401 403 405 429 444" # Add the 404 Status code later aftrer testing
+      BAD_BEHAVIOR_THRESHOLD: "20"
+      BAD_BEHAVIOR_COUNT_TIME: "120"
+      BAD_BEHAVIOR_BAN_TIME: "300"
+      BAD_BEHAVIOR_BAN_SCOPE: "service"
+      USE_BLACKLIST: "yes"
+      BLACKLIST_COMMUNITY_LISTS: |
+        ip:danmeuk-tor-exit
+        ip:abuseipdb-ip
+        ip:projecthoneypot-ip
+        ip:sslbl-ip
+        ip:cybercrime-trails-ip
+        ua:mitchellkrogza-bad-user-agents
+      USE_BROTLI: "yes"
+      USE_BUNKERNET: "yes"
+      BUNKERNET_SERVER: "https://api.bunkerweb.io"
+      USE_CLIENT_CACHE: "yes"
+      CLIENT_CACHE_EXTENSIONS: "jpg | jpeg | png | bmp | ico | svg | tif | css | js | otf | ttf | eot | woff | woff2"
+      CLIENT_CACHE_CONTROL: "public, max-age=15552000"
+      CLIENT_CACHE_ETAG: "yes"
+      WHITELIST_COUNTRYS: "DE"
+      USE_DNSBL: "yes"
+      DNSBL_LISTS: |
+        dnsbl:abuseipdb
+        dnsbl:bl.spamcop.net
+        dnsbl:bl.blocklist.de
+        dnsbl:bl.mailspike.net
+        dnsbl:bl.score.senderscore.com
+        dnsbl:zen.spamhaus.org
+      USE_GREYLIST: "yes"
+      GREYLIST_IP: "10.8.0.0/21"
+      GREYLIST_RDNS: ".${ROOT_DOMAIN} .${CATEGORY_SUB_DOMAIN_8}"
+      # GREYLIST_ASN: "12345 67890"  # Company and partner ASNs
+      # GREYLIST_USER_AGENT: "(?:\b)GoodBot(?:\b) (?:\b)PartnerCrawler(?:\b)"
+      # GREYLIST_URI: "^/api/v1/"
+      STRICT_TRANSPORT_SECURITY: "max-age=63072000; includeSubDomains; preload"
+      CONTENT_SECURITY_POLICY: "object-src 'none'; form-action 'self'; frame-ancestors 'self';"
+      CONTENT_SECURITY_POLICY_REPORT_ONLY: "no"
+      X_FRAME_OPTIONS: "SAMEORIGIN"
+      X_CONTENT_TYPE_OPTIONS: "nosniff"
+      X_DNS_PREFETCH_CONTROL: "off"
+      REFERRER_POLICY: "strict-origin-when-cross-origin"
+      PERMISSIONS_POLICY: "geolocation=(), microphone=(), camera=()"
+      KEEP_UPSTREAM_HEADERS: "Content-Security-Policy Permissions-Policy X-Frame-Options"
+      EMAIL_LETS_ENCRYPT: ${EMAIL_LETS_ENCRYPT}
+      LETS_ENCRYPT_SERVER: "letsencrypt"
+      LETS_ENCRYPT_CHALLENGE_TYPE: "dns"
+      LETS_ENCRYPT_DNS_PROVIDER: "cloudflare"
+      LETS_ENCRYPT_DNS_PROPAGATION: "30"
+      LETS_ENCRYPT_DNS_CREDENTIAL_ITEM: ${LETS_ENCRYPT_DNS_CREDENTIAL_ITEM}
+      USE_LETS_ENCRYPT_WILDCARD: "yes"
+      USE_LETS_ENCRYPT_STAGING: "yes" # Enabled for testing
+      LETS_ENCRYPT_CLEAR_OLD_CERTS: "yes"
+      LETS_ENCRYPT_MAX_RETRIES: "1" # Set low for testing, increase it later
+      USE_LIMIT_REQ: "yes"
+      LIMIT_REQ_URL: "/"
+      LIMIT_REQ_RATE: "10r/s"
+      USE_LIMIT_CONN: "yes"
+      LIMIT_CONN_MAX_HTTP1: "10"
+      LIMIT_CONN_MAX_HTTP2: "100"
+      LIMIT_CONN_MAX_HTTP3: "100"
+      LIMIT_CONN_MAX_STREAM: "10"
+      USE_METRICS: "yes"
+      METRICS_MEMORY_SIZE: "16mb"
+      METRICS_MAX_BLOCKED_REQUESTS: "1000"
+      METRICS_MAX_BLOCKED_REQUESTS_REDIS: "100000"
+      METRICS_SAVE_TO_REDIS: "yes"
+      DISABLE_DEFAULT_SERVER: "yes"
+      DISABLE_DEFAULT_SERVER_STRICT_SNI: "yes"
+      DENY_HTTP_STATUS: "444"
+      ALLOWED_METHODS: "GET|POST|PUT|DELETE"
+      MAX_CLIENT_SIZE: "5m"
+      HTTP2: "yes"
+      HTTP3: "yes"
+      HTTP3_ALT_SVC_PORT: "443"
+      # Maybe better to configure per app
+      USE_MODSECURITY: "yes"
+      USE_MODSECURITY_CRS: "yes"
+      MODSECURITY_CRS_VERSION: "4"
+      MODSECURITY_SEC_RULE_ENGINE: "On"
+      MODSECURITY_SEC_AUDIT_ENGINE: "RelevantOnly"
+      MODSECURITY_SEC_AUDIT_LOG_PARTS: "ABIJDEFHZ"
+      MODSECURITY_REQ_BODY_NO_FILES_LIMIT: "131072"
+      USE_MODSECURITY_CRS_PLUGINS: "yes"
+      # MODSECURITY_CRS_PLUGINS: "some-plugin"
+      USE_REVERSE_SCAN: "yes"
+      REVERSE_SCAN_PORTS: "22 80 443 3128 8000 8080"
+      REVERSE_SCAN_TIMEOUT: "500"
+      USE_SECURITYTXT: "yes"
+      SECURITYTXT_URI: "/.well-known/security.txt"
+      SECURITYTXT_CONTACT: ${SECURITYTXT_CONTACT}
+      SECURITYTXT_EXPIRES: "2025-12-31"
+      SECURITYTXT_PREFERRED_LANG: "en"
+      SECURITYTXT_CANONICAL: "https://${ROOT_DOMAIN}/.well-known/security.txt"
+      SECURITYTXT_POLICY: "https://${ROOT_DOMAIN}/security-policy.html"
+      SESSIONS_SECRET: "${BUNKERWEB_SESSIONS_SECRET}"
+      SESSIONS_NAME: "bunkerweb_session"
+      SESSIONS_IDLING_TIMEOUT: "3600"
+      SESSIONS_ROLLING_TIMEOUT: "7200"
+      SESSIONS_ABSOLUTE_TIMEOUT: "86400"
+      SESSIONS_CHECK_IP: "yes"
+      SESSIONS_CHECK_USER_AGENT: "yes"
+      REDIRECT_HTTP_TO_HTTPS: "yes"
+      AUTO_REDIRECT_HTTP_TO_HTTPS: "yes"
+      SSL_PROTOCOLS: "TLSv1.2 TLSv1.3"
+      SSL_CIPHERS_LEVEL: "modern"
+      SSL_SESSION_CACHE_SIZE: "10m"
     volumes:
       - /mnt/ssd/core/bunkerweb/storage:/data # This is used to persist the cache and other data
       - /mnt/hdd/core/bunkerweb/backups:/var/lib/bunkerweb/backups # This is used to persist the backups
