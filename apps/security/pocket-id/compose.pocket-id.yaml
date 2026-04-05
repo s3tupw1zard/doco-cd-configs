@@ -1,6 +1,6 @@
 services:
   pocket-id:
-    image: ghcr.io/pocket-id/pocket-id:v2.4.0
+    image: ghcr.io/pocket-id/pocket-id:v2.5.0@sha256:1549f31f76a6c158af0056a4f2c62a590627886a84e9da9bda76eb1e142a449a
     container_name: pocket-id
     hostname: pocket-id
     restart: unless-stopped
