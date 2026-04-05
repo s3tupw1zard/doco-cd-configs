@@ -34,7 +34,7 @@ services:
       API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.8.0.0/21"
       MULTISITE: "yes"
       USE_UI: "yes"
-      UI_HOST: "https://bunkerweb.core.s3tupw1zard.ovh" # Change it if needed
+      UI_HOST: "http://bunkerweb-ui:7000" # Change it if needed
       USE_REDIS: "yes"
       REDIS_HOST: "bunkerweb-redis"
       SECURITY_MODE: "detect"
