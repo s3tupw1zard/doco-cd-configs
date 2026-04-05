@@ -94,6 +94,9 @@
                 "bunkerity/bunkerweb-scheduler"
             ],
             "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
                 "digest"
             ],
             "groupName": "bunkerweb",
