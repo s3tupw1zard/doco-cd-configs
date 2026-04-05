@@ -199,7 +199,7 @@ services:
       - bw-db
 
   bunkerweb-db:
-    image: mysql:8.4.8
+    image: mysql:9.6.0@sha256:24e450bbd24f621c71b10404c946cc9ea1cbb0e6e7464b2be2de5193dcf1d05b
     container_name: bunkerweb-db
     hostname: bunkerweb-db
     # We set the max allowed packet size to avoid issues with large queries
