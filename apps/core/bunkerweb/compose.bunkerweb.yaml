@@ -234,13 +234,13 @@ services:
 networks:
   bw-universe:
     name: bw-universe
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.20.30.0/24
+    external: true
   bw-services:
+    external: true
     name: bw-services
   bw-docker:
+    external: true
     name: bw-docker
   bw-db:
+    external: true
     name: bw-db
