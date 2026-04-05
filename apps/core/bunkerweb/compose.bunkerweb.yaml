@@ -6,7 +6,7 @@ x-ui-env: &bw-ui-env
 
 services:
   bunkerweb:
-    image: bunkerity/bunkerweb:1.6.8
+    image: bunkerity/bunkerweb:1.6.8@sha256:57f5d62623196ed25039c1977bc2d165e088866e5793e9b2ec221ce842b37133
     container_name: bunkerweb
     hostname: bunkerweb
     ports:
@@ -24,7 +24,7 @@ services:
       - bw-services
 
   bunkerweb-scheduler:
-    image: bunkerity/bunkerweb-scheduler:1.6.8
+    image: bunkerity/bunkerweb-scheduler:1.6.8@sha256:40cdbb90cc90fae860d3f5ae9b5760c61cf9c69350991293d6bcbbd505f21b78
     container_name: bunkerweb-scheduler
     hostname: bunkerweb-scheduler
     environment:
@@ -159,7 +159,7 @@ services:
       - bw-db
 
   bunkerweb-autoconf:
-    image: bunkerity/bunkerweb-autoconf:1.6.8
+    image: bunkerity/bunkerweb-autoconf:1.6.8@sha256:1deb7366b4b17f17fd531df29a3f178536dfb1f7198278aa40fb62731bb87bfb
     container_name: bunkerweb-autoconf
     hostname: bunkerweb-autoconf
     depends_on:
@@ -187,7 +187,7 @@ services:
       - bw-docker
 
   bunkerweb-ui:
-    image: bunkerity/bunkerweb-ui:1.6.8
+    image: bunkerity/bunkerweb-ui:1.6.8@sha256:6590c024fefd18c4116f0f51550ffb3862ff90b350437c13a7231ae305209923
     container_name: bunkerweb-ui
     hostname: bunkerweb-ui
     environment:
@@ -203,7 +203,7 @@ services:
       - "bunkerweb.USE_REVERSE_PROXY=yes"
       - "bunkerweb.REVERSE_PROXY_HOST=http://bunkerweb-ui:7000"
   bunkerweb-db:
-    image: mariadb:12
+    image: mariadb:12@sha256:e16f61b8f6ed25111adbb1c5c19bbc2904efc8ed14029999af0cbe1c7ae18bf1
     container_name: bunkerweb-db
     hostname: bunkerweb-db
     # We set the max allowed packet size to avoid issues with large queries
