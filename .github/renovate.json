@@ -123,6 +123,7 @@
             "matchPackageNames": [
                 "mariadb"
             ],
+            "allowedVersions": "11",
             "matchUpdateTypes": [
                 "digest"
             ],
