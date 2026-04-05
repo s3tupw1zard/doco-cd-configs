@@ -29,7 +29,7 @@ services:
     hostname: bunkerweb-scheduler
     environment:
       <<: *bw-ui-env
-      BUNKERWEB_INSTANCES: ""
+      BUNKERWEB_INSTANCES: "bunkerweb"
       SERVER_NAME: ""
       API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.8.0.0/21"
       MULTISITE: "yes"
