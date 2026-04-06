@@ -92,6 +92,7 @@ external_secrets:
   OIDC_PROVIDER_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/OIDC_PROVIDER_DOMAIN
   VAULTWARDEN_BASIC_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_USER
   VAULTWARDEN_BASIC_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_PASSWORD
+  PANGOLIN_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/PANGOLIN_DOMAIN
 ---
 name: whoami
 working_dir: apps/core/whoami
@@ -157,6 +158,7 @@ external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_NAME
   ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
+  PANGOLIN_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/PANGOLIN_DOMAIN
 ---
 name: immich
 working_dir: apps/storage/immich
