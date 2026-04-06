@@ -47,6 +47,9 @@ services:
       - "bunkerweb.CORS_HEADERS=Authorization,Content-Type,X-Requested-With"
       - "bunkerweb.USE_CSP=no"
       - "bunkerweb.MODSECURITY_SEC_RULE_ENGINE=OnDetectionOnly"
+      - "bunkerweb.USE_ANTIBOT=no"
+      - "bunkerweb.CONTENT_SECURITY_POLICY=default-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+      - "bunkerweb.PERMISSIONS_POLICY=geolocation=(), microphone=(), camera=()"
 
 networks:
   bw-services:
