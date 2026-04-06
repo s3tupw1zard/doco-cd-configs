@@ -93,7 +93,7 @@ services:
       LETS_ENCRYPT_DNS_PROPAGATION: "30"
       LETS_ENCRYPT_DNS_CREDENTIAL_ITEM: ${LETS_ENCRYPT_DNS_CREDENTIAL_ITEM}
       USE_LETS_ENCRYPT_WILDCARD: "yes"
-      USE_LETS_ENCRYPT_STAGING: "yes" # Enabled for testing
+      USE_LETS_ENCRYPT_STAGING: "no"
       LETS_ENCRYPT_CLEAR_OLD_CERTS: "yes"
       LETS_ENCRYPT_MAX_RETRIES: "1" # Set low for testing, increase it later
       USE_LIMIT_REQ: "yes"
