@@ -52,9 +52,6 @@ services:
       - "bunkerweb.AUTH_BASIC_USER=${VAULTWARDEN_BASIC_USER}"
       - "bunkerweb.AUTH_BASIC_PASSWORD=${VAULTWARDEN_BASIC_PASSWORD}"
       - "bunkerweb.USE_CLIENT_CACHE=no"
-      - |
-        bunkerweb.CUSTOM_HEADERS: |
-          Permissions-Policy: publickey-credentials-get=(self), publickey-credentials-set=(self)
       #    X-Frame-Options: SAMEORIGIN
       #    Content-Security-Policy: frame-ancestors 'self' *;
       #    Referrer-Policy: strict-origin-when-cross-origin
