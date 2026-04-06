@@ -156,7 +156,7 @@ services:
       USE_REAL_IP: "yes"
       REAL_IP_HEADER: "X-FORWARDED-FOR"
       REAL_IP_RECURSIVE: "yes"
-      REAL_IP_FROM: "100.95.53.54"
+      REAL_IP_FROM: "100.95.53.54 100.109.92.13 172.18.0.0/16"
     volumes:
       - /mnt/ssd/core/bunkerweb/storage:/data # This is used to persist the cache and other data
       - /mnt/hdd/core/bunkerweb/backups:/var/lib/bunkerweb/backups # This is used to persist the backups
