@@ -217,6 +217,16 @@ services:
       - "bunkerweb.USE_REVERSE_PROXY=yes"
       - "bunkerweb.REVERSE_PROXY_HOST=http://bunkerweb-ui:7000"
       - "bunkerweb.USE_CORS=no"
+      - "bunkerweb.USE_TEMPLATE=ui"
+      - "bunkerweb.SECURITY_MODE=block"
+      - "bunkerweb.USE_LIMIT_REQ=yes"
+      - "bunkerweb.LIMIT_REQ_URL=/"
+      - "bunkerweb.LIMIT_REQ_RATE=5r/s"
+      - "bunkerweb.BAD_BEHAVIOR_THRESHOLD=20"
+      - "bunkerweb.WHITELIST_IP=127.0.0.1 10.20.30.0/24 10.8.0.0/21"
+      - "bunkerweb.USE_COUNTRY_BLOCK=no"
+      - "bunkerweb.USE_ANTIBOT=no"
+      - "bunkerweb.MODSECURITY_SEC_RULE_ENGINE=OnDetectionOnly"
       # - "bunkerweb.REVERSE_PROXY_URL=/${BWUI_PROXY_URL}/"
   bunkerweb-db:
     image: mariadb:12@sha256:e16f61b8f6ed25111adbb1c5c19bbc2904efc8ed14029999af0cbe1c7ae18bf1
