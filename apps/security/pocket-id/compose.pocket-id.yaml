@@ -51,9 +51,9 @@ services:
       - "bunkerweb.CONTENT_SECURITY_POLICY=default-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; manifest-src 'self' https://${PANGOLIN_DOMAIN} https://${SERVICE_DOMAIN};"
       - "bunkerweb.PERMISSIONS_POLICY=geolocation=() microphone=() camera=() local-network=() private-network=() publickey-credentials=(self)"
       - |
-        bunkerweb.CUSTOM_CONF_MODSEC_CRS_webauthn-register=
-        SecRule REQUEST_URI "@streq /api/webauthn/register/start" \
-          "id:100101,phase:1,pass,nolog,ctl:ruleRemoveById=942290"
+        bunkerweb.CUSTOM_CONF_MODSEC_CRS_posthog-whitelist=
+        SecRule REQUEST_COOKIES_NAMES "@rx posthog$" \
+          "id:100200,phase:1,pass,nolog,ctl:ruleRemoveById=942290"
 
 
 networks:
