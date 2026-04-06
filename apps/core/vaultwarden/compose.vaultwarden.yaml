@@ -45,7 +45,7 @@ services:
       - "bunkerweb.LIMIT_REQ_URL_2=/api/accounts"
       - "bunkerweb.LIMIT_REQ_RATE_2=60r/m"
       - "bunkerweb.BAD_BEHAVIOR_THRESHOLD=5"
-      - "bunkerweb.CORS_ORIGIN=${OIDC_PROVIDER_DOMAIN} ${SERVICE_DOMAIN}"
+      - "bunkerweb.CORS_ORIGIN=${OIDC_PROVIDER_DOMAIN} ${SERVICE_DOMAIN} ${PANGOLIN_DOMAIN}"
       - "bunkerweb.CORS_CREDENTIALS=yes"
       - "bunkerweb.USE_AUTH_BASIC=yes"
       - "bunkerweb.AUTH_BASIC_LOCATION=/admin"
