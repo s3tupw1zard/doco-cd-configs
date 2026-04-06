@@ -150,6 +150,10 @@ services:
       SSL_PROTOCOLS: "TLSv1.2 TLSv1.3"
       SSL_CIPHERS_LEVEL: "modern"
       SSL_SESSION_CACHE_SIZE: "10m"
+      USE_REAL_IP: "yes"
+      REAL_IP_HEADER: "CF-Connecting-IP"
+      REAL_IP_RECURSIVE: "yes"
+      REAL_IP_FROM_URLS: "https://www.cloudflare.com/ips-v4/ https://www.cloudflare.com/ips-v6/"
     volumes:
       - /mnt/ssd/core/bunkerweb/storage:/data # This is used to persist the cache and other data
       - /mnt/hdd/core/bunkerweb/backups:/var/lib/bunkerweb/backups # This is used to persist the backups
