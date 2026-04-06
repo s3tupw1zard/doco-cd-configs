@@ -15,9 +15,12 @@ services:
       - "443:8443/udp" # For QUIC / HTTP3 support
     labels:
       - "bunkerweb.INSTANCE=yes" # We set the instance label to allow the autoconf to detect the instance
+    volumes:
+      - /mnt/hdd/core/bunkerweb/logs:/var/log/bunkerweb
     environment:
       AUTOCONF_MODE: "yes"
       API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.0.0.0/21"
+      TZ: "Europe/Berlin"
     restart: "unless-stopped"
     networks:
       - bw-universe
