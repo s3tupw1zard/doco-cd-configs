@@ -202,7 +202,7 @@ services:
       - bw-universe
       - bw-db
     labels:
-      - "bunkerweb.SERVER_NAME=bunkerweb.core.s3tupw1zard.ovh"
+      - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
       - "bunkerweb.USE_REVERSE_PROXY=yes"
       - "bunkerweb.REVERSE_PROXY_HOST=http://bunkerweb-ui:7000"
   bunkerweb-db:
