@@ -40,7 +40,6 @@ services:
       - "bunkerweb.REVERSE_PROXY_CONNECT_TIMEOUT=10s"
       - "bunkerweb.REVERSE_PROXY_SEND_TIMEOUT=300s"
       - "bunkerweb.REVERSE_PROXY_READ_TIMEOUT=300s"
-
       - "bunkerweb.SECURITY_MODE=detect"
       - "bunkerweb.USE_LIMIT_REQ=yes"
       - "bunkerweb.USE_LIMIT_REQ=yes"
