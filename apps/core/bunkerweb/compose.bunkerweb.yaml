@@ -6,7 +6,7 @@ x-ui-env: &bw-ui-env
 
 services:
   bunkerweb:
-    image: bunkerity/bunkerweb:1.6.9
+    image: bunkerity/bunkerweb:1.6.9@sha256:67e45857583378d3e0e5aaa473a4d8405da685dc143d4e43d7636b17e4646082
     container_name: bunkerweb
     hostname: bunkerweb
     ports:
@@ -24,7 +24,7 @@ services:
       - bw-services
 
   bunkerweb-scheduler:
-    image: bunkerity/bunkerweb-scheduler:1.6.9
+    image: bunkerity/bunkerweb-scheduler:1.6.9@sha256:2e23c66f14759c6ab69911a028278ff573a05ae826900772d2dc2398811c0926
     container_name: bunkerweb-scheduler
     hostname: bunkerweb-scheduler
     environment:
@@ -162,7 +162,7 @@ services:
       - bw-db
 
   bunkerweb-autoconf:
-    image: bunkerity/bunkerweb-autoconf:1.6.9
+    image: bunkerity/bunkerweb-autoconf:1.6.9@sha256:ed26a72999b8e7b5c8fe21394d97a30cb8a5d191ec6110ea187c5d598a8840d8
     container_name: bunkerweb-autoconf
     hostname: bunkerweb-autoconf
     depends_on:
@@ -190,7 +190,7 @@ services:
       - bw-docker
 
   bunkerweb-ui:
-    image: bunkerity/bunkerweb-ui:1.6.9
+    image: bunkerity/bunkerweb-ui:1.6.9@sha256:447ef5c0e8215e36262b2cf072934b23f7e19d77e1520343a94244c80dafb79a
     container_name: bunkerweb-ui
     hostname: bunkerweb-ui
     environment:
