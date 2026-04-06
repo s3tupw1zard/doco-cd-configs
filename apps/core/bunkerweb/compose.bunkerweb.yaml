@@ -86,6 +86,7 @@ services:
       REFERRER_POLICY: "strict-origin-when-cross-origin"
       PERMISSIONS_POLICY: "geolocation=(), microphone=(), camera=()"
       KEEP_UPSTREAM_HEADERS: "Content-Security-Policy Permissions-Policy X-Frame-Options"
+      AUTO_LETS_ENCRYPT: "yes"
       EMAIL_LETS_ENCRYPT: ${EMAIL_LETS_ENCRYPT}
       LETS_ENCRYPT_SERVER: "letsencrypt"
       LETS_ENCRYPT_CHALLENGE_TYPE: "dns"
