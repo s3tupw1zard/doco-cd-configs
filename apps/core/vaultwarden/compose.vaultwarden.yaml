@@ -8,7 +8,7 @@ services:
     volumes:
       - /mnt/ssd/core/vaultwarden/data:/data:rw
     networks:
-      - traefik
+      - bw-services
     environment:
       DOMAIN: ${DOMAIN}
       ADMIN_TOKEN: ${ADMIN_TOKEN}
@@ -32,15 +32,27 @@ services:
       SSO_MASTER_PASSWORD_POLICY: '{"enforceOnLogin":false,"minComplexity":3,"minLength":10,"requireLower":true,"requireNumbers":true,"requireSpecial":true,"requireUpper":true}'
       SSO_AUTH_ONLY_NOT_SESSION: "false"
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
-      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
-      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
-      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
-      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
-      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=80"
-      - "traefik.docker.network=traefik"
+      - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
+      - "bunkerweb.USE_REVERSE_PROXY=yes"
+      - "bunkerweb.REVERSE_PROXY_HOST=http://vaultwarden:80"
+      - "bunkerweb.SECURITY_MODE=detect"
+      - "bunkerweb.USE_LIMIT_REQ=yes"
+      - "bunkerweb.USE_LIMIT_REQ=yes"
+      - "bunkerweb.LIMIT_REQ_URL=/"
+      - "bunkerweb.LIMIT_REQ_RATE=30r/m"
+      - "bunkerweb.LIMIT_REQ_URL_1=/identity/connect/authorize"
+      - "bunkerweb.LIMIT_REQ_RATE_1=5r/m"
+      - "bunkerweb.LIMIT_REQ_URL_2=/api/accounts"
+      - "bunkerweb.LIMIT_REQ_RATE_2=60r/m"
+      - "bunkerweb.BAD_BEHAVIOR_THRESHOLD=5"
+      - "bunkerweb.CORS_ORIGIN=${OIDC_PROVIDER_DOMAIN} ${SERVICE_DOMAIN}"
+      - "bunkerweb.CORS_CREDENTIALS=yes"
+      - "bunkerweb.USE_AUTH_BASIC=yes"
+      - "bunkerweb.AUTH_BASIC_LOCATION=/admin"
+      - "bunkerweb.AUTH_BASIC_USER=${VAULTWARDEN_BASIC_USER}"
+      - "bunkerweb.AUTH_BASIC_PASSWORD=${VAULTWARDEN_BASIC_PASSWORD}"
+#      - "bunkerweb.USE_ANTIBOT=no"
 
 networks:
-  traefik:
+  bw-services:
     external: true
