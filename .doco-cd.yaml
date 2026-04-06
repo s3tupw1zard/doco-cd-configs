@@ -37,20 +37,20 @@ remove_orphans: true
 force_image_pull: true
 external_secrets:
   TUNNEL_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/cloudflared/TUNNEL_TOKEN
----
-name: doco-cd
-working_dir: apps/core/doco-cd
-compose_files:
-  - compose.doco-cd.yaml
-remove_orphans: true
-force_image_pull: true
-external_secrets:
-  GIT_ACCESS_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/GIT_ACCESS_TOKEN
-  POLL_CONFIG_REPO_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/POLL_CONFIG_REPO_URL
-  SECRET_PROVIDER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER
-  SECRET_PROVIDER_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_ID
-  SECRET_PROVIDER_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
-  SECRET_PROVIDER_SITE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_SITE_URL
+#---
+#name: doco-cd
+#working_dir: apps/core/doco-cd
+#compose_files:
+#  - compose.doco-cd.yaml
+#remove_orphans: true
+#force_image_pull: true
+#external_secrets:
+#  GIT_ACCESS_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/GIT_ACCESS_TOKEN
+#  POLL_CONFIG_REPO_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/POLL_CONFIG_REPO_URL
+#  SECRET_PROVIDER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER
+#  SECRET_PROVIDER_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_ID
+#  SECRET_PROVIDER_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
+#  SECRET_PROVIDER_SITE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_SITE_URL
 #---
 #name: traefik
 #working_dir: apps/core/traefik
