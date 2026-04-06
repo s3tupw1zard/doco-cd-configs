@@ -27,7 +27,7 @@ services:
       start_period: 10s
     labels:
       - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
-      - "bunkerweb.REVERSE_PROXY=yes"
+      - "bunkerweb.USE_REVERSE_PROXY=yes"
       - "bunkerweb.REVERSE_PROXY_URL=/"
       - "bunkerweb.REVERSE_PROXY_HOST=http://pocket-id:1411"
       - "bunkerweb.SECURITY_MODE=detect"
