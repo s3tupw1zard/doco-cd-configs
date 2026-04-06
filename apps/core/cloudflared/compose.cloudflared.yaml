@@ -8,8 +8,8 @@ services:
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
-      - traefik
+      - bw-services
 
 networks:
-  traefik:
+  bw-services:
     external: true
