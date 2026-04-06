@@ -39,7 +39,7 @@ services:
       - "bunkerweb.USE_LIMIT_REQ=yes"
       - "bunkerweb.USE_LIMIT_REQ=yes"
       - "bunkerweb.LIMIT_REQ_URL=/"
-      - "bunkerweb.LIMIT_REQ_RATE=30r/m"
+      - "bunkerweb.LIMIT_REQ_RATE=5r/s"
       - "bunkerweb.LIMIT_REQ_URL_1=/identity/connect/authorize"
       - "bunkerweb.LIMIT_REQ_RATE_1=5r/m"
       - "bunkerweb.LIMIT_REQ_URL_2=/api/accounts"
