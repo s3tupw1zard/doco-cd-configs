@@ -28,6 +28,8 @@ external_secrets:
   LETS_ENCRYPT_DNS_CREDENTIAL_ITEM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/LETS_ENCRYPT_DNS_CREDENTIAL_ITEM
   SECURITYTXT_CONTACT: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/SECURITYTXT_CONTACT
   BUNKERWEB_SESSIONS_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_SESSIONS_SECRET
+  ANTIBOT_TURNSTILE_SITEKEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ANTIBOT_TURNSTILE_SITEKEY
+  ANTIBOT_TURNSTILE_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ANTIBOT_TURNSTILE_SECRET
 ---
 name: cloudflared
 working_dir: apps/core/cloudflared
@@ -87,6 +89,9 @@ external_secrets:
   SSO_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_CLIENT_SECRET
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SERVICE_NAME
+  OIDC_PROVIDER_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/OIDC_PROVIDER_DOMAIN
+  VAULTWARDEN_BASIC_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_USER
+  VAULTWARDEN_BASIC_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_PASSWORD
 ---
 name: whoami
 working_dir: apps/core/whoami
@@ -151,6 +156,7 @@ external_secrets:
   MAXMIND_LICENSE_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/MAXMIND_LICENSE_KEY
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_NAME
+  ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
 ---
 name: immich
 working_dir: apps/storage/immich
