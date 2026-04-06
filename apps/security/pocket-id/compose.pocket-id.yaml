@@ -49,9 +49,11 @@ services:
       - "bunkerweb.MODSECURITY_SEC_RULE_ENGINE=OnDetectionOnly"
       - "bunkerweb.USE_ANTIBOT=no"
       - "bunkerweb.CONTENT_SECURITY_POLICY=default-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; manifest-src 'self' https://${PANGOLIN_DOMAIN} https://${SERVICE_DOMAIN};"
-      - "bunkerweb.PERMISSIONS_POLICY=publickey-credentials-create=(self); publickey-credentials-get=(self)"
       - "bunkerweb.USE_MODSECURITY=no"
       - "bunkerweb.USE_MODSECURITY_CRS=no"
+      - |
+        bunkerweb.CUSTOM_HEADERS: |
+          Permissions-Policy: publickey-credentials-create=(self), publickey-credentials-get=(self)
       #- |
       #  bunkerweb.CUSTOM_CONF_MODSEC_CRS_posthog-whitelist=
       #  SecRule REQUEST_COOKIES_NAMES "@rx posthog$" \
