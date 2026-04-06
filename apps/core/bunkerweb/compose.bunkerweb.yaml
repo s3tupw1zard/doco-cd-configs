@@ -74,7 +74,7 @@ services:
         dnsbl:zen.spamhaus.org
       USE_GREYLIST: "yes"
       GREYLIST_IP: "10.8.0.0/21"
-      GREYLIST_RDNS: ".${ROOT_DOMAIN} .${CATEGORY_SUB_DOMAIN_8}"
+      GREYLIST_RDNS: ".${ROOT_DOMAIN}"
       # GREYLIST_ASN: "12345 67890"  # Company and partner ASNs
       # GREYLIST_USER_AGENT: "(?:\b)GoodBot(?:\b) (?:\b)PartnerCrawler(?:\b)"
       # GREYLIST_URI: "^/api/v1/"
