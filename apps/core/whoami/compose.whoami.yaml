@@ -24,7 +24,7 @@ services:
       - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
       - "bunkerweb.USE_REVERSE_PROXY=yes"
       - "bunkerweb.REVERSE_PROXY_URL=/"
-      - "bunkerweb.REVERSE_PROXY_HOST=http://whoami_whoami:80"
+      - "bunkerweb.REVERSE_PROXY_HOST=http://whoami:80"
 
 networks:
   bw-services:
