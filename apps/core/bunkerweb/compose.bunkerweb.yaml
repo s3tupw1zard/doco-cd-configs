@@ -87,7 +87,6 @@ services:
       X_CONTENT_TYPE_OPTIONS: "nosniff"
       X_DNS_PREFETCH_CONTROL: "off"
       REFERRER_POLICY: "strict-origin-when-cross-origin"
-      PERMISSIONS_POLICY: "geolocation=(), microphone=(), camera=()"
       KEEP_UPSTREAM_HEADERS: "Permissions-Policy X-Frame-Options X-Forwarded-For X-Real-IP X-Forwarded-Proto X-Forwarded-Host"
       AUTO_LETS_ENCRYPT: "yes"
       EMAIL_LETS_ENCRYPT: ${EMAIL_LETS_ENCRYPT}
