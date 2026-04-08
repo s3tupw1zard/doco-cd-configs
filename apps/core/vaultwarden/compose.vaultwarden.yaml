@@ -32,11 +32,6 @@ services:
       SSO_MASTER_PASSWORD_POLICY: '{"enforceOnLogin":false,"minComplexity":3,"minLength":10,"requireLower":true,"requireNumbers":true,"requireSpecial":true,"requireUpper":true}'
       SSO_AUTH_ONLY_NOT_SESSION: "false"
     labels:
-      - "bunkerweb.LOG_TYPES=file stderr syslog"
-      - "bunkerweb.SYSLOG_TAG=vaultwarden"
-      - "bunkerweb.ACCESS_LOG=/var/log/bunkerweb/vaultwarden_access.log"
-      - "bunkerweb.ERROR_LOG=/var/log/bunkerweb/vaultwarden_error.log"
-      - "bunkerweb.LOG_FILE_PATH=/var/log/bunkerweb/vaultwarden_container.log"
       - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
       - "bunkerweb.USE_REVERSE_PROXY=yes"
       - "bunkerweb.REVERSE_PROXY_HOST=http://vaultwarden:80"
@@ -58,8 +53,8 @@ services:
       - "bunkerweb.LIMIT_REQ_URL_2=/api/accounts"
       - "bunkerweb.LIMIT_REQ_RATE_2=60r/m"
       - "bunkerweb.BAD_BEHAVIOR_THRESHOLD=5"
-      - "bunkerweb.CORS_ORIGIN=${OIDC_PROVIDER_DOMAIN} ${SERVICE_DOMAIN} ${PANGOLIN_DOMAIN}"
-      - "bunkerweb.CORS_CREDENTIALS=yes"
+      - "bunkerweb.CORS_ALLOW_ORIGIN=${OIDC_PROVIDER_DOMAIN} ${SERVICE_DOMAIN} ${PANGOLIN_DOMAIN}"
+      - "bunkerweb.CORS_ALLOW_CREDENTIALS=yes"
       - "bunkerweb.USE_AUTH_BASIC=yes"
       - "bunkerweb.AUTH_BASIC_LOCATION=/admin"
       - "bunkerweb.AUTH_BASIC_USER=${VAULTWARDEN_BASIC_USER}"
