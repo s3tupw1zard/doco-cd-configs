@@ -78,7 +78,7 @@ services:
       CLIENT_CACHE_EXTENSIONS: "jpg | jpeg | png | bmp | ico | svg | tif | css | js | otf | ttf | eot | woff | woff2"
       CLIENT_CACHE_CONTROL: "public, max-age=15552000"
       CLIENT_CACHE_ETAG: "yes"
-      WHITELIST_COUNTRYS: "DE"
+      WHITELIST_COUNTRY: "DE"
       USE_DNSBL: "yes"
       DNSBL_LISTS: |
         dnsbl:abuseipdb
@@ -239,7 +239,6 @@ services:
       - "bunkerweb.LIMIT_REQ_RATE=5r/s"
       - "bunkerweb.BAD_BEHAVIOR_THRESHOLD=20"
       - "bunkerweb.WHITELIST_IP=127.0.0.1 10.20.30.0/24 10.8.0.0/21"
-      - "bunkerweb.USE_COUNTRY_BLOCK=no"
       - "bunkerweb.USE_ANTIBOT=no"
       - "bunkerweb.MODSECURITY_SEC_RULE_ENGINE=DetectionOnly"
       # - "bunkerweb.REVERSE_PROXY_URL=/${BWUI_PROXY_URL}/"
