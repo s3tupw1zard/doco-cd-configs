@@ -290,7 +290,7 @@ services:
       - bw-universe
 
   bunkerweb-syslog:
-    image: balabit/syslog-ng:4.10.2
+    image: balabit/syslog-ng:4.11.0@sha256:ce85e1af17daf888c72267b19f7f104bf329044257564b784ff8c00ce4fc01ef
     container_name: bunkerweb-syslog
     hostname: bunkerweb-syslog
     cap_add:
