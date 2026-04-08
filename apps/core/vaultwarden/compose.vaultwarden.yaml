@@ -32,58 +32,49 @@ services:
       SSO_MASTER_PASSWORD_POLICY: '{"enforceOnLogin":false,"minComplexity":3,"minLength":10,"requireLower":true,"requireNumbers":true,"requireSpecial":true,"requireUpper":true}'
       SSO_AUTH_ONLY_NOT_SESSION: "false"
     labels:
+      - "bunkerweb.USE_TEMPLATE=vaultwarden"
       - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
+      
       - "bunkerweb.USE_REVERSE_PROXY=yes"
-      - "bunkerweb.REVERSE_PROXY_HOST=http://vaultwarden:80"
-      - "bunkerweb.REVERSE_PROXY_URL=/"
-      - "bunkerweb.REVERSE_PROXY_WS=yes"
-      - "bunkerweb.REVERSE_PROXY_BUFFERING=no"
-      - "bunkerweb.REVERSE_PROXY_INTERCEPT_ERRORS=no"
-      - "bunkerweb.REVERSE_PROXY_CONNECT_TIMEOUT=15s"
-      - "bunkerweb.REVERSE_PROXY_SEND_TIMEOUT=300s"
-      - "bunkerweb.REVERSE_PROXY_READ_TIMEOUT=300s"
-      - "bunkerweb.ALLOWED_METHODS=GET|POST|HEAD|PUT|DELETE"
-      - "bunkerweb.SECURITY_MODE=block"
       - "bunkerweb.USE_LIMIT_REQ=yes"
-      - "bunkerweb.USE_LIMIT_REQ=yes"
-      - "bunkerweb.LIMIT_REQ_URL=/"
-      - "bunkerweb.LIMIT_REQ_RATE=3r/s"
-      - "bunkerweb.LIMIT_REQ_URL_1=/identity/connect/authorize"
-      - "bunkerweb.LIMIT_REQ_RATE_1=5r/m"
-      - "bunkerweb.LIMIT_REQ_URL_2=/api/accounts"
-      - "bunkerweb.LIMIT_REQ_RATE_2=60r/m"
-      - "bunkerweb.BAD_BEHAVIOR_THRESHOLD=5"
+      #- "bunkerweb.LIMIT_REQ_URL=/"
+      #- "bunkerweb.LIMIT_REQ_RATE=3r/s"
+      #- "bunkerweb.LIMIT_REQ_URL_1=/identity/connect/authorize"
+      #- "bunkerweb.LIMIT_REQ_RATE_1=5r/m"
+      #- "bunkerweb.LIMIT_REQ_URL_2=/api/accounts"
+      #- "bunkerweb.LIMIT_REQ_RATE_2=60r/m"
+      # - "bunkerweb.BAD_BEHAVIOR_THRESHOLD=5"
       - "bunkerweb.CORS_ALLOW_ORIGIN=${OIDC_PROVIDER_DOMAIN} ${SERVICE_DOMAIN} ${PANGOLIN_DOMAIN}"
       - "bunkerweb.CORS_ALLOW_CREDENTIALS=yes"
       - "bunkerweb.USE_AUTH_BASIC=yes"
       - "bunkerweb.AUTH_BASIC_LOCATION=/admin"
       - "bunkerweb.AUTH_BASIC_USER=${VAULTWARDEN_BASIC_USER}"
       - "bunkerweb.AUTH_BASIC_PASSWORD=${VAULTWARDEN_BASIC_PASSWORD}"
-      - "bunkerweb.USE_CLIENT_CACHE=yes"
-      - "bunkerweb.USE_MODSECURITY=yes"
-      - "bunkerweb.USE_MODSECURITY_CRS=yes"
-      - |
-        bunkerweb.CUSTOM_CONF_MODSEC_CRS_vaultwarden-import=
-        SecAction "id:420001,phase:1,nolog,pass,t:none,setvar:'tx.allowed_methods=GET HEAD POST OPTIONS PUT DELETE'"
+      #- "bunkerweb.USE_CLIENT_CACHE=yes"
+      #- "bunkerweb.USE_MODSECURITY=yes"
+      #- "bunkerweb.USE_MODSECURITY_CRS=yes"
+      #- |
+      #  bunkerweb.CUSTOM_CONF_MODSEC_CRS_vaultwarden-import=
+      #  SecAction "id:420001,phase:1,nolog,pass,t:none,setvar:'tx.allowed_methods=GET HEAD POST OPTIONS PUT DELETE'"
 
-        ## Make import to Org Possible by deaktivating XSS check
-        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
-          "id:420002,phase:1,pass,nolog,ctl:ruleRemoveById=941100"
+#        ## Make import to Org Possible by deaktivating XSS check
+#        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
+#          "id:420002,phase:1,pass,nolog,ctl:ruleRemoveById=941100"
 
-        ## Remove RCE attack since non windows systems are not vulnerable
-        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
-          "id:420003,phase:1,pass,nolog,ctl:ruleRemoveById=932110"
+#        ## Remove RCE attack since non windows systems are not vulnerable
+#        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
+#          "id:420003,phase:1,pass,nolog,ctl:ruleRemoveById=932110"
 
-        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
-          "id:420006,phase:1,pass,nolog,ctl:ruleRemoveById=932115"
+#        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
+#          "id:420006,phase:1,pass,nolog,ctl:ruleRemoveById=932115"
 
-        ## Remove Test for Inbound XSS check
-        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
-          "id:420004,phase:1,pass,nolog,ctl:ruleRemoveById=949110"
+#        ## Remove Test for Inbound XSS check
+#        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
+#          "id:420004,phase:1,pass,nolog,ctl:ruleRemoveById=949110"
 
-        ## XXS Test deactivated for Org Import
-        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
-          "id:420005,phase:1,pass,nolog,ctl:ruleRemoveById=941120"
+#        ## XXS Test deactivated for Org Import
+#        SecRule REQUEST_URI "@beginsWith /api/ciphers/import-organization" \
+#          "id:420005,phase:1,pass,nolog,ctl:ruleRemoveById=941120"
 
       #    X-Frame-Options: SAMEORIGIN
       #    Content-Security-Policy: frame-ancestors 'self' *;
