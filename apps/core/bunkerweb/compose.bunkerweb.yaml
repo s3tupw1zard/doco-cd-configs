@@ -241,7 +241,7 @@ services:
       - "bunkerweb.WHITELIST_IP=127.0.0.1 10.20.30.0/24 10.8.0.0/21"
       - "bunkerweb.USE_COUNTRY_BLOCK=no"
       - "bunkerweb.USE_ANTIBOT=no"
-      - "bunkerweb.MODSECURITY_SEC_RULE_ENGINE=OnDetectionOnly"
+      - "bunkerweb.MODSECURITY_SEC_RULE_ENGINE=DetectionOnly"
       # - "bunkerweb.REVERSE_PROXY_URL=/${BWUI_PROXY_URL}/"
   bunkerweb-db:
     image: mariadb:12@sha256:b3af559fc38e013c50dd5b5993bfbbb21125c1a62d976b3b0a14d9c4acaae578
