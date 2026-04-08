@@ -11,8 +11,8 @@ x-bw-env: &bw-env
   LOG_SYSLOG_ADDRESS: "udp://bunkerweb-syslog:514"
   # LOG_SYSLOG_TAG will be automatically set per service (override per-service if needed)
   # NGINX Logs: Send to Syslog (bunkerweb only)
-  ACCESS_LOG_1: "syslog:server=bw-syslog:514,tag=bunkerweb_access"
-  ERROR_LOG_1: "syslog:server=bw-syslog:514,tag=bunkerweb"
+  ACCESS_LOG_1: "syslog:server=bunkerweb-syslog:514,tag=bunkerweb_access"
+  ERROR_LOG_1: "syslog:server=bunkerweb-syslog:514,tag=bunkerweb"
 
 services:
   bunkerweb:
