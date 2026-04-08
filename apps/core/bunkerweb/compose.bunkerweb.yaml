@@ -4,6 +4,19 @@ x-ui-env: &bw-ui-env
   DATABASE_URI: "${BUNKERWEB_DATABASE_URI}"
   TZ: "Europe/Berlin"
 
+x-bw-env: &bw-env
+  # We use an anchor to avoid repeating the same settings for both services
+  API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.0.0.0/21" # Make sure to set the correct IP range so the scheduler can send the configuration to the instance
+  # Optional: set an API token and mirror it in both containers
+  API_TOKEN: ""
+  # Service Logs
+  LOG_TYPES: "file stderr syslog"
+  LOG_SYSLOG_ADDRESS: "udp://bunkerweb-syslog:514"
+  # LOG_SYSLOG_TAG will be automatically set per service (override per-service if needed)
+  # NGINX Logs: Send to Syslog (bunkerweb only)
+  ACCESS_LOG_1: "syslog:server=bw-syslog:514,tag=bunkerweb_access"
+  ERROR_LOG_1: "syslog:server=bw-syslog:514,tag=bunkerweb"
+
 services:
   bunkerweb:
     image: bunkerity/bunkerweb:1.6.9@sha256:67e45857583378d3e0e5aaa473a4d8405da685dc143d4e43d7636b17e4646082
@@ -18,8 +31,10 @@ services:
     volumes:
       - /mnt/hdd/core/bunkerweb/logs:/var/log/bunkerweb
     environment:
+      <<: *bw-env
+      LOG_SYSLOG_TAG: "bunkerweb"
+      LOG_FILE_PATH: "/var/log/bunkerweb/bunkerweb.log"
       AUTOCONF_MODE: "yes"
-      API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.0.0.0/21"
       TZ: "Europe/Berlin"
     restart: "unless-stopped"
     networks:
@@ -32,9 +47,11 @@ services:
     hostname: bunkerweb-scheduler
     environment:
       <<: *bw-ui-env
+      <<: *bw-env
+      LOG_SYSLOG_TAG: "bunkerweb-scheduler"
+      LOG_FILE_PATH: "/var/log/bunkerweb/bunkerweb-scheduler.log"
       BUNKERWEB_INSTANCES: "bunkerweb"
       SERVER_NAME: ""
-      API_WHITELIST_IP: "127.0.0.0/8 10.20.30.0/24 10.8.0.0/21"
       MULTISITE: "yes"
       USE_UI: "yes"
       UI_HOST: "http://bunkerweb-ui:7000" # Change it if needed
@@ -179,6 +196,9 @@ services:
       - bunkerweb-docker
     environment:
       <<: *bw-ui-env
+      <<: *bw-env
+      LOG_SYSLOG_TAG: "bunkerweb-autoconf"
+      LOG_FILE_PATH: "/var/log/bunkerweb/bunkerweb-autoconf.log"
       DOCKER_HOST: "tcp://bunkerweb-docker:2375"
     restart: "unless-stopped"
     networks:
@@ -205,6 +225,9 @@ services:
     hostname: bunkerweb-ui
     environment:
       <<: *bw-ui-env
+      <<: *bw-env
+      LOG_SYSLOG_TAG: "bunkerweb-ui"
+      LOG_FILE_PATH: "/var/log/bunkerweb/bunkerweb-ui.log"
       SERVER_NAME: ${SERVICE_DOMAIN}
       TOTP_ENCRYPTION_KEYS: "${TOTP_ENCRYPTION_KEYS}"
     restart: "unless-stopped"
@@ -262,6 +285,25 @@ services:
       --appendonly yes
     volumes:
       - /mnt/ssd/core/bunkerweb/redis-data:/data
+    restart: "unless-stopped"
+    networks:
+      - bw-universe
+
+  bunkerweb-syslog:
+    image: balabit/syslog-ng:4.10.2
+    container_name: bunkerweb-syslog
+    hostname: bunkerweb-syslog
+    cap_add:
+      - NET_BIND_SERVICE  # Bind to low ports
+      - NET_BROADCAST  # Send broadcasts
+      - NET_RAW  # Use raw sockets
+      - DAC_READ_SEARCH  # Read files bypassing permissions
+      - DAC_OVERRIDE  # Override file permissions
+      - CHOWN  # Change ownership
+      - SYSLOG  # Write to system logs
+    volumes:
+      - /mnt/ssd/core/bunkerweb/syslog-ng/logs/bunkerweb:/var/log/bunkerweb # This is the volume used to store the logs
+      - /mnt/ssd/core/bunkerweb/syslog-ng/config/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf # This is the syslog-ng configuration file
     restart: "unless-stopped"
     networks:
       - bw-universe
