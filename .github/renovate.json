@@ -166,6 +166,32 @@
             "platformAutomerge": true
         },
         {
+            "description": "BunkerWeb Syslog-NG",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/core/bunkerweb/**"
+            ],
+            "matchPackageNames": [
+                "balabit/syslog-ng"
+            ],
+            "matchUpdateTypes": [
+                "pin",
+                "digest"
+            ],
+            "labels": [
+                "dependencies",
+                "renovate",
+                "core",
+                "logging"
+            ],
+            "internalChecksFilter": "strict",
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
             "description": "cloudflared",
             "matchManagers": [
                 "docker-compose"
