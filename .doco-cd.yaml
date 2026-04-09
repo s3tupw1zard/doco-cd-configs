@@ -30,7 +30,7 @@ external_secrets:
 #  BUNKERWEB_SESSIONS_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_SESSIONS_SECRET
 #  ANTIBOT_TURNSTILE_SITEKEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ANTIBOT_TURNSTILE_SITEKEY
 #  ANTIBOT_TURNSTILE_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ANTIBOT_TURNSTILE_SECRET
----
+
 name: cloudflared
 working_dir: apps/core/cloudflared
 compose_files:
@@ -39,6 +39,7 @@ remove_orphans: true
 force_image_pull: true
 external_secrets:
   TUNNEL_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/cloudflared/TUNNEL_TOKEN
+---
 #---
 #name: doco-cd
 #working_dir: apps/core/doco-cd
