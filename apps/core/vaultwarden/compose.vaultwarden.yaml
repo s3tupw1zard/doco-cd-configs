@@ -8,7 +8,7 @@ services:
     volumes:
       - /mnt/ssd/core/vaultwarden/data:/data:rw
     networks:
-      - bw-services
+      - traefik
     environment:
       DOMAIN: ${DOMAIN}
       ADMIN_TOKEN: ${ADMIN_TOKEN}
@@ -32,6 +32,15 @@ services:
       SSO_MASTER_PASSWORD_POLICY: '{"enforceOnLogin":false,"minComplexity":3,"minLength":10,"requireLower":true,"requireNumbers":true,"requireSpecial":true,"requireUpper":true}'
       SSO_AUTH_ONLY_NOT_SESSION: "false"
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik"
+
       - "bunkerweb.USE_TEMPLATE=vaultwarden"
       - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
       
@@ -83,5 +92,5 @@ services:
 #      - "bunkerweb.USE_ANTIBOT=no"
 
 networks:
-  bw-services:
+  traefik:
     external: true
