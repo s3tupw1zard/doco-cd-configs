@@ -19,7 +19,7 @@ services:
 
       - traefik.http.routers.${SERVICE_NAME}-dashboard.rule=Host(`${SERVICE_DOMAIN}`)
       - traefik.http.routers.${SERVICE_NAME}-dashboard.entrypoints=websecure
-      - traefik.http.routers.${SERVICE_NAME}-dashboard.middlewares=cloudflarewarp@file,crowdsec@file #traefik-dashboard-oidc
+      # - traefik.http.routers.${SERVICE_NAME}-dashboard.middlewares=cloudflarewarp@file,crowdsec@file #traefik-dashboard-oidc
       - traefik.http.routers.${SERVICE_NAME}-dashboard.service=${SERVICE_NAME}-dashboard
       - "traefik.http.services.${SERVICE_NAME}-dashboard.loadbalancer.server.port=8080"
       - traefik.http.routers.${SERVICE_NAME}-dashboard.tls.certresolver=cloudflare

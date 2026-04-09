@@ -53,7 +53,7 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}-public.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}-public.service=${SERVICE_NAME}-public"
       - "traefik.http.routers.${SERVICE_NAME}-public.tls.certresolver=cloudflare"
-      - "traefik.http.routers.${SERVICE_NAME}-public.middlewares=cloudflarewarp@file,crowdsec@file"
+      # - "traefik.http.routers.${SERVICE_NAME}-public.middlewares=cloudflarewarp@file,crowdsec@file"
       - "traefik.http.services.${SERVICE_NAME}-public.loadbalancer.server.port=80"
 
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
@@ -61,12 +61,12 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
       - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
-      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file,${SERVICE_NAME}-oidc"
+      # - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file,${SERVICE_NAME}-oidc"
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=80"
 
       - traefik.http.routers.${SERVICE_NAME}-callback.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/oauth2`)
       - traefik.http.routers.${SERVICE_NAME}-callback.entrypoints=websecure
-      - "traefik.http.routers.${SERVICE_NAME}-callback.middlewares=cloudflarewarp@file,crowdsec@file"
+      # - "traefik.http.routers.${SERVICE_NAME}-callback.middlewares=cloudflarewarp@file,crowdsec@file"
       #- traefik.http.routers.${SERVICE_NAME}-callback.service=traefik
       - traefik.http.routers.${SERVICE_NAME}-callback.tls.certresolver=cloudflare
 
