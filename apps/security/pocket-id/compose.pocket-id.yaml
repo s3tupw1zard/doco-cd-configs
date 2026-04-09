@@ -18,7 +18,7 @@ services:
       - "/mnt/ssd/security/pocket-id/data:/app/data"
       - "/etc/localtime:/etc/localtime:ro"
     networks:
-      - bw-services
+      - traefik
     healthcheck:
       test: [ "CMD", "/app/pocket-id", "healthcheck" ]
       interval: 1m30s
@@ -26,6 +26,15 @@ services:
       retries: 2
       start_period: 10s
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik"
+
       - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
       - "bunkerweb.USE_REVERSE_PROXY=yes"
       - "bunkerweb.REVERSE_PROXY_URL=/"
@@ -58,5 +67,5 @@ services:
 
 
 networks:
-  bw-services:
+  traefik:
     external: true
