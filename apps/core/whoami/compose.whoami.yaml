@@ -7,7 +7,7 @@ services:
     environment:
       TEST_VAR: ${TEST_VAR}
     networks:
-      - bw-services
+      - traefik
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
@@ -27,5 +27,5 @@ services:
       - "bunkerweb.REVERSE_PROXY_HOST=http://whoami:80"
 
 networks:
-  bw-services:
+  traefik:
     external: true
