@@ -8,28 +8,28 @@ external_secrets:
   BACKUP_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/backrest/BACKUP_USER
   BACKUP_PASS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/backrest/BACKUP_PASS
 ---
-name: bunkerweb
-working_dir: apps/core/bunkerweb
-compose_files:
-  - compose.bunkerweb.yaml
-remove_orphans: true
-force_image_pull: true
-external_secrets:
-  ADMIN_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ADMIN_USER
-  ADMIN_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ADMIN_PASSWORD
-  BWUI_PROXY_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BWUI_PROXY_URL
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/SERVICE_DOMAIN
-  BUNKERWEB_SERVER_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_SERVER_NAME
-  BUNKERWEB_DB_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_DB_PASSWORD
-  BUNKERWEB_DATABASE_URI: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_DATABASE_URI
-  TOTP_ENCRYPTION_KEYS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/TOTP_ENCRYPTION_KEYS
-  ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
-  EMAIL_LETS_ENCRYPT: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/EMAIL_LETS_ENCRYPT
-  LETS_ENCRYPT_DNS_CREDENTIAL_ITEM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/LETS_ENCRYPT_DNS_CREDENTIAL_ITEM
-  SECURITYTXT_CONTACT: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/SECURITYTXT_CONTACT
-  BUNKERWEB_SESSIONS_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_SESSIONS_SECRET
-  ANTIBOT_TURNSTILE_SITEKEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ANTIBOT_TURNSTILE_SITEKEY
-  ANTIBOT_TURNSTILE_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ANTIBOT_TURNSTILE_SECRET
+#name: bunkerweb
+#working_dir: apps/core/bunkerweb
+#compose_files:
+#  - compose.bunkerweb.yaml
+#remove_orphans: true
+#force_image_pull: true
+#external_secrets:
+#  ADMIN_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ADMIN_USER
+#  ADMIN_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ADMIN_PASSWORD
+#  BWUI_PROXY_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BWUI_PROXY_URL
+#  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/SERVICE_DOMAIN
+#  BUNKERWEB_SERVER_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_SERVER_NAME
+#  BUNKERWEB_DB_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_DB_PASSWORD
+#  BUNKERWEB_DATABASE_URI: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_DATABASE_URI
+#  TOTP_ENCRYPTION_KEYS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/TOTP_ENCRYPTION_KEYS
+#  ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
+#  EMAIL_LETS_ENCRYPT: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/EMAIL_LETS_ENCRYPT
+#  LETS_ENCRYPT_DNS_CREDENTIAL_ITEM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/LETS_ENCRYPT_DNS_CREDENTIAL_ITEM
+#  SECURITYTXT_CONTACT: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/SECURITYTXT_CONTACT
+#  BUNKERWEB_SESSIONS_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/BUNKERWEB_SESSIONS_SECRET
+#  ANTIBOT_TURNSTILE_SITEKEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ANTIBOT_TURNSTILE_SITEKEY
+#  ANTIBOT_TURNSTILE_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/bunkerweb/ANTIBOT_TURNSTILE_SECRET
 ---
 name: cloudflared
 working_dir: apps/core/cloudflared
@@ -54,21 +54,21 @@ external_secrets:
 #  SECRET_PROVIDER_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
 #  SECRET_PROVIDER_SITE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_SITE_URL
 #---
-#name: traefik
-#working_dir: apps/core/traefik
-#compose_files:
-#  - compose.traefik.yaml
-#remove_orphans: true
-#force_image_pull: true
-#external_secrets:
-#  CLOUDFLARE_API_EMAIL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/CLOUDFLARE_API_EMAIL
-#  CLOUDFLARE_DNS_API_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/CLOUDFLARE_DNS_API_TOKEN
-#  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/SERVICE_DOMAIN
-#  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/SERVICE_NAME
-#  ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
-#  OIDC_SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_DOMAIN
-#  TRAEFIK_OIDC_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_ID
-#  TRAEFIK_OIDC_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_SECRET
+name: traefik
+working_dir: apps/core/traefik
+compose_files:
+  - compose.traefik.yaml
+remove_orphans: true
+force_image_pull: true
+external_secrets:
+  CLOUDFLARE_API_EMAIL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/CLOUDFLARE_API_EMAIL
+  CLOUDFLARE_DNS_API_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/CLOUDFLARE_DNS_API_TOKEN
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/SERVICE_NAME
+  ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
+  OIDC_SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_DOMAIN
+  TRAEFIK_OIDC_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_ID
+  TRAEFIK_OIDC_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_SECRET
 ---
 name: vaultwarden
 working_dir: apps/core/vaultwarden
