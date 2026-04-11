@@ -32,7 +32,7 @@ services:
       #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.callbackURL=/oauth2/callback
       #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.logoutURL=/oauth2/logout
       #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.scopes=openid,profile,email,groups
-      - "traefik.docker.network=public"
+      - "traefik.docker.network=traefik"
     command:
       - --api=true
       - --api.insecure=true
