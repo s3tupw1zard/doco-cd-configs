@@ -17,7 +17,6 @@ force_image_pull: true
 external_secrets:
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/searxng/SERVICE_NAME
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/searxng/SERVICE_DOMAIN
-
 ---
 #name: bunkerweb
 #working_dir: apps/core/bunkerweb
