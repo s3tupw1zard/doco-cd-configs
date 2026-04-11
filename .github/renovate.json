@@ -53,6 +53,35 @@
             "platformAutomerge": true
         },
         {
+            "description": "searxng",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/automation/searxng/**"
+            ],
+            "matchPackageNames": [
+                "valkey/valkey",
+                "searxng/searxng"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "searxng",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "automation",
+                "web-search"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
             "description": "Backrest",
             "matchManagers": [
                 "docker-compose"

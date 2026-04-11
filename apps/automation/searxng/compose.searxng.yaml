@@ -1,0 +1,50 @@
+services:
+
+  searxng-redis:
+    container_name: searxng-redis
+    image: docker.io/valkey/valkey:8-alpine
+    command: valkey-server --save 30 1 --loglevel warning
+    restart: always
+    networks:
+      - searxng
+    volumes:
+      - /mnt/ssd/automation/searxng/valkey-data2:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+
+  searxng:
+    container_name: searxng
+    image: docker.io/searxng/searxng:latest
+    restart: always
+    networks:
+      - searxng
+      - traefik
+    #ports:
+    #  - "127.0.0.1:8002:8080"
+    volumes:
+      - /mnt/ssd/automation/searxng/config:/etc/searxng:rw
+      - /mnt/ssd/automation/searxng/data:/var/cache/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=https://searxng.s3tupw1zard.ovh/
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      # - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8080"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true
+  searxng:
