@@ -35,37 +35,6 @@ services:
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=1411"
       - "traefik.docker.network=traefik"
 
-      - "bunkerweb.SERVER_NAME=${SERVICE_DOMAIN}"
-      - "bunkerweb.USE_REVERSE_PROXY=yes"
-      - "bunkerweb.REVERSE_PROXY_URL=/"
-      - "bunkerweb.REVERSE_PROXY_HOST=http://pocket-id:1411"
-      - "bunkerweb.SECURITY_MODE=detect"
-      - "bunkerweb.USE_LIMIT_REQ=yes"
-      - "bunkerweb.LIMIT_REQ_URL=/"
-      - "bunkerweb.LIMIT_REQ_RATE=100r/m"
-      - "bunkerweb.LIMIT_REQ_URL_1=/authorize"
-      - "bunkerweb.LIMIT_REQ_RATE_1=15r/m"
-      - "bunkerweb.LIMIT_REQ_URL_2=/api/oidc/token"
-      - "bunkerweb.LIMIT_REQ_RATE_2=50r/m"
-      - "bunkerweb.LIMIT_REQ_URL_3=/api/oidc/userinfo"
-      - "bunkerweb.LIMIT_REQ_RATE_3=80r/m"
-      - "bunkerweb.BAD_BEHAVIOR_THRESHOLD=8"
-      - "bunkerweb.CORS_ALLOW_ORIGIN=*.${ROOT_DOMAIN}"
-      - "bunkerweb.CORS_ALLOW_CREDENTIALS=yes"
-      - "bunkerweb.CORS_ALLOW_METHODS=GET,POST,OPTIONS,PUT,DELETE"
-      - "bunkerweb.CORS_ALLOW_HEADERS=Authorization,Content-Type,X-Requested-With"
-      - "bunkerweb.MODSECURITY_SEC_RULE_ENGINE=DetectionOnly"
-      - "bunkerweb.USE_ANTIBOT=no"
-      - "bunkerweb.CONTENT_SECURITY_POLICY=default-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; manifest-src 'self' https://${PANGOLIN_DOMAIN} https://${SERVICE_DOMAIN};"
-      - "bunkerweb.USE_MODSECURITY=no"
-      - "bunkerweb.USE_MODSECURITY_CRS=no"
-      - "bunkerweb.CUSTOM_HEADER=Permissions-Policy: publickey-credentials-create=(self), publickey-credentials-get=(self)"
-      #- |
-      #  bunkerweb.CUSTOM_CONF_MODSEC_CRS_posthog-whitelist=
-      #  SecRule REQUEST_COOKIES_NAMES "@rx posthog$" \
-      #    "id:100200,phase:1,pass,nolog,ctl:ruleRemoveById=942290"
-
-
 networks:
   traefik:
     external: true
