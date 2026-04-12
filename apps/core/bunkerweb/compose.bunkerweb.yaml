@@ -201,7 +201,7 @@ services:
       - bw-db
 
   bunkerweb-docker:
-    image: tecnativa/docker-socket-proxy:nightly@sha256:37ada773f5d32a05bcac17a5aa1335bbaf4bdd96ae20a342b02f678a156d389f
+    image: tecnativa/docker-socket-proxy:nightly@sha256:911a8744f4958f3c151199a1bf1ae94da4ee93cdffcc06e2be611a3a3f11bc41
     container_name: bunkerweb-docker
     hostname: bunkerweb-docker
     restart: "unless-stopped"
