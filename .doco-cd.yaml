@@ -30,7 +30,7 @@ external_secrets:
   OAUTH_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OAUTH_CLIENT_ID
   OAUTH_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OAUTH_CLIENT_SECRET
   OPENAI_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPENAI_API_KEY
-  OPENAI_BASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPENAI_BASE_URL
+  OPENAI_API_BASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPENAI_BASE_URL
   WEBUI_SECRET_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/WEBUI_SECRET_KEY
 ---
 name: backrest
