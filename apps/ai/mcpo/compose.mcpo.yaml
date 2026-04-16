@@ -1,0 +1,27 @@
+services:
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main
+    volumes:
+      - /mnt/ssd/ai/mcpo/config:/config
+      - /mnt/hdd/ai/mcpo/data:/data
+      - /mnt/ssd/ai/mcpo/cache:/cache
+      - /mnt/ssd/ai/mcpo/db:/db
+    command: >
+      --port 8000
+      --root-path "/api"
+      --api-key "${MCPO_API_KEY}"
+      --config /config/config.json
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`$SERVICE_DOMAIN`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8000"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true
