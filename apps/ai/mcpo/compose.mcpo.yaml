@@ -1,6 +1,8 @@
 services:
   mcpo:
     image: ghcr.io/open-webui/mcpo:main
+    container_name: mcpo
+    hostname: mcpo
     volumes:
       - /mnt/ssd/ai/mcpo/config:/config
       - /mnt/hdd/ai/mcpo/data:/data
