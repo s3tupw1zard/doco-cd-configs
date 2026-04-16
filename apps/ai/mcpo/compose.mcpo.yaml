@@ -5,7 +5,7 @@ services:
     hostname: mcpo
     volumes:
       - /mnt/ssd/ai/mcpo/config:/config
-      - /mnt/hdd/ai/mcpo/data:/mcpo-data
+      - /mnt/ssd/ai/mcpo/data:/mcpo-data
       - /mnt/ssd/ai/mcpo/cache:/mcpo-cache
     command: >
       --port 8000
