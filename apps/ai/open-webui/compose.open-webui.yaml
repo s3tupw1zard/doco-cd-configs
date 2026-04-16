@@ -82,6 +82,14 @@ services:
       - OPEN_TERMINAL_API_KEY=${OPEN_TERMINAL_API_KEY}
     networks:
       - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}-terminal.rule=Host(`terminal.$SERVICE_DOMAIN`)"
+      - "traefik.http.routers.${SERVICE_NAME}-terminal.entrypoints=websecure"
+      - "traefik.http.services.${SERVICE_NAME}-terminal.loadbalancer.server.port=8000"
+      - "traefik.http.routers.${SERVICE_NAME}-terminal.service=${SERVICE_NAME}-terminal"
+      - "traefik.http.routers.${SERVICE_NAME}-terminal.tls.certresolver=cloudflare"
+      - "traefik.docker.network=traefik"
 
   postgres:
     image: postgres:15-alpine
