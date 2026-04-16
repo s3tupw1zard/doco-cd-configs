@@ -73,13 +73,16 @@ services:
     container_name: open-terminal
     hostname: open-terminal
     restart: unless-stopped
+    user: "0:0"
     #ports:
     #  - 8000:8000
     volumes:
-      - /mnt/ssd/ai/open-webui/open-terminal/home:/home/user
+      - /mnt/ssd/ai/open-webui/open-terminal/home:/home
       - /mnt/ssd/ai/open-webui/open-terminal/config/.git-credentials:/root/.git-credentials:ro
     environment:
       - OPEN_TERMINAL_API_KEY=${OPEN_TERMINAL_API_KEY}
+      - HOME=/home
+      - OPEN_TERMINAL_MULTI_USER=true
     networks:
       - traefik
     labels:
