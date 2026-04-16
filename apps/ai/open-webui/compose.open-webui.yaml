@@ -68,6 +68,21 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.docker.network=traefik"
 
+  open-terminal:
+    image: git.${ROOT_DOMAIN}/s3tupw1zard/open-terminal:custom
+    container_name: open-terminal
+    hostname: open-terminal
+    restart: unless-stopped
+    #ports:
+    #  - 8000:8000
+    volumes:
+      - /mnt/ssd/ai/open-webui/open-terminal/home:/home/user
+      - /mnt/ssd/ai/open-webui/open-terminal/config/.git-credentials:/root/.git-credentials:ro
+    environment:
+      - OPEN_TERMINAL_API_KEY=${OPEN_TERMINAL_API_KEY}
+    networks:
+      - traefik
+
   postgres:
     image: postgres:15-alpine
     container_name: open-webui-postgres
