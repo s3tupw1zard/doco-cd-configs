@@ -26,6 +26,95 @@
             "separateMinorPatch": true
         },
         {
+            "description": "mcpo",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ai/mcpo/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/open-webui/mcpo"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "mcpo",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "mcp-server",
+                "ai"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "open-webui",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ai/open-webui/**"
+            ],
+            "matchPackageNames": [
+                "apache/tika",
+                "ghcr.io/open-webui/open-webui",
+                "qdrant/qdrant",
+                "redis"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "open-webui",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "chatbot",
+                "ai"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
+            "description": "open-webui Postgres",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ai/open-webui/**"
+            ],
+            "matchPackageNames": [
+                "postgres"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "open-webui-postgres",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "database"
+            ],
+            "allowedVersions": "15-alpine",
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
             "description": "n8n",
             "matchManagers": [
                 "docker-compose"
