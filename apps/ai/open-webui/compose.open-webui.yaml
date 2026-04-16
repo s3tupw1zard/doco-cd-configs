@@ -1,0 +1,124 @@
+services:
+
+  tika:
+    image: apache/tika:latest
+    container_name: tika
+    networks:
+      - open-webui
+#    ports:
+#      - "9998:9998"
+    labels:
+      - "traefik.enable=false"
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
+    container_name: open-webui
+    volumes:
+      - /mnt/ssd/ai/open-webui/open-webui-data:/app/backend/data
+      - /mnt/ssd/ai/open-webui/prompt-plus/custom.css:/app/build/static/custom.css
+      - /mnt/ssd/ai/open-webui/prompt-plus/loader.js:/app/build/static/loader.js
+      - /mnt/ssd/ai/open-webui/prompt-plus/js/prompt-plus-app.js:/app/build/static/js/prompt-plus-app.js
+    networks:
+      - open-webui
+      - traefik
+    #ports:
+    #  - ${OPEN_WEBUI_PORT-3020}:8080
+    environment:
+#      - OLLAMA_BASE_URL=http://ollama:11434
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
+      - OPENAI_API_BASE_URL=${OPENAI_API_BASE_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DATABASE_URL=${DATABASE_URL}
+      - QDRANT_URI=http://qdrant:6333
+      - VECTOR_DB=qdrant
+      - QDRANT_API_KEY=${QDRANT_API_KEY}
+      - ENABLE_WEBSOCKET_SUPPORT=true
+      - REDIS_URL=${REDIS_URL}
+      - WEBSOCKET_MANAGER=redis
+      - DATABASE_POOL_SIZE=20
+      - DATABASE_POOL_MAX_OVERFLOW=10
+      - DATABASE_POOL_TIMEOUT=30
+      - DATABASE_POOL_RECYCLE=1800
+      - ENABLE_OAUTH_SIGNUP=True
+      - ENABLE_OAUTH_PERSISTENT_CONFIG=True
+      - OAUTH_UPDATE_PICTURE_ON_LOGIN=True
+      - OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}
+      - OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
+      - OPENID_PROVIDER_URL=${OPENID_PROVIDER_URL}
+      - ENABLE_WEB_LOADER_SSL_VERIFICATION=false
+#      - OPENID_REDIRECT_URI=
+      - OAUTH_SCOPES=openid email profile groups
+      - OAUTH_PROVIDER_NAME=Pocket ID
+      - OAUTH_USERNAME_CLAIM=preferred_username
+      - OAUTH_EMAIL_CLAIM=email
+      - OAUTH_PICTURE_CLAIM=picture
+      - OAUTH_GROUP_CLAIM=groups
+      - ENABLE_OAUTH_ROLE_MANAGEMENT=True
+      - OAUTH_ROLES_CLAIM=groups
+      - OAUTH_ADMIN_ROLES=open_webui_admin
+      - ENABLE_FORWARD_USER_INFO_HEADERS=True
+#      - CORS_ALLOW_ORIGIN="172.18.0.0/16;172.19.0.0/16"
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`$SERVICE_DOMAIN`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8080"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.docker.network=traefik"
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    hostname: postgres
+    restart: unless-stopped
+    command: postgres -c shared_buffers=256MB -c work_mem=16MB -c maintenance_work_mem=128MB -c effective_cache_size=512MB -c max_connections=100
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_MULTIPLE_DATABASES=${POSTGRES_MULTIPLE_DATABASES}
+    volumes:
+      - /mnt/ssd/ai/open-webui/postgres-data:/var/lib/postgresql/data
+      - /mnt/ssd/ai/open-webui/scripts/postgres-init:/docker-entrypoint-initdb.d
+    networks:
+      - open-webui
+    labels:
+      - "traefik.enable=false"
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    hostname: qdrant
+    environment:
+      - QDRANT__SERVICE__API_KEY=${QDRANT_API_KEY}
+      - QDRANT__SERVICE__ENABLE_API_KEY_AUTHORIZATION=true
+    restart: unless-stopped
+    volumes:
+      - /mnt/ssd/ai/open-webui/qdrant-data:/qdrant/storage
+    networks:
+      - open-webui
+    labels:
+      - "traefik.enable=false"
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    hostname: redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - /mnt/ssd/ai/open-webui/redis-data:/data
+    networks:
+      - open-webui
+    labels:
+      - "traefik.enable=false"
+
+networks:
+  open-webui:
+    name: open-webui
+    driver: bridge
+  searxng:
+  traefik:
+    external: true
