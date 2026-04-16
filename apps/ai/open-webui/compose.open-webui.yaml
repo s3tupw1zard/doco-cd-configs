@@ -69,7 +69,7 @@ services:
       - "traefik.docker.network=traefik"
 
   open-terminal:
-    image: git.${ROOT_DOMAIN}/s3tupw1zard/open-terminal:custom
+    image: git.${ROOT_DOMAIN}/s3tupw1zard/open-terminal:custom-full
     container_name: open-terminal
     hostname: open-terminal
     restart: unless-stopped
