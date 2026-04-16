@@ -7,6 +7,8 @@ services:
       - /mnt/ssd/ai/mcpo/config:/config
       - /mnt/ssd/ai/mcpo/data:/mcpo-data
       - /mnt/ssd/ai/mcpo/cache:/mcpo-cache
+    environment:
+      - BASE_DIR=/mcpo-data/docs
     command: >
       --port 8000
       --root-path "/api"
