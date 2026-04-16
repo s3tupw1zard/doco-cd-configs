@@ -1,3 +1,38 @@
+name: mcpo
+working_dir: apps/ai/mcpo
+compose_files:
+  - compose.mcpo.yaml
+remove_orphans: true
+force_image_pull: true
+external_secrets:
+  MCPO_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/mcpo/MCPO_API_KEY
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/mcpo/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/mcpo/SERVICE_NAME
+---
+name: open-webui
+working_dir: apps/ai/open-webui
+compose_files:
+  - compose.open-webui.yaml
+remove_orphans: true
+force_image_pull: true
+external_secrets:
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/SERVICE_NAME
+  DATABASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/DATABASE_URL
+  POSTGRES_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/POSTGRES_USER
+  POSTGRES_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/POSTGRES_PASSWORD
+  POSTGRES_DB: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/POSTGRES_DB
+  POSTGRES_MULTIPLE_DATABASES: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/POSTGRES_MULTIPLE_DATABASES
+  QDRANT_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/QDRANT_API_KEY
+  REDIS_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/REDIS_PASSWORD
+  REDIS_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/REDIS_URL
+  OPENID_PROVIDER_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPENID_PROVIDER_URL
+  OAUTH_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OAUTH_CLIENT_ID
+  OAUTH_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OAUTH_CLIENT_SECRET
+  OPENAI_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPENAI_API_KEY
+  OPENAI_BASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPENAI_BASE_URL
+  WEBUI_SECRET_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/WEBUI_SECRET_KEY
+---
 name: backrest
 working_dir: apps/core/backrest
 compose_files:
