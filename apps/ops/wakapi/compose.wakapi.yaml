@@ -18,6 +18,9 @@ services:
       WAKAPI_MAIL_SMTP_PASS: ${WAKAPI_MAIL_SMTP_PASS}
       WAKAPI_MAIL_SMTP_HOST: ${WAKAPI_MAIL_SMTP_HOST}
       WAKAPI_MAIL_SMTP_PORT: "465"
+    networks:
+      - wakapi
+      - traefik
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
@@ -37,6 +40,10 @@ services:
       POSTGRES_DB: "wakapi"
     volumes:
       - /mnt/ssd/ops/wakapi/db:/var/lib/postgresql/data
+    networks:
+      - wakapi
 
-volumes:
-  wakapi-db-data: {}
+networks:
+  traefik:
+    external: true
+  wakapi:
