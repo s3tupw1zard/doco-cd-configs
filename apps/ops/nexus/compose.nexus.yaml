@@ -4,6 +4,7 @@ services:
     #ports:
     #  - 8081:8081
     container_name: nexus
+    hostname: nexus
     environment:
       - NEXUS_SECRETS_KEY_FILE=/opt/sonatype/nexus/etc/nexus.secrets.json
     volumes:
