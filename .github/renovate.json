@@ -97,12 +97,6 @@
             "matchPackageNames": [
                 "postgres"
             ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
             "groupName": "open-webui-postgres",
             "labels": [
                 "dependencies",
