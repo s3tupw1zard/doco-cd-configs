@@ -1,0 +1,23 @@
+services:
+  nexus3:
+    image: sonatype/nexus3:latest
+    #ports:
+    #  - 8081:8081
+    container_name: nexus
+    volumes:
+      - /mnt/hdd/ops/nexus/data:/nexus-data
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      # - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8081"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true

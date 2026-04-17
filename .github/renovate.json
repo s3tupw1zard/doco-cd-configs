@@ -477,6 +477,34 @@
             "platformAutomerge": true
         },
         {
+            "description": "Nexus Sonatype",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ops/nexus/**"
+            ],
+            "matchPackageNames": [
+                "sonatype/nexus3"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "nexus",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "ops",
+                "apt"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
             "description": "CrowdSec",
             "matchManagers": [
                 "docker-compose"
