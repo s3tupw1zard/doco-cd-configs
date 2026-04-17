@@ -196,6 +196,22 @@ external_secrets:
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/nexus/SERVICE_NAME
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/nexus/SERVICE_DOMAIN
 ---
+name: wakapi
+working_dir: apps/ops/wakapi
+compose_files:
+  - compose.wakapi.yaml
+remove_orphans: true
+force_image_pull: true
+external_secrets:
+  POSTGRES_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/POSTGRES_PASSWORD
+  WAKAPI_PASSWORD_SALT: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/WAKAPI_PASSWORD_SALT
+  WAKAPI_MAIL_SMTP_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/WAKAPI_MAIL_SMTP_USER
+  WAKAPI_MAIL_SMTP_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/WAKAPI_MAIL_SMTP_PASSWORD
+  WAKAPI_MAIL_SMTP_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/WAKAPI_MAIL_SMTP_HOST
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/SERVICE_NAME
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/SERVICE_DOMAIN
+
+---
 name: crowdsec
 working_dir: apps/security/crowdsec
 compose_files:

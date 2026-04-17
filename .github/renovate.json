@@ -505,6 +505,35 @@
             "platformAutomerge": true
         },
         {
+            "description": "Wakapi",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ops/wakapi/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/muety/wakapi"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "wakapi",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "ops",
+                "programming"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
             "description": "CrowdSec",
             "matchManagers": [
                 "docker-compose"
