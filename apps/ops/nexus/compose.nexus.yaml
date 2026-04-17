@@ -4,8 +4,11 @@ services:
     #ports:
     #  - 8081:8081
     container_name: nexus
+    environment:
+      - NEXUS_SECRETS_KEY_FILE=/opt/sonatype/nexus/etc/nexus.secrets.json
     volumes:
       - /mnt/hdd/ops/nexus/data:/nexus-data
+      - /mnt/hdd/ops/nexus/config/nexus.secrets.json:/opt/sonatype/nexus/etc/nexus.secrets.json:ro
     networks:
       - traefik
     labels:
