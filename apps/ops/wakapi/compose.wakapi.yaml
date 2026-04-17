@@ -1,6 +1,8 @@
 services:
   wakapi:
     image: ghcr.io/muety/wakapi:latest
+    container_name: wakapi
+    hostname: wakapi
     init: true
     #ports:
     #  - 3000:3000
@@ -33,6 +35,8 @@ services:
 
   db:
     image: postgres:17
+    container_name: wakapi-db
+    hostname: wakapi-db
     restart: unless-stopped
     environment:
       POSTGRES_USER: "wakapi"
