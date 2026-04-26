@@ -1,6 +1,6 @@
 services:
   doco-cd:
-    image: ghcr.io/kimdre/doco-cd:0.80.1@sha256:a0ab70473dfa746ce132b2142168ce7295c20d901fd6d3d26b470a19efa6335f
+    image: ghcr.io/kimdre/doco-cd:0.82.2@sha256:b3e3c28c7690e1f3cb7ad5cdbf2cecf34965a40ef3e89bf55bb21f221f1c0a20
     container_name: doco-cd
     hostname: doco-cd
     environment:
