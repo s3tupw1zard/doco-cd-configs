@@ -89,11 +89,11 @@ services:
       - CF_DNS_API_TOKEN=${CLOUDFLARE_DNS_API_TOKEN}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /mnt/ssd/core/traefik:/data
-      - /mnt/ssd/core/traefik/dynamic:/dynamic
-      - /mnt/ssd/core/traefik/letsencrypt:/letsencrypt
-      - /mnt/hdd/logs/traefik/traefik.log:/var/log/traefik/traefik.log
-      - /mnt/hdd/logs/traefik/traefik.access.log:/var/log/traefik/access.log
+      - /mnt/core/traefik:/data
+      - /mnt/core/traefik/dynamic:/dynamic
+      - /mnt/core/traefik/letsencrypt:/letsencrypt
+      - /mnt/logs/traefik/traefik.log:/var/log/traefik/traefik.log
+      - /mnt/logs/traefik/traefik.access.log:/var/log/traefik/access.log
     networks:
       - traefik
 

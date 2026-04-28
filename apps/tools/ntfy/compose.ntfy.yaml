@@ -30,11 +30,11 @@ services:
       NTFY_AUTH_USERS: ${NTFY_AUTH_USERS}
     #user: 1000:1000
     volumes:
-      - /mnt/hdd/tools/ntfy/attachments:/var/lib/ntfy/attachments:rw
-      - /mnt/ssd/tools/ntfy/cache:/var/cache/ntfy:rw
-      - /mnt/ssd/tools/ntfy/lib/auth.db:/var/lib/ntfy/auth.db:rw
-      - /mnt/ssd/tools/ntfy/lib/webpush.db:/var/lib/ntfy/webpush.db:rw
-      - /mnt/ssd/tools/ntfy/config:/etc/ntfy:rw
+      - /mnt/tools/ntfy/attachments:/var/lib/ntfy/attachments:rw
+      - /mnt/tools/ntfy/cache:/var/cache/ntfy:rw
+      - /mnt/tools/ntfy/lib/auth.db:/var/lib/ntfy/auth.db:rw
+      - /mnt/tools/ntfy/lib/webpush.db:/var/lib/ntfy/webpush.db:rw
+      - /mnt/tools/ntfy/config:/etc/ntfy:rw
 #    ports:
 #      - 80:80
     healthcheck:

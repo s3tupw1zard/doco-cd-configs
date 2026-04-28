@@ -13,12 +13,12 @@ services:
       - 7422 # appsec waf endpoint
     volumes:
       # crowdsec container data
-      - /mnt/ssd/security/crowdsec/data:/var/lib/crowdsec/data
-      - /mnt/ssd/security/crowdsec/etc:/etc/crowdsec
+      - /mnt/security/crowdsec/data:/var/lib/crowdsec/data
+      - /mnt/security/crowdsec/etc:/etc/crowdsec
       # log bind mounts into crowdsec
       #- /var/log/auth.log:/var/log/auth.log:ro
       #- /var/log/syslog:/var/log/syslog:ro
-      - /mnt/hdd/logs/traefik/access.log:/var/log/traefik/access.log:ro
+      - /mnt/logs/traefik/access.log:/var/log/traefik/access.log:ro
 
     environment:
       - GID=1000

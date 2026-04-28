@@ -32,7 +32,7 @@ services:
       HBOX_OPTIONS_ALLOW_LOCAL_LOGIN: "true"
       HBOX_OPTIONS_TRUST_PROXY: "true"
     volumes:
-      - /mnt/ssd/tools/homebox/data:/data/
+      - /mnt/tools/homebox/data:/data/
     networks:
       - traefik
 #    ports:

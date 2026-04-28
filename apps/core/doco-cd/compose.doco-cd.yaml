@@ -17,6 +17,6 @@ services:
       DOCKER_SWARM_FEATURES: "false"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /mnt/ssd/core/doco-cd/data:/data
+      - /mnt/core/doco-cd/data:/data
     labels:
       - "traefik.enable=false"

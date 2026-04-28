@@ -16,7 +16,7 @@ services:
       - APP_TIMEZONE=Europe/Berlin
       - DISPLAY_TIMEZONE=Europe/Berlin
     volumes:
-      - /mnt/ssd/monitoring/speedtest-tracker/data:/config
+      - /mnt/monitoring/speedtest-tracker/data:/config
     networks:
       - traefik
     labels:

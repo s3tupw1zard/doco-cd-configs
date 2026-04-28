@@ -43,7 +43,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: "wakapi"
     volumes:
-      - /mnt/ssd/ops/wakapi/db:/var/lib/postgresql/data
+      - /mnt/ops/wakapi/db:/var/lib/postgresql/data
     networks:
       - wakapi
 

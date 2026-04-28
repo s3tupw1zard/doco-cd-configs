@@ -8,7 +8,7 @@ services:
     networks:
       - searxng
     volumes:
-      - /mnt/ssd/automation/searxng/valkey-data2:/data
+      - /mnt/automation/searxng/valkey-data2:/data
     logging:
       driver: "json-file"
       options:
@@ -25,8 +25,8 @@ services:
     #ports:
     #  - "127.0.0.1:8002:8080"
     volumes:
-      - /mnt/ssd/automation/searxng/config:/etc/searxng:rw
-      - /mnt/ssd/automation/searxng/data:/var/cache/searxng:rw
+      - /mnt/automation/searxng/config:/etc/searxng:rw
+      - /mnt/automation/searxng/data:/var/cache/searxng:rw
     environment:
       - SEARXNG_BASE_URL=https://${SERVICE_DOMAIN}/
     logging:

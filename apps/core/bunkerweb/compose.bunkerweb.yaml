@@ -26,7 +26,7 @@ services:
     labels:
       - "bunkerweb.INSTANCE=yes" # We set the instance label to allow the autoconf to detect the instance
     volumes:
-      - /mnt/hdd/core/bunkerweb/logs:/var/log/bunkerweb
+      - /mnt/core/bunkerweb/logs:/var/log/bunkerweb
     environment:
       <<: *bw-env
       LOG_SYSLOG_TAG: "bunkerweb"
@@ -176,8 +176,8 @@ services:
       ANTIBOT_TIME_RESOLVE: "60"
       ANTIBOT_TIME_VALID: "86400"
     volumes:
-      - /mnt/ssd/core/bunkerweb/storage:/data # This is used to persist the cache and other data
-      - /mnt/hdd/core/bunkerweb/backups:/var/lib/bunkerweb/backups # This is used to persist the backups
+      - /mnt/core/bunkerweb/storage:/data # This is used to persist the cache and other data
+      - /mnt/core/bunkerweb/backups:/var/lib/bunkerweb/backups # This is used to persist the backups
     restart: "unless-stopped"
     networks:
       - bw-universe
@@ -242,7 +242,7 @@ services:
       - "bunkerweb.MODSECURITY_SEC_RULE_ENGINE=DetectionOnly" # TODO: Set Rule Engine to On
       # - "bunkerweb.REVERSE_PROXY_URL=/${BWUI_PROXY_URL}/" # TODO: Configure proxy url
     volumes:
-      - /mnt/ssd/core/bunkerweb/ui:/var/lib/bunkerweb
+      - /mnt/core/bunkerweb/ui:/var/lib/bunkerweb
   bunkerweb-db:
     image: mariadb:12@sha256:e0236fc6386e7eacd9359e59d0a078bd7aa0d18280d36d13061121bedeaee903
     container_name: bunkerweb-db
@@ -261,7 +261,7 @@ services:
       MYSQL_USER: "bunkerweb"
       MYSQL_PASSWORD: "${BUNKERWEB_DB_PASSWORD}" # Remember to set a stronger password for the database
     volumes:
-      - /mnt/ssd/core/bunkerweb/db-data:/var/lib/mysql
+      - /mnt/core/bunkerweb/db-data:/var/lib/mysql
     restart: "unless-stopped"
     networks:
       - bw-db
@@ -277,7 +277,7 @@ services:
       --save 60 1000
       --appendonly yes
     volumes:
-      - /mnt/ssd/core/bunkerweb/redis-data:/data
+      - /mnt/core/bunkerweb/redis-data:/data
     restart: "unless-stopped"
     networks:
       - bw-universe
@@ -295,8 +295,8 @@ services:
       - CHOWN  # Change ownership
       - SYSLOG  # Write to system logs
     volumes:
-      - /mnt/ssd/core/bunkerweb/syslog-ng/logs/bunkerweb:/var/log/bunkerweb # This is the volume used to store the logs
-      - /mnt/ssd/core/bunkerweb/syslog-ng/config/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf # This is the syslog-ng configuration file
+      - /mnt/core/bunkerweb/syslog-ng/logs/bunkerweb:/var/log/bunkerweb # This is the volume used to store the logs
+      - /mnt/core/bunkerweb/syslog-ng/config/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf # This is the syslog-ng configuration file
     restart: "unless-stopped"
     networks:
       - bw-universe

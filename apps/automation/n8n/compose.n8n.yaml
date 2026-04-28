@@ -28,9 +28,9 @@ services:
       EXTERNAL_FRONTEND_HOOKS_URLS: "/assets/oidc-frontend-hook.js"
       N8N_ADDITIONAL_NON_UI_ROUTES: "auth"
     volumes:
-      - /mnt/ssd/automation/n8n/data:/home/node/.n8n
-      - /mnt/ssd/automation/n8n/hook.js:/home/node/.n8n/hooks.js
-      - /mnt/ssd/automation/n8n/local-files:/files
+      - /mnt/automation/n8n/data:/home/node/.n8n
+      - /mnt/automation/n8n/hook.js:/home/node/.n8n/hooks.js
+      - /mnt/automation/n8n/local-files:/files
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"

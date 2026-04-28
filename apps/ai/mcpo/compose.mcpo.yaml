@@ -4,9 +4,9 @@ services:
     container_name: mcpo
     hostname: mcpo
     volumes:
-      - /mnt/ssd/ai/mcpo/config:/config
-      - /mnt/ssd/ai/mcpo/data:/mcpo-data
-      - /mnt/ssd/ai/mcpo/cache:/mcpo-cache
+      - /mnt/ai/mcpo/config:/config
+      - /mnt/ai/mcpo/data:/mcpo-data
+      - /mnt/ai/mcpo/cache:/mcpo-cache
     environment:
       - BASE_DIR=/mcpo-data/docs
     command: >
