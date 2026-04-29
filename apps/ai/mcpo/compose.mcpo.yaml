@@ -7,6 +7,7 @@ services:
       - /mnt/ai/mcpo/config:/config
       - /mnt/ai/mcpo/data:/mcpo-data
       - /mnt/ai/mcpo/cache:/mcpo-cache
+      - /mnt/ai/mcpo/userdata:/data/user
     environment:
       - BASE_DIR=/mcpo-data/docs
     command: >
