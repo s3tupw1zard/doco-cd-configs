@@ -14,6 +14,7 @@ services:
       --root-path "/api"
       --api-key "${MCPO_API_KEY}"
       --config /config/config.json
+      --hot-reload
     networks:
       - traefik
     labels:
