@@ -1,7 +1,7 @@
 services:
 
   tika:
-    image: apache/tika:latest
+    image: apache/tika:latest@sha256:2a565f1ea1290bdcb74a7d35957d16a989ed44ef98790dcdcc28121d728fa583
     container_name: open-webui-tika
     networks:
       - open-webui
@@ -31,13 +31,13 @@ services:
       - "traefik.docker.network=traefik"
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
+    image: ghcr.io/open-webui/open-webui:main@sha256:c2e4723fdbca5de8f9f0529e22b78acf5bc312a88da730bed88860063d028fe8
     container_name: open-webui
     volumes:
       - /mnt/ai/open-webui/open-webui-data:/app/backend/data
-      - /mnt/ai/open-webui/prompt-plus/custom.css:/app/build/static/custom.css
-      - /mnt/ai/open-webui/prompt-plus/loader.js:/app/build/static/loader.js
-      - /mnt/ai/open-webui/prompt-plus/js/prompt-plus-app.js:/app/build/static/js/prompt-plus-app.js
+      #- /mnt/ai/open-webui/prompt-plus/custom.css:/app/build/static/custom.css
+      #- /mnt/ai/open-webui/prompt-plus/loader.js:/app/build/static/loader.js
+      #- /mnt/ai/open-webui/prompt-plus/js/prompt-plus-app.js:/app/build/static/js/prompt-plus-app.js
     networks:
       - open-webui
       - traefik
@@ -88,31 +88,31 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.docker.network=traefik"
 
-  open-terminal:
-    image: git.${ROOT_DOMAIN}/s3tupw1zard/open-terminal:custom-full
-    container_name: open-terminal
-    hostname: open-terminal
-    restart: unless-stopped
-    user: "0:0"
-    #ports:
-    #  - 8000:8000
-    volumes:
-      - /mnt/ai/open-webui/open-terminal/home:/home
-      - /mnt/ai/open-webui/open-terminal/config/.git-credentials:/root/.git-credentials:ro
-    environment:
-      - OPEN_TERMINAL_API_KEY=${OPEN_TERMINAL_API_KEY}
-      - HOME=/home
-      - OPEN_TERMINAL_MULTI_USER=true
-    networks:
-      - traefik
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${SERVICE_NAME}-terminal.rule=Host(`terminal.$SERVICE_DOMAIN`)"
-      - "traefik.http.routers.${SERVICE_NAME}-terminal.entrypoints=websecure"
-      - "traefik.http.services.${SERVICE_NAME}-terminal.loadbalancer.server.port=8000"
-      - "traefik.http.routers.${SERVICE_NAME}-terminal.service=${SERVICE_NAME}-terminal"
-      - "traefik.http.routers.${SERVICE_NAME}-terminal.tls.certresolver=cloudflare"
-      - "traefik.docker.network=traefik"
+#  open-terminal:
+#    image: git.${ROOT_DOMAIN}/s3tupw1zard/open-terminal:custom-full
+#    container_name: open-terminal
+#    hostname: open-terminal
+#    restart: unless-stopped
+#    user: "0:0"
+#    #ports:
+#    #  - 8000:8000
+#    volumes:
+#      - /mnt/ai/open-webui/open-terminal/home:/home
+#      - /mnt/ai/open-webui/open-terminal/config/.git-credentials:/root/.git-credentials:ro
+#    environment:
+#      - OPEN_TERMINAL_API_KEY=${OPEN_TERMINAL_API_KEY}
+#      - HOME=/home
+#      - OPEN_TERMINAL_MULTI_USER=true
+#    networks:
+#      - traefik
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.${SERVICE_NAME}-terminal.rule=Host(`terminal.$SERVICE_DOMAIN`)"
+#      - "traefik.http.routers.${SERVICE_NAME}-terminal.entrypoints=websecure"
+#      - "traefik.http.services.${SERVICE_NAME}-terminal.loadbalancer.server.port=8000"
+#      - "traefik.http.routers.${SERVICE_NAME}-terminal.service=${SERVICE_NAME}-terminal"
+#      - "traefik.http.routers.${SERVICE_NAME}-terminal.tls.certresolver=cloudflare"
+#      - "traefik.docker.network=traefik"
 
   postgres:
     image: postgres:15-alpine@sha256:09e4f20b14ddb3dfe3a0c825b206032aaf8f28300ba2070c0b60fc1c10c6abc7
@@ -134,7 +134,7 @@ services:
       - "traefik.enable=false"
 
   qdrant:
-    image: qdrant/qdrant:latest
+    image: qdrant/qdrant:latest@sha256:94728574965d17c6485dd361aa3c0818b325b9016dac5ea6afec7b4b2700865f
     container_name: open-webui-qdrant
     hostname: qdrant
     environment:
@@ -149,7 +149,7 @@ services:
       - "traefik.enable=false"
 
   redis:
-    image: redis:alpine
+    image: redis:alpine@sha256:c5e375abb885e6b2021c0377879e4890bf76f9065b8922ffc113f2b226b9fc17
     container_name: open-webui-redis
     hostname: redis
     restart: unless-stopped

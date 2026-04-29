@@ -1,6 +1,6 @@
 services:
   wakapi:
-    image: ghcr.io/muety/wakapi:latest
+    image: ghcr.io/muety/wakapi:latest@sha256:156e3e60656f6143f58cc849444a0a7992bbaa573dc870d92a9789be5671099d
     container_name: wakapi
     hostname: wakapi
     init: true
@@ -34,7 +34,7 @@ services:
       - "traefik.docker.network=traefik"
 
   db:
-    image: postgres:17
+    image: postgres:18@sha256:78481659c47e862334611ccdaf7c369c986b3046da9857112f3b309114a65fb4
     container_name: wakapi-db
     hostname: wakapi-db
     restart: unless-stopped

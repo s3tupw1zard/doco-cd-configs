@@ -1,6 +1,6 @@
 services:
   nexus3:
-    image: sonatype/nexus3:latest
+    image: sonatype/nexus3:latest@sha256:5b18c40967ea7056a60571ec1a683f92d6618101fdd1ed17b042a29e8c9e685b
     #ports:
     #  - 8081:8081
     container_name: nexus

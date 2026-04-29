@@ -1,12 +1,13 @@
 services:
   mcpo:
-    image: ghcr.io/open-webui/mcpo:main
+    image: ghcr.io/open-webui/mcpo:main@sha256:1e82c9555c19e50b80745705f32b47a2647589f35279527b5118ecd3a71bd467
     container_name: mcpo
     hostname: mcpo
     volumes:
       - /mnt/ai/mcpo/config:/config
       - /mnt/ai/mcpo/data:/mcpo-data
       - /mnt/ai/mcpo/cache:/mcpo-cache
+      - /mnt/ai/mcpo/userdata:/data/user
     environment:
       - BASE_DIR=/mcpo-data/docs
     command: >
@@ -14,6 +15,7 @@ services:
       --root-path "/api"
       --api-key "${MCPO_API_KEY}"
       --config /config/config.json
+      --hot-reload
     networks:
       - traefik
     labels:
