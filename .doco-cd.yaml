@@ -34,6 +34,7 @@ external_secrets:
   WEBUI_SECRET_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/WEBUI_SECRET_KEY
   OPEN_TERMINAL_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPEN_TERMINAL_API_KEY
   ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
+  EDGE_TTS_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/EDGE_TTS_API_KEY
 ---
 name: backrest
 working_dir: apps/core/backrest

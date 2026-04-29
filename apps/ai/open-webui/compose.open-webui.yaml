@@ -10,6 +10,26 @@ services:
     labels:
       - "traefik.enable=false"
 
+  openai-edge-tts:
+    container_name: openai-edge-tts
+    image: travisvn/openai-edge-tts:latest
+    #ports:
+    #  - 5050:5050
+    environment:
+      - API_KEY=${EDGE_TTS_API_KEY}
+    restart: unless-stopped
+    networks:
+      - open-webui
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.edgetts-${SERVICE_NAME}.rule=Host(`edgetts.${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.edgetts-${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.services.edgetts-${SERVICE_NAME}.loadbalancer.server.port=5050"
+      - "traefik.http.routers.edgetts-${SERVICE_NAME}.service=edgetts-${SERVICE_NAME}"
+      - "traefik.http.routers.edgetts-${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.docker.network=traefik"
+
   open-webui:
     image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
     container_name: open-webui
