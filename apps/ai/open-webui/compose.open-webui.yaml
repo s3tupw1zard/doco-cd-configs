@@ -15,9 +15,9 @@ services:
     container_name: open-webui
     volumes:
       - /mnt/ai/open-webui/open-webui-data:/app/backend/data
-      - /mnt/ai/open-webui/prompt-plus/custom.css:/app/build/static/custom.css
-      - /mnt/ai/open-webui/prompt-plus/loader.js:/app/build/static/loader.js
-      - /mnt/ai/open-webui/prompt-plus/js/prompt-plus-app.js:/app/build/static/js/prompt-plus-app.js
+      #- /mnt/ai/open-webui/prompt-plus/custom.css:/app/build/static/custom.css
+      #- /mnt/ai/open-webui/prompt-plus/loader.js:/app/build/static/loader.js
+      #- /mnt/ai/open-webui/prompt-plus/js/prompt-plus-app.js:/app/build/static/js/prompt-plus-app.js
     networks:
       - open-webui
       - traefik
