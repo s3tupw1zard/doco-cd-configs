@@ -1,6 +1,6 @@
 services:
   wakapi:
-    image: ghcr.io/muety/wakapi:latest
+    image: ghcr.io/muety/wakapi:latest@sha256:156e3e60656f6143f58cc849444a0a7992bbaa573dc870d92a9789be5671099d
     container_name: wakapi
     hostname: wakapi
     init: true
