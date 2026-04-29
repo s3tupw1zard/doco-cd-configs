@@ -12,7 +12,7 @@ services:
 
   openai-edge-tts:
     container_name: openai-edge-tts
-    image: travisvn/openai-edge-tts:latest
+    image: travisvn/openai-edge-tts:latest@sha256:af8df8fb39719623cb6c3dbcba87ab65813030d97e20ae436d3161a53d41d72a
     #ports:
     #  - 5050:5050
     environment:
