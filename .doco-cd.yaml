@@ -96,17 +96,6 @@ external_secrets:
 #  VAULTWARDEN_BASIC_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_PASSWORD
 #  PANGOLIN_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/PANGOLIN_DOMAIN
 ---
-name: whoami
-working_dir: apps/core/whoami
-compose_files:
-  - compose.whoami.yaml
-remove_orphans: true
-force_image_pull: true
-external_secrets:
-  TEST_VAR: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/whoami/TEST_VAR
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/whoami/SERVICE_NAME
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/whoami/SERVICE_DOMAIN
----
 name: speedtest-tracker
 working_dir: apps/monitoring/speedtest-tracker
 compose_files:
@@ -164,14 +153,6 @@ external_secrets:
   WAKAPI_MAIL_SMTP_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/WAKAPI_MAIL_SMTP_HOST
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/SERVICE_NAME
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/SERVICE_DOMAIN
-
----
-name: crowdsec
-working_dir: apps/security/crowdsec
-compose_files:
-  - compose.crowdsec.yaml
-remove_orphans: true
-force_image_pull: true
 ---
 name: pocket-id
 working_dir: apps/security/pocket-id
@@ -187,19 +168,6 @@ external_secrets:
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_NAME
   ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
   PANGOLIN_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/PANGOLIN_DOMAIN
----
-name: immich
-working_dir: apps/storage/immich
-compose_files:
-  - compose.immich.yaml
-remove_orphans: true
-force_image_pull: true
-external_secrets:
-  DB_DATABASE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/storage/immich/DB_DATABASE_NAME
-  DB_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/storage/immich/DB_PASSWORD
-  DB_USERNAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/storage/immich/DB_USERNAME
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/storage/immich/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/storage/immich/SERVICE_NAME
 ---
 name: homebox
 working_dir: apps/tools/homebox
@@ -233,26 +201,3 @@ external_secrets:
   OIDC_REDIRECT_URI: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/OIDC_REDIRECT_URI
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/SERVICE_NAME
-#---
-#name: ntfy
-#working_dir: apps/tools/ntfy
-#compose_files:
-#  - compose.ntfy.yaml
-#remove_orphans: true
-#force_image_pull: true
-#external_secrets:
-#  NTFY_BASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_BASE_URL
-#  NTFY_WEB_PUSH_PUBLIC_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_WEB_PUSH_PUBLIC_KEY
-#  NTFY_WEB_PUSH_PRIVATE_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_WEB_PUSH_PRIVATE_KEY
-#  NTFY_WEB_PUSH_EMAIL_ADDRESS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_WEB_PUSH_EMAIL_ADDRESS
-#  NTFY_SMTP_SENDER_ADDR: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_SMTP_SENDER_ADDR
-#  NTFY_SMTP_SENDER_FROM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_SMTP_SENDER_FROM
-#  NTFY_SMTP_SENDER_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_SMTP_SENDER_USER
-#  NTFY_SMTP_SENDER_PASS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_SMTP_SENDER_PASS
-#  NTFY_AUTH_USERS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_AUTH_USERS
-#  NTFY_OIDC_ISSUER_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_OIDC_ISSUER_URL
-#  NTFY_OIDC_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_OIDC_CLIENT_ID
-#  NTFY_OIDC_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_OIDC_CLIENT_SECRET
-#  NTFY_OIDC_SESSION_ENCRYPTION_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/NTFY_OIDC_SESSION_ENCRYPTION_KEY
-#  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/SERVICE_NAME
-#  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/ntfy/SERVICE_DOMAIN
