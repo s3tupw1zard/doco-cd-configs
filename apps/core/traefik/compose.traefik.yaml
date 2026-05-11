@@ -47,6 +47,8 @@ services:
       - --certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json
       - --entryPoints.websecure.http.tls.domains[0].main=${ROOT_DOMAIN}
       - --entryPoints.websecure.http.tls.domains[0].sans=*.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[0].main=driftware.io
+      - --entryPoints.websecure.http.tls.domains[0].sans=*.driftware.io
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
