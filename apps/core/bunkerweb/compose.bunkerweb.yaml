@@ -244,7 +244,7 @@ services:
     volumes:
       - /mnt/core/bunkerweb/ui:/var/lib/bunkerweb
   bunkerweb-db:
-    image: mariadb:12@sha256:e0236fc6386e7eacd9359e59d0a078bd7aa0d18280d36d13061121bedeaee903
+    image: mariadb:12@sha256:350261292d0129fd4b24f537dcf05ecd3ebe34d39d5b592af551f38310e7a167
     container_name: bunkerweb-db
     hostname: bunkerweb-db
     # We set the max allowed packet size to avoid issues with large queries
