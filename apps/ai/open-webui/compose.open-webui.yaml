@@ -1,7 +1,7 @@
 services:
 
   tika:
-    image: apache/tika:latest@sha256:2a565f1ea1290bdcb74a7d35957d16a989ed44ef98790dcdcc28121d728fa583
+    image: apache/tika:latest@sha256:90b7fa1dc018434075fce9e1d9b88b1e3d0ea6979d0cf86e116c79a8073ae973
     container_name: open-webui-tika
     networks:
       - open-webui
@@ -31,7 +31,7 @@ services:
       - "traefik.docker.network=traefik"
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:main@sha256:74093dadc9c6aabc23987a74fd8c2fb8d995b1a5b22e83b0036fb9d6af590e8c
+    image: ghcr.io/open-webui/open-webui:main@sha256:7f1b0a1a50cfbac23da3b16f96bc968fd757b26dc9e54e93813d61768ea9184e
     container_name: open-webui
     volumes:
       - /mnt/ai/open-webui/open-webui-data:/app/backend/data
@@ -134,7 +134,7 @@ services:
       - "traefik.enable=false"
 
   qdrant:
-    image: qdrant/qdrant:latest@sha256:45f8e3ddc2570a4d029877e1b5ec1045c19b3852b4e22a55c7f43b05aea0ca89
+    image: qdrant/qdrant:latest@sha256:75eab8c4ba42096724fdcfde8b4de0b5713d529dde32f285a1f86fdcb2c9e50c
     container_name: open-webui-qdrant
     hostname: qdrant
     environment:
@@ -149,7 +149,7 @@ services:
       - "traefik.enable=false"
 
   redis:
-    image: redis:alpine@sha256:ad0a6eff0a40304ab1ab4f50f0dc192d82b071e1094eac961bcb6106092f8a4e
+    image: redis:alpine@sha256:09160599abd229764c0fb44cb6be640294e1d360a54b19985ab4843dcf2d90f1
     container_name: open-webui-redis
     hostname: redis
     restart: unless-stopped
