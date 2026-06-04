@@ -17,6 +17,7 @@ services:
       XDG_DATA_HOME: /pelican-data
       APP_URL: "https://${SERVICE_DOMAIN}"
       # ADMIN_EMAIL: "${ADMIN_EMAIL}"
+      BEHIND_PROXY: true
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
