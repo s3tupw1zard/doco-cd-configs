@@ -1,6 +1,8 @@
 services:
   panel:
     image: ghcr.io/pelican-dev/panel:v1.0.0-beta34
+    container_name: pelican-panel
+    hostname: pelican-panel
     restart: always
     networks:
       - default
