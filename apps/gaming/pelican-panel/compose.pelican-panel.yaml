@@ -1,0 +1,34 @@
+services:
+  panel:
+    image: ghcr.io/pelican-dev/panel:v1.0.0-beta34
+    restart: always
+    networks:
+      - default
+      - traefik
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - /mnt/gaming/pelican-panel/data:/pelican-data
+      - /mnt/gaming/pelican-panel/logs:/var/www/html/storage/logs
+      - /mnt/gaming/pelican-panel/Caddyfile:/etc/caddy/Caddyfile:ro
+    environment:
+      XDG_DATA_HOME: /pelican-data
+      APP_URL: "https://${SERVICE_DOMAIN}"
+      ADMIN_EMAIL: "${ADMIN_EMAIL}"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      # - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik"
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.27.0.0/16
+  traefik:
+    external: true
