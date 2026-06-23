@@ -115,7 +115,7 @@ services:
 #      - "traefik.docker.network=traefik"
 
   postgres:
-    image: postgres:15-alpine@sha256:df7bca0066e6f60cc3dd32faa70caddec20e2c22b58932f79498e5704b23854a
+    image: postgres:15-alpine@sha256:cd17e2ac98240fce1541ad2a803b34009b4eea5aec8a832363cdc7eca62e722e
     container_name: open-webui-postgres
     hostname: postgres
     restart: unless-stopped
