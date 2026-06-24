@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   traefik:
-    image: traefik:v3.6@sha256:850b1b3484519b12353d9679ec3246e63a42df2cc640bf8e6fa50267d589f5a0
+    image: traefik:v3.7@sha256:e4d98158c01ad752fc1071d4e9573788747230d902cdde00a772516e692d07c9
     container_name: traefik
     hostname: traefik
     restart: unless-stopped
