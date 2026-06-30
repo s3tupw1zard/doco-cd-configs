@@ -1,7 +1,7 @@
 services:
 
   app:
-    image: jez500/pricebuddy:v1.0.51
+    image: jez500/pricebuddy:v1.0.51@sha256:90e9cd7ceb68cfb3a00071468d6045e586a40605fc713f627ad7f5f0a8050948
     volumes:
       - /mnt/automation/pricebuddy/storage:/app/storage
     environment:
@@ -32,7 +32,7 @@ services:
       - "traefik.docker.network=traefik"
 
   database:
-    image: mysql:8.2
+    image: mysql:8.2@sha256:212fe73edca5df6ff14826d5eb975c914bfb91f82a2e923f9050568f99525da1
     environment:
       MYSQL_DATABASE: pricebuddy
       MYSQL_USER: pricebuddy
@@ -50,7 +50,7 @@ services:
       start_period: 1m
 
   scraper:
-    image: jez500/seleniumbase-scrapper:v1.0
+    image: jez500/seleniumbase-scrapper:v1.0@sha256:501895ba8e1f592b0480c870d10113b94f1a2ba3185dfaf89b41b9e36fe8f25f
     networks:
       - default
     #ports:
