@@ -31,7 +31,8 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/gaming/pelican-*/**"
+                "apps/gaming/pelican-panel/**",
+                "apps/gaming/pelican-wings/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/pelican-dev/panel",
