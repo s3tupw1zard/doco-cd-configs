@@ -14,6 +14,8 @@ services:
       APP_USER_PASSWORD: ${APP_USER_PASSWORD} # Only used for seeding the database
       SCRAPER_BASE_URL: http://scraper:3000   # Url to Name of the scrapper service
       AFFILIATE_ENABLED: 'true'               # See https://pricebuddy.jez.me/support-project.html
+      APP_URL: https://${SERVICE_DOMAIN}            # The domain name of the service
+      ASSET_URL: https://${SERVICE_DOMAIN} # The domain name of the service
     depends_on:
       database:
         condition: service_healthy
