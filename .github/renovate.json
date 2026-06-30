@@ -56,6 +56,35 @@
             "platformAutomerge": true
         },
         {
+            "description": "litellm",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ai/litellm/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/berriai/litellm:v1.90.1"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "litellm",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "litellm",
+                "ai"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
             "description": "mcpo",
             "matchManagers": [
                 "docker-compose"
