@@ -1,7 +1,7 @@
 services:
 
   app:
-    image: jez500/pricebuddy:v1.0.43
+    image: jez500/pricebuddy:v1.0.51
     volumes:
       - /mnt/automation/pricebuddy/storage:/app/storage
     environment:

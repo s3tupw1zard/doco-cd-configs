@@ -203,6 +203,7 @@
                 "apps/automation/pricebuddy/**"
             ],
             "matchPackageNames": [
+                "jez500/pricebuddy",
                 "mysql",
                 "jez500/seleniumbase-scrapper"
             ],
