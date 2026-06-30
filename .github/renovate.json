@@ -195,6 +195,36 @@
             "platformAutomerge": true
         },
         {
+            "description": "pricebuddy",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/automation/pricebuddy/**"
+            ],
+            "matchPackageNames": [
+                "jez500/pricebuddy",
+                "mysql",
+                "jez500/seleniumbase-scrapper"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "pricebuddy",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "automation",
+                "price-monitoring"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "platformAutomerge": true
+        },
+        {
             "description": "searxng",
             "matchManagers": [
                 "docker-compose"
