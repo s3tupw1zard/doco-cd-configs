@@ -1,0 +1,26 @@
+services:
+  litellm:
+    image: ghcr.io/berriai/litellm:v1.90.1
+    container_name: litellm
+    environment:
+      - OPENAI_API_KEY=${OPENROUTER_API_KEY}
+      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY}
+      - LITELLM_LOG=INFO
+      - OPENAI_BASE_URL=${OPENROUTER_API_URL}
+    volumes:
+      - /mnt/ai/litellm/data:/etc/litellm 
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      # - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=4000"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true
