@@ -23,6 +23,7 @@ services:
       - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY}
       - LITELLM_LOG=INFO
       - OPENAI_BASE_URL=${OPENROUTER_API_URL}
+      - DATABASE_URL=${LITELLM_DB_URL}
     volumes:
       - /mnt/ai/litellm/data:/etc/litellm 
     networks:
