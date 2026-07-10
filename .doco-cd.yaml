@@ -104,30 +104,29 @@ external_secrets:
   OIDC_SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_DOMAIN
   TRAEFIK_OIDC_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_ID
   TRAEFIK_OIDC_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_SECRET
-#---
-#name: vaultwarden
-#working_dir: apps/core/vaultwarden
-#compose_files:
-#  - compose.vaultwarden.yaml
-#remove_orphans: true
-#force_image_pull: true
-#external_secrets:
-#  ADMIN_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/ADMIN_TOKEN
-#  EXPERIMENTAL_CLIENT_FEATURE_FLAGS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/EXPERIMENTAL_CLIENT_FEATURE_FLAGS
-#  DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/DOMAIN
-#  SMTP_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_HOST
-#  SMTP_FROM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_FROM
-#  SMTP_USERNAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_USERNAME
-#  SMTP_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_PASSWORD
-#  SSO_AUTHORITY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_AUTHORITY
-#  SSO_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_CLIENT_ID
-#  SSO_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_CLIENT_SECRET
-#  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SERVICE_DOMAIN
-#  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SERVICE_NAME
-#  OIDC_PROVIDER_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/OIDC_PROVIDER_DOMAIN
-#  VAULTWARDEN_BASIC_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_USER
-#  VAULTWARDEN_BASIC_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_PASSWORD
-#  PANGOLIN_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/PANGOLIN_DOMAIN
+---
+name: vaultwarden
+working_dir: apps/core/vaultwarden
+compose_files:
+  - compose.vaultwarden.yaml
+remove_orphans: true
+force_image_pull: true
+external_secrets:
+  ADMIN_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/ADMIN_TOKEN
+  EXPERIMENTAL_CLIENT_FEATURE_FLAGS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/EXPERIMENTAL_CLIENT_FEATURE_FLAGS
+  DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/DOMAIN
+  SMTP_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_HOST
+  SMTP_FROM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_FROM
+  SMTP_USERNAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_USERNAME
+  SMTP_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_PASSWORD
+  SSO_AUTHORITY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_AUTHORITY
+  SSO_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_CLIENT_ID
+  SSO_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_CLIENT_SECRET
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SERVICE_NAME
+  OIDC_PROVIDER_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/OIDC_PROVIDER_DOMAIN
+  VAULTWARDEN_BASIC_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_USER
+  VAULTWARDEN_BASIC_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_PASSWORD
 ---
 name: speedtest-tracker
 working_dir: apps/monitoring/speedtest-tracker
