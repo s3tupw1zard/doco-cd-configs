@@ -257,32 +257,6 @@
             ]
         },
         {
-            "description": "cloudflared",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/core/cloudflared/**"
-            ],
-            "matchPackageNames": [
-                "cloudflare/cloudflared"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "cloudflared",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "core",
-                "network"
-            ]
-        },
-        {
             "description": "Traefik",
             "matchManagers": [
                 "docker-compose"
