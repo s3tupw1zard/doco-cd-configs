@@ -13,6 +13,7 @@
         "dependencies",
         "renovate"
     ],
+     "platformAutomerge": true,
     "packageRules": [
         {
             "description": "Default for all Compose-Stacks",
@@ -23,7 +24,9 @@
                 "docker"
             ],
             "pinDigests": true,
-            "separateMinorPatch": true
+            "separateMinorPatch": true,
+            "automerge": true,
+            "automergeType": "pr"
         },
         {
             "description": "pelican",
@@ -50,10 +53,7 @@
                 "renovate",
                 "pelican",
                 "gaming"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "litellm",
@@ -79,10 +79,7 @@
                 "renovate",
                 "litellm",
                 "ai"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "mcpo",
@@ -108,10 +105,7 @@
                 "renovate",
                 "mcp-server",
                 "ai"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "open-webui",
@@ -140,10 +134,7 @@
                 "renovate",
                 "chatbot",
                 "ai"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "open-webui Postgres",
@@ -162,10 +153,7 @@
                 "renovate",
                 "database"
             ],
-            "allowedVersions": "15-alpine",
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            "allowedVersions": "15-alpine"
         },
         {
             "description": "n8n",
@@ -189,10 +177,7 @@
                 "dependencies",
                 "renovate",
                 "automation"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "pricebuddy",
@@ -219,10 +204,7 @@
                 "renovate",
                 "automation",
                 "price-monitoring"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "searxng",
@@ -248,10 +230,7 @@
                 "renovate",
                 "automation",
                 "web-search"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "Backrest",
@@ -275,10 +254,7 @@
                 "dependencies",
                 "renovate",
                 "core"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "BunkerWeb",
@@ -308,10 +284,7 @@
                 "security"
             ],
             "minimumReleaseAge": "14 days",
-            "internalChecksFilter": "strict",
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            "internalChecksFilter": "strict"
         },
         {
             "description": "BunkerWeb MariaDB: same Major but Digest/Patch",
@@ -324,10 +297,7 @@
             "matchPackageNames": [
                 "mariadb"
             ],
-            "allowedVersions": "11",
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            "allowedVersions": "11"
         },
         {
             "description": "BunkerWeb Docker Socket Proxy: Only digests",
@@ -342,10 +312,7 @@
             ],
             "matchUpdateTypes": [
                 "digest"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "BunkerWeb Redis: same Major but Digest/Patch",
@@ -361,10 +328,7 @@
             "matchUpdateTypes": [
                 "digest",
                 "patch"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "BunkerWeb Syslog-NG",
@@ -387,10 +351,7 @@
                 "core",
                 "logging"
             ],
-            "internalChecksFilter": "strict",
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            "internalChecksFilter": "strict"
         },
         {
             "description": "cloudflared",
@@ -416,10 +377,7 @@
                 "renovate",
                 "core",
                 "network"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "Traefik",
@@ -443,10 +401,7 @@
                 "renovate",
                 "core",
                 "network"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "Vaultwarden",
@@ -471,10 +426,7 @@
                 "renovate",
                 "core",
                 "security"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "whoami",
@@ -499,10 +451,7 @@
                 "dependencies",
                 "renovate",
                 "core"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "Speedtest Tracker",
@@ -527,10 +476,7 @@
                 "dependencies",
                 "renovate",
                 "monitoring"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "Forgejo",
@@ -554,10 +500,7 @@
                 "dependencies",
                 "renovate",
                 "ops"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "Nexus Sonatype",
@@ -582,10 +525,7 @@
                 "renovate",
                 "ops",
                 "apt"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "Wakapi",
@@ -611,10 +551,7 @@
                 "renovate",
                 "ops",
                 "programming"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "CrowdSec",
@@ -638,10 +575,7 @@
                 "dependencies",
                 "renovate",
                 "security"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "Pocket ID",
@@ -665,10 +599,7 @@
                 "dependencies",
                 "renovate",
                 "security"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "Immich",
@@ -693,10 +624,7 @@
                 "dependencies",
                 "renovate",
                 "storage"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "automerge Immich Valkey Digest",
@@ -727,10 +655,7 @@
             "matchPackageNames": [
                 "ghcr.io/immich-app/postgres"
             ],
-            "allowedVersions": "/^14-.+$/",
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            "allowedVersions": "/^14-.+$/"
         },
         {
             "description": "Homebox",
@@ -754,10 +679,7 @@
                 "dependencies",
                 "renovate",
                 "tools"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "ntfy",
@@ -782,10 +704,7 @@
                 "dependencies",
                 "renovate",
                 "tools"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         },
         {
             "description": "doco-cd",
@@ -810,10 +729,7 @@
                 "renovate",
                 "core",
                 "gitops"
-            ],
-            "automerge": true,
-            "automergeType": "pr",
-            "platformAutomerge": true
+            ]
         }
     ]
 }
