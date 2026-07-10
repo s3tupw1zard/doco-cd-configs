@@ -184,7 +184,7 @@ services:
       - bw-db
 
   bunkerweb-autoconf:
-    image: bunkerity/bunkerweb-autoconf:1.6.11@sha256:11626aeeb2315d44967d940f86d9cee15cfe285efc581af2dc8c2707fce2edd5
+    image: bunkerity/bunkerweb-autoconf:1.6.12@sha256:08bfd19762b6a6845485da618ffb0ecc7a1d164259b45f84481af22074ed4fe0
     container_name: bunkerweb-autoconf
     hostname: bunkerweb-autoconf
     depends_on:
