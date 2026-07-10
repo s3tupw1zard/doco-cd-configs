@@ -50,7 +50,7 @@ services:
       start_period: 1m
 
   scraper:
-    image: jez500/seleniumbase-scrapper:v1.0
+    image: jez500/seleniumbase-scrapper:v1.0@sha256:501895ba8e1f592b0480c870d10113b94f1a2ba3185dfaf89b41b9e36fe8f25f
     networks:
       - default
     #ports:
