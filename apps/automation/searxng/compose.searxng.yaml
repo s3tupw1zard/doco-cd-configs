@@ -17,7 +17,7 @@ services:
 
   searxng:
     container_name: searxng
-    image: searxng/searxng:latest@sha256:b7492e1b8fcb376191809982e6a45dc809a5d0e641d81feaa53a1fac6c599b9e
+    image: searxng/searxng:latest@sha256:4ebe6ab0297397426fe7ca015caab8f5ed3b50784cf968bfbda7887ea6b16f6e
     restart: always
     networks:
       - searxng
