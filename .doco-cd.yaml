@@ -247,3 +247,13 @@ external_secrets:
   APP_USER_EMAIL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/APP_USER_EMAIL
   APP_USER_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/APP_USER_PASSWORD
   DB_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/DB_PASSWORD
+---
+name: jellyfin
+working_dir: apps/media/jellyfin
+compose_files:
+  - compose.jellyfin.yaml
+remove_orphans: true
+force_image_pull: true
+external_secrets:
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/jellyfin/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/jellyfin/SERVICE_NAME

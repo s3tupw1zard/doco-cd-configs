@@ -1,0 +1,30 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:2026070606
+    container_name: jellyfin
+    hostname: jellyfin
+    # Optional - specify the uid and gid you would like Jellyfin to use instead of root
+    user: 1000:1000
+    volumes:
+      - /mnt/media/jellyfin/config:/config
+      - /mnt/media/jellyfin/cache:/cache
+      - /opt/mounts/unionfs/Media:/media
+    restart: 'unless-stopped'
+    # Optional - alternative address used for autodiscovery
+    environment:
+      - JELLYFIN_PublishedServerUrl=https://${SERVICE_DOMAIN}
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      # - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8096"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true

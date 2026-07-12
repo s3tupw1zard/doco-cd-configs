@@ -579,15 +579,15 @@
             ]
         },
         {
-            "description": "ntfy",
+            "description": "jellyfin",
             "matchManagers": [
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/tools/ntfy/**"
+                "apps/media/jellyfin/**"
             ],
             "matchPackageNames": [
-                "binwiederhier/ntfy"
+                "jellyfin/jellyfin"
             ],
             "matchUpdateTypes": [
                 "major",
@@ -596,7 +596,7 @@
                 "pin",
                 "digest"
             ],
-            "groupName": "ntfy",
+            "groupName": "jellyfin",
             "labels": [
                 "dependencies",
                 "renovate",
