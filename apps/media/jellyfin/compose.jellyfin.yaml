@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:2026070606
     container_name: jellyfin
     hostname: jellyfin
     # Optional - specify the uid and gid you would like Jellyfin to use instead of root
