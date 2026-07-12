@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin:2026070606
+    image: jellyfin/jellyfin:2026070606@sha256:c611196d806ee768b5bdd45c9d23b3d47f6235d9eac7af59cccac32ba8f8e178
     container_name: jellyfin
     hostname: jellyfin
     # Optional - specify the uid and gid you would like Jellyfin to use instead of root
