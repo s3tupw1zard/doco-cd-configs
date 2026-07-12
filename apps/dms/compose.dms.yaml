@@ -1,0 +1,52 @@
+services:
+  mailserver:
+    image: ghcr.io/docker-mailserver/docker-mailserver:latest
+    container_name: mailserver
+    # Provide the FQDN of your mail server here (Your DNS MX record should point to this value)
+    hostname: ${MAILSERVER_HOSTNAME}
+    env_file: mailserver.env
+    # More information about the mail-server ports:
+    # https://docker-mailserver.github.io/docker-mailserver/latest/config/security/understanding-the-ports/
+    ports:
+      - "25:25"    # SMTP  (explicit TLS => STARTTLS, Authentication is DISABLED => use port 465/587 instead)
+      - "143:143"  # IMAP4 (explicit TLS => STARTTLS)
+      - "465:465"  # ESMTP (implicit TLS)
+      - "587:587"  # ESMTP (explicit TLS => STARTTLS)
+      - "993:993"  # IMAP4 (implicit TLS)
+    volumes:
+      - /mnt/core/dms/docker-data/dms/mail-data/:/var/mail/
+      - /mnt/core/dms/docker-data/dms/mail-state/:/var/mail-state/
+      - /mnt/core/dms/docker-data/dms/mail-logs/:/var/log/mail/
+      - /mnt/core/dms/docker-data/dms/config/:/tmp/docker-mailserver/
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    stop_grace_period: 1m
+    # Uncomment if using `ENABLE_FAIL2BAN=1`:
+    cap_add:
+      - NET_ADMIN
+
+  autodiscover-${AUTODISCOVER_SERVICE_DOMAIN}:
+    image: monogramm/autodiscover-email-settings:latest
+    container_name: autodiscover
+    environment:
+      - COMPANY_NAME=${COMPANY_NAME}
+      - SUPPORT_URL=https://${AUTODISCOVER_SERVICE_DOMAIN}
+      - DOMAIN=${AUTODISCOVER_SERVICE_DOMAIN}
+      # IMAP configuration (host mandatory to enable)
+      - IMAP_HOST=${IMAP_DOMAIN}
+      - IMAP_PORT=993
+      - IMAP_SOCKET=SSL
+      # SMTP configuration (host mandatory to enable)
+      - SMTP_HOST=${SMTP_DOMAIN}
+      - SMTP_PORT=587
+      - SMTP_SOCKET=STARTTLS
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${AUTODISCOVER_SERVICE_NAME}.rule=Host(`${AUTODISCOVER_SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${AUTODISCOVER_SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${AUTODISCOVER_SERVICE_NAME}.service=${AUTODISCOVER_SERVICE_NAME}"
+      - "traefik.http.routers.${AUTODISCOVER_SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.services.${AUTODISCOVER_SERVICE_NAME}.loadbalancer.server.port=8000"
+      - "traefik.docker.network=traefik"
