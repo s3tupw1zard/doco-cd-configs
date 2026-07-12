@@ -34,8 +34,8 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/gaming/pelican-panel/**",
-                "apps/gaming/pelican-wings/**"
+                "apps/pelican-panel/**",
+                "apps/pelican-wings/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/pelican-dev/panel",
@@ -61,7 +61,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/ai/litellm/**"
+                "apps/litellm/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/berriai/litellm"
@@ -83,7 +83,7 @@
         {
             "description": "litellm Postgres",
             "matchFileNames": [
-                "apps/ai/litellm/**"
+                "apps/litellm/**"
             ],
             "matchDatasources": [
                 "docker"
@@ -107,7 +107,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/ai/mcpo/**"
+                "apps/mcpo/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/open-webui/mcpo"
@@ -133,7 +133,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/ai/open-webui/**"
+                "apps/open-webui/**"
             ],
             "matchPackageNames": [
                 "apache/tika",
@@ -162,7 +162,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/ai/open-webui/**"
+                "apps/open-webui/**"
             ],
             "matchPackageNames": [
                 "postgres"
@@ -181,7 +181,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/automation/n8n/**"
+                "archive/n8n/**"
             ],
             "matchPackageNames": [
                 "n8nio/n8n"
@@ -205,7 +205,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/automation/pricebuddy/**"
+                "apps/pricebuddy/**"
             ],
             "matchPackageNames": [
                 "jez500/pricebuddy",
@@ -232,7 +232,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/automation/searxng/**"
+                "appsutomation/searxng/**"
             ],
             "matchPackageNames": [
                 "valkey/valkey",
@@ -258,7 +258,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/core/backrest/**"
+                "apps/backrest/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/garethgeorge/backrest"
@@ -282,7 +282,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/core/traefik/**"
+                "apps/traefik/**"
             ],
             "matchPackageNames": [
                 "traefik"
@@ -306,7 +306,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/core/vaultwarden/**"
+                "apps/vaultwarden/**"
             ],
             "matchPackageNames": [
                 "vaultwarden/server"
@@ -331,7 +331,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/core/whoami/**"
+                "archive/whoami/**"
             ],
             "matchPackageNames": [
                 "traefik/whoami"
@@ -356,7 +356,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/monitoring/speedtest-tracker/**"
+                "apps/speedtest-tracker/**"
             ],
             "matchPackageNames": [
                 "lscr.io/linuxserver/speedtest-tracker",
@@ -381,7 +381,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/ops/forgejo/**"
+                "apps/forgejo/**"
             ],
             "matchPackageNames": [
                 "codeberg.org/forgejo/forgejo"
@@ -405,7 +405,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/ops/nexus/**"
+                "archive/nexus/**"
             ],
             "matchPackageNames": [
                 "sonatype/nexus3"
@@ -430,7 +430,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/ops/wakapi/**"
+                "archive/wakapi/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/muety/wakapi"
@@ -456,7 +456,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/security/crowdsec/**"
+                "archive/crowdsec/**"
             ],
             "matchPackageNames": [
                 "crowdsec/crowdsec"
@@ -480,7 +480,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/security/pocket-id/**"
+                "apps/pocket-id/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/pocket-id/pocket-id"
@@ -504,7 +504,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/storage/immich/**"
+                "archive/immich/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/immich-app/immich-server",
@@ -526,7 +526,7 @@
         {
             "description": "automerge Immich Valkey Digest",
             "matchFileNames": [
-                "apps/storage/immich/**"
+                "archive/immich/**"
             ],
             "matchDatasources": [
                 "docker"
@@ -544,7 +544,7 @@
         {
             "description": "Immich PostgreSQL",
             "matchFileNames": [
-                "apps/core/bunkerweb/**"
+                "archive/immich/**"
             ],
             "matchDatasources": [
                 "docker"
@@ -560,7 +560,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/tools/homebox/**"
+                "archive/homebox/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/sysadminsmedia/homebox"
@@ -584,7 +584,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/media/jellyfin/**"
+                "apps/jellyfin/**"
             ],
             "matchPackageNames": [
                 "jellyfin/jellyfin"
@@ -604,12 +604,40 @@
             ]
         },
         {
+            "description": "dms",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/dms/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/docker-mailserver/docker-mailserver",
+                "monogramm/autodiscover-email-settings"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "dms",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "core",
+                "mail",
+                "autodiscover-mail"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/core/doco-cd/**"
+                "archive/doco-cd/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/kimdre/doco-cd"
