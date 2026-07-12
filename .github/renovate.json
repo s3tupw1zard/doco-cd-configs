@@ -91,7 +91,15 @@
             "matchPackageNames": [
                 "postgres"
             ],
-            "allowedVersions": "< 16.0.0"
+            "allowedVersions": "< 16.0.0",
+            "groupName": "litellm-postgres",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "litellm",
+                "ai",
+                "postgres"
+            ]
         },
         {
             "description": "mcpo",
