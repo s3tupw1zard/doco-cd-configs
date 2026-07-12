@@ -64,8 +64,7 @@
                 "apps/ai/litellm/**"
             ],
             "matchPackageNames": [
-                "ghcr.io/berriai/litellm",
-                "postgres"
+                "ghcr.io/berriai/litellm"
             ],
             "matchUpdateTypes": [
                 "minor",
@@ -79,6 +78,27 @@
                 "renovate",
                 "litellm",
                 "ai"
+            ]
+        },
+        {
+            "description": "litellm Postgres",
+            "matchFileNames": [
+                "apps/ai/litellm/**"
+            ],
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackageNames": [
+                "postgres"
+            ],
+            "allowedVersions": "< 16.0.0",
+            "groupName": "litellm-postgres",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "litellm",
+                "ai",
+                "postgres"
             ]
         },
         {
