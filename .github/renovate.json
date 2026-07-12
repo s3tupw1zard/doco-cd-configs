@@ -64,8 +64,7 @@
                 "apps/ai/litellm/**"
             ],
             "matchPackageNames": [
-                "ghcr.io/berriai/litellm",
-                "postgres"
+                "ghcr.io/berriai/litellm"
             ],
             "matchUpdateTypes": [
                 "minor",
