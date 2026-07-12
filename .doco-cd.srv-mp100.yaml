@@ -1,5 +1,5 @@
 name: pelican-panel
-working_dir: apps/gaming/pelican-panel
+working_dir: apps/pelican-panel
 compose_files:
   - compose.pelican-panel.yaml
 remove_orphans: true
@@ -10,14 +10,14 @@ external_secrets:
   ADMIN_EMAIL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-panel/ADMIN_EMAIL
 ---
 name: pelican-wings
-working_dir: apps/gaming/pelican-wings
+working_dir: apps/pelican-wings
 compose_files:
   - compose.pelican-wings.yaml
 remove_orphans: true
 force_image_pull: true
 ---
 name: litellm
-working_dir: apps/ai/litellm
+working_dir: apps/litellm
 compose_files:
   - compose.litellm.yaml
 remove_orphans: true
@@ -32,7 +32,7 @@ external_secrets:
   OPENROUTER_API_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/OPENROUTER_API_URL
 ---
 name: mcpo
-working_dir: apps/ai/mcpo
+working_dir: apps/mcpo
 compose_files:
   - compose.mcpo.yaml
 remove_orphans: true
@@ -43,7 +43,7 @@ external_secrets:
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/mcpo/SERVICE_NAME
 ---
 name: open-webui
-working_dir: apps/ai/open-webui
+working_dir: apps/open-webui
 compose_files:
   - compose.open-webui.yaml
 remove_orphans: true
@@ -70,7 +70,7 @@ external_secrets:
   EDGE_TTS_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/EDGE_TTS_API_KEY
 ---
 name: backrest
-working_dir: apps/core/backrest
+working_dir: apps/backrest
 compose_files:
   - compose.backrest.yaml
 remove_orphans: true
@@ -80,7 +80,7 @@ external_secrets:
   BACKUP_PASS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/backrest/BACKUP_PASS
 ---
 name: searxng
-working_dir: apps/automation/searxng
+working_dir: apps/searxng
 compose_files:
   - compose.searxng.yaml
 remove_orphans: true
@@ -90,7 +90,7 @@ external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/searxng/SERVICE_DOMAIN
 ---
 name: traefik
-working_dir: apps/core/traefik
+working_dir: apps/traefik
 compose_files:
   - compose.traefik.yaml
 remove_orphans: true
@@ -106,7 +106,7 @@ external_secrets:
   TRAEFIK_OIDC_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_SECRET
 ---
 name: vaultwarden
-working_dir: apps/core/vaultwarden
+working_dir: apps/vaultwarden
 compose_files:
   - compose.vaultwarden.yaml
 remove_orphans: true
@@ -129,7 +129,7 @@ external_secrets:
   VAULTWARDEN_BASIC_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_PASSWORD
 ---
 name: speedtest-tracker
-working_dir: apps/monitoring/speedtest-tracker
+working_dir: apps/speedtest-tracker
 compose_files:
   - compose.speedtest-tracker.yaml
 remove_orphans: true
@@ -142,7 +142,7 @@ external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/monitoring/speedtest-tracker/SERVICE_DOMAIN
 ---
 name: forgejo
-working_dir: apps/ops/forgejo
+working_dir: apps/forgejo
 compose_files:
   - compose.forgejo.yaml
 remove_orphans: true
@@ -161,33 +161,8 @@ external_secrets:
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/SERVICE_NAME
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/SERVICE_DOMAIN
 ---
-#name: nexus
-#working_dir: apps/ops/nexus
-#compose_files:
-#  - compose.nexus.yaml
-#remove_orphans: true
-#force_image_pull: true
-#external_secrets:
-#  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/nexus/SERVICE_NAME
-#  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/nexus/SERVICE_DOMAIN
-#---
-#name: wakapi
-#working_dir: apps/ops/wakapi
-#compose_files:
-#  - compose.wakapi.yaml
-#remove_orphans: true
-#force_image_pull: true
-#external_secrets:
-#  POSTGRES_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/POSTGRES_PASSWORD
-#  WAKAPI_PASSWORD_SALT: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/WAKAPI_PASSWORD_SALT
-#  WAKAPI_MAIL_SMTP_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/WAKAPI_MAIL_SMTP_USER
-#  WAKAPI_MAIL_SMTP_PASS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/WAKAPI_MAIL_SMTP_PASS
-#  WAKAPI_MAIL_SMTP_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/WAKAPI_MAIL_SMTP_HOST
-#  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/SERVICE_NAME
-#  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/wakapi/SERVICE_DOMAIN
-#---
 name: pocket-id
-working_dir: apps/security/pocket-id
+working_dir: apps/pocket-id
 compose_files:
   - compose.pocket-id.yaml
 remove_orphans: true
@@ -201,41 +176,8 @@ external_secrets:
   ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
   PANGOLIN_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/PANGOLIN_DOMAIN
 ---
-#name: homebox
-#working_dir: apps/tools/homebox
-#compose_files:
-#  - compose.homebox.yaml
-#remove_orphans: true
-#force_image_pull: true
-#external_secrets:
-#  HBOX_OIDC_ISSUER_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/homebox/HBOX_OIDC_ISSUER_URL
-#  HBOX_OIDC_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/homebox/HBOX_OIDC_CLIENT_ID
-#  HBOX_OIDC_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/homebox/HBOX_OIDC_CLIENT_SECRET
-#  HBOX_MAILER_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/homebox/HBOX_MAILER_HOST
-#  HBOX_MAILER_USERNAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/homebox/HBOX_MAILER_USERNAME
-#  HBOX_MAILER_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/homebox/HBOX_MAILER_PASSWORD
-#  HBOX_MAILER_FROM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/homebox/HBOX_MAILER_FROM
-#  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/homebox/SERVICE_DOMAIN
-#  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/tools/homebox/SERVICE_NAME
-#---
-#name: n8n
-#working_dir: apps/automation/n8n
-#compose_files:
-#  - compose.n8n.yaml
-#remove_orphans: true
-#force_image_pull: true
-#external_secrets:
-#  N8N_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/N8N_HOST
-#  WEBHOOK_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/WEBHOOK_URL
-#  OIDC_ISSUER_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/OIDC_ISSUER_URL
-#  OIDC_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/OIDC_CLIENT_ID
-#  OIDC_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/OIDC_CLIENT_SECRET
-#  OIDC_REDIRECT_URI: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/OIDC_REDIRECT_URI
-#  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/SERVICE_DOMAIN
-#  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/SERVICE_NAME
-#---
 name: pricebuddy
-working_dir: apps/automation/pricebuddy
+working_dir: apps/pricebuddy
 compose_files:
   - compose.pricebuddy.yaml
 remove_orphans: true
@@ -249,7 +191,7 @@ external_secrets:
   DB_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/DB_PASSWORD
 ---
 name: jellyfin
-working_dir: apps/media/jellyfin
+working_dir: apps/jellyfin
 compose_files:
   - compose.jellyfin.yaml
 remove_orphans: true
