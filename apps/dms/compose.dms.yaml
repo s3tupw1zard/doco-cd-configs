@@ -1,6 +1,6 @@
 services:
   mailserver:
-    image: ghcr.io/docker-mailserver/docker-mailserver:latest
+    image: ghcr.io/docker-mailserver/docker-mailserver:latest@sha256:af51b15dd3fc72153c0e90eb7692bb5e3a463212d87959a80fa7aa89b617d44a
     container_name: mailserver
     # Provide the FQDN of your mail server here (Your DNS MX record should point to this value)
     hostname: ${MAILSERVER_HOSTNAME}
@@ -26,7 +26,7 @@ services:
       - NET_ADMIN
 
   autodiscover-${AUTODISCOVER_SERVICE_DOMAIN}:
-    image: monogramm/autodiscover-email-settings:latest
+    image: monogramm/autodiscover-email-settings:latest@sha256:4a9706ab469aff8e610bb2a4e22fe9c19216c571d2471e85941b2d3d5f4e6f28
     container_name: autodiscover
     environment:
       - COMPANY_NAME=${COMPANY_NAME}
