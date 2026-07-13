@@ -114,3 +114,9 @@ services:
       - MAX_OLD_SPACE_SIZE=2048
     volumes:
       - /mnt/ai/hermes/.camofox-docker:/root/.camofox
+
+networks:
+  hermes:
+    name: hermes
+  traefik:
+    external: true
