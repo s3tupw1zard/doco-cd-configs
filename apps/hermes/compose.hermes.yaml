@@ -1,0 +1,116 @@
+#
+# docker-compose.yml for Hermes Agent
+#
+# Usage:
+#   HERMES_UID=$(id -u) HERMES_GID=$(id -g) docker compose up -d
+#
+# Set HERMES_UID / HERMES_GID to the host user that owns ~/.hermes so
+# files created inside the container stay readable/writable on the host.
+# The s6-overlay stage2 hook remaps the internal `hermes` user to these
+# values via usermod/groupmod; each supervised service then drops to that
+# user via `s6-setuidgid`.
+#
+# Security notes:
+#   - The dashboard service binds to 127.0.0.1 by default. It stores API
+#     keys; exposing it on LAN without auth is unsafe. If you want remote
+#     access, use an SSH tunnel or put it behind a reverse proxy that
+#     adds authentication — do NOT pass --insecure --host 0.0.0.0.
+#   - If you override entrypoint, keep `/init` as the first command in
+#     the chain (or let docker use the image's default ENTRYPOINT,
+#     which is `["/init", "/opt/hermes/docker/main-wrapper.sh"]`).
+#     `/init` is s6-overlay's PID 1 — it runs the cont-init.d scripts
+#     (chown, profile reconcile, dashboard toggle) and sets up the
+#     supervision tree before any service starts. Bypassing it skips
+#     all of that setup and the gateway will not work correctly.
+#   - The gateway's API server is off unless you uncomment API_SERVER_KEY
+#     and API_SERVER_HOST. See docs/user-guide/api-server.md before doing
+#     this on an internet-facing host.
+#
+services:
+  gateway:
+    image: nousresearch/hermes-agent:v2026.7.7.2
+    container_name: hermes
+    hostname: hermes
+    restart: unless-stopped
+    networks:
+      - hermes
+      - traefik
+    volumes:
+      - /mnt/ai/hermes/.hermes:/opt/data
+    environment:
+      - HERMES_UID=1000
+      - HERMES_GID=1000
+      # To expose the OpenAI-compatible API server beyond localhost,
+      # uncomment BOTH lines (API_SERVER_KEY is mandatory for auth):
+      - API_SERVER_HOST=0.0.0.0
+      - API_SERVER_KEY=${API_SERVER_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      #- OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - TERMINAL_ENV=docker
+      # Container images (for singularity/docker/modal backends)
+      - TERMINAL_DOCKER_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
+      - TERMINAL_SINGULARITY_IMAGE=docker://nikolaik/python-nodejs:python3.11-nodejs20
+      - TERMINAL_MODAL_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
+      - CAMOFOX_URL=http://camofox:9377
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
+      - TELEGRAM_VOICE_OUTPUT=true
+      - STT_PROVIDER="whisper"
+      - TTS_PROVIDER="edge-tts"
+    command: ["gateway", "run"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api-${SERVICE_NAME}.rule=Host(`api.${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.api-${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.api-${SERVICE_NAME}.service=api-${SERVICE_NAME}"
+      - "traefik.http.routers.api-${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.services.api-${SERVICE_NAME}.loadbalancer.server.port=8642"
+      - "traefik.docker.network=traefik"
+
+  dashboard:
+    image: nousresearch/hermes-agent:v2026.7.7.2
+    container_name: hermes-dashboard
+    hostname: hermes-dashboard
+    restart: unless-stopped
+    networks:
+      - hermes
+      - traefik
+    depends_on:
+      - gateway
+    volumes:
+      - /mnt/ai/hermes/.hermes:/opt/data
+    environment:
+      - HERMES_UID=1000
+      - HERMES_GID=1000
+    # Localhost-only. For remote access, tunnel via `ssh -L 9119:localhost:9119`.
+    command: ["dashboard", "--host", "0.0.0.0", "--no-open"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard-${SERVICE_NAME}.rule=Host(`dashboard.${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.dashboard-${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.dashboard-${SERVICE_NAME}.service=dashboard-${SERVICE_NAME}"
+      - "traefik.http.routers.dashboard-${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.services.dashboard-${SERVICE_NAME}.loadbalancer.server.port=9119"
+      - "traefik.docker.network=traefik"
+
+  camofox-browser:
+    image: ghcr.io/jo-inc/camofox-browser:1.11.2
+    container_name: camofox-browser
+    hostname: camofox-browser
+    user: 1000:1000
+    restart: unless-stopped
+    #ports:
+    #  - 9377:9377
+    #  - 6080:6080
+    #  - 5901:5900
+    networks:
+      - hermes
+    environment:
+      - CAMOFOX_PORT=9377
+      - ENABLE_VNC=1
+      - VNC_BIND=0.0.0.0
+      - VNC_RESOLUTION=1920x1080
+      - MAX_OLD_SPACE_SIZE=2048
+    volumes:
+      - /mnt/ai/hermes/.camofox-docker:/root/.camofox
