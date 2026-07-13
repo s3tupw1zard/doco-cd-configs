@@ -69,6 +69,7 @@ services:
       - --accesslog.fields.headers.names.User-Agent=keep
       - --providers.file.directory=/dynamic
       - --providers.file.watch=true
+      - --providers.docker.exposedbydefault=false
       # !!! IMPORTANT! Comment out or delete next line in production! !!!
       # - --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
       - --experimental.plugins.oidc.moduleName=github.com/lukaszraczylo/traefikoidc
@@ -77,7 +78,6 @@ services:
       - --experimental.plugins.bouncer.version=v1.5.1
       - --experimental.plugins.cloudflarewarp.moduleName=github.com/n8n-io/traefik-cloudflarewarp-plugin
       - --experimental.plugins.cloudflarewarp.version=v1.4.1
-      - --docker.exposedbydefault=false
     ports:
       - target: 80
         published: 80
