@@ -632,6 +632,31 @@
             ]
         },
         {
+            "description": "Hermes Agent",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/hermes/**"
+            ],
+            "matchPackageNames": [
+                "nousresearch/hermes-agent",
+                "ghcr.io/jo-inc/camofox-browser"
+            ],
+            "matchUpdateTypes": [
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "hermes",
+            "labels": [
+                "renovate",
+                "ai",
+                "agent",
+                "hermes"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
