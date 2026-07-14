@@ -641,9 +641,12 @@
             ],
             "matchPackageNames": [
                 "nousresearch/hermes-agent",
-                "ghcr.io/jo-inc/camofox-browser"
+                "ghcr.io/jo-inc/camofox-browser",
+                "bbernhard/signal-cli-rest-api"
             ],
             "matchUpdateTypes": [
+                "major",
+                "minor",
                 "patch",
                 "pin",
                 "digest"
