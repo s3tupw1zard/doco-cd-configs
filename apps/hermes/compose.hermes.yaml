@@ -124,6 +124,7 @@ services:
       - hermes
     volumes:
       - /mnt/ai/hermes/signal-api:/home/.local/share/signal-cli
+    command: bash -c "signal-cli --account +{PHONE_NUMBER} daemon --http 0.0.0.0:8080"
     environment:
       - MODE=native
 
