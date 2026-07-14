@@ -116,7 +116,7 @@ services:
       - /mnt/ai/hermes/.camofox-docker:/root/.camofox
 
   signal-cli-rest-api:
-    image: bbernhard/signal-cli-rest-api
+    image: bbernhard/signal-cli-rest-api@sha256:2399d449123cdad56c4d859277e3b9127e1a00c4d2ab4601c239882609286cf8
     container_name: signal-api
     hostname: signal-api
     restart: unless-stopped
