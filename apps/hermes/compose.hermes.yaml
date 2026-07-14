@@ -115,6 +115,18 @@ services:
     volumes:
       - /mnt/ai/hermes/.camofox-docker:/root/.camofox
 
+  signal-cli-rest-api:
+    image: bbernhard/signal-cli-rest-api
+    container_name: signal-api
+    hostname: signal-api
+    restart: unless-stopped
+    networks:
+      - hermes
+    volumes:
+      - /mnt/ai/hermes/signal-api:/home/.local/share/signal-cli
+    environment:
+      - MODE=native
+
 networks:
   hermes:
     name: hermes
