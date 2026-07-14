@@ -645,6 +645,8 @@
                 "bbernhard/signal-cli-rest-api"
             ],
             "matchUpdateTypes": [
+                "major",
+                "minor",
                 "patch",
                 "pin",
                 "digest"
