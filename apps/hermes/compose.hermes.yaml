@@ -120,6 +120,8 @@ services:
     container_name: signal-api
     hostname: signal-api
     restart: unless-stopped
+    ports:
+      - 8081:8080
     networks:
       - hermes
     volumes:
