@@ -1,6 +1,6 @@
 services:
   litellm-db:
-    image: postgres:15@sha256:bcab099bfaab33333a73a2ebe8c1d615c9f4c2402dd43452f989a36c6da9a5ba
+    image: postgres:15@sha256:52682f82a094ac5c2b6043a6bc89787d22d8566942f62547cd591c3cda41e34d
     container_name: litellm-db
     restart: always
     environment:
