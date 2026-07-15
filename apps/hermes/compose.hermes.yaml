@@ -57,7 +57,7 @@ services:
       - TERMINAL_MODAL_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
       - TZ=Europe/Berlin
       
-      - CAMOFOX_URL=http://camofox-browser:9377
+      - CAMOFOX_URL=http://${TS_IP}:9377
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
       - TELEGRAM_GROUP_ALLOWED_CHATS=${TELEGRAM_GROUP_ALLOWED_CHATS}
@@ -122,8 +122,8 @@ services:
     hostname: camofox-browser
     user: 1000:1000
     restart: unless-stopped
-    #ports:
-    #  - 9377:9377
+    ports:
+      - 9377:9377
     #  - 6080:6080
     #  - 5901:5900
     networks:
