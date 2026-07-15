@@ -46,6 +46,7 @@ services:
       - API_SERVER_ENABLED=true
       - API_SERVER_HOST=0.0.0.0
       - API_SERVER_KEY=${API_SERVER_KEY}
+      - DOCKER_HOST=tcp://hermes-dind:2375
       - OPENAI_BASE_URL=${OPENAI_BASE_URL}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
@@ -54,6 +55,8 @@ services:
       - TERMINAL_DOCKER_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
       - TERMINAL_SINGULARITY_IMAGE=docker://nikolaik/python-nodejs:python3.11-nodejs20
       - TERMINAL_MODAL_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
+      - TZ=Europe/Berlin
+      
       - CAMOFOX_URL=http://camofox-browser:9377
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
@@ -85,6 +88,7 @@ services:
       - /mnt/ai/hermes/.hermes:/opt/data
       - /mnt/ai/hermes/output:/output
     environment:
+      - TZ=Europe/Berlin
       - HERMES_UID=1000
       - HERMES_GID=1000
       - GATEWAY_HEALTH_URL=http://hermes:8642
@@ -98,6 +102,19 @@ services:
       - "traefik.http.routers.dashboard-${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.http.services.dashboard-${SERVICE_NAME}.loadbalancer.server.port=9119"
       - "traefik.docker.network=traefik"
+
+  hermes-dind:
+    image: docker:dind
+    container_name: hermes-dind
+    hostname: hermes-dind
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+      TZ: "Europe/Berlin"
+    networks:
+      - hermes
+    volumes:
+      - /mnt/ai/hermes/dind:/var/lib/docker
 
   camofox-browser:
     image: ghcr.io/jo-inc/camofox-browser:1.11.2@sha256:826da04c4ec75b3eb450bc7cf2513176ba408f92b862b89f768ca30563171137
