@@ -42,6 +42,7 @@ services:
       - HERMES_GID=1000
       # To expose the OpenAI-compatible API server beyond localhost,
       # uncomment BOTH lines (API_SERVER_KEY is mandatory for auth):
+      - API_SERVER_ENABLED=true
       - API_SERVER_HOST=0.0.0.0
       - API_SERVER_KEY=${API_SERVER_KEY}
       - OPENAI_BASE_URL=${OPENAI_BASE_URL}
@@ -84,8 +85,9 @@ services:
     environment:
       - HERMES_UID=1000
       - HERMES_GID=1000
+      - GATEWAY_HEALTH_URL=http://hermes:8642
     # Localhost-only. For remote access, tunnel via `ssh -L 9119:localhost:9119`.
-    command: ["dashboard", "--host", "0.0.0.0", "--no-open"]
+    command: ["dashboard", "--host", "0.0.0.0", "--port", "9119", "--no-open", "--insecure"]
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.dashboard-${SERVICE_NAME}.rule=Host(`dashboard.${SERVICE_DOMAIN}`)"
