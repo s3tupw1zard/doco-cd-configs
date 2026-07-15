@@ -19,7 +19,7 @@ services:
       - OPENCLAW_ALLOWED_ORIGINS=${OPENCLAW_ALLOWED_ORIGINS}
       - OPENCLAW__channels__telegram__textChunkLimit=3500
       - OPENCLAW_CONFIG_JSON={"agents":{"defaults":{"model":{"primary":"openrouter/free","fallbacks":["google/gemini-2.5-flash"]}}}}
-      - OPENCLAW_HOME=/data/.openclaw
+      - OPENCLAW_HOME=/data
       - HOOKS_ENABLED=true
       - HOOKS_TOKEN=${HOOKS_TOKEN}
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
