@@ -105,10 +105,10 @@ services:
     hostname: camofox-browser
     user: 1000:1000
     restart: unless-stopped
-    #ports:
-    #  - 9377:9377
-    #  - 6080:6080
-    #  - 5901:5900
+    ports:
+      - 9377:9377
+      - 6080:6080
+      - 5901:5900
     networks:
       - hermes
     environment:
