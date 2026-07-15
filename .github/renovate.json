@@ -656,6 +656,33 @@
             ]
         },
         {
+            "description": "OpenClaw",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/openclaw/**"
+            ],
+            "matchPackageNames": [
+                "coollabsio/openclaw",
+                "coollabsio/openclaw-browser"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "openclaw",
+            "labels": [
+                "renovate",
+                "ai",
+                "agent",
+                "openclaw"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
