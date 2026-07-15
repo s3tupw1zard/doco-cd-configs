@@ -41,13 +41,8 @@
                 "ghcr.io/pelican-dev/panel",
                 "ghcr.io/pelican-dev/wings"
             ],
-            "versioning": "loose",
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
+            "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>beta\\d+)$",
+            "ignoreUnstable": false,
             "groupName": "pelican",
             "labels": [
                 "dependencies",
