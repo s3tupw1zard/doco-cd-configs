@@ -1,6 +1,6 @@
 services:
   openclaw:
-    image: coollabsio/openclaw:2026.7.1
+    image: coollabsio/openclaw:2026.7.1@sha256:27b6aec9b742b6272372818d7f906e8057bf8af19ba2118be86a2e1654ed8e37
     container_name: openclaw
     hostname: openclaw
     environment:
@@ -57,7 +57,7 @@ services:
       - "traefik.docker.network=traefik"
 
   browser:
-    image: coollabsio/openclaw-browser:0.3.0
+    image: coollabsio/openclaw-browser:0.3.0@sha256:c5f8a9d812992429be2c5a0b6b8f5d70d63e81cc1b381c5475e067a91e0d3179
     container_name: openclaw-browser
     hostname: openclaw-browser
     environment:
