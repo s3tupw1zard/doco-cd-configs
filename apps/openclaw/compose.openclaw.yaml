@@ -1,0 +1,58 @@
+services:
+  openclaw:
+    image: coollabsio/openclaw:2026.7.1
+    environment:
+      - TZ=Europe/Berlin
+      - PUID=1000
+      - PGID=1000
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENCLAW_PRIMARY_MODEL=openrouter/free
+      - AUTH_USERNAME=${AUTH_USERNAME}
+      - AUTH_PASSWORD=${AUTH_PASSWORD}
+      - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
+      - BROWSER_CDP_URL=http://browser:9223
+      - BROWSER_DEFAULT_PROFILE=openclaw
+      - BROWSER_EVALUATE_ENABLED=true
+      - OPENCLAW_ALLOWED_ORIGINS=${OPENCLAW_ALLOWED_ORIGINS}
+      - OPENCLAW__channels__telegram__textChunkLimit=3500
+      - OPENCLAW_CONFIG_JSON={"agents":{"defaults":{"maxLoops":10,"model":{"primary":"openrouter/free","fallback":"google/gemini-2.5-flash"}}}}
+      - HOOKS_ENABLED=true
+      - HOOKS_TOKEN=${HOOKS_TOKEN}
+    volumes:
+      - /mnt/ai/openclaw/data:/data
+      # Optional: custom JSON config for complex settings (groups, plugins, etc.)
+      # - ./my-openclaw.json:/app/config/openclaw.json
+    depends_on:
+      - browser
+    networks:
+      - traefik
+      - openclaw
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8080"
+      - "traefik.docker.network=traefik"
+
+  browser:
+    image: coollabsio/openclaw-browser:0.3.0
+    # No port exposure needed — proxied via openclaw at /browser/
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      - CHROME_CLI=--remote-debugging-port=9222
+    volumes:
+      - /mnt/ai/openclaw/browser:/config
+    networks:
+      - openclaw
+    shm_size: 2g
+    restart: unless-stopped
+
+networks:
+  traefik:
+    external: true
+  openclaw:
