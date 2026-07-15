@@ -9,6 +9,7 @@ services:
       - PGID=1000
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - OPENCLAW_PRIMARY_MODEL=openrouter/free
+      - OPENCLAW_CONFIG=/data/.openclaw/openclaw.json
       - AUTH_USERNAME=${AUTH_USERNAME}
       - AUTH_PASSWORD=${AUTH_PASSWORD}
       - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
