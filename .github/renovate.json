@@ -41,6 +41,7 @@
                 "ghcr.io/pelican-dev/panel",
                 "ghcr.io/pelican-dev/wings"
             ],
+            "versioning": "loose",
             "matchUpdateTypes": [
                 "minor",
                 "patch",
