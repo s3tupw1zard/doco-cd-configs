@@ -54,7 +54,7 @@ services:
       - TERMINAL_DOCKER_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
       - TERMINAL_SINGULARITY_IMAGE=docker://nikolaik/python-nodejs:python3.11-nodejs20
       - TERMINAL_MODAL_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
-      - CAMOFOX_URL=http://camofox:9377
+      - CAMOFOX_URL=http://camofox-browser:9377
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}
       - TELEGRAM_GROUP_ALLOWED_CHATS=${TELEGRAM_GROUP_ALLOWED_CHATS}
