@@ -37,6 +37,7 @@ services:
       - traefik
     volumes:
       - /mnt/ai/hermes/.hermes:/opt/data
+      - /mnt/ai/hermes/output:/output
     environment:
       - HERMES_UID=1000
       - HERMES_GID=1000
@@ -47,7 +48,7 @@ services:
       - API_SERVER_KEY=${API_SERVER_KEY}
       - OPENAI_BASE_URL=${OPENAI_BASE_URL}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      #- OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - TERMINAL_ENV=docker
       # Container images (for singularity/docker/modal backends)
       - TERMINAL_DOCKER_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
@@ -82,6 +83,7 @@ services:
       - gateway
     volumes:
       - /mnt/ai/hermes/.hermes:/opt/data
+      - /mnt/ai/hermes/output:/output
     environment:
       - HERMES_UID=1000
       - HERMES_GID=1000
