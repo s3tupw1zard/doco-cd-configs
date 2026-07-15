@@ -48,7 +48,7 @@ services:
       - API_SERVER_KEY=${API_SERVER_KEY}
       - OPENAI_BASE_URL=${OPENAI_BASE_URL}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      #- OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - TERMINAL_ENV=docker
       # Container images (for singularity/docker/modal backends)
       - TERMINAL_DOCKER_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
