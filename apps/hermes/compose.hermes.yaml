@@ -119,6 +119,7 @@ services:
       - MAX_OLD_SPACE_SIZE=2048
     volumes:
       - /mnt/ai/hermes/.camofox-docker:/home/node/.camofox
+      - /mnt/ai/hermes/camofox.config.json:/app/camofox.config.json
 
   signal-cli-rest-api:
     image: bbernhard/signal-cli-rest-api@sha256:2399d449123cdad56c4d859277e3b9127e1a00c4d2ab4601c239882609286cf8
