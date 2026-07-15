@@ -2,7 +2,7 @@ services:
 
   searxng-redis:
     container_name: searxng-redis
-    image: valkey/valkey:9-alpine@sha256:a35428eba9043cc0b79dbe54100f0c92784f2de00ad09b01182bfb1c5c83d1bd
+    image: valkey/valkey:9-alpine@sha256:c9b77919daeba2c02ad954d0c844cc4e7142069d177b89c5fd771f405daf9e02
     command: valkey-server --save 30 1 --loglevel warning
     restart: always
     networks:
@@ -17,7 +17,7 @@ services:
 
   searxng:
     container_name: searxng
-    image: searxng/searxng:latest@sha256:f433294b46a93564993c4371005341e013d94aa8ea4662d8ee521cd2cccb08e8
+    image: searxng/searxng:latest@sha256:af9aec5c8fe88767106e8043004a1232d43cabde22869e6355f3a63d26e41351
     restart: always
     networks:
       - searxng

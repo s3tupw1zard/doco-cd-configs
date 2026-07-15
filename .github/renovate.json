@@ -41,12 +41,8 @@
                 "ghcr.io/pelican-dev/panel",
                 "ghcr.io/pelican-dev/wings"
             ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
+            "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>beta\\d+)$",
+            "ignoreUnstable": false,
             "groupName": "pelican",
             "labels": [
                 "dependencies",
@@ -641,9 +637,12 @@
             ],
             "matchPackageNames": [
                 "nousresearch/hermes-agent",
-                "ghcr.io/jo-inc/camofox-browser"
+                "ghcr.io/jo-inc/camofox-browser",
+                "bbernhard/signal-cli-rest-api"
             ],
             "matchUpdateTypes": [
+                "major",
+                "minor",
                 "patch",
                 "pin",
                 "digest"
