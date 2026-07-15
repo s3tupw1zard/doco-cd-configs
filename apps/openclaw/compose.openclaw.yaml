@@ -17,7 +17,7 @@ services:
       - BROWSER_EVALUATE_ENABLED=true
       - OPENCLAW_ALLOWED_ORIGINS=${OPENCLAW_ALLOWED_ORIGINS}
       - OPENCLAW__channels__telegram__textChunkLimit=3500
-      - OPENCLAW_CONFIG_JSON={"agents":{"defaults":{"maxLoops":10,"model":{"primary":"openrouter/free","fallback":"google/gemini-2.5-flash"}}}}
+      - OPENCLAW_CONFIG_JSON={"agents":{"defaults":{"model":{"primary":"openrouter/free","fallback":"google/gemini-2.5-flash"}}}}
       - HOOKS_ENABLED=true
       - HOOKS_TOKEN=${HOOKS_TOKEN}
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
