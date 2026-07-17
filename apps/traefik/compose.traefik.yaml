@@ -78,8 +78,6 @@ services:
       - --experimental.plugins.oidc.version=v0.8.24
       - --experimental.plugins.bouncer.moduleName=github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin
       - --experimental.plugins.bouncer.version=v1.5.1
-      - --experimental.plugins.cloudflarewarp.moduleName=github.com/n8n-io/traefik-cloudflarewarp-plugin
-      - --experimental.plugins.cloudflarewarp.version=v1.4.1
     ports:
       - target: 80
         published: 80
