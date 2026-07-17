@@ -5,31 +5,31 @@ services:
     hostname: traefik
     restart: unless-stopped
     labels:
-      - traefik.http.middlewares.to-https.redirectscheme.scheme=https
-      - traefik.http.routers.to-https.entrypoints=web
-      - traefik.http.routers.to-https.middlewares=to-https
-      - traefik.http.routers.to-https.rule=HostRegexp(`{host:.+}`)
+      - "traefik.http.middlewares.to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.to-https.entrypoints=web"
+      - "traefik.http.routers.to-https.middlewares=to-https"
+      - "traefik.http.routers.to-https.rule=HostRegexp(`{host:.+}`)"
 
       #- traefik.http.routers.traefik-callback.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/oauth2`)
       #- traefik.http.routers.traefik-callback.entrypoints=websecure
       #- traefik.http.routers.traefik-callback.service=traefik
       #- traefik.http.routers.traefik-callback.tls.certresolver=cloudflare
 
-      - traefik.http.routers.${SERVICE_NAME}-dashboard.rule=Host(`${SERVICE_DOMAIN}`)
-      - traefik.http.routers.${SERVICE_NAME}-dashboard.entrypoints=websecure
-      # - traefik.http.routers.${SERVICE_NAME}-dashboard.middlewares=cloudflarewarp@file,crowdsec@file #traefik-dashboard-oidc
-      - traefik.http.routers.${SERVICE_NAME}-dashboard.service=${SERVICE_NAME}-dashboard
+      - "traefik.http.routers.${SERVICE_NAME}-dashboard.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}-dashboard.entrypoints=websecure"
+      # - "traefik.http.routers.${SERVICE_NAME}-dashboard.middlewares=cloudflarewarp@file,crowdsec@file" #traefik-dashboard-oidc
+      - "traefik.http.routers.${SERVICE_NAME}-dashboard.service=${SERVICE_NAME}-dashboard"
       - "traefik.http.services.${SERVICE_NAME}-dashboard.loadbalancer.server.port=8080"
-      - traefik.http.routers.${SERVICE_NAME}-dashboard.tls.certresolver=cloudflare
+      - "traefik.http.routers.${SERVICE_NAME}-dashboard.tls.certresolver=cloudflare"
 
-      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.enablePKCE=true
-      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.providerURL=https://${OIDC_SERVICE_DOMAIN}
-      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.clientID=${TRAEFIK_OIDC_CLIENT_ID}
-      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.clientSecret=${TRAEFIK_OIDC_CLIENT_SECRET}
-      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.sessionEncryptionKey=${TRAEFIK_OIDC_SESSION_ENCRYPTION_KEY}
-      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.callbackURL=/oauth2/callback
-      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.logoutURL=/oauth2/logout
-      #- traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.scopes=openid,profile,email,groups
+      #- "traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.enablePKCE=true"
+      #- "traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.providerURL=https://${OIDC_SERVICE_DOMAIN}"
+      #- "traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.clientID=${TRAEFIK_OIDC_CLIENT_ID}"
+      #- "traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.clientSecret=${TRAEFIK_OIDC_CLIENT_SECRET}"
+      #- "traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.sessionEncryptionKey=${TRAEFIK_OIDC_SESSION_ENCRYPTION_KEY}"
+      #- "traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.callbackURL=/oauth2/callback"
+      #- "traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.logoutURL=/oauth2/logout"
+      #- "traefik.http.middlewares.${SERVICE_NAME}-dashboard-oidc.plugin.oidc.scopes=openid,profile,email,groups"
       - "traefik.docker.network=traefik"
     command:
       - --api=true
