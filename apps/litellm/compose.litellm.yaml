@@ -27,6 +27,7 @@ services:
       - OPENAI_BASE_URL=${OPENROUTER_API_URL}
       - DATABASE_URL=${LITELLM_DB_URL}
       - STORE_MODEL_IN_DB=true
+      - LITELLM_MODEL_COST_MAP_URL=https://cloudprice.net/api/v2/ai/litellm_model_prices.json
     volumes:
       - /srv/ai/litellm/data:/etc/litellm 
     networks:
