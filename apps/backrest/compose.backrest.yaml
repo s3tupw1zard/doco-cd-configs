@@ -5,12 +5,12 @@ services:
     hostname: backrest
     restart: unless-stopped
     volumes:
-      - /mnt/core/backrest/data:/data
-      - /mnt/core/backrest/config:/config
-      - /mnt/core/backrest/cache:/cache
-      - /mnt/core/backrest/tmp:/tmp
-      - /mnt/core/backrest/rclone:/root/.config/rclone # Mount for rclone config (needed when using rclone remotes)
-      - /mnt:/userdata
+      - /srv/core/backrest/data:/data
+      - /srv/core/backrest/config:/config
+      - /srv/core/backrest/cache:/cache
+      - /srv/core/backrest/tmp:/tmp
+      - /srv/core/backrest/rclone:/root/.config/rclone # Mount for rclone config (needed when using rclone remotes)
+      - /srv:/userdata
       #- /path/to/local/repos:/repos     # Mount local repos (optional for remote storage)
     environment:
       BACKREST_DATA: "/data"

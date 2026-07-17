@@ -14,10 +14,10 @@ services:
       - "587:587"  # ESMTP (explicit TLS => STARTTLS)
       - "993:993"  # IMAP4 (implicit TLS)
     volumes:
-      - /mnt/core/dms/docker-data/dms/mail-data/:/var/mail/
-      - /mnt/core/dms/docker-data/dms/mail-state/:/var/mail-state/
-      - /mnt/core/dms/docker-data/dms/mail-logs/:/var/log/mail/
-      - /mnt/core/dms/docker-data/dms/config/:/tmp/docker-mailserver/
+      - /srv/core/dms/docker-data/dms/mail-data/:/var/mail/
+      - /srv/core/dms/docker-data/dms/mail-state/:/var/mail-state/
+      - /srv/core/dms/docker-data/dms/mail-logs/:/var/log/mail/
+      - /srv/core/dms/docker-data/dms/config/:/tmp/docker-mailserver/
       - /etc/localtime:/etc/localtime:ro
     restart: always
     stop_grace_period: 1m

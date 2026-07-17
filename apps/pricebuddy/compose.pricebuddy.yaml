@@ -3,7 +3,7 @@ services:
   app:
     image: jez500/pricebuddy:v1.0.53@sha256:583f8794328bbec4d0a3eab49d9af4ed7c0aaaee96f26811cc8bf8c3b47ae34c
     volumes:
-      - /mnt/automation/pricebuddy/storage:/app/storage
+      - /srv/automation/pricebuddy/storage:/app/storage
     environment:
       DB_HOST: database                       # Name of the database service
       DB_USERNAME: pricebuddy                 # Should match the MYSQL_USER in the database service
@@ -39,7 +39,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - /mnt/automation/pricebuddy/database:/var/lib/mysql
+      - /srv/automation/pricebuddy/database:/var/lib/mysql
     networks:
       - default
     healthcheck:

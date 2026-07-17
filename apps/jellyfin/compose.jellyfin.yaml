@@ -6,8 +6,8 @@ services:
     # Optional - specify the uid and gid you would like Jellyfin to use instead of root
     user: 1000:1000
     volumes:
-      - /mnt/media/jellyfin/config:/config
-      - /mnt/media/jellyfin/cache:/cache
+      - /srv/media/jellyfin/config:/config
+      - /srv/media/jellyfin/cache:/cache
       - /opt/mounts/unionfs/Media:/media
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
