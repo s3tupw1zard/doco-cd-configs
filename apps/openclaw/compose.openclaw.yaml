@@ -39,7 +39,7 @@ services:
       - TELEGRAM_ACTIONS_STICKER=false
 
     volumes:
-      - /mnt/ai/openclaw/data:/data
+      - /srv/ai/openclaw/data:/data
       # Optional: custom JSON config for complex settings (groups, plugins, etc.)
       # - ./my-openclaw.json:/app/config/openclaw.json
     depends_on:
@@ -67,7 +67,7 @@ services:
       - TZ=Europe/Berlin
       - CHROME_CLI=--remote-debugging-port=9222
     volumes:
-      - /mnt/ai/openclaw/browser:/config
+      - /srv/ai/openclaw/browser:/config
     networks:
       - openclaw
     shm_size: 2g

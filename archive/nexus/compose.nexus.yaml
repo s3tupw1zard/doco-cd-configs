@@ -8,8 +8,8 @@ services:
     environment:
       - NEXUS_SECRETS_KEY_FILE=/opt/sonatype/nexus/etc/nexus.secrets.json
     volumes:
-      - /mnt/ops/nexus/data:/nexus-data
-      - /mnt/ops/nexus/config/nexus.secrets.json:/opt/sonatype/nexus/etc/nexus.secrets.json:ro
+      - /srv/ops/nexus/data:/nexus-data
+      - /srv/ops/nexus/config/nexus.secrets.json:/opt/sonatype/nexus/etc/nexus.secrets.json:ro
     networks:
       - traefik
     labels:

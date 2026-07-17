@@ -36,8 +36,8 @@ services:
       - hermes
       - traefik
     volumes:
-      - /mnt/ai/hermes/.hermes:/opt/data
-      - /mnt/ai/hermes/output:/output
+      - /srv/ai/hermes/.hermes:/opt/data
+      - /srv/ai/hermes/output:/output
     environment:
       - HERMES_UID=1000
       - HERMES_GID=1000
@@ -85,8 +85,8 @@ services:
     depends_on:
       - gateway
     volumes:
-      - /mnt/ai/hermes/.hermes:/opt/data
-      - /mnt/ai/hermes/output:/output
+      - /srv/ai/hermes/.hermes:/opt/data
+      - /srv/ai/hermes/output:/output
     environment:
       - TZ=Europe/Berlin
       - HERMES_UID=1000
@@ -114,7 +114,7 @@ services:
     networks:
       - hermes
     volumes:
-      - /mnt/ai/hermes/dind:/var/lib/docker
+      - /srv/ai/hermes/dind:/var/lib/docker
 
   camofox-browser:
     image: ghcr.io/jo-inc/camofox-browser:1.11.2@sha256:826da04c4ec75b3eb450bc7cf2513176ba408f92b862b89f768ca30563171137
@@ -136,8 +136,8 @@ services:
       - VNC_RESOLUTION=1920x1080
       - MAX_OLD_SPACE_SIZE=2048
     volumes:
-      - /mnt/ai/hermes/.camofox-docker:/home/node/.camofox
-      - /mnt/ai/hermes/camofox.config.json:/app/camofox.config.json
+      - /srv/ai/hermes/.camofox-docker:/home/node/.camofox
+      - /srv/ai/hermes/camofox.config.json:/app/camofox.config.json
 
   signal-cli-rest-api:
     image: bbernhard/signal-cli-rest-api@sha256:2399d449123cdad56c4d859277e3b9127e1a00c4d2ab4601c239882609286cf8
@@ -147,7 +147,7 @@ services:
     networks:
       - hermes
     volumes:
-      - /mnt/ai/hermes/signal-api:/home/.local/share/signal-cli
+      - /srv/ai/hermes/signal-api:/home/.local/share/signal-cli
     command: bash -c "signal-cli --account +${PHONE_NUMBER} daemon --http 0.0.0.0:8080"
     environment:
       - MODE=native

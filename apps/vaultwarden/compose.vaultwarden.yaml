@@ -6,7 +6,7 @@ services:
 #    ports:
 #      - 8000:80
     volumes:
-      - /mnt/core/vaultwarden/data:/data:rw
+      - /srv/core/vaultwarden/data:/data:rw
     networks:
       - traefik
     environment:
