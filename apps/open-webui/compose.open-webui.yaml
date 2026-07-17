@@ -1,6 +1,6 @@
 services:
   computer:
-    image: ghcr.io/open-webui/computer:0.9.9-browser
+    image: ghcr.io/open-webui/computer:0.9.9-browser@sha256:5350a6198866ec4c2eed915baa5dc3fbf49d66c2981f8912b94d994874b1dbcf
     container_name: open-webui-computer
     hostname: open-webui-computer
     #ports:
