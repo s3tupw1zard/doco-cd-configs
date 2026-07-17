@@ -22,6 +22,7 @@ services:
     container_name: litellm
     environment:
       - OPENAI_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY}
       - LITELLM_LOG=INFO
       - OPENAI_BASE_URL=${OPENROUTER_API_URL}
