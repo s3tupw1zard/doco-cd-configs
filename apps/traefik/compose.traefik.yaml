@@ -49,6 +49,8 @@ services:
       - --entryPoints.websecure.http.tls.domains[0].sans=*.${ROOT_DOMAIN}
       - --entryPoints.websecure.http.tls.domains[0].main=hermes.${ROOT_DOMAIN}
       - --entryPoints.websecure.http.tls.domains[0].sans=*.hermes.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[0].main=ai.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[0].sans=*.ai.${ROOT_DOMAIN}
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
