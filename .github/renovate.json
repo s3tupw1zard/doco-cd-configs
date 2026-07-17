@@ -134,6 +134,7 @@
             "matchPackageNames": [
                 "apache/tika",
                 "ghcr.io/open-webui/open-webui",
+                "ghcr.io/open-webui/computer",
                 "qdrant/qdrant",
                 "redis"
             ],
