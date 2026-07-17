@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   traefik:
     image: traefik:v3.7@sha256:4299bbed850421258fc5448c2e0e6ad350981d4d335a68de11b92448aedbefe5
@@ -47,10 +45,10 @@ services:
       - --certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json
       - --entryPoints.websecure.http.tls.domains[0].main=${ROOT_DOMAIN}
       - --entryPoints.websecure.http.tls.domains[0].sans=*.${ROOT_DOMAIN}
-      - --entryPoints.websecure.http.tls.domains[0].main=hermes.${ROOT_DOMAIN}
-      - --entryPoints.websecure.http.tls.domains[0].sans=*.hermes.${ROOT_DOMAIN}
-      - --entryPoints.websecure.http.tls.domains[0].main=ai.${ROOT_DOMAIN}
-      - --entryPoints.websecure.http.tls.domains[0].sans=*.ai.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[1].main=hermes.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[1].sans=*.hermes.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[2].main=ai.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[2].sans=*.ai.${ROOT_DOMAIN}
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
