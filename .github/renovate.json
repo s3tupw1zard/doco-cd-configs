@@ -178,7 +178,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "archive/n8n/**"
+                "apps/n8n/**"
             ],
             "matchPackageNames": [
                 "n8nio/n8n"
