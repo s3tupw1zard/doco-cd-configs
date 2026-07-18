@@ -33,7 +33,6 @@ services:
       - /srv/ai/open-webui/mcpo/userdata:/data/user
     command: >
       --port 8000
-      --root-path "/api"
       --api-key "${MCPO_API_KEY}"
       --config /config/config.json
       --hot-reload
