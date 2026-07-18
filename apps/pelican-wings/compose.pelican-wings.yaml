@@ -7,7 +7,7 @@ services:
     networks:
       - wings0
     ports:
-      - "8080:8080"
+    #  - "8080:8080"
       - "2022:2022"
     tty: true
     environment:
@@ -27,6 +27,14 @@ services:
       #- "/srv/daemon-data/:/srv/daemon-data/"
       # Required for ssl if you use let's encrypt. uncomment to use.
       - "/etc/letsencrypt/:/etc/letsencrypt/"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.computer-${SERVICE_NAME}.rule=Host(`computer.${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.computer-${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.services.computer-${SERVICE_NAME}.loadbalancer.server.port=8080"
+      - "traefik.http.routers.computer-${SERVICE_NAME}.service=computer-${SERVICE_NAME}"
+      - "traefik.http.routers.computer-${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.docker.network=traefik"
 
 networks:
   wings0:
