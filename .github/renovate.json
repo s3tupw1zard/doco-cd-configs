@@ -98,32 +98,6 @@
             ]
         },
         {
-            "description": "mcpo",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/mcpo/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/open-webui/mcpo"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "mcpo",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "mcp-server",
-                "ai"
-            ]
-        },
-        {
             "description": "open-webui",
             "matchManagers": [
                 "docker-compose"
@@ -135,6 +109,7 @@
                 "apache/tika",
                 "ghcr.io/open-webui/open-webui",
                 "ghcr.io/open-webui/computer",
+                "ghcr.io/open-webui/mcpo",
                 "qdrant/qdrant",
                 "redis"
             ],
