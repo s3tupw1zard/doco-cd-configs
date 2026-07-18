@@ -31,17 +31,6 @@ external_secrets:
   OPENROUTER_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/OPENROUTER_API_KEY
   OPENROUTER_API_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/OPENROUTER_API_URL
 ---
-name: mcpo
-working_dir: apps/mcpo
-compose_files:
-  - compose.mcpo.yaml
-remove_orphans: true
-force_image_pull: true
-external_secrets:
-  MCPO_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/mcpo/MCPO_API_KEY
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/mcpo/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/mcpo/SERVICE_NAME
----
 name: open-webui
 working_dir: apps/open-webui
 compose_files:
@@ -68,6 +57,7 @@ external_secrets:
   OPEN_TERMINAL_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPEN_TERMINAL_API_KEY
   ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
   EDGE_TTS_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/EDGE_TTS_API_KEY
+  MCPO_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/MCPO_API_KEY
 ---
 name: backrest
 working_dir: apps/backrest
