@@ -4,12 +4,10 @@ services:
     container_name: mcpo
     hostname: mcpo
     volumes:
-      - /srv/ai/mcpo/config:/config
-      - /srv/ai/mcpo/data:/mcpo-data
-      - /srv/ai/mcpo/cache:/mcpo-cache
-      - /srv/ai/mcpo/userdata:/data/user
-    environment:
-      - BASE_DIR=/mcpo-data/docs
+      - /srv/ai/open-webui/mcpo/config:/config
+      - /srv/ai/open-webui/mcpo/data:/mcpo-data
+      - /srv/ai/open-webui/mcpo/cache:/mcpo-cache
+      - /srv/ai/open-webui/mcpo/userdata:/data/user
     command: >
       --port 8000
       --root-path "/api"
@@ -20,11 +18,11 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`$SERVICE_DOMAIN`)"
-      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
-      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8000"
-      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
-      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.mcpo-${SERVICE_NAME}.rule=Host(`mcpo.${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.mcpo-${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.services.mcpo-${SERVICE_NAME}.loadbalancer.server.port=8000"
+      - "traefik.http.routers.mcpo-${SERVICE_NAME}.service=mcpo-${SERVICE_NAME}"
+      - "traefik.http.routers.mcpo-${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.docker.network=traefik"
 
 networks:
