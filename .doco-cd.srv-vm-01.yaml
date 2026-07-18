@@ -3,7 +3,7 @@ working_dir: apps/pelican-panel
 compose_files:
   - compose.pelican-panel.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-panel/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-panel/SERVICE_NAME
@@ -14,7 +14,7 @@ working_dir: apps/pelican-wings
 compose_files:
   - compose.pelican-wings.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-wings/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-wings/SERVICE_NAME
@@ -24,7 +24,7 @@ working_dir: apps/litellm
 compose_files:
   - compose.litellm.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   LITELLM_DB_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/LITELLM_DB_PASSWORD
   LITELLM_DB_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/LITELLM_DB_URL
@@ -39,7 +39,7 @@ working_dir: apps/open-webui
 compose_files:
   - compose.open-webui.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/SERVICE_NAME
@@ -67,7 +67,7 @@ working_dir: apps/backrest
 compose_files:
   - compose.backrest.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/backrest/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/backrest/SERVICE_NAME
@@ -79,7 +79,7 @@ working_dir: apps/searxng
 compose_files:
   - compose.searxng.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/searxng/SERVICE_NAME
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/searxng/SERVICE_DOMAIN
@@ -89,7 +89,7 @@ working_dir: apps/traefik
 compose_files:
   - compose.traefik.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   CLOUDFLARE_API_EMAIL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/CLOUDFLARE_API_EMAIL
   CLOUDFLARE_DNS_API_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/CLOUDFLARE_DNS_API_TOKEN
@@ -105,7 +105,7 @@ working_dir: apps/vaultwarden
 compose_files:
   - compose.vaultwarden.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   ADMIN_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/ADMIN_TOKEN
   EXPERIMENTAL_CLIENT_FEATURE_FLAGS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/EXPERIMENTAL_CLIENT_FEATURE_FLAGS
@@ -128,7 +128,7 @@ working_dir: apps/speedtest-tracker
 compose_files:
   - compose.speedtest-tracker.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   APP_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/monitoring/speedtest-tracker/APP_KEY
   APP_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/monitoring/speedtest-tracker/APP_URL
@@ -141,7 +141,7 @@ working_dir: apps/forgejo
 compose_files:
   - compose.forgejo.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   CF_CAPTCHA_SITEKEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/CF_CAPTCHA_SITEKEY
   CF_CAPTCHA_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/CF_CAPTCHA_SECRET
@@ -161,7 +161,7 @@ working_dir: apps/pocket-id
 compose_files:
   - compose.pocket-id.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   APP_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/APP_URL
   ENCRYPTION_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/ENCRYPTION_KEY
@@ -176,7 +176,7 @@ working_dir: apps/pricebuddy
 compose_files:
   - compose.pricebuddy.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/SERVICE_NAME
@@ -190,7 +190,7 @@ working_dir: apps/jellyfin
 compose_files:
   - compose.jellyfin.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/media/jellyfin/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/media/jellyfin/SERVICE_NAME
@@ -200,7 +200,7 @@ working_dir: apps/openclaw
 compose_files:
   - compose.openclaw.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/SERVICE_NAME
@@ -216,7 +216,7 @@ working_dir: apps/n8n
 compose_files:
   - compose.n8n.yaml
 remove_orphans: true
-force_image_pull: true
+force_image_pull: false
 external_secrets:
   SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/SERVICE_DOMAIN
   SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/SERVICE_NAME
