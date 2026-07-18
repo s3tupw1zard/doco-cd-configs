@@ -6,6 +6,7 @@ services:
     restart: always
     networks:
       - wings0
+      - traefik
     ports:
     #  - "8080:8080"
       - "2022:2022"
@@ -29,11 +30,11 @@ services:
       - "/etc/letsencrypt/:/etc/letsencrypt/"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.computer-${SERVICE_NAME}.rule=Host(`computer.${SERVICE_DOMAIN}`)"
-      - "traefik.http.routers.computer-${SERVICE_NAME}.entrypoints=websecure"
-      - "traefik.http.services.computer-${SERVICE_NAME}.loadbalancer.server.port=8080"
-      - "traefik.http.routers.computer-${SERVICE_NAME}.service=computer-${SERVICE_NAME}"
-      - "traefik.http.routers.computer-${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8080"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.docker.network=traefik"
 
 networks:
@@ -45,3 +46,5 @@ networks:
         - subnet: "172.28.0.0/16"
     driver_opts:
       com.docker.network.bridge.name: wings0
+  traefik:
+    external: true
