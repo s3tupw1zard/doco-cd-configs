@@ -22,6 +22,32 @@ services:
       - "traefik.http.routers.computer-${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.docker.network=traefik"
 
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main@sha256:1e82c9555c19e50b80745705f32b47a2647589f35279527b5118ecd3a71bd467
+    container_name: mcpo
+    hostname: mcpo
+    volumes:
+      - /srv/ai/open-webui/mcpo/config:/config
+      - /srv/ai/open-webui/mcpo/data:/mcpo-data
+      - /srv/ai/open-webui/mcpo/cache:/mcpo-cache
+      - /srv/ai/open-webui/mcpo/userdata:/data/user
+    command: >
+      --port 8000
+      --root-path "/api"
+      --api-key "${MCPO_API_KEY}"
+      --config /config/config.json
+      --hot-reload
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mcpo-${SERVICE_NAME}.rule=Host(`mcpo.${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.mcpo-${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.services.mcpo-${SERVICE_NAME}.loadbalancer.server.port=8000"
+      - "traefik.http.routers.mcpo-${SERVICE_NAME}.service=mcpo-${SERVICE_NAME}"
+      - "traefik.http.routers.mcpo-${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.docker.network=traefik"
+
   tika:
     image: apache/tika:latest@sha256:90b7fa1dc018434075fce9e1d9b88b1e3d0ea6979d0cf86e116c79a8073ae973
     container_name: open-webui-tika
