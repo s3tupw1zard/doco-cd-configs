@@ -29,7 +29,7 @@ services:
       N8N_ADDITIONAL_NON_UI_ROUTES: "auth"
     volumes:
       - /srv/automation/n8n/data:/home/node/.n8n
-      # - /srv/automation/n8n/hook.js:/home/node/.n8n/hooks.js
+      - /srv/automation/n8n/hook.js:/home/node/.n8n/hooks.js
       - /srv/automation/n8n/local-files:/files
     labels:
       - "traefik.enable=true"
