@@ -15,6 +15,9 @@ compose_files:
   - compose.pelican-wings.yaml
 remove_orphans: true
 force_image_pull: true
+external_secrets:
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-wings/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-wings/SERVICE_NAME
 ---
 name: litellm
 working_dir: apps/litellm
