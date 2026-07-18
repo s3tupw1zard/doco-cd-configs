@@ -34,7 +34,12 @@ services:
     networks:
       - default
       - traefik
-    command: [ "--config", "/etc/litellm/config.yaml" ]
+    entrypoint:
+      - sh
+      - -c
+      - |
+        apk add --no-cache nodejs npm uv --quiet
+        exec litellm --config /etc/litellm/config.yaml
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
