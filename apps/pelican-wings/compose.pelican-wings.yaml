@@ -29,8 +29,7 @@ services:
       # Required for ssl if you use let's encrypt. uncomment to use.
       - "/etc/letsencrypt/:/etc/letsencrypt/"
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     labels:
       - "traefik.enable=true"
