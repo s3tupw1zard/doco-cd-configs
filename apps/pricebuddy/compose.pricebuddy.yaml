@@ -1,22 +1,24 @@
 services:
 
-  app:
+  pricebuddy:
     image: jez500/pricebuddy:v1.0.53@sha256:583f8794328bbec4d0a3eab49d9af4ed7c0aaaee96f26811cc8bf8c3b47ae34c
+    container_name: pricebuddy
+    hostname: pricebuddy
+    restart: unless-stopped
     volumes:
       - /srv/automation/pricebuddy/storage:/app/storage
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     environment:
-      DB_HOST: database                       # Name of the database service
+      DB_HOST: pricebuddy-database                       # Name of the database service
       DB_USERNAME: pricebuddy                 # Should match the MYSQL_USER in the database service
       DB_PASSWORD: ${DB_PASSWORD}                # Should match the MYSQL_PASSWORD in the database service
       DB_DATABASE: pricebuddy                 # Should match the MYSQL_DATABASE in the database service
       APP_KEY: ${APP_KEY}                         # Should be a random 32 character string
       APP_USER_EMAIL: ${APP_USER_EMAIL}       # Only used for seeding the database
       APP_USER_PASSWORD: ${APP_USER_PASSWORD} # Only used for seeding the database
-      SCRAPER_BASE_URL: http://scraper:3000   # Url to Name of the scrapper service
+      SCRAPER_BASE_URL: http://pricebuddy-scraper:3000   # Url to Name of the scrapper service
       AFFILIATE_ENABLED: 'true'               # See https://pricebuddy.jez.me/support-project.html
       APP_URL: https://${SERVICE_DOMAIN}            # The domain name of the service
       ASSET_URL: https://${SERVICE_DOMAIN} # The domain name of the service
@@ -37,6 +39,9 @@ services:
 
   database:
     image: mysql:9.7@sha256:8fdf311514c91fa5014e93e98e19d7f5d9eb162a462c13100c956dacc278ee21
+    container_name: pricebuddy-database
+    hostname: pricebuddy-database
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: pricebuddy
       MYSQL_USER: pricebuddy
@@ -44,6 +49,9 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - /srv/automation/pricebuddy/database:/var/lib/mysql
+
+      # localtime mount
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - default
     healthcheck:
@@ -55,8 +63,14 @@ services:
 
   scraper:
     image: jez500/seleniumbase-scrapper:v1.0@sha256:501895ba8e1f592b0480c870d10113b94f1a2ba3185dfaf89b41b9e36fe8f25f
+    container_name: pricebuddy-scraper
+    hostname: pricebuddy-scraper
+    restart: unless-stopped
     networks:
       - default
+    volumes:
+      # localtime mount
+      - /etc/localtime:/etc/localtime:ro
     #ports:
     #    - 3030:3000 # Optional, if you want to access the scrapper api from the host machine
 
