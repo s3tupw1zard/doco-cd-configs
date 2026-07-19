@@ -23,7 +23,7 @@ jobs:
         id: pragent
         uses: the-pr-agent/pr-agent@main
         env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          OPENAI_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI.API_BASE: ${{ secrets.OPENAI_API_BASE }}
           config.model: "openai/gpt-4.1-nano"
