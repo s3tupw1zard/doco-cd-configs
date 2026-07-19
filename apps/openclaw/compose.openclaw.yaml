@@ -42,6 +42,10 @@ services:
       - /srv/ai/openclaw/data:/data
       # Optional: custom JSON config for complex settings (groups, plugins, etc.)
       # - ./my-openclaw.json:/app/config/openclaw.json
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     depends_on:
       - browser
     networks:
@@ -68,6 +72,10 @@ services:
       - CHROME_CLI=--remote-debugging-port=9222
     volumes:
       - /srv/ai/openclaw/browser:/config
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - openclaw
     shm_size: 2g

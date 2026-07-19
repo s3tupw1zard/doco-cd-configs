@@ -95,6 +95,10 @@ services:
       - /srv/core/traefik/letsencrypt:/letsencrypt
       - /srv/logs/traefik/traefik.log:/var/log/traefik/traefik.log
       - /srv/logs/traefik/traefik.access.log:/var/log/traefik/access.log
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik
 

@@ -9,6 +9,10 @@ services:
       - searxng
     volumes:
       - /srv/automation/searxng/valkey-data2:/data
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     logging:
       driver: "json-file"
       options:

@@ -16,7 +16,10 @@ services:
 #      - 1411:1411
     volumes:
       - "/srv/security/pocket-id/data:/app/data"
-      - "/etc/localtime:/etc/localtime:ro"
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik
     healthcheck:

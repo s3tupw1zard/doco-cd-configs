@@ -9,6 +9,10 @@ services:
       - /srv/media/jellyfin/config:/config
       - /srv/media/jellyfin/cache:/cache
       - /opt/mounts/unionfs/Media:/media
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     environment:
