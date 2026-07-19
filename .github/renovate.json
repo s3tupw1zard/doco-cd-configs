@@ -659,6 +659,83 @@
             ]
         },
         {
+            "description": "Ghost",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ghost/**"
+            ],
+            "matchPackageNames": [
+                "ghost",
+                "caddy",
+                "ghost/traffic-analytics",
+                "ghcr.io/tryghost/activitypub",
+                "ghcr.io/tryghost/activitypub-migrations"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "ghost",
+            "labels": [
+                "renovate",
+                "blog",
+                "ghost",
+                "caddy",
+                "analytics",
+                "activitypub",
+                "activitypub-migrations"
+            ]
+        },
+        {
+            "description": "ghost-tinybird",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ghost/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/s3tupw1zard/ghost-tinybird"
+            ],
+            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>tinybird)\\.(?<build>\\d{8})$",
+            "ignoreUnstable": true,
+            "groupName": "ghost-tinybird",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "ghost",
+                "tinybird",
+                "analytics"
+
+            ]
+        },
+        {
+            "description": "ghost-mysql",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ghost/**"
+            ],
+            "matchPackageNames": [
+                "mysql"
+            ],
+            "ignoreUnstable": true,
+            "groupName": "ghost-mysql",
+            "allowedVersions": "/^8(\\.|$)/",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "ghost",
+                "mysql"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
