@@ -21,7 +21,7 @@ compose_files:
   - compose.ghost.yaml
 profiles:
   - analytics
-  # - activitypub
+  - activitypub
   - tinybird-local
 remove_orphans: true
 force_image_pull: true
