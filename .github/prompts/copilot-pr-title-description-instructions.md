@@ -60,17 +60,21 @@ BREAKING CHANGE:
 - \[service-name\]: Migrate volumes before redeploy  
 → `docker volume migrate --old=legacy --new=nvme`
 
+### Formatting
+
+Use three hashtag characters followed by a space in front of Title, Description, Why, Changes and Breaking Changes so that it is displayed as header 3.
+
 ## Example
 
-### **Title**
+**Title**
 
 deploy(service/api): scale gunicorn workers
 
-### **Description**
+**Description**
 
 Increases Gunicorn worker count for API service to handle peak traffic loads.
 
-### **Why**
+**Why**
 
 Performance metrics showed worker saturation leading to 503 errors during daily traffic spikes.
 
@@ -80,7 +84,7 @@ Performance metrics showed worker saturation leading to 503 errors during daily 
 - service/api: memory limit 512MB → 768MB
 - image/api: upgrade base image to python:3.11-slim
 
-### **Breaking Changes**
+**Breaking Changes**
 
 None
 
