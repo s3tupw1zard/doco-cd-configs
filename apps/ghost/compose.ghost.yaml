@@ -227,11 +227,15 @@ services:
           memory: '16GB'
     # ports:
     #   - "7181:7181"
-    env_file:
-      - .env
+    environment:
+      TB_INFRA_TOKEN: ${TB_INFRA_TOKEN}
+      TB_INFRA_WORKSPACE: ${TB_INFRA_WORKSPACE}
+      TB_INFRA_ORGANIZATION: ${TB_INFRA_ORGANIZATION}
+      TB_INFRA_USER: ${TB_INFRA_USER}
     volumes:
       - clickhouse:/var/lib/clickhouse
       - redis-data:/redis-data
+    profiles: [tinybird-local]
     networks:
       - tinybird_network
 
