@@ -3,6 +3,7 @@ services:
     image: ghcr.io/open-webui/computer:0.9.10-browser@sha256:3bad74f0b9cb9f14ed0de054b5667a4deb2d72d923c12467c4d8ac198a652f6b
     container_name: open-webui-computer
     hostname: open-webui-computer
+    restart: unless-stopped
     #ports:
     #  - 8000:8000
     volumes:
@@ -30,6 +31,7 @@ services:
     image: ghcr.io/open-webui/mcpo:main@sha256:1e82c9555c19e50b80745705f32b47a2647589f35279527b5118ecd3a71bd467
     container_name: mcpo
     hostname: mcpo
+    restart: unless-stopped
     volumes:
       - /srv/ai/open-webui/mcpo/config:/config
       - /srv/ai/open-webui/mcpo/data:/mcpo-data
@@ -58,6 +60,8 @@ services:
   tika:
     image: apache/tika:latest@sha256:90b7fa1dc018434075fce9e1d9b88b1e3d0ea6979d0cf86e116c79a8073ae973
     container_name: open-webui-tika
+    hostname: open-webui-tika
+    restart: unless-stopped
     networks:
       - open-webui
 #    ports:
@@ -67,6 +71,7 @@ services:
 
   openai-edge-tts:
     container_name: openai-edge-tts
+    hostname: openai-edge-tts
     image: travisvn/openai-edge-tts:latest@sha256:8ac4b5bc904d34f3f3b90e5836bb14e51b71bed84dc1f668a8791ffa046d2904
     #ports:
     #  - 5050:5050
@@ -92,6 +97,8 @@ services:
   open-webui:
     image: ghcr.io/open-webui/open-webui:main@sha256:a26effeb220e132482bf7e0560b3404843e7bc40d23051144e062960df8df6b0
     container_name: open-webui
+    hostname: open-webui
+    restart: unless-stopped
     volumes:
       - /srv/ai/open-webui/open-webui-data:/app/backend/data
       #- /srv/ai/open-webui/prompt-plus/custom.css:/app/build/static/custom.css
@@ -141,7 +148,6 @@ services:
       - OAUTH_ADMIN_ROLES=open_webui_admin
       - ENABLE_FORWARD_USER_INFO_HEADERS=True
 #      - CORS_ALLOW_ORIGIN="172.18.0.0/16;172.19.0.0/16"
-    restart: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`$SERVICE_DOMAIN`)"

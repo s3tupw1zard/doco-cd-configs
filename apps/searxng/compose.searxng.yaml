@@ -1,10 +1,12 @@
 services:
 
   searxng-redis:
-    container_name: searxng-redis
     image: valkey/valkey:9-alpine@sha256:c9b77919daeba2c02ad954d0c844cc4e7142069d177b89c5fd771f405daf9e02
+    container_name: searxng-redis
+    hostname: searxng-redis
+    restart: unless-stopped
     command: valkey-server --save 30 1 --loglevel warning
-    restart: always
+
     networks:
       - searxng
     volumes:
@@ -20,9 +22,10 @@ services:
         max-file: "1"
 
   searxng:
-    container_name: searxng
     image: searxng/searxng:latest@sha256:800a5e3757df04f59e6bd6c622f15de2edbfa47f5591c5b82d4a8ff3b938a845
-    restart: always
+    container_name: searxng
+    hostname: searxng
+    restart: unless-stopped
     networks:
       - searxng
       - traefik
