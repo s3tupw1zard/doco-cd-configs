@@ -19,6 +19,7 @@ services:
       - ghost
     networks:
       - ghost_network
+      - tinybird_network
 
   ghost:
     # Do not alter this without updating the Tinybird Sync container as well
@@ -214,6 +215,27 @@ services:
     profiles: [activitypub]
     restart: no
 
+  tinybird-local:
+    image: tinybirdco/tinybird-local:beta
+    container_name: tinybird-local
+    hostname: tinybird-local
+    # If you want to limit container resources
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: '16GB'
+    # ports:
+    #   - "7181:7181"
+    env_file:
+      - .env
+    volumes:
+      - clickhouse:/var/lib/clickhouse
+      - redis-data:/redis-data
+    networks:
+      - tinybird_network
+
+
 volumes:
   caddy_data:
     name: caddy_data
@@ -225,7 +247,13 @@ volumes:
     name: tinybird_home
   traffic_analytics_data:
     name: traffic_analytics_data
+  clickhouse:
+    name: clickhouse
+  redis-data:
+    name: redis-data
 
 networks:
   ghost_network:
     name: ghost_network
+  tinybird_network:
+    name: tinybird_network
