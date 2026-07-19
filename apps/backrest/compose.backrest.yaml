@@ -9,7 +9,8 @@ services:
       - /srv/core/backrest/config:/config
       - /srv/core/backrest/cache:/cache
       - /srv/core/backrest/tmp:/tmp
-      - /srv/core/backrest/rclone:/root/.config/rclone # Mount for rclone config (needed when using rclone remotes)
+      - /srv/core/backrest/ssh:/root/.ssh # Mount for SSH keys
+      # - /srv/core/backrest/rclone:/root/.config/rclone # Mount for rclone config (needed when using rclone remotes)
       - /srv:/userdata
       - /mnt/local/backrest/repos:/repos     # Mount for local repos
     environment:
