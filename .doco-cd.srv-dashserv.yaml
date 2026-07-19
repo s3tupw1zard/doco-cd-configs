@@ -22,6 +22,7 @@ compose_files:
 profiles:
   - analytics
   - activitypub
+  - tinybird-local
 remove_orphans: true
 force_image_pull: true
 external_secrets:
@@ -38,3 +39,7 @@ external_secrets:
   TINYBIRD_API_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TINYBIRD_API_URL
   TINYBIRD_TRACKER_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TINYBIRD_TRACKER_TOKEN
   TINYBIRD_WORKSPACE_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TINYBIRD_WORKSPACE_ID
+  TB_INFRA_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TB_INFRA_TOKEN
+  TB_INFRA_WORKSPACE: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TB_INFRA_WORKSPACE
+  TB_INFRA_ORGANIZATION: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TB_INFRA_ORGANIZATION
+  TB_INFRA_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TB_INFRA_USER
