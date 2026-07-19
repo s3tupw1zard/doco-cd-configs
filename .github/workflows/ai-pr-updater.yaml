@@ -26,8 +26,8 @@ jobs:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI.API_BASE: ${{ secrets.OPENAI_API_BASE }}
-          config.model: "meta-llama/llama-3.3-70b-instruct"
-          config.fallback_models: '["meta-llama/llama-3.3-70b-instruct"]'
+          config.model: "google/gemini-2.5-flash-lite"
+          config.fallback_models: '["google/gemini-2.5-flash-lite"]'
           pr_description.publish_description_as_comment: "false"
           pr_description.generate_ai_title: "true"
           pr_description.auto_create_ticket: "true"
