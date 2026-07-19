@@ -2,7 +2,8 @@ services:
   litellm-db:
     image: postgres:15@sha256:74e110c41804365e3915fcc09d5e7a1eff50161aaa94d5da0e58e0cd75ae509c
     container_name: litellm-db
-    restart: always
+    hostname: litellm-db
+    restart: unless-stopped
     environment:
       POSTGRES_DB: litellm
       POSTGRES_USER: litellm
@@ -23,6 +24,8 @@ services:
   litellm:
     image: ghcr.io/berriai/litellm:v1.93.0@sha256:a1745e629abfb17d434426ff48b115f54f4f4c4a0f5af241de569e93c63c411e
     container_name: litellm
+    hostname: litellm
+    restart: unless-stopped
     environment:
       - OPENAI_API_KEY=${OPENROUTER_API_KEY}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
@@ -52,7 +55,6 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
       - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
-      # - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=4000"
       - "traefik.docker.network=traefik"
 

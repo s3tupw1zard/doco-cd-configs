@@ -3,7 +3,7 @@ services:
     image: ghcr.io/pelican-dev/wings:v1.0.0-beta26@sha256:0da2b1afbefbb5f668312d653213eb71bf4756341d5a56bf37f04802e0f3b31c
     container_name: pelican-wings
     hostname: pelican-wings
-    restart: always
+    restart: unless-stopped
     networks:
       - wings0
       - traefik
