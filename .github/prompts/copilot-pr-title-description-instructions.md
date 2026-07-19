@@ -1,73 +1,86 @@
 # Pull Request Generation Instructions
 
 ## General
+
 - Be concise and technical.
-- Focus on the actual user-facing or infrastructure impact.
-- Do not invent facts that are not present in the diff.
+- Focus on the actual infrastructure impact.
+- Base entirely on commit history/diff - no inventions.
 
 ## PR Title
-- Generate a short, imperative title.
-- Use the Conventional Commits format: <type>(<scope>): <summary>.
-- Keep it under 72 characters if possible.
-- Mention the most important change only.
-- Use Docker Compose / doco-cd specific types and scopes (see below).
 
-### Docker Types
-- deploy: Deployment or rollout strategy changes (e.g., replicas, profiles, stacks).
-- compose: Docker Compose file changes (e.g., services, networks, volumes).
-- config: Environment variables, secrets, or configuration changes.
-- infra: Infrastructure or cloud resource changes (e.g., AWS, GCP, Azure).
-- image: Container image updates, tags, or build arg changes.
-- fix: Bug fix in services, networking, or container behavior.
-- ci: CI/CD pipeline or automation changes (e.g., GitHub Actions, GitLab CI).
-- docs: Documentation changes in README or inline comments.
-- refactor: Restructuring services, volumes, or compose files without behavior change.
-- perf: Performance improvements (e.g., resource limits, caching layers).
-- test: Changes to healthchecks, test containers, or compose overrides.
-- chore: Maintenance tasks, cleanup, or version bumps.
-- revert: Revert a previous PR or change.
+`<type>(<scope>): <infra-impact>`
 
-### Scope Examples
-- compose: General compose file changes.
-- service/<name>: Specific service changes (e.g., service/web, service/db).
-- image/<name>: Specific image or Dockerfile changes.
-- stack: Docker Swarm stack or deployment changes.
-- network, volume, secret, env: Component-level changes.
-- ci: CI/CD workflow files.
-- docs: Documentation updates.
+Types:
+
+- **deploy**: Rollout/replica changes
+- **compose**: Docker Compose modifications
+- **config**: Env/secrets/params updates
+- **infra**: Cloud resource modifications
+- **image**: Container image adjustments
+- **fix**: Service-level bug resolutions
+
+Scope Examples: `compose`, `service/web`, `network`, `stack`, `ci`
+
+Rules:
+
+- Imperative verb first (`Add`, `Upgrade`, `Fix`)
+- Max 72 characters
+- Scope in parentheses for service-specific changes
 
 ## PR Description
-- Start with a short summary of what changed.
-- Then explain why the change was made.
-- Include testing notes and relevant caveats.
-- Mention breaking changes explicitly if present.
-- If helpful, add bullet points for key changes.
 
-### Body Structure
-1. Summary: One or two sentences about the change.
-2. Why: Explain the motivation or problem being solved.
-3. Changes: Use bullet points for specific modifications.
-4. Testing: How was this validated (e.g., docker compose up, healthchecks, CI pipeline)?
-5. Breaking Changes: If applicable, describe what breaks and the migration path.
+### First Line: Summary
 
-### Example
-**Title:**
-deploy(stack): add rolling update policy to web service
+"Adjusts \[WHAT\] to achieve \[OPERATIONAL GOAL\]"
 
-**Description:**
-Adds a rolling update configuration to the web service in the production stack to minimize downtime during deployments.
+### Why Section (1-2 sentences)
 
-Why:
-Previously, updating the web service caused a brief outage due to immediate container recreation.
+- Problem context: "Resolves intermittent DNS lookup failures during..."
+- Business rationale: "Avoids 5xx errors during peak traffic"
 
-Changes:
-- Added `deploy.update_config` with `delay: 10s` and `failure_action: rollback` to `compose.prod.yml`.
-- Set `parallelism: 1` to update one container at a time.
-- Added healthcheck endpoint verification before marking the update as successful.
+### Changes (Bullet Point Heavy!)
 
-Testing:
-- Verified zero-downtime deployment with `docker stack deploy`.
-- Confirmed healthcheck passes before old container is stopped.
+### **Do:**
 
-Breaking Changes:
-- None.
+- compose/prod.yml: increase web replicas from 2 → 4
+- volume/web-data: change mount type to tmpfs
+- secrets/db-password: rotate to v2
+- service/redis: add healthcheck endpoint
+
+### **Avoid:**
+
+- "Updated config files"
+- "Fixed bugs"
+- Generic "Improved performance"
+
+### Breaking Changes (If Any)
+
+BREAKING CHANGE:
+
+- \[service-name\]: Migrate volumes before redeploy  
+→ `docker volume migrate --old=legacy --new=nvme`
+
+## Example
+
+### **Title**
+
+deploy(service/api): scale gunicorn workers
+
+### **Description**
+
+Increases Gunicorn worker count for API service to handle peak traffic loads.
+
+### **Why**
+
+Performance metrics showed worker saturation leading to 503 errors during daily traffic spikes.
+
+**Changes**
+
+- compose/prod.yml: `gunicorn_workers: 8` → `12`
+- service/api: memory limit 512MB → 768MB
+- image/api: upgrade base image to python:3.11-slim
+
+### **Breaking Changes**
+
+None
+
