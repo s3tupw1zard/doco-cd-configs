@@ -10,8 +10,7 @@ services:
       - /srv/media/jellyfin/cache:/cache
       - /opt/mounts/unionfs/Media:/media
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
@@ -25,7 +24,6 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
       - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
-      # - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8096"
       - "traefik.docker.network=traefik"
 

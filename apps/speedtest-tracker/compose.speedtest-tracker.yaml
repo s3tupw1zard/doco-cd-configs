@@ -18,8 +18,7 @@ services:
     volumes:
       - /srv/monitoring/speedtest-tracker/data:/config
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik
