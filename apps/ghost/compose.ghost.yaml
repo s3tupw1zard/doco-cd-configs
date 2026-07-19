@@ -137,9 +137,6 @@ services:
     image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719
     container_name: tinybird-login
     hostname: tinybird-login
-    build:
-      context: ./tinybird
-      dockerfile: Dockerfile
     working_dir: /home/tinybird
     command: /usr/local/bin/tinybird-login
     volumes:
@@ -180,9 +177,6 @@ services:
     image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719
     container_name: tinybird-deploy
     hostname: tinybird-deploy
-    build:
-      context: ./tinybird
-      dockerfile: Dockerfile
     working_dir: /data/tinybird
     command: >
       sh -c "
