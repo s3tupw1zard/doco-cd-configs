@@ -28,8 +28,6 @@ services:
     hostname: ghost
     restart: unless-stopped
     # This is required to import current config when migrating
-    env_file:
-      - .env
     environment:
       NODE_ENV: production
       url: https://${SERVICE_DOMAIN}
@@ -46,6 +44,7 @@ services:
       tinybird__stats__endpoint: ${TINYBIRD_API_URL}
     volumes:
       - /srv/core/ghost/data/ghost:/var/lib/ghost/content
+    profiles: [ghost] # temporary to keep ghost from deploying
     depends_on:
       db:
         condition: service_healthy
@@ -77,6 +76,7 @@ services:
     volumes:
       - /srv/core/ghost/data/mysql:/var/lib/mysql
       - /srv/core/ghost/mysql-init:/docker-entrypoint-initdb.d
+    profiles: [ghost] # temporary to keep ghost from deploying
     healthcheck:
       test: mysqladmin ping -p${MYSQL_ROOT_PASSWORD} -h 127.0.0.1
       interval: 1s
