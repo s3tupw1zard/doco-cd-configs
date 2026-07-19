@@ -9,6 +9,10 @@ services:
       - /srv/ai/open-webui/computer/data:/data
       - /srv/ai/open-webui/computer/workspace:/workspace
       - /srv/ai/open-webui/computer/home/ctpr:/home/ctpr/workspace
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     working_dir: /workspace
     networks:
       - open-webui
@@ -31,6 +35,10 @@ services:
       - /srv/ai/open-webui/mcpo/data:/mcpo-data
       - /srv/ai/open-webui/mcpo/cache:/mcpo-cache
       - /srv/ai/open-webui/mcpo/userdata:/data/user
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     command: >
       --port 8000
       --api-key "${MCPO_API_KEY}"
@@ -64,6 +72,10 @@ services:
     #  - 5050:5050
     environment:
       - API_KEY=${EDGE_TTS_API_KEY}
+    volumes:
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     networks:
       - open-webui
@@ -85,6 +97,10 @@ services:
       #- /srv/ai/open-webui/prompt-plus/custom.css:/app/build/static/custom.css
       #- /srv/ai/open-webui/prompt-plus/loader.js:/app/build/static/loader.js
       #- /srv/ai/open-webui/prompt-plus/js/prompt-plus-app.js:/app/build/static/js/prompt-plus-app.js
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - open-webui
       - traefik
@@ -175,6 +191,10 @@ services:
     volumes:
       - /srv/ai/open-webui/postgres-data:/var/lib/postgresql/data
       - /srv/ai/open-webui/scripts/postgres-init:/docker-entrypoint-initdb.d
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - open-webui
     labels:
@@ -190,6 +210,10 @@ services:
     restart: unless-stopped
     volumes:
       - /srv/ai/open-webui/qdrant-data:/qdrant/storage
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - open-webui
     labels:
@@ -203,6 +227,10 @@ services:
     command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
       - /srv/ai/open-webui/redis-data:/data
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - open-webui
     labels:

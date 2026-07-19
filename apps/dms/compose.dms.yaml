@@ -18,6 +18,9 @@ services:
       - /srv/core/dms/docker-data/dms/mail-state/:/var/mail-state/
       - /srv/core/dms/docker-data/dms/mail-logs/:/var/log/mail/
       - /srv/core/dms/docker-data/dms/config/:/tmp/docker-mailserver/
+
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     restart: always
     stop_grace_period: 1m

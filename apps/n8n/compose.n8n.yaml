@@ -30,6 +30,10 @@ services:
       - /srv/automation/n8n/data:/home/node/.n8n
       - /srv/automation/n8n/hook.js:/assets/oidc-frontend-hook.js
       - /srv/automation/n8n/local-files:/files
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"

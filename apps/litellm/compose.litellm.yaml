@@ -9,6 +9,10 @@ services:
       POSTGRES_PASSWORD: ${LITELLM_DB_PASSWORD}
     volumes:
       - /srv/ai/litellm/db:/var/lib/postgresql/data
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - default
     healthcheck:
@@ -30,7 +34,11 @@ services:
       - STORE_MODEL_IN_DB=true
       - LITELLM_MODEL_COST_MAP_URL=https://cloudprice.net/api/v2/ai/litellm_model_prices.json
     volumes:
-      - /srv/ai/litellm/data:/etc/litellm 
+      - /srv/ai/litellm/data:/etc/litellm
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - default
       - traefik

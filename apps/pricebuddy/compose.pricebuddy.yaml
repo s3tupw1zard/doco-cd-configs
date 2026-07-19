@@ -4,6 +4,10 @@ services:
     image: jez500/pricebuddy:v1.0.53@sha256:583f8794328bbec4d0a3eab49d9af4ed7c0aaaee96f26811cc8bf8c3b47ae34c
     volumes:
       - /srv/automation/pricebuddy/storage:/app/storage
+      
+      # timezone and localtime mounts
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     environment:
       DB_HOST: database                       # Name of the database service
       DB_USERNAME: pricebuddy                 # Should match the MYSQL_USER in the database service
