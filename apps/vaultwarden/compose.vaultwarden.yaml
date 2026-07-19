@@ -8,8 +8,7 @@ services:
     volumes:
       - /srv/core/vaultwarden/data:/data:rw
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     networks:
       - traefik

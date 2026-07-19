@@ -10,8 +10,7 @@ services:
       - /srv/ai/open-webui/computer/workspace:/workspace
       - /srv/ai/open-webui/computer/home/ctpr:/home/ctpr/workspace
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     working_dir: /workspace
     networks:
@@ -36,8 +35,7 @@ services:
       - /srv/ai/open-webui/mcpo/cache:/mcpo-cache
       - /srv/ai/open-webui/mcpo/userdata:/data/user
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     command: >
       --port 8000
@@ -62,6 +60,9 @@ services:
       - open-webui
 #    ports:
 #      - "9998:9998"
+    volumes:
+      # localtime mount
+      - /etc/localtime:/etc/localtime:ro
     labels:
       - "traefik.enable=false"
 
@@ -73,8 +74,7 @@ services:
     environment:
       - API_KEY=${EDGE_TTS_API_KEY}
     volumes:
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     networks:
@@ -98,8 +98,7 @@ services:
       #- /srv/ai/open-webui/prompt-plus/loader.js:/app/build/static/loader.js
       #- /srv/ai/open-webui/prompt-plus/js/prompt-plus-app.js:/app/build/static/js/prompt-plus-app.js
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     networks:
       - open-webui
@@ -192,8 +191,7 @@ services:
       - /srv/ai/open-webui/postgres-data:/var/lib/postgresql/data
       - /srv/ai/open-webui/scripts/postgres-init:/docker-entrypoint-initdb.d
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     networks:
       - open-webui
@@ -211,8 +209,7 @@ services:
     volumes:
       - /srv/ai/open-webui/qdrant-data:/qdrant/storage
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     networks:
       - open-webui
@@ -228,8 +225,7 @@ services:
     volumes:
       - /srv/ai/open-webui/redis-data:/data
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     networks:
       - open-webui

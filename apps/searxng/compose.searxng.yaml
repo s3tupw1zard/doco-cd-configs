@@ -10,8 +10,7 @@ services:
     volumes:
       - /srv/automation/searxng/valkey-data2:/data
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     logging:
       driver: "json-file"
@@ -31,6 +30,9 @@ services:
     volumes:
       - /srv/automation/searxng/config:/etc/searxng:rw
       - /srv/automation/searxng/data:/var/cache/searxng:rw
+      
+      # localtime mount
+      - /etc/localtime:/etc/localtime:ro
     environment:
       - SEARXNG_BASE_URL=https://${SERVICE_DOMAIN}/
     logging:

@@ -8,8 +8,7 @@ services:
       - /srv/ops/forgejo/data:/data
       - /srv/ops/forgejo/data/gitea/packages:/data/gitea/packages
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     environment:
       TZ: "Europe/Berlin"

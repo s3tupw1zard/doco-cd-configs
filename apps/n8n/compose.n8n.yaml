@@ -31,8 +31,7 @@ services:
       - /srv/automation/n8n/hook.js:/assets/oidc-frontend-hook.js
       - /srv/automation/n8n/local-files:/files
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     labels:
       - "traefik.enable=true"

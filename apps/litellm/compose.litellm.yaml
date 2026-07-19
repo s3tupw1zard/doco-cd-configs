@@ -10,8 +10,7 @@ services:
     volumes:
       - /srv/ai/litellm/db:/var/lib/postgresql/data
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     networks:
       - default
@@ -36,8 +35,7 @@ services:
     volumes:
       - /srv/ai/litellm/data:/etc/litellm
       
-      # timezone and localtime mounts
-      - /etc/timezone:/etc/timezone:ro
+      # localtime mount
       - /etc/localtime:/etc/localtime:ro
     networks:
       - default
