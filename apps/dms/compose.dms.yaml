@@ -27,7 +27,7 @@ services:
     cap_add:
       - NET_ADMIN
 
-  autodiscover-${AUTODISCOVER_SERVICE_DOMAIN}:
+  autodiscover:
     image: monogramm/autodiscover-email-settings:latest@sha256:4a9706ab469aff8e610bb2a4e22fe9c19216c571d2471e85941b2d3d5f4e6f28
     container_name: autodiscover
     hostname: autodiscover

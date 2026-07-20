@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:2.11.4-alpine
+    image: caddy:2.11.4-alpine@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648
     container_name: caddy
     hostname: caddy
     restart: unless-stopped
@@ -24,7 +24,7 @@ services:
 
   ghost:
     # Do not alter this without updating the Tinybird Sync container as well
-    image: ghost:6.53.0-alpine
+    image: ghost:6.53.0-alpine@sha256:63b12cb176ffe9cfe651b839c18f6c7261004370f566d9ae218cacd67766b2b1
     container_name: ghost
     hostname: ghost
     restart: unless-stopped
@@ -144,7 +144,7 @@ services:
   # Supporting Services
 
   tinybird-login:
-    image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719
+    image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719@sha256:e873f98d9c4ee366f0f6e1fb909ff6b5e742f8acc7e5c5f6073e8c3fc385f84e
     container_name: tinybird-login
     hostname: tinybird-login
     working_dir: /home/tinybird
@@ -160,7 +160,7 @@ services:
 
   tinybird-sync:
     # Do not alter this without updating the Ghost container as well
-    image: ghost:6.53.0-alpine
+    image: ghost:6.53.0-alpine@sha256:63b12cb176ffe9cfe651b839c18f6c7261004370f566d9ae218cacd67766b2b1
     container_name: tinybird-sync
     hostname: tinybird-sync
     command: >
@@ -184,7 +184,7 @@ services:
     restart: no
 
   tinybird-deploy:
-    image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719
+    image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719@sha256:e873f98d9c4ee366f0f6e1fb909ff6b5e742f8acc7e5c5f6073e8c3fc385f84e
     container_name: tinybird-deploy
     hostname: tinybird-deploy
     working_dir: /data/tinybird
@@ -218,7 +218,7 @@ services:
     restart: no
 
   tinybird-local:
-    image: tinybirdco/tinybird-local:beta
+    image: tinybirdco/tinybird-local:beta@sha256:5f93b292ed85eff73a56de4d60ecb9535dfc6ff72ab6546d3ae92df7a2bffd94
     container_name: tinybird-local
     hostname: tinybird-local
     # If you want to limit container resources
