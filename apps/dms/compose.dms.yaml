@@ -18,6 +18,9 @@ services:
       - /srv/core/dms/docker-data/dms/mail-logs/:/var/log/mail/
       - /srv/core/dms/docker-data/dms/config/:/tmp/docker-mailserver/
 
+      # bind mount for certs
+      - /etc/letsencrypt:/etc/letsencrypt
+
       # localtime mount
       - /etc/localtime:/etc/localtime:ro
     restart: always
