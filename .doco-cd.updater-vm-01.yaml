@@ -1,8 +1,8 @@
 ---
-name: doco-cd-vm01-updater
+name: doco-cd-vm-01-updater
 working_dir: apps/doco-cd
 compose_files:
-  - compose.updater-vm-01.yaml
+  - compose.main-vm-01.yaml
 remove_orphans: true
 force_image_pull: false
 external_secrets:

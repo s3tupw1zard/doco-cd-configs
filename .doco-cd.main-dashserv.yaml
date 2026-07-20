@@ -54,7 +54,7 @@ external_secrets:
 name: doco-cd-dashserv-main
 working_dir: apps/doco-cd
 compose_files:
-  - compose.main-dashserv.yaml
+  - compose.updater-dashserv.yaml
 remove_orphans: true
 force_image_pull: false
 external_secrets:
