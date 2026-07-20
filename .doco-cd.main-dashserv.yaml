@@ -4,7 +4,7 @@ working_dir: apps/dms
 compose_files:
   - compose.dms.yaml
 env_files:
-  - /srv/core/dms/env/mailserver.env
+  - /srv/envs/dms/mailserver.env
 remove_orphans: true
 force_image_pull: false
 external_secrets:
