@@ -5,6 +5,7 @@
 - Be concise and technical.
 - Focus on the actual infrastructure impact.
 - Base entirely on commit history/diff - no inventions.
+- If the filename begins with `.doco-cd.` then it is not a docker compose configuration file but a doco-cd configuration file.
 
 ## PR Title
 
@@ -14,6 +15,7 @@ Types:
 
 - **deploy**: Rollout/replica changes
 - **compose**: Docker Compose modifications
+- **doco-cd**: Doco-CD configuration modifications
 - **config**: Env/secrets/params updates
 - **infra**: Cloud resource modifications
 - **image**: Container image adjustments
