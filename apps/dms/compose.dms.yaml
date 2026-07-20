@@ -4,6 +4,24 @@ services:
     container_name: mailserver
     # Provide the FQDN of your mail server here (Your DNS MX record should point to this value)
     hostname: ${MAILSERVER_HOSTNAME}
+    environment:
+      - LOG_LEVEL=info
+      - SUPERVISOR_LOGLEVEL=
+      - DMS_VMAIL_UID=
+      - DMS_VMAIL_GID=
+      - ACCOUNT_PROVISIONER=
+      - POSTMASTER_ADDRESS=postmaster@${MAIL_DOMAIN}
+      - ENABLE_UPDATE_CHECK=0
+      - UPDATE_CHECK_INTERVAL=1d
+      - PERMIT_DOCKER=none
+      - TZ=Europe/Berlin
+      - NETWORK_INTERFACE=
+      - TLS_LEVEL=
+      - SPOOF_PROTECTION=1
+      - ENABLE_SRS=1
+      - ENABLE_OPENDKIM=1
+      - ENABLE_OPENDMARC=1
+
     # More information about the mail-server ports:
     # https://docker-mailserver.github.io/docker-mailserver/latest/config/security/understanding-the-ports/
     ports:
