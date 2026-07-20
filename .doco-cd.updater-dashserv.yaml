@@ -2,7 +2,7 @@
 name: doco-cd-dashserv-updater
 working_dir: apps/doco-cd
 compose_files:
-  - compose.updater-dashserv.yaml
+  - compose.main-dashserv.yaml
 remove_orphans: true
 force_image_pull: false
 external_secrets:
