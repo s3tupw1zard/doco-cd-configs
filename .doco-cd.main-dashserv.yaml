@@ -50,3 +50,18 @@ external_secrets:
   MAIL_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/MAIL_HOST
   MAIL_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/MAIL_USER
   MAIL_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/MAIL_PASSWORD
+---
+name: doco-cd-dashserv-main
+working_dir: apps/doco-cd
+compose_files:
+  - compose.main-dashserv.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SERVICE_NAME
+  SECRET_PROVIDER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER
+  SECRET_PROVIDER_SITE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_SITE_URL
+  SECRET_PROVIDER_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_ID
+  SECRET_PROVIDER_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
+  GIT_ACCESS_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/GIT_ACCESS_TOKEN
