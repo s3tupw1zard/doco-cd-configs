@@ -19,6 +19,7 @@ services:
       DOCKER_SWARM_FEATURES: "false"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /srv/envs:/srv/envs:ro
       - updater-data:/data
     labels:
       - "traefik.enable=false"
