@@ -1,0 +1,50 @@
+---
+name: dms
+working_dir: apps/dms
+compose_files:
+  - compose.dms.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/dms/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/dms/SERVICE_NAME
+  MAILSERVER_HOSTNAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/dms/MAILSERVER_HOSTNAME
+  AUTODISCOVER_SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/dms/AUTODISCOVER_SERVICE_NAME
+  AUTODISCOVER_SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/dms/AUTODISCOVER_SERVICE_DOMAIN
+  COMPANY_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/dms/COMPANY_NAME
+  IMAP_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/dms/IMAP_DOMAIN
+  SMTP_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/dms/SMTP_DOMAIN
+---
+name: ghost
+working_dir: apps/ghost
+compose_files:
+  - compose.ghost.yaml
+profiles:
+  - analytics
+  - activitypub
+  - tinybird-local
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  ACTIVITYPUB_TARGET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/ACTIVITYPUB_TARGET
+  ADMIN_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/ADMIN_DOMAIN
+  DATABASE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/DATABASE_NAME
+  DATABASE_NAME_ACTIVITYPUB: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/DATABASE_NAME_ACTIVITYPUB
+  DATABASE_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/DATABASE_PASSWORD
+  DATABASE_ROOT_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/DATABASE_ROOT_PASSWORD
+  DATABASE_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/DATABASE_USER
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/SERVICE_NAME
+  TINYBIRD_ADMIN_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TINYBIRD_ADMIN_TOKEN
+  TINYBIRD_API_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TINYBIRD_API_URL
+  TINYBIRD_TRACKER_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TINYBIRD_TRACKER_TOKEN
+  TINYBIRD_WORKSPACE_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TINYBIRD_WORKSPACE_ID
+  TB_INFRA_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TB_INFRA_TOKEN
+  TB_INFRA_WORKSPACE: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TB_INFRA_WORKSPACE
+  TB_INFRA_ORGANIZATION: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TB_INFRA_ORGANIZATION
+  TB_INFRA_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/TB_INFRA_USER
+  MAIL_FROM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/MAIL_FROM
+  MAIL_SERVICE: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/MAIL_SERVICE
+  MAIL_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/MAIL_HOST
+  MAIL_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/MAIL_USER
+  MAIL_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/ghost/MAIL_PASSWORD
