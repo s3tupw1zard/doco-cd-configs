@@ -30,6 +30,7 @@ services:
   autodiscover-${AUTODISCOVER_SERVICE_DOMAIN}:
     image: monogramm/autodiscover-email-settings:latest@sha256:4a9706ab469aff8e610bb2a4e22fe9c19216c571d2471e85941b2d3d5f4e6f28
     container_name: autodiscover
+    hostname: autodiscover
     environment:
       - COMPANY_NAME=${COMPANY_NAME}
       - SUPPORT_URL=https://${AUTODISCOVER_SERVICE_DOMAIN}
@@ -43,12 +44,8 @@ services:
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
     networks:
-      - traefik
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${AUTODISCOVER_SERVICE_NAME}.rule=Host(`${AUTODISCOVER_SERVICE_DOMAIN}`)"
-      - "traefik.http.routers.${AUTODISCOVER_SERVICE_NAME}.entrypoints=websecure"
-      - "traefik.http.routers.${AUTODISCOVER_SERVICE_NAME}.service=${AUTODISCOVER_SERVICE_NAME}"
-      - "traefik.http.routers.${AUTODISCOVER_SERVICE_NAME}.tls.certresolver=cloudflare"
-      - "traefik.http.services.${AUTODISCOVER_SERVICE_NAME}.loadbalancer.server.port=8000"
-      - "traefik.docker.network=traefik"
+      - dms_network
+
+networks:
+  dms_network:
+    external: true
