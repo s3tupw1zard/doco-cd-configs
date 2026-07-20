@@ -5,6 +5,7 @@
 - Write the message in English.
 - Keep it concise and technical.
 - Base the message only on the actual diff.
+- If the filename begins with `.doco-cd.` then it is not a docker compose configuration file but a doco-cd configuration file.
 
 ## Format
 - Use Conventional Commits.
@@ -48,6 +49,7 @@ Pick a scope that reflects the Docker area affected:
 ## Examples
 - feat(service/api): add rate limiting middleware
 - fix(compose): resolve dependency startup order for db service
+- fix(doco-cd): add missing secret
 - config(env): update database connection string variables
 - deploy(stack): increase replica count for worker service
 - ci(gitlab): add build stage for production image
