@@ -9,7 +9,7 @@ services:
       - "443:443"
     environment:
       DOMAIN: ${SERVICE_DOMAIN}
-      ADMIN_DOMAIN: ${ADMIN_DOMAIN}
+      # ADMIN_DOMAIN: ${ADMIN_DOMAIN}
       ACTIVITYPUB_TARGET: ${ACTIVITYPUB_TARGET}
     volumes:
       - /srv/core/ghost/caddy:/etc/caddy
@@ -28,14 +28,12 @@ services:
     hostname: ghost
     restart: unless-stopped
     # This is required to import current config when migrating
-    env_file:
-      - .env
     environment:
       NODE_ENV: production
       url: https://${SERVICE_DOMAIN}
-      admin__url: https://${ADMIN_DOMAIN}
+      # admin__url: https://${ADMIN_DOMAIN}
       database__client: mysql
-      database__connection__host: db
+      database__connection__host: ghost-db
       database__connection__user: ${DATABASE_USER}
       database__connection__password: ${DATABASE_PASSWORD}
       database__connection__database: ${DATABASE_NAME}
@@ -139,9 +137,6 @@ services:
     image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719
     container_name: tinybird-login
     hostname: tinybird-login
-    build:
-      context: ./tinybird
-      dockerfile: Dockerfile
     working_dir: /home/tinybird
     command: /usr/local/bin/tinybird-login
     volumes:
@@ -182,9 +177,6 @@ services:
     image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719
     container_name: tinybird-deploy
     hostname: tinybird-deploy
-    build:
-      context: ./tinybird
-      dockerfile: Dockerfile
     working_dir: /data/tinybird
     command: >
       sh -c "
