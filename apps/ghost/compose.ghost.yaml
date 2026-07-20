@@ -20,6 +20,7 @@ services:
     networks:
       - ghost_network
       - tinybird_network
+      - dms_network
 
   ghost:
     # Do not alter this without updating the Tinybird Sync container as well
@@ -262,3 +263,5 @@ networks:
     name: ghost_network
   tinybird_network:
     name: tinybird_network
+  dms_network:
+    external: true
