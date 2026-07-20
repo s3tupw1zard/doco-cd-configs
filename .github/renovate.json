@@ -715,6 +715,33 @@
             ]
         },
         {
+            "description": "Tinybird Local",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/ghost/**"
+            ],
+            "matchPackageNames": [
+                "tinybirdco/tinybird-local"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "tinybird-local",
+            "labels": [
+                "renovate",
+                "blog",
+                "ghost",
+                "tinybird-local",
+                "analytics"
+            ]
+        },
+        {
             "description": "ghost-mysql",
             "matchManagers": [
                 "docker-compose"
