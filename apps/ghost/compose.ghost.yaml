@@ -52,6 +52,7 @@ services:
       tinybird__stats__endpoint: ${TINYBIRD_API_URL}
     volumes:
       - /srv/core/ghost/data/ghost:/var/lib/ghost/content
+      - /srv/core/ghost/config/config.production.json:/var/lib/ghost/config.production.json:ro
     depends_on:
       db:
         condition: service_healthy
