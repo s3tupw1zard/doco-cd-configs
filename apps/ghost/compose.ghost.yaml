@@ -144,7 +144,7 @@ services:
   # Supporting Services
 
   tinybird-login:
-    image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719
+    image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719@sha256:e873f98d9c4ee366f0f6e1fb909ff6b5e742f8acc7e5c5f6073e8c3fc385f84e
     container_name: tinybird-login
     hostname: tinybird-login
     working_dir: /home/tinybird
@@ -184,7 +184,7 @@ services:
     restart: no
 
   tinybird-deploy:
-    image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719
+    image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719@sha256:e873f98d9c4ee366f0f6e1fb909ff6b5e742f8acc7e5c5f6073e8c3fc385f84e
     container_name: tinybird-deploy
     hostname: tinybird-deploy
     working_dir: /data/tinybird
