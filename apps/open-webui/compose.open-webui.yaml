@@ -1,15 +1,15 @@
 services:
   computer:
     image: ghcr.io/open-webui/computer:0.9.11-browser@sha256:ec64e6ddb7e3ebee5bf986defeaa8bcda57b32013398a30bc7d173576694097d
-    container_name: open-webui-computer
-    hostname: open-webui-computer
+    container_name: computer
+    hostname: computer
     restart: unless-stopped
     #ports:
     #  - 8000:8000
     volumes:
       - /srv/ai/open-webui/computer/data:/data
       - /srv/ai/open-webui/computer/workspace:/workspace
-      - /srv/ai/open-webui/computer/home/ctpr:/home/ctpr/workspace
+      - /srv/ai/open-webui/computer/home/cptr:/home/cptr/workspace
       
       # localtime mount
       - /etc/localtime:/etc/localtime:ro
