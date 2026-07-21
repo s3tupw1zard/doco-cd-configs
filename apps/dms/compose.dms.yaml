@@ -28,6 +28,7 @@ services:
       - ENABLE_FAIL2BAN=1
       - ENABLE_MTA_STS=1
 
+      - SSL_TYPE=letsencrypt
       - ENABLE_IMAP=1
       - ENABLE_POP3=0
       - ENABLE_MANAGESIEVE=1
