@@ -4,6 +4,8 @@ services:
     container_name: computer
     hostname: computer
     restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
     #ports:
     #  - 8000:8000
     volumes:
