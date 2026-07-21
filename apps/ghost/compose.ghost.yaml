@@ -70,7 +70,7 @@ services:
       - ghost_network
 
   db:
-    image: mysql:8.0.46@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b
+    image: mysql:8.4.10@sha256:c592c15aaf4a1961e15d82eb31ea5987dda862d1c4b1e93424438c0e91dc1f8d
     container_name: ghost-db
     hostname: ghost-db
     restart: unless-stopped
@@ -95,7 +95,7 @@ services:
       - ghost_network
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.296@sha256:fffd5ef04341304d1577b28e09ff7ee46ec7304fed73cddc5e3223b8cdaf7f0f
+    image: ghost/traffic-analytics:1.0.298@sha256:752cd215bd85e33acc15ae879c401a95aff0da37b61a015ec1280e43a4856d22
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: unless-stopped
@@ -218,7 +218,7 @@ services:
     restart: no
 
   tinybird-local:
-    image: tinybirdco/tinybird-local:beta@sha256:92f49e3f5e6073fa271fedaadc843dd643052af1ecae2b3f2daaddad163f714b
+    image: tinybirdco/tinybird-local:beta@sha256:c5781cd734c4137014e92505a9fce4be7cbf70a03506c30823cd6edfd0cefb26
     container_name: tinybird-local
     hostname: tinybird-local
     # If you want to limit container resources
