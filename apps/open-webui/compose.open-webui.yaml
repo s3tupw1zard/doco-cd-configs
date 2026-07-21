@@ -9,7 +9,7 @@ services:
     volumes:
       - /srv/ai/open-webui/computer/data:/data
       - /srv/ai/open-webui/computer/workspace:/workspace
-      - /srv/ai/open-webui/computer/home/cptr:/home/cptr
+      - /srv/ai/open-webui/computer/home/cptr/workspaces:/home/cptr/workspaces
       
       # localtime mount
       - /etc/localtime:/etc/localtime:ro
