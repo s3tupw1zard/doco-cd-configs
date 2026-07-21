@@ -1,0 +1,104 @@
+services:
+  freescout-app:
+    image: docker.io/nfrastack/freescout:latest
+    container_name: freescout-app
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.freescout.rule=Host(`freescout.example.com`)
+      - traefik.http.services.freescout.loadbalancer.server.port=80
+    volumes:
+      ### Mount /data for persistent storage (config, sessions, cache, modules, uploads)
+      - ./data:/data
+      ### Alternative: mount /www/html to expose the source tree for inspection/self-update
+      ### (requires ENABLE_CONFIG_REDIRECTION=FALSE and ENABLE_STORAGE_REDIRECTION=FALSE)
+      #- ./html:/www/html
+      - ./logs:/logs
+    environment:
+      - CONTAINER_NAME=freescout-app
+      - TIMEZONE=Europe/Berlin
+
+      - DEBUG_MODE=FALSE
+
+      - DB_TYPE=mariadb
+      - DB_HOST=freescout-db
+      - DB_PORT=3306
+      - DB_NAME=freescout
+      - DB_USER=freescout
+      - DB_PASS=freescoutpass # todo
+
+      - ADMIN_EMAIL=admin@example.com # todo  # Only required for fresh DB
+      - ADMIN_FIRST_NAME=FreeScout    # todo  #
+      - ADMIN_LAST_NAME=Admin         # todo  #
+      - ADMIN_PASS=freescout          # todo  #
+
+      - APP_URL=https://freescout.example.com # todo # Required!
+
+      #- SCHEDULER_TYPE=service
+
+      # todo
+
+      ### All other FreeScout `.env` config goes through FREESCOUT_ prefix
+      ###
+      ### Use these values to remove an in place config value
+      ###   FREESCOUT_FOO=unset    FREESCOUT_FOO=null    FREESCOUT_FOO=
+      ###
+      ### Docker secrets: any FREESCOUT_<KEY>_FILE=/run/secrets/x is resolved into FREESCOUT_<KEY>=<contents> before passthrough.
+
+      # - FREESCOUT_APP_DEBUG=false
+
+      # todo
+      - FREESCOUT_APP_LOCALE=en
+      # - FREESCOUT_APP_SINCE_WITHOUT_QUOTES_ON_FETCHING=false
+
+      - FREESCOUT_MAIL_DRIVER=smtp
+      - FREESCOUT_MAIL_HOST=postfix-relay
+      - FREESCOUT_MAIL_PORT=25
+      - FREESCOUT_MAIL_FROM_ADDRESS=freescout@example.com
+      - FREESCOUT_MAIL_FROM_NAME=FreeScout
+      # - FREESCOUT_MAIL_USERNAME=...
+      # - FREESCOUT_MAIL_PASSWORD_FILE=/run/secrets/smtp_password
+      # - FREESCOUT_MAIL_ENCRYPTION=tls
+    networks:
+      - proxy
+      - services
+    restart: always
+
+  freescout-db:
+    image: docker.io/nfrastack/mariadb:11.8
+    container_name: freescout-db
+    volumes:
+      - ./db:/data
+    environment:
+      - TIMEZONE=America/Vancouver
+
+      - ROOT_PASS=rootpassword
+      - DB_NAME=freescout
+      - DB_USER=freescout
+      - DB_PASS=freescoutpass
+    networks:
+      - services
+    restart: always
+
+  freescout-db-backup:
+    image: docker.io/tiredofit/db-backup
+    container_name: freescout-db-backup
+    volumes:
+      - ./dbbackup:/backup
+    environment:
+      - DB01_HOST=freescout-db
+      - DB01_TYPE=mariadb
+      - DB01_NAME=freescout
+      - DB01_USER=freescout
+      - DB01_PASS=freescoutpass
+      - DB01_BACKUP_INTERVAL=1440
+      - DB01_BACKUP_BEGIN=0000
+      - DB01_CLEANUP_TIME=8640
+    networks:
+      - services
+    restart: always
+
+networks:
+  proxy:
+    external: true
+  services:
+    external: true
