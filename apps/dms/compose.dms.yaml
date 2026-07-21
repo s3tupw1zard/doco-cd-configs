@@ -6,7 +6,7 @@ services:
     hostname: ${MAILSERVER_HOSTNAME}
     environment:
       - LOG_LEVEL=info
-      - SUPERVISOR_LOGLEVEL=
+      - SUPERVISOR_LOGLEVEL=warn
       - DMS_VMAIL_UID=
       - DMS_VMAIL_GID=
       - ACCOUNT_PROVISIONER=
@@ -15,12 +15,26 @@ services:
       - UPDATE_CHECK_INTERVAL=1d
       - PERMIT_DOCKER=none
       - TZ=Europe/Berlin
-      - NETWORK_INTERFACE=
-      - TLS_LEVEL=
-      - SPOOF_PROTECTION=1
-      - ENABLE_SRS=1
+      
+      - ENABLE_RSPAMD=1
+      - ENABLE_RSPAMD_REDIS=1
+      - ENABLE_POLICYD_SPF=0
+      - ENABLE_CLAMAV=1
+      - ENABLE_FAIL2BAN=1
       - ENABLE_OPENDKIM=1
       - ENABLE_OPENDMARC=1
+      - SPOOF_PROTECTION=1
+      - ENABLE_SRS=1
+      - ENABLE_FAIL2BAN=1
+      - ENABLE_MTA_STS=1
+
+      - ENABLE_IMAP=1
+      - ENABLE_POP3=0
+      - ENABLE_MANAGESIEVE=1
+
+      - POSTSCREEN_ACTION=enforce
+      - MOVE_SPAM_TO_JUNK=1
+      - MARK_SPAM_AS_READ=0
 
     # More information about the mail-server ports:
     # https://docker-mailserver.github.io/docker-mailserver/latest/config/security/understanding-the-ports/
