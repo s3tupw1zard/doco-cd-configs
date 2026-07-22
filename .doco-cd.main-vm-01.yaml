@@ -241,3 +241,22 @@ external_secrets:
   SECRET_PROVIDER_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_ID
   SECRET_PROVIDER_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
   GIT_ACCESS_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/GIT_ACCESS_TOKEN
+---
+name: manifest
+working_dir: apps/manifest
+compose_files:
+  - compose.manifest.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/SERVICE_DOMAIN
+  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/SERVICE_NAME
+  BETTER_AUTH_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/BETTER_AUTH_SECRET
+  BETTER_AUTH_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/BETTER_AUTH_URL
+  DATABASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/DATABASE_URL
+  EMAIL_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/EMAIL_API_KEY
+  EMAIL_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/EMAIL_DOMAIN
+  EMAIL_FROM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/EMAIL_FROM
+  EMAIL_PROVIDER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/EMAIL_PROVIDER
+  MANIFEST_ENCRYPTION_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/MANIFEST_ENCRYPTION_KEY
+  POSTGRES_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/POSTGRES_PASSWORD
