@@ -1,6 +1,6 @@
 services:
   manifest:
-    image: manifestdotbuild/manifest:6.15.2
+    image: manifestdotbuild/manifest:6.15.2@sha256:6d1b0db4b6723d0f2b43699cdb9ef9926b3fa4a3a8f63e6ba19b27cb7a338b30
     container_name: manifest
     hostname: manifest
     #ports:
@@ -66,7 +66,7 @@ services:
       - "traefik.docker.network=traefik"
 
   manifest-db:
-    image: postgres:16-alpine
+    image: postgres:16-alpine@sha256:57c72fd2a128e416c7fcc499958864df5301e940bca0a56f58fddf30ffc07777
     container_name: manifest-db
     hostname: manifest-db
     environment:
