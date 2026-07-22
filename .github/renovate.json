@@ -763,6 +763,55 @@
             ]
         },
         {
+            "description": "Manifest",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/manifest/**"
+            ],
+            "matchPackageNames": [
+                "manifestdotbuild/manifest"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "manifest",
+            "labels": [
+                "renovate",
+                "ai",
+                "manifest",
+                "gateway",
+                "routing"
+            ]
+        },
+        {
+            "description": "Manifest Postgres",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/manifest/**"
+            ],
+            "matchPackageNames": [
+                "postgres"
+            ],
+            "allowedVersions": "< 17.0.0",
+            "groupName": "manifest-postgres",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "manifest",
+                "ai",
+                "auto-routing",
+                "postgres"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
