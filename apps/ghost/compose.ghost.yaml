@@ -95,7 +95,7 @@ services:
       - ghost_network
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.300@sha256:12085536b6c8d3284d92eeca64385760d9a9391e1ba7a1fcc017756286d002b4
+    image: ghost/traffic-analytics:1.0.303@sha256:1e882956dde2747784df3b0759778b8c3efb470bf35cc6cc323b92b73b3dac68
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: unless-stopped
