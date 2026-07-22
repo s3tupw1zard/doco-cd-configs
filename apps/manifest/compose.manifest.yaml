@@ -62,7 +62,7 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
       - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
-      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=4000"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=2099"
       - "traefik.docker.network=traefik"
 
   manifest-db:
