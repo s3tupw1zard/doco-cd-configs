@@ -1,0 +1,100 @@
+services:
+  manifest:
+    image: manifestdotbuild/manifest:6.15.2
+    container_name: manifest
+    hostname: manifest
+    #ports:
+    #  - "127.0.0.1:${PORT:-2099}:${PORT:-2099}"
+    environment:
+      - PORT=2099
+      - DATABASE_URL=${DATABASE_URL}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - MANIFEST_ENCRYPTION_KEY=${MANIFEST_ENCRYPTION_KEY}
+      - BETTER_AUTH_URL=${BETTER_AUTH_URL}
+      # Defaults to the host-installed Ollama. Override in .env if your
+      # Ollama runs elsewhere (e.g. on another host on your LAN).
+      - PROVIDER_TIMEOUT_MS=180000
+      - STREAM_WARMUP_MS=15000
+      - SEED_DATA=false
+      - NODE_ENV=production
+      - MANIFEST_MODE=selfhosted
+      # Email provider (optional). Covers both login/verification emails
+      # and threshold alert notifications. Set one provider block — see
+      # DOCKER_README.md "Email setup". Supports resend, mailgun, sendgrid.
+      - EMAIL_PROVIDER=${EMAIL_PROVIDER}
+      - EMAIL_API_KEY=${EMAIL_API_KEY}
+      - EMAIL_DOMAIN=${EMAIL_DOMAIN}
+      - EMAIL_FROM=${EMAIL_FROM}
+      - MANIFEST_TELEMETRY_DISABLED=1
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - "CMD"
+        - "node"
+        - "-e"
+        - "const p=process.env.PORT||'2099';fetch(`http://127.0.0.1:$${p}/api/v1/health`).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      start_period: 90s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 1g
+    pids_limit: 512
+    networks:
+      - internal
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=4000"
+      - "traefik.docker.network=traefik"
+
+  manifest-db:
+    image: postgres:16-alpine
+    container_name: manifest-db
+    hostname: manifest-db
+    environment:
+      - POSTGRES_USER=manifest
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=manifest
+    volumes:
+      - /srv/ai/manifest/postgres/data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U manifest
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - internal
+    labels:
+      - "traefik.enable=false"
+
+networks:
+  internal:
+    driver: bridge
+    internal: true
+  traefik:
+    external: true
