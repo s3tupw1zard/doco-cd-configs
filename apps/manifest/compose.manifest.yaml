@@ -27,7 +27,7 @@ services:
       - EMAIL_FROM=${EMAIL_FROM}
       - MANIFEST_TELEMETRY_DISABLED=1
     depends_on:
-      postgres:
+      manifest-db:
         condition: service_healthy
     healthcheck:
       test:
