@@ -218,7 +218,7 @@ services:
     restart: no
 
   tinybird-local:
-    image: tinybirdco/tinybird-local:beta@sha256:527888958f008b2a29dcd0e042e0e1da76460544b67ff487b6102bc1373f2cf4
+    image: tinybirdco/tinybird-local:beta@sha256:852c6a52547cb6d4a81d8fa7814046a73d1d4b9a452b14fe7ec3723f640f30dd
     container_name: tinybird-local
     hostname: tinybird-local
     # If you want to limit container resources
