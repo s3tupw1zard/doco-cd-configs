@@ -7,7 +7,7 @@ services:
       POLL_CONFIG: |
         - url: ${POLL_CONFIG_REPO_URL}
           reference: main
-          interval: 60
+          interval: 300
           target: main-dashserv
       SECRET_PROVIDER: ${SECRET_PROVIDER}
       SECRET_PROVIDER_SITE_URL: ${SECRET_PROVIDER_SITE_URL}

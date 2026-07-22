@@ -7,7 +7,7 @@ services:
       POLL_CONFIG: |
         - url: ${POLL_CONFIG_REPO_URL}
           reference: main
-          interval: 60
+          interval: 300
           target: updater-vm-01
       SCHEDULER_ENABLED: false
       SECRET_PROVIDER: ${SECRET_PROVIDER}
