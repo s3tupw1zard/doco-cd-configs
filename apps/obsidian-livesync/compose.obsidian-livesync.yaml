@@ -12,11 +12,6 @@ services:
     ports:
       - "5984:5984"
     restart: unless-stopped
-    healthcheck:
-      test: curl --fail -s -u ${COUCHDB_USER}:${COUCHDB_PASSWORD}  http://localhost:5984/_up | grep -Eo '\"status\":\"ok\"' || exit 1
-      interval: 30s
-      timeout: 10s
-      retries: 3
     networks:
       - traefik
     labels:
