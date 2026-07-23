@@ -2,7 +2,7 @@ services:
   obsidian-livesync:
     container_name: obsidian-livesync
     hostname: obsidian-livesync
-    image: couchdb:3.5.2.1
+    image: couchdb:3.5.2.1@sha256:7feb744b60195233219f3fa801cbc2384efa24b28c76a5d1f3e93efe6557f921
     environment:
       - COUCHDB_USER=${COUCHDB_USER}
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
