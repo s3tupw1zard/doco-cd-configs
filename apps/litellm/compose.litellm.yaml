@@ -69,11 +69,11 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}-api.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}-api.tls.certresolver=cloudflare"
       - "traefik.http.routers.${SERVICE_NAME}-api.service=${SERVICE_NAME}-api"
-      - "traefik.http.routers.${SERVICE_NAME}-api.middlewares=${SERVICE_NAME}-api-strip"
+      # - "traefik.http.routers.${SERVICE_NAME}-api.middlewares=${SERVICE_NAME}-api-strip"
 
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=4000"
 
-      - "traefik.http.middlewares.${SERVICE_NAME}-api-strip.stripprefix.prefixes=/api"
+      # - "traefik.http.middlewares.${SERVICE_NAME}-api-strip.stripprefix.prefixes=/api"
 
       # Redirect /api/v1/ui to /
       - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/api`)"
