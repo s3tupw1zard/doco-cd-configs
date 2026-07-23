@@ -240,3 +240,15 @@ external_secrets:
   SECRET_PROVIDER_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_ID
   SECRET_PROVIDER_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
   GIT_ACCESS_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/GIT_ACCESS_TOKEN
+---
+name: obsidian-livesync
+working_dir: apps/obsidian-livesync
+compose_files:
+  - compose.obsidian-livesync.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/SERVICE_NAME
+  COUCHDB_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/COUCHDB_PASSWORD
+  COUCHDB_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/COUCHDB_USER
