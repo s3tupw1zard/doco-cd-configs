@@ -5,9 +5,9 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-panel/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-panel/SERVICE_NAME
-  ADMIN_EMAIL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-panel/ADMIN_EMAIL
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-panel/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-panel/SERVICE_NAME
+  ADMIN_EMAIL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-panel/ADMIN_EMAIL
 ---
 name: pelican-wings
 working_dir: apps/pelican-wings
@@ -16,8 +16,8 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-wings/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/gaming/pelican-wings/SERVICE_NAME
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-wings/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-wings/SERVICE_NAME
 ---
 name: litellm
 working_dir: apps/litellm
@@ -26,13 +26,13 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  LITELLM_DB_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/LITELLM_DB_PASSWORD
-  LITELLM_DB_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/LITELLM_DB_URL
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/SERVICE_NAME
-  LITELLM_MASTER_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/LITELLM_MASTER_KEY
-  OPENROUTER_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/OPENROUTER_API_KEY
-  OPENROUTER_API_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/litellm/OPENROUTER_API_URL
+  LITELLM_DB_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LITELLM_DB_PASSWORD
+  LITELLM_DB_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LITELLM_DB_URL
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/SERVICE_NAME
+  LITELLM_MASTER_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LITELLM_MASTER_KEY
+  OPENROUTER_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/OPENROUTER_API_KEY
+  OPENROUTER_API_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/OPENROUTER_API_URL
 ---
 name: open-webui
 working_dir: apps/open-webui
@@ -41,26 +41,26 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/SERVICE_NAME
-  DATABASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/DATABASE_URL
-  POSTGRES_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/POSTGRES_USER
-  POSTGRES_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/POSTGRES_PASSWORD
-  POSTGRES_DB: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/POSTGRES_DB
-  POSTGRES_MULTIPLE_DATABASES: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/POSTGRES_MULTIPLE_DATABASES
-  QDRANT_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/QDRANT_API_KEY
-  REDIS_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/REDIS_PASSWORD
-  REDIS_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/REDIS_URL
-  OPENID_PROVIDER_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPENID_PROVIDER_URL
-  OAUTH_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OAUTH_CLIENT_ID
-  OAUTH_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OAUTH_CLIENT_SECRET
-  OPENAI_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPENAI_API_KEY
-  OPENAI_API_BASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPENAI_API_BASE_URL
-  WEBUI_SECRET_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/WEBUI_SECRET_KEY
-  OPEN_TERMINAL_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/OPEN_TERMINAL_API_KEY
-  ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
-  EDGE_TTS_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/EDGE_TTS_API_KEY
-  MCPO_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/open-webui/MCPO_API_KEY
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/SERVICE_NAME
+  DATABASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/DATABASE_URL
+  POSTGRES_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/POSTGRES_USER
+  POSTGRES_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/POSTGRES_PASSWORD
+  POSTGRES_DB: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/POSTGRES_DB
+  POSTGRES_MULTIPLE_DATABASES: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/POSTGRES_MULTIPLE_DATABASES
+  QDRANT_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/QDRANT_API_KEY
+  REDIS_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/REDIS_PASSWORD
+  REDIS_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/REDIS_URL
+  OPENID_PROVIDER_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OPENID_PROVIDER_URL
+  OAUTH_CLIENT_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OAUTH_CLIENT_ID
+  OAUTH_CLIENT_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OAUTH_CLIENT_SECRET
+  OPENAI_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OPENAI_API_KEY
+  OPENAI_API_BASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OPENAI_API_BASE_URL
+  WEBUI_SECRET_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/WEBUI_SECRET_KEY
+  OPEN_TERMINAL_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OPEN_TERMINAL_API_KEY
+  ROOT_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ROOT_DOMAIN
+  EDGE_TTS_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/EDGE_TTS_API_KEY
+  MCPO_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/MCPO_API_KEY
 ---
 name: backrest
 working_dir: apps/backrest
@@ -69,10 +69,10 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/backrest/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/backrest/SERVICE_NAME
-  BACKUP_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/backrest/BACKUP_USER
-  BACKUP_PASS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/backrest/BACKUP_PASS
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/backrest/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/backrest/SERVICE_NAME
+  BACKUP_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/backrest/BACKUP_USER
+  BACKUP_PASS: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/backrest/BACKUP_PASS
 ---
 name: searxng
 working_dir: apps/searxng
@@ -81,8 +81,8 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/searxng/SERVICE_NAME
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/searxng/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/searxng/SERVICE_NAME
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/searxng/SERVICE_DOMAIN
 ---
 name: traefik
 working_dir: apps/traefik
@@ -91,14 +91,14 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  CLOUDFLARE_API_EMAIL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/CLOUDFLARE_API_EMAIL
-  CLOUDFLARE_DNS_API_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/CLOUDFLARE_DNS_API_TOKEN
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/SERVICE_NAME
-  ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
-  OIDC_SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_DOMAIN
-  TRAEFIK_OIDC_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_ID
-  TRAEFIK_OIDC_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_SECRET
+  CLOUDFLARE_API_EMAIL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/traefik/CLOUDFLARE_API_EMAIL
+  CLOUDFLARE_DNS_API_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/traefik/CLOUDFLARE_DNS_API_TOKEN
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/traefik/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/traefik/SERVICE_NAME
+  ROOT_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ROOT_DOMAIN
+  OIDC_SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/SERVICE_DOMAIN
+  TRAEFIK_OIDC_CLIENT_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_ID
+  TRAEFIK_OIDC_CLIENT_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/traefik/TRAEFIK_OIDC_CLIENT_SECRET
 ---
 name: vaultwarden
 working_dir: apps/vaultwarden
@@ -107,21 +107,21 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  ADMIN_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/ADMIN_TOKEN
-  EXPERIMENTAL_CLIENT_FEATURE_FLAGS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/EXPERIMENTAL_CLIENT_FEATURE_FLAGS
-  DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/DOMAIN
-  SMTP_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_HOST
-  SMTP_FROM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_FROM
-  SMTP_USERNAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_USERNAME
-  SMTP_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SMTP_PASSWORD
-  SSO_AUTHORITY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_AUTHORITY
-  SSO_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_CLIENT_ID
-  SSO_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SSO_CLIENT_SECRET
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/SERVICE_NAME
-  OIDC_PROVIDER_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/OIDC_PROVIDER_DOMAIN
-  VAULTWARDEN_BASIC_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_USER
-  VAULTWARDEN_BASIC_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/vaultwarden/VAULTWARDEN_BASIC_PASSWORD
+  ADMIN_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/ADMIN_TOKEN
+  EXPERIMENTAL_CLIENT_FEATURE_FLAGS: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/EXPERIMENTAL_CLIENT_FEATURE_FLAGS
+  DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/DOMAIN
+  SMTP_HOST: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SMTP_HOST
+  SMTP_FROM: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SMTP_FROM
+  SMTP_USERNAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SMTP_USERNAME
+  SMTP_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SMTP_PASSWORD
+  SSO_AUTHORITY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SSO_AUTHORITY
+  SSO_CLIENT_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SSO_CLIENT_ID
+  SSO_CLIENT_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SSO_CLIENT_SECRET
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SERVICE_NAME
+  OIDC_PROVIDER_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/OIDC_PROVIDER_DOMAIN
+  VAULTWARDEN_BASIC_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/VAULTWARDEN_BASIC_USER
+  VAULTWARDEN_BASIC_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/VAULTWARDEN_BASIC_PASSWORD
 ---
 name: speedtest-tracker
 working_dir: apps/speedtest-tracker
@@ -130,11 +130,11 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  APP_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/monitoring/speedtest-tracker/APP_KEY
-  APP_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/monitoring/speedtest-tracker/APP_URL
-  SPEEDTEST_SERVERS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/monitoring/speedtest-tracker/SPEEDTEST_SERVERS
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/monitoring/speedtest-tracker/SERVICE_NAME
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/monitoring/speedtest-tracker/SERVICE_DOMAIN
+  APP_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/monitoring/speedtest-tracker/APP_KEY
+  APP_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/monitoring/speedtest-tracker/APP_URL
+  SPEEDTEST_SERVERS: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/monitoring/speedtest-tracker/SPEEDTEST_SERVERS
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/monitoring/speedtest-tracker/SERVICE_NAME
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/monitoring/speedtest-tracker/SERVICE_DOMAIN
 ---
 name: forgejo
 working_dir: apps/forgejo
@@ -143,18 +143,18 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  CF_CAPTCHA_SITEKEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/CF_CAPTCHA_SITEKEY
-  CF_CAPTCHA_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/CF_CAPTCHA_SECRET
-  MAIL_FROM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/MAIL_FROM
-  MAIL_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/MAIL_HOST
-  MAIL_USER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/MAIL_USER
-  MAIL_PASSWD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/MAIL_PASSWD
-  NO_REPLY_ADDRESS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/NO_REPLY_ADDRESS
-  ROOT_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/ROOT_URL
-  DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/DOMAIN
-  SSH_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/SSH_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/SERVICE_NAME
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ops/forgejo/SERVICE_DOMAIN
+  CF_CAPTCHA_SITEKEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/CF_CAPTCHA_SITEKEY
+  CF_CAPTCHA_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/CF_CAPTCHA_SECRET
+  MAIL_FROM: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/MAIL_FROM
+  MAIL_HOST: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/MAIL_HOST
+  MAIL_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/MAIL_USER
+  MAIL_PASSWD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/MAIL_PASSWD
+  NO_REPLY_ADDRESS: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/NO_REPLY_ADDRESS
+  ROOT_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/ROOT_URL
+  DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/DOMAIN
+  SSH_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/SSH_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/SERVICE_NAME
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/forgejo/SERVICE_DOMAIN
 ---
 name: pocket-id
 working_dir: apps/pocket-id
@@ -163,13 +163,13 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  APP_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/APP_URL
-  ENCRYPTION_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/ENCRYPTION_KEY
-  MAXMIND_LICENSE_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/MAXMIND_LICENSE_KEY
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/security/pocket-id/SERVICE_NAME
-  ROOT_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ROOT_DOMAIN
-  PANGOLIN_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/PANGOLIN_DOMAIN
+  APP_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/APP_URL
+  ENCRYPTION_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/ENCRYPTION_KEY
+  MAXMIND_LICENSE_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/MAXMIND_LICENSE_KEY
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/SERVICE_NAME
+  ROOT_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ROOT_DOMAIN
+  PANGOLIN_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/PANGOLIN_DOMAIN
 ---
 name: pricebuddy
 working_dir: apps/pricebuddy
@@ -178,12 +178,12 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/SERVICE_NAME
-  APP_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/APP_KEY
-  APP_USER_EMAIL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/APP_USER_EMAIL
-  APP_USER_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/APP_USER_PASSWORD
-  DB_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/pricebuddy/DB_PASSWORD
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/pricebuddy/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/pricebuddy/SERVICE_NAME
+  APP_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/pricebuddy/APP_KEY
+  APP_USER_EMAIL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/pricebuddy/APP_USER_EMAIL
+  APP_USER_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/pricebuddy/APP_USER_PASSWORD
+  DB_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/pricebuddy/DB_PASSWORD
 ---
 name: jellyfin
 working_dir: apps/jellyfin
@@ -192,8 +192,8 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/media/jellyfin/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/media/jellyfin/SERVICE_NAME
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/media/jellyfin/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/media/jellyfin/SERVICE_NAME
 ---
 name: openclaw
 working_dir: apps/openclaw
@@ -202,15 +202,15 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/SERVICE_NAME
-  LITELLM_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/LITELLM_API_KEY
-  LITELLM_BASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/LITELLM_BASE_URL
-  AUTH_USERNAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/AUTH_USERNAME
-  AUTH_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/AUTH_PASSWORD
-  OPENCLAW_GATEWAY_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/OPENCLAW_GATEWAY_TOKEN
-  OPENCLAW_ALLOWED_ORIGINS: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/OPENCLAW_ALLOWED_ORIGINS
-  HOOKS_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/openclaw/HOOKS_TOKEN
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/SERVICE_NAME
+  LITELLM_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/LITELLM_API_KEY
+  LITELLM_BASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/LITELLM_BASE_URL
+  AUTH_USERNAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/AUTH_USERNAME
+  AUTH_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/AUTH_PASSWORD
+  OPENCLAW_GATEWAY_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/OPENCLAW_GATEWAY_TOKEN
+  OPENCLAW_ALLOWED_ORIGINS: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/OPENCLAW_ALLOWED_ORIGINS
+  HOOKS_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/HOOKS_TOKEN
 ---
 name: n8n
 working_dir: apps/n8n
@@ -219,14 +219,14 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/SERVICE_NAME
-  N8N_HOST: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/N8N_HOST
-  OIDC_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/OIDC_CLIENT_ID
-  OIDC_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/OIDC_CLIENT_SECRET
-  OIDC_ISSUER_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/OIDC_ISSUER_URL
-  OIDC_REDIRECT_URI: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/OIDC_REDIRECT_URI
-  WEBHOOK_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/automation/n8n/WEBHOOK_URL
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/n8n/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/n8n/SERVICE_NAME
+  N8N_HOST: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/n8n/N8N_HOST
+  OIDC_CLIENT_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/n8n/OIDC_CLIENT_ID
+  OIDC_CLIENT_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/n8n/OIDC_CLIENT_SECRET
+  OIDC_ISSUER_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/n8n/OIDC_ISSUER_URL
+  OIDC_REDIRECT_URI: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/n8n/OIDC_REDIRECT_URI
+  WEBHOOK_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/n8n/WEBHOOK_URL
 ---
 name: doco-cd-vm-01-main
 working_dir: apps/doco-cd
@@ -235,12 +235,12 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  POLL_CONFIG_REPO_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/POLL_CONFIG_REPO_URL
-  SECRET_PROVIDER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER
-  SECRET_PROVIDER_SITE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_SITE_URL
-  SECRET_PROVIDER_CLIENT_ID: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_ID
-  SECRET_PROVIDER_CLIENT_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
-  GIT_ACCESS_TOKEN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/core/doco-cd/GIT_ACCESS_TOKEN
+  POLL_CONFIG_REPO_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/POLL_CONFIG_REPO_URL
+  SECRET_PROVIDER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER
+  SECRET_PROVIDER_SITE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER_SITE_URL
+  SECRET_PROVIDER_CLIENT_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_ID
+  SECRET_PROVIDER_CLIENT_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
+  GIT_ACCESS_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/GIT_ACCESS_TOKEN
 ---
 name: manifest
 working_dir: apps/manifest
@@ -249,14 +249,14 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/SERVICE_DOMAIN
-  SERVICE_NAME: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/SERVICE_NAME
-  BETTER_AUTH_SECRET: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/BETTER_AUTH_SECRET
-  BETTER_AUTH_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/BETTER_AUTH_URL
-  DATABASE_URL: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/DATABASE_URL
-  EMAIL_API_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/EMAIL_API_KEY
-  EMAIL_DOMAIN: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/EMAIL_DOMAIN
-  EMAIL_FROM: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/EMAIL_FROM
-  EMAIL_PROVIDER: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/EMAIL_PROVIDER
-  MANIFEST_ENCRYPTION_KEY: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/MANIFEST_ENCRYPTION_KEY
-  POSTGRES_PASSWORD: 65a92749-709e-4cfc-97a7-1bb81d09182e:prod:/ai/manifest/POSTGRES_PASSWORD
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/SERVICE_NAME
+  BETTER_AUTH_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/BETTER_AUTH_SECRET
+  BETTER_AUTH_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/BETTER_AUTH_URL
+  DATABASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/DATABASE_URL
+  EMAIL_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_API_KEY
+  EMAIL_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_DOMAIN
+  EMAIL_FROM: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_FROM
+  EMAIL_PROVIDER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_PROVIDER
+  MANIFEST_ENCRYPTION_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/MANIFEST_ENCRYPTION_KEY
+  POSTGRES_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/POSTGRES_PASSWORD
