@@ -51,15 +51,14 @@ services:
     labels:
       - "traefik.enable=true"
 
-      # UI auf Root – weiterleitung zu /ui
-      - "traefik.http.routers.${SERVICE_NAME}-ui.rule=Host(`${SERVICE_DOMAIN}`)"
-      - "traefik.http.routers.${SERVICE_NAME}-ui.priority=1"
+      # UI auf /
+      - "traefik.http.routers.${SERVICE_NAME}-ui.rule=Host(`${SERVICE_DOMAIN}`) && Path(`/`)"
       - "traefik.http.routers.${SERVICE_NAME}-ui.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}-ui.tls.certresolver=cloudflare"
-      - "traefik.http.routers.${SERVICE_NAME}-ui.middlewares=${SERVICE_NAME}-redirect-ui"
-      - "traefik.http.middlewares.${SERVICE_NAME}-redirect-ui.redirectregex.regex=^https://([^/]+)/?$"
-      - "traefik.http.middlewares.${SERVICE_NAME}-redirect-ui.redirectregex.replacement=https://$${1}/ui"
+      - "traefik.http.routers.${SERVICE_NAME}-ui.priority=1"
       - "traefik.http.routers.${SERVICE_NAME}-ui.service=${SERVICE_NAME}-svc"
+      - "traefik.http.routers.${SERVICE_NAME}-ui.middlewares=${SERVICE_NAME}-ui-addprefix"
+      - "traefik.http.middlewares.${SERVICE_NAME}-ui-addprefix.addprefix.prefix=/ui"
 
       # API unter /api/v1 → intern /v1
       - "traefik.http.routers.${SERVICE_NAME}-api.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/api/v1`)"
