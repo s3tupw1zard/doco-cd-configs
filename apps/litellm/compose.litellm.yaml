@@ -35,6 +35,8 @@ services:
       - DATABASE_URL=${LITELLM_DB_URL}
       - STORE_MODEL_IN_DB=true
       - LITELLM_MODEL_COST_MAP_URL=https://cloudprice.net/api/v2/ai/litellm_model_prices.json
+      - SERVER_ROOT_PATH=/api/v1
+      - UI_BASE_PATH=/api/v1/ui
     volumes:
       - /srv/ai/litellm/data:/etc/litellm
       
