@@ -53,36 +53,36 @@ services:
       - "traefik.enable=true"
 
       # UI /
-      - "traefik.http.routers.${SERVICE_NAME}-ui.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/`)"
+      - "traefik.http.routers.${SERVICE_NAME}-ui.rule=Host(`${SERVICE_DOMAIN}`) && Path(`/`)"
+      - "traefik.http.routers.${SERVICE_NAME}-ui.priority=1"
       - "traefik.http.routers.${SERVICE_NAME}-ui.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}-ui.tls.certresolver=cloudflare"
       - "traefik.http.routers.${SERVICE_NAME}-ui.service=${SERVICE_NAME}-ui"
       - "traefik.http.routers.${SERVICE_NAME}-ui.middlewares=${SERVICE_NAME}-ui-root"
-
       - "traefik.http.services.${SERVICE_NAME}-ui.loadbalancer.server.port=4000"
-
       - "traefik.http.middlewares.${SERVICE_NAME}-ui-root.replacepathregex.regex=^/$"
       - "traefik.http.middlewares.${SERVICE_NAME}-ui-root.replacepathregex.replacement=/ui/"
 
         # API /api
       - "traefik.http.routers.${SERVICE_NAME}-api.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.${SERVICE_NAME}-api.priority=100"
       - "traefik.http.routers.${SERVICE_NAME}-api.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}-api.tls.certresolver=cloudflare"
       - "traefik.http.routers.${SERVICE_NAME}-api.service=${SERVICE_NAME}-api"
-      # - "traefik.http.routers.${SERVICE_NAME}-api.middlewares=${SERVICE_NAME}-api-strip"
+      - "traefik.http.services.${SERVICE_NAME}-api.loadbalancer.server.port=4000"
+      - "traefik.http.routers.${SERVICE_NAME}-api.middlewares=${SERVICE_NAME}-api-strip"
 
-      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=4000"
+      #- "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=4000"
 
-      # - "traefik.http.middlewares.${SERVICE_NAME}-api-strip.stripprefix.prefixes=/api"
+      - "traefik.http.middlewares.${SERVICE_NAME}-api-strip.stripprefix.prefixes=/api"
 
       # Redirect /api/v1/ui to /
-      - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.priority=100"
+      - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/api/v1/ui`)"
+      - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.priority=200"
       - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.entrypoints=websecure"
-      - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.tls=true"
+      - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.tls.certresolver=cloudflare"
       - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.service=${SERVICE_NAME}-ui"
       - "traefik.http.routers.${SERVICE_NAME}-ui-redirect.middlewares=redirect-api-ui-to-root@file"
-
       - "traefik.docker.network=traefik"
 
 networks:
