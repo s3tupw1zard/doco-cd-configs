@@ -211,6 +211,7 @@ external_secrets:
   OPENCLAW_GATEWAY_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/OPENCLAW_GATEWAY_TOKEN
   OPENCLAW_ALLOWED_ORIGINS: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/OPENCLAW_ALLOWED_ORIGINS
   HOOKS_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/HOOKS_TOKEN
+  OPENAI_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/openclaw/OPENAI_API_KEY
 ---
 name: n8n
 working_dir: apps/n8n
