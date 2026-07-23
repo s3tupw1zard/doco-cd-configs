@@ -95,7 +95,7 @@ services:
       - ghost_network
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.300@sha256:12085536b6c8d3284d92eeca64385760d9a9391e1ba7a1fcc017756286d002b4
+    image: ghost/traffic-analytics:1.0.304@sha256:5748b6fc8eac3caf5a320b54e185b10de9d8e51e907f8c9e72d5db244edfadb2
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: unless-stopped
@@ -218,7 +218,7 @@ services:
     restart: no
 
   tinybird-local:
-    image: tinybirdco/tinybird-local:beta@sha256:852c6a52547cb6d4a81d8fa7814046a73d1d4b9a452b14fe7ec3723f640f30dd
+    image: tinybirdco/tinybird-local:beta@sha256:b4fa74493f9ce19981effcbb0d8fa219f5610daafe2ca902014dcdfb09a9d50e
     container_name: tinybird-local
     hostname: tinybird-local
     # If you want to limit container resources
