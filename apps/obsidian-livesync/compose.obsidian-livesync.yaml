@@ -1,0 +1,33 @@
+services:
+  obsidian-livesync:
+    container_name: obsidian-livesync
+    image: couchdb:latest
+    env_file:
+      - .env
+    environment:
+      - COUCHDB_USER=${COUCHDB_USER}
+      - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
+    volumes:
+      - /srv/tools/obsidian-livesync/couchdb/data:/opt/couchdb/data
+      - /srv/tools/obsidian-livesync/couchdb/etc:/opt/couchdb/etc/local.d
+    #ports:
+    #  - "5984:5984"
+    restart: unless-stopped
+    healthcheck:
+      test: curl --fail -s -u ${COUCHDB_USER}:${COUCHDB_PASSWORD}  http://localhost:5984/_up | grep -Eo '\"status\":\"ok\"' || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=5984"
+      - "traefik.docker.network=traefik"
+
+networks:
+  external: true
