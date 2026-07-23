@@ -1,9 +1,8 @@
 services:
   obsidian-livesync:
     container_name: obsidian-livesync
-    image: couchdb:latest
-    env_file:
-      - .env
+    hostname: obsidian-livesync
+    image: couchdb:3.5.2.1
     environment:
       - COUCHDB_USER=${COUCHDB_USER}
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
