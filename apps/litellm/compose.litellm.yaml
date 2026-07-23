@@ -61,7 +61,8 @@ services:
 
       - "traefik.http.services.${SERVICE_NAME}-ui.loadbalancer.server.port=4000"
 
-      - "traefik.http.middlewares.${SERVICE_NAME}-ui-root.addprefix.prefix=/ui"
+      - "traefik.http.middlewares.${SERVICE_NAME}-ui-root.replacepathregex.regex=^/$"
+      - "traefik.http.middlewares.${SERVICE_NAME}-ui-root.replacepathregex.replacement=/ui/"
 
         # API /api
       - "traefik.http.routers.${SERVICE_NAME}-api.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/api`)"
