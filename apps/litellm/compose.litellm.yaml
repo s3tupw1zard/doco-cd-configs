@@ -35,8 +35,6 @@ services:
       - DATABASE_URL=${LITELLM_DB_URL}
       - STORE_MODEL_IN_DB=true
       - LITELLM_MODEL_COST_MAP_URL=https://cloudprice.net/api/v2/ai/litellm_model_prices.json
-      - SERVER_ROOT_PATH=/api/v1
-      - UI_BASE_PATH=/
     volumes:
       - /srv/ai/litellm/data:/etc/litellm
       
@@ -53,24 +51,26 @@ services:
     labels:
       - "traefik.enable=true"
 
-      # UI auf Root
-      - "traefik.http.routers.${SERVICE_NAME}-ui.rule=Host(`${SERVICE_DOMAIN}`) && Path(`/`)"
+      # UI auf Root – weiterleitung zu /ui
+      - "traefik.http.routers.${SERVICE_NAME}-ui.rule=Host(`${SERVICE_DOMAIN}`)"
       - "traefik.http.routers.${SERVICE_NAME}-ui.priority=1"
       - "traefik.http.routers.${SERVICE_NAME}-ui.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}-ui.tls.certresolver=cloudflare"
-      - "traefik.http.routers.${SERVICE_NAME}-ui.service=${SERVICE_NAME}-ui"
-      - "traefik.http.services.${SERVICE_NAME}-ui.loadbalancer.server.port=4000"
+      - "traefik.http.routers.${SERVICE_NAME}-ui.middlewares=${SERVICE_NAME}-redirect-ui"
+      - "traefik.http.middlewares.${SERVICE_NAME}-redirect-ui.redirectregex.regex=^https://([^/]+)/?$"
+      - "traefik.http.middlewares.${SERVICE_NAME}-redirect-ui.redirectregex.replacement=https://$${1}/ui"
+      - "traefik.http.routers.${SERVICE_NAME}-ui.service=${SERVICE_NAME}-svc"
 
-      # API unter /api/v1
-      - "traefik.http.routers.${SERVICE_NAME}-api.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/api`)"
+      # API unter /api/v1 → intern /v1
+      - "traefik.http.routers.${SERVICE_NAME}-api.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/api/v1`)"
       - "traefik.http.routers.${SERVICE_NAME}-api.priority=100"
       - "traefik.http.routers.${SERVICE_NAME}-api.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}-api.tls.certresolver=cloudflare"
-      - "traefik.http.routers.${SERVICE_NAME}-api.service=${SERVICE_NAME}-api"
-      - "traefik.http.services.${SERVICE_NAME}-api.loadbalancer.server.port=4000"
       - "traefik.http.routers.${SERVICE_NAME}-api.middlewares=${SERVICE_NAME}-api-strip"
       - "traefik.http.middlewares.${SERVICE_NAME}-api-strip.stripprefix.prefixes=/api"
+      - "traefik.http.routers.${SERVICE_NAME}-api.service=${SERVICE_NAME}-svc"
 
+      - "traefik.http.services.${SERVICE_NAME}-svc.loadbalancer.server.port=4000"
       - "traefik.docker.network=traefik"
 
 networks:
