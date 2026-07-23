@@ -22,7 +22,7 @@ services:
       retries: 5
 
   litellm:
-    image: ghcr.io/s3tupw1zard/litellm-custom-ui:v1.93.0@sha256:83b8fa9fdc66ee61086ca8ff1f15e666e68e36e1113e0e91a3380913afcf23df
+    image: ghcr.io/berriai/litellm:v1.93.0
     container_name: litellm
     hostname: litellm
     restart: unless-stopped
