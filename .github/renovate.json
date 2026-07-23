@@ -812,6 +812,33 @@
             ]
         },
         {
+            "description": "Obsidian LiveSync",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/obsidian-livesync/**"
+            ],
+            "matchPackageNames": [
+                "couchdb"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "obsidian-livesync",
+            "labels": [
+                "renovate",
+                "writing",
+                "sync",
+                "obsidian",
+                "couchdb"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
