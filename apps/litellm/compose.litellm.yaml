@@ -52,7 +52,7 @@ services:
       - "traefik.enable=true"
 
       # UI auf /
-      - "traefik.http.routers.${SERVICE_NAME}-ui.rule=Host(`${SERVICE_DOMAIN}`) && Path(`/`)"
+      - "traefik.http.routers.${SERVICE_NAME}-ui.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/`)"
       - "traefik.http.routers.${SERVICE_NAME}-ui.entrypoints=websecure"
       - "traefik.http.routers.${SERVICE_NAME}-ui.tls.certresolver=cloudflare"
       - "traefik.http.routers.${SERVICE_NAME}-ui.priority=1"
