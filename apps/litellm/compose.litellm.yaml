@@ -58,7 +58,7 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}-ui.priority=1"
       - "traefik.http.routers.${SERVICE_NAME}-ui.service=${SERVICE_NAME}-svc"
       - "traefik.http.routers.${SERVICE_NAME}-ui.middlewares=${SERVICE_NAME}-ui-addprefix"
-      - "traefik.http.middlewares.${SERVICE_NAME}-ui-addprefix.addprefix.prefix=/ui"
+      - "traefik.http.middlewares.${SERVICE_NAME}-ui-addprefix.addprefix.prefix=/api/v1/ui"
 
       # API unter /api/v1 → intern /v1
       - "traefik.http.routers.${SERVICE_NAME}-api.rule=Host(`${SERVICE_DOMAIN}`) && PathPrefix(`/api/v1`)"
