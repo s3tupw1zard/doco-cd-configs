@@ -1,791 +1,817 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-        "config:recommended"
-    ],
-    "enabledManagers": [
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "enabledManagers": [
+    "docker-compose"
+  ],
+  "includePaths": [
+    "apps/**"
+  ],
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "platformAutomerge": true,
+  "packageRules": [
+    {
+      "description": "Default for all Compose-Stacks",
+      "matchManagers": [
         "docker-compose"
-    ],
-    "includePaths": [
-        "apps/**"
-    ],
-    "labels": [
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "pinDigests": true,
+      "separateMinorPatch": true,
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "pelican",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/pelican-panel/**",
+        "apps/pelican-wings/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/pelican-dev/panel",
+        "ghcr.io/pelican-dev/wings"
+      ],
+      "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>beta\\d+)$",
+      "ignoreUnstable": false,
+      "groupName": "pelican",
+      "labels": [
         "dependencies",
-        "renovate"
-    ],
-     "platformAutomerge": true,
-    "packageRules": [
-        {
-            "description": "Default for all Compose-Stacks",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchDatasources": [
-                "docker"
-            ],
-            "pinDigests": true,
-            "separateMinorPatch": true,
-            "automerge": true,
-            "automergeType": "pr"
-        },
-        {
-            "description": "pelican",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/pelican-panel/**",
-                "apps/pelican-wings/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/pelican-dev/panel",
-                "ghcr.io/pelican-dev/wings"
-            ],
-            "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>beta\\d+)$",
-            "ignoreUnstable": false,
-            "groupName": "pelican",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "pelican",
-                "gaming"
-            ]
-        },
-        {
-            "description": "litellm",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/litellm/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/berriai/litellm"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "litellm",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "litellm",
-                "ai"
-            ]
-        },
-        {
-            "description": "litellm Postgres",
-            "matchFileNames": [
-                "apps/litellm/**"
-            ],
-            "matchDatasources": [
-                "docker"
-            ],
-            "matchPackageNames": [
-                "postgres"
-            ],
-            "allowedVersions": "< 16.0.0",
-            "groupName": "litellm-postgres",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "litellm",
-                "ai",
-                "postgres"
-            ]
-        },
-        {
-            "description": "open-webui",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/open-webui/**"
-            ],
-            "matchPackageNames": [
-                "apache/tika",
-                "ghcr.io/open-webui/open-webui",
-                "ghcr.io/open-webui/computer",
-                "ghcr.io/open-webui/mcpo",
-                "qdrant/qdrant",
-                "redis"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "open-webui",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "chatbot",
-                "ai"
-            ]
-        },
-        {
-            "description": "open-webui Postgres",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/open-webui/**"
-            ],
-            "matchPackageNames": [
-                "postgres"
-            ],
-            "groupName": "open-webui-postgres",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "database"
-            ],
-            "allowedVersions": "15-alpine"
-        },
-        {
-            "description": "n8n",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/n8n/**"
-            ],
-            "matchPackageNames": [
-                "n8nio/n8n"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "n8n",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "automation"
-            ]
-        },
-        {
-            "description": "pricebuddy",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/pricebuddy/**"
-            ],
-            "matchPackageNames": [
-                "jez500/pricebuddy",
-                "mysql",
-                "jez500/seleniumbase-scrapper"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "pricebuddy",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "automation",
-                "price-monitoring"
-            ]
-        },
-        {
-            "description": "searxng",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "appsutomation/searxng/**"
-            ],
-            "matchPackageNames": [
-                "valkey/valkey",
-                "searxng/searxng"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "searxng",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "automation",
-                "web-search"
-            ]
-        },
-        {
-            "description": "Backrest",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/backrest/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/garethgeorge/backrest"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "backrest",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "core"
-            ]
-        },
-        {
-            "description": "Traefik",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/traefik/**"
-            ],
-            "matchPackageNames": [
-                "traefik"
-            ],
-            "matchUpdateTypes": [
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "traefik",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "core",
-                "network"
-            ]
-        },
-        {
-            "description": "Vaultwarden",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/vaultwarden/**"
-            ],
-            "matchPackageNames": [
-                "vaultwarden/server"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "vaultwarden",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "core",
-                "security"
-            ]
-        },
-        {
-            "description": "whoami",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "archive/whoami/**"
-            ],
-            "matchPackageNames": [
-                "traefik/whoami"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "whoami",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "core"
-            ]
-        },
-        {
-            "description": "Speedtest Tracker",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/speedtest-tracker/**"
-            ],
-            "matchPackageNames": [
-                "lscr.io/linuxserver/speedtest-tracker",
-                "linuxserver/speedtest-tracker"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "speedtest-tracker",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "monitoring"
-            ]
-        },
-        {
-            "description": "Forgejo",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/forgejo/**"
-            ],
-            "matchPackageNames": [
-                "codeberg.org/forgejo/forgejo"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "forgejo",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "ops"
-            ]
-        },
-        {
-            "description": "Nexus Sonatype",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "archive/nexus/**"
-            ],
-            "matchPackageNames": [
-                "sonatype/nexus3"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "nexus",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "ops",
-                "apt"
-            ]
-        },
-        {
-            "description": "Wakapi",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "archive/wakapi/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/muety/wakapi"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "wakapi",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "ops",
-                "programming"
-            ]
-        },
-        {
-            "description": "CrowdSec",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "archive/crowdsec/**"
-            ],
-            "matchPackageNames": [
-                "crowdsec/crowdsec"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "crowdsec",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "security"
-            ]
-        },
-        {
-            "description": "Pocket ID",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/pocket-id/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/pocket-id/pocket-id"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "pocket-id",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "security"
-            ]
-        },
-        {
-            "description": "Immich",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "archive/immich/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/immich-app/immich-server",
-                "ghcr.io/immich-app/immich-machine-learning"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "immich",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "storage"
-            ]
-        },
-        {
-            "description": "automerge Immich Valkey Digest",
-            "matchFileNames": [
-                "archive/immich/**"
-            ],
-            "matchDatasources": [
-                "docker"
-            ],
-            "matchPackageNames": [
-                "valkey/valkey"
-            ],
-            "matchUpdateTypes": [
-                "digest"
-            ],
-            "automerge": true,
-            "automergeType": "pr-comment",
-            "automergeComment": "bors: r+"
-        },
-        {
-            "description": "Immich PostgreSQL",
-            "matchFileNames": [
-                "archive/immich/**"
-            ],
-            "matchDatasources": [
-                "docker"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/immich-app/postgres"
-            ],
-            "allowedVersions": "/^14-.+$/"
-        },
-        {
-            "description": "Homebox",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "archive/homebox/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/sysadminsmedia/homebox"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "homebox",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "tools"
-            ]
-        },
-        {
-            "description": "jellyfin",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/jellyfin/**"
-            ],
-            "matchPackageNames": [
-                "jellyfin/jellyfin"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "jellyfin",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "tools"
-            ]
-        },
-        {
-            "description": "dms",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/dms/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/docker-mailserver/docker-mailserver",
-                "monogramm/autodiscover-email-settings"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "dms",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "core",
-                "mail",
-                "autodiscover-mail"
-            ]
-        },
-        {
-            "description": "Hermes Agent",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/hermes/**"
-            ],
-            "matchPackageNames": [
-                "nousresearch/hermes-agent",
-                "ghcr.io/jo-inc/camofox-browser",
-                "bbernhard/signal-cli-rest-api"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "hermes",
-            "labels": [
-                "renovate",
-                "ai",
-                "agent",
-                "hermes"
-            ]
-        },
-        {
-            "description": "OpenClaw",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/openclaw/**"
-            ],
-            "matchPackageNames": [
-                "coollabsio/openclaw",
-                "coollabsio/openclaw-browser"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "openclaw",
-            "labels": [
-                "renovate",
-                "ai",
-                "agent",
-                "openclaw"
-            ]
-        },
-        {
-            "description": "Ghost",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/ghost/**"
-            ],
-            "matchPackageNames": [
-                "ghost",
-                "caddy",
-                "ghost/traffic-analytics",
-                "ghcr.io/tryghost/activitypub",
-                "ghcr.io/tryghost/activitypub-migrations"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "ghost",
-            "labels": [
-                "renovate",
-                "blog",
-                "ghost",
-                "caddy",
-                "analytics",
-                "activitypub",
-                "activitypub-migrations"
-            ]
-        },
-        {
-            "description": "ghost-tinybird",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/ghost/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/s3tupw1zard/ghost-tinybird"
-            ],
-            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>tinybird)\\.(?<build>\\d{8})$",
-            "ignoreUnstable": true,
-            "groupName": "ghost-tinybird",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "ghost",
-                "tinybird",
-                "analytics"
-
-            ]
-        },
-        {
-            "description": "Tinybird Local",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/ghost/**"
-            ],
-            "matchPackageNames": [
-                "tinybirdco/tinybird-local"
-            ],
-            "matchUpdateTypes": [
-                "major",
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "tinybird-local",
-            "labels": [
-                "renovate",
-                "blog",
-                "ghost",
-                "tinybird-local",
-                "analytics"
-            ]
-        },
-        {
-            "description": "ghost-mysql",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "apps/ghost/**"
-            ],
-            "matchPackageNames": [
-                "mysql"
-            ],
-            "ignoreUnstable": true,
-            "groupName": "ghost-mysql",
-            "allowedVersions": "/^8(\\.|$)/",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "ghost",
-                "mysql"
-            ]
-        },
-        {
-            "description": "doco-cd",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchFileNames": [
-                "archive/doco-cd/**"
-            ],
-            "matchPackageNames": [
-                "ghcr.io/kimdre/doco-cd"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "groupName": "doco-cd",
-            "labels": [
-                "dependencies",
-                "renovate",
-                "core",
-                "gitops"
-            ]
-        }
-    ]
+        "renovate",
+        "pelican",
+        "gaming"
+      ]
+    },
+    {
+      "description": "litellm",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/litellm/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/berriai/litellm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "litellm",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "litellm",
+        "ai"
+      ]
+    },
+    {
+      "description": "litellm Postgres",
+      "matchFileNames": [
+        "apps/litellm/**"
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "postgres"
+      ],
+      "allowedVersions": "< 16.0.0",
+      "groupName": "litellm-postgres",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "litellm",
+        "ai",
+        "postgres"
+      ]
+    },
+    {
+      "description": "open-webui",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/open-webui/**"
+      ],
+      "matchPackageNames": [
+        "apache/tika",
+        "ghcr.io/open-webui/open-webui",
+        "ghcr.io/open-webui/computer",
+        "ghcr.io/open-webui/mcpo",
+        "qdrant/qdrant",
+        "redis"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "open-webui",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "chatbot",
+        "ai"
+      ]
+    },
+    {
+      "description": "open-webui Postgres",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/open-webui/**"
+      ],
+      "matchPackageNames": [
+        "postgres"
+      ],
+      "groupName": "open-webui-postgres",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "database"
+      ],
+      "allowedVersions": "15-alpine"
+    },
+    {
+      "description": "n8n",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/n8n/**"
+      ],
+      "matchPackageNames": [
+        "n8nio/n8n"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "n8n",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "automation"
+      ]
+    },
+    {
+      "description": "pricebuddy",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/pricebuddy/**"
+      ],
+      "matchPackageNames": [
+        "jez500/pricebuddy",
+        "mysql",
+        "jez500/seleniumbase-scrapper"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "pricebuddy",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "automation",
+        "price-monitoring"
+      ]
+    },
+    {
+      "description": "searxng",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "appsutomation/searxng/**"
+      ],
+      "matchPackageNames": [
+        "valkey/valkey",
+        "searxng/searxng"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "searxng",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "automation",
+        "web-search"
+      ]
+    },
+    {
+      "description": "Backrest",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/backrest/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/garethgeorge/backrest"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "backrest",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "core"
+      ]
+    },
+    {
+      "description": "Traefik",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/traefik/**"
+      ],
+      "matchPackageNames": [
+        "traefik"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "traefik",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "core",
+        "network"
+      ]
+    },
+    {
+      "description": "Vaultwarden",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/vaultwarden/**"
+      ],
+      "matchPackageNames": [
+        "vaultwarden/server"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "vaultwarden",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "core",
+        "security"
+      ]
+    },
+    {
+      "description": "whoami",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "archive/whoami/**"
+      ],
+      "matchPackageNames": [
+        "traefik/whoami"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "whoami",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "core"
+      ]
+    },
+    {
+      "description": "Speedtest Tracker",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/speedtest-tracker/**"
+      ],
+      "matchPackageNames": [
+        "lscr.io/linuxserver/speedtest-tracker",
+        "linuxserver/speedtest-tracker"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "speedtest-tracker",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "monitoring"
+      ]
+    },
+    {
+      "description": "Forgejo",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/forgejo/**"
+      ],
+      "matchPackageNames": [
+        "codeberg.org/forgejo/forgejo"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "forgejo",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "ops"
+      ]
+    },
+    {
+      "description": "Nexus Sonatype",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "archive/nexus/**"
+      ],
+      "matchPackageNames": [
+        "sonatype/nexus3"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "nexus",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "ops",
+        "apt"
+      ]
+    },
+    {
+      "description": "Wakapi",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "archive/wakapi/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/muety/wakapi"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "wakapi",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "ops",
+        "programming"
+      ]
+    },
+    {
+      "description": "CrowdSec",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "archive/crowdsec/**"
+      ],
+      "matchPackageNames": [
+        "crowdsec/crowdsec"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "crowdsec",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "security"
+      ]
+    },
+    {
+      "description": "Pocket ID",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/pocket-id/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/pocket-id/pocket-id"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "pocket-id",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "security"
+      ]
+    },
+    {
+      "description": "Immich",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "archive/immich/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/immich-app/immich-server",
+        "ghcr.io/immich-app/immich-machine-learning"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "immich",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "storage"
+      ]
+    },
+    {
+      "description": "automerge Immich Valkey Digest",
+      "matchFileNames": [
+        "archive/immich/**"
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "valkey/valkey"
+      ],
+      "matchUpdateTypes": [
+        "digest"
+      ],
+      "automerge": true,
+      "automergeType": "pr-comment",
+      "automergeComment": "bors: r+"
+    },
+    {
+      "description": "Immich PostgreSQL",
+      "matchFileNames": [
+        "archive/immich/**"
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/immich-app/postgres"
+      ],
+      "allowedVersions": "/^14-.+$/"
+    },
+    {
+      "description": "Homebox",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "archive/homebox/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/sysadminsmedia/homebox"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "homebox",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "tools"
+      ]
+    },
+    {
+      "description": "jellyfin",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/jellyfin/**"
+      ],
+      "matchPackageNames": [
+        "jellyfin/jellyfin"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "jellyfin",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "tools"
+      ]
+    },
+    {
+      "description": "dms",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/dms/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/docker-mailserver/docker-mailserver",
+        "monogramm/autodiscover-email-settings"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "dms",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "core",
+        "mail",
+        "autodiscover-mail"
+      ]
+    },
+    {
+      "description": "Hermes Agent",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/hermes/**"
+      ],
+      "matchPackageNames": [
+        "nousresearch/hermes-agent",
+        "ghcr.io/jo-inc/camofox-browser",
+        "bbernhard/signal-cli-rest-api"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "hermes",
+      "labels": [
+        "renovate",
+        "ai",
+        "agent",
+        "hermes"
+      ]
+    },
+    {
+      "description": "OpenClaw",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/openclaw/**"
+      ],
+      "matchPackageNames": [
+        "coollabsio/openclaw",
+        "coollabsio/openclaw-browser"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "openclaw",
+      "labels": [
+        "renovate",
+        "ai",
+        "agent",
+        "openclaw"
+      ]
+    },
+    {
+      "description": "Ghost",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/ghost/**"
+      ],
+      "matchPackageNames": [
+        "ghost",
+        "caddy",
+        "ghost/traffic-analytics",
+        "ghcr.io/tryghost/activitypub",
+        "ghcr.io/tryghost/activitypub-migrations"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "ghost",
+      "labels": [
+        "renovate",
+        "blog",
+        "ghost",
+        "caddy",
+        "analytics",
+        "activitypub",
+        "activitypub-migrations"
+      ]
+    },
+    {
+      "description": "ghost-tinybird",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/ghost/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/s3tupw1zard/ghost-tinybird"
+      ],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>tinybird)\\.(?<build>\\d{8})$",
+      "ignoreUnstable": true,
+      "groupName": "ghost-tinybird",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "ghost",
+        "tinybird",
+        "analytics"
+      ]
+    },
+    {
+      "description": "Tinybird Local",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/ghost/**"
+      ],
+      "matchPackageNames": [
+        "tinybirdco/tinybird-local"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "tinybird-local",
+      "labels": [
+        "renovate",
+        "blog",
+        "ghost",
+        "tinybird-local",
+        "analytics"
+      ]
+    },
+    {
+      "description": "Obsidian LiveSync",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/obsidian-livesync/**"
+      ],
+      "matchPackageNames": [
+        "couchdb"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "obsidian-livesync",
+      "labels": [
+        "renovate",
+        "writing",
+        "sync",
+        "obsidian",
+        "couchdb"
+      ]
+    },
+    {
+      "description": "ghost-mysql",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "apps/ghost/**"
+      ],
+      "matchPackageNames": [
+        "mysql"
+      ],
+      "ignoreUnstable": true,
+      "groupName": "ghost-mysql",
+      "allowedVersions": "/^8(\\.|$)/",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "ghost",
+        "mysql"
+      ]
+    },
+    {
+      "description": "doco-cd",
+      "matchManagers": [
+        "docker-compose"
+      ],
+      "matchFileNames": [
+        "archive/doco-cd/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/kimdre/doco-cd"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "doco-cd",
+      "labels": [
+        "dependencies",
+        "renovate",
+        "core",
+        "gitops"
+      ]
+    }
+  ]
 }
