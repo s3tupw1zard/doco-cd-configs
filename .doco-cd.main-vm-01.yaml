@@ -273,3 +273,14 @@ external_secrets:
   SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/SERVICE_NAME
   COUCHDB_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/COUCHDB_PASSWORD
   COUCHDB_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/COUCHDB_USER
+---
+name: vane
+working_dir: apps/vane
+compose_files:
+  - compose.vane.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/vane/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/vane/SERVICE_NAME
+  SEARXNG_API_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/vane/SEARXNG_API_URL
