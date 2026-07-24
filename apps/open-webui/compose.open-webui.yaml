@@ -1,6 +1,6 @@
 services:
   computer:
-    image: ghcr.io/open-webui/computer:0.9.15-browser@sha256:ae06d85989f57d4c754cb925a74888eafe1f39b2aa9c0f128130d5edb5635677
+    image: ghcr.io/s3tupw1zard/open-webui-computer:0.9.15-browser
     container_name: computer
     hostname: computer
     restart: unless-stopped
