@@ -1,6 +1,8 @@
 services:
   vane:
     image: itzcrazykns1337/vane:slim-v1.12.2
+    container_name: vane
+    hostname: vane
     # ports:
     #   - '3000:3000'
     volumes:
