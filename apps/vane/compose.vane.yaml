@@ -1,6 +1,6 @@
 services:
   vane:
-    image: itzcrazykns1337/vane:slim-v1.12.2
+    image: itzcrazykns1337/vane:slim-v1.12.2@sha256:d2878cf9c91962aa3fc053b59bc9b89adcbdcaeb7ee36b54906e853464b2c190
     # ports:
     #   - '3000:3000'
     volumes:
