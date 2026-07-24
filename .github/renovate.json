@@ -839,6 +839,31 @@
             ]
         },
         {
+            "description": "Vane",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/vane/**"
+            ],
+            "matchPackageNames": [
+                "itzcrazykns1337/vane"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "vane",
+            "labels": [
+                "renovate",
+                "ai",
+                "search"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
