@@ -1,92 +1,57 @@
 # Pull Request Generation Instructions
 
-## General
+## Context
 
-- Be concise and technical.
-- Focus on the actual infrastructure impact.
-- Base entirely on commit history/diff - no inventions.
-- If the filename begins with `.doco-cd.` then it is not a docker compose configuration file but a doco-cd configuration file.
+This repository is a collection of Docker Compose stacks deployed via doco-cd.
+It is NOT an application or software project. Files present:
+- `compose.*.yaml` — Docker Compose stack definitions
+- `.doco-cd.*.yaml` — doco-cd deployment configuration files (NOT Compose files)
+- `renovate.json` — Renovate bot config for automated container image updates
+
+Do NOT invent a "Why" or business rationale. If the diff does not explain a reason, omit the Why section entirely.
 
 ## PR Title
 
-`<type>(<scope>): <infra-impact>`
+`<type>(<scope>): <short description>`
 
 Types:
-
-- **deploy**: Rollout/replica changes
-- **compose**: Docker Compose modifications
-- **doco-cd**: Doco-CD configuration modifications
-- **config**: Env/secrets/params updates
-- **infra**: Cloud resource modifications
-- **image**: Container image adjustments
-- **fix**: Service-level bug resolutions
-
-Scope Examples: `compose`, `service/web`, `network`, `stack`, `ci`
+- **compose**: Docker Compose stack additions or modifications
+- **doco-cd**: doco-cd configuration changes
+- **config**: Env/secrets/Renovate config updates
+- **image**: Container image version changes
+- **fix**: Broken stack or config fixes
 
 Rules:
-
-- Imperative verb first (`Add`, `Upgrade`, `Fix`)
+- Imperative verb (`Add`, `Update`, `Fix`)
 - Max 72 characters
-- Scope in parentheses for service-specific changes
+- Scope = service name (e.g. `service-x`, `stack`, `host`)
 
 ## PR Description
 
-### First Line: Summary
+One sentence: what was added/changed. No filler phrases like "to improve functionality" or "to enhance capabilities".
 
-"Adjusts \[WHAT\] to achieve \[OPERATIONAL GOAL\]"
+### Changes
 
-### Why Section (1-2 sentences)
+Bullet per changed file. Be specific and literal — only what is visible in the diff:
+- `compose.service-x.yaml`: add stack definition
+- `.doco-cd.main-vm-01.yaml`: add service-x to doco-cd deployment config, including external secrets when needed. If the filename differs from the one in the example, use the actual filename instead of blindly using the one from the example.
+- `renovate.json`: add image update rules for new service
 
-- Problem context: "Resolves intermittent DNS lookup failures during..."
-- Business rationale: "Avoids 5xx errors during peak traffic"
+### Breaking Changes
 
-### Changes (Bullet Point Heavy!)
-
-### **Do:**
-
-- compose/prod.yml: increase web replicas from 2 → 4
-- volume/web-data: change mount type to tmpfs
-- secrets/db-password: rotate to v2
-- service/redis: add healthcheck endpoint
-
-### **Avoid:**
-
-- "Updated config files"
-- "Fixed bugs"
-- Generic "Improved performance"
-
-### Breaking Changes (If Any)
-
-BREAKING CHANGE:
-
-- \[service-name\]: Migrate volumes before redeploy  
-→ `docker volume migrate --old=legacy --new=nvme`
-
-### Formatting
-
-Use three hashtag characters followed by a space in front of Title, Description, Why, Changes and Breaking Changes so that it is displayed as header 3.
+Only if an existing running service is affected.
+If none: `None`
 
 ## Example
 
-**Title**
+**Title:** `compose(service-x): add new stack`
 
-deploy(service/api): scale gunicorn workers
+**Description:** Adds Docker Compose stack and doco-cd deployment config for a new service.
 
-**Description**
+### Changes
+- `compose.service-x.yaml`: add stack definition
+- `.doco-cd.main-vm-01.yaml`: add service-x to doco-cd deployment config, including external secrets when needed
+- `renovate.json`: add image update rules for new service
 
-Increases Gunicorn worker count for API service to handle peak traffic loads.
-
-**Why**
-
-Performance metrics showed worker saturation leading to 503 errors during daily traffic spikes.
-
-**Changes**
-
-- compose/prod.yml: `gunicorn_workers: 8` → `12`
-- service/api: memory limit 512MB → 768MB
-- image/api: upgrade base image to python:3.11-slim
-
-**Breaking Changes**
-
+### Breaking Changes
 None
-
