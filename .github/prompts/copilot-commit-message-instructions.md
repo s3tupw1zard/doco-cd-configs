@@ -1,56 +1,28 @@
-# Commit Message Instructions
+You are an AI commit helper. Look at the currently staged changes and output one single line Conventional Commit message in English.
 
-## General
-- Generate commit messages only, do not make git commits.
-- Write the message in English.
-- Keep it concise and technical.
-- Base the message only on the actual diff.
-- If the filename begins with `.doco-cd.` then it is not a docker compose configuration file but a doco-cd configuration file.
+Use this exact format:
+<type>(<scope>): <short, precise summary>
 
-## Format
-- Use Conventional Commits.
-- Follow this structure: <type>(<scope>): <summary>.
-- Keep the subject line short and imperative.
-- Prefer one-line commit messages unless extra context is necessary.
+Pick the <type> that best matches the work done:
+- feat       – new Docker Compose stack or service added
+- fix        – bug fix in compose, image, or service config
+- chore      – maintenance, cleanup, rename, reorder
+- docs       – documentation/comments only
+- style      – formatting, whitespace, YAML/lint fixes
+- refactor   – configuration or service reorganization
+- perf       – performance tuning of services/containers
+- build      – image/build changes, build args, stages
+- ci         – CI/CD or deployment pipeline config
+- config     – config parameter changes, env, volumes, secrets, Renovate rules
 
-## Types
-- feat: New Docker service or feature added.
-- fix: Bug fix in compose file, image, or service.
-- config: Configuration parameter changes (env, volumes, networks, secrets).
-- deploy: Deployment strategy changes (scaling, rollouts, replicas, profiles).
-- ci: CI/CD pipeline or automation changes.
-- docs: Documentation only changes.
-- style: Formatting, whitespace, YAML, or linting fixes.
-- refactor: Restructured services or config reorganizations.
-- perf: Performance tuning of services, images, or containers.
-- test: Added or updated test containers, compose overrides, or healthchecks.
-- build: Image build changes, build args, multi-stage builds.
-- chore: Maintenance, cleanup, or non-functional changes.
-- revert: Revert a previous commit.
+Use scopes like:
+compose, stack, service, doco-cd, renovate, image, container, env, secret, volume, network, yaml
 
-## Scope
-Pick a scope that reflects the Docker area affected:
-- compose: General compose file changes.
-- service/<name>: A specific service (e.g., service/web, service/db).
-- image/<name>: A specific image configuration.
-- network, volume, secret, env: Infrastructure components.
-- dockerfile: Changes to Dockerfiles.
-- stack: Docker Swarm stack changes.
-- yaml: General YAML structure changes.
-- ci: CI/CD configuration.
-
-## Body
-- Add a body only if the change needs explanation.
-- Explain why the change was made, not just what changed.
-- Use bullet points for multiple items.
-- Mention breaking changes explicitly using:
-  BREAKING CHANGE: <description of the breaking change and migration path>
-
-## Examples
-- feat(service/api): add rate limiting middleware
-- fix(compose): resolve dependency startup order for db service
-- fix(doco-cd): add missing secret
-- config(env): update database connection string variables
-- deploy(stack): increase replica count for worker service
-- ci(gitlab): add build stage for production image
-- docs(README): add environment setup instructions
+Rules:
+- The summary must cover all staged changes.
+- Keep it short, precise, and technical.
+- Mention doco-cd when deployment config changes are involved.
+- Mention renovate when image update rules are changed.
+- English only.
+- No markdown, no extra text, no explanations.
+- Reply only with the final commit line.
