@@ -8,6 +8,8 @@ services:
     environment:
       SEARXNG_API_URL: ${SEARXNG_API_URL}
     restart: unless-stopped
+    networks:
+      - traefik
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
@@ -16,3 +18,7 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=80"
       - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true
