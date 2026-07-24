@@ -1,14 +1,14 @@
 services:
   vane:
-    image: itzcrazykns1337/vane:slim-v1.12.2
+    image: itzcrazykns1337/vane:v1.12.2
     container_name: vane
     hostname: vane
     # ports:
     #   - '3000:3000'
     volumes:
       - /srv/ai/vane/data:/home/vane/data
-    environment:
-      SEARXNG_API_URL: ${SEARXNG_API_URL}
+    # environment:
+    #   SEARXNG_API_URL: ${SEARXNG_API_URL}
     restart: unless-stopped
     networks:
       - traefik
