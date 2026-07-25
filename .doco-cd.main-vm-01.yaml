@@ -138,16 +138,6 @@ external_secrets:
   ROOT_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ROOT_DOMAIN
   PANGOLIN_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/PANGOLIN_DOMAIN
 ---
-name: jellyfin
-working_dir: apps/jellyfin
-compose_files:
-  - compose.jellyfin.yaml
-remove_orphans: true
-force_image_pull: false
-external_secrets:
-  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/media/jellyfin/SERVICE_DOMAIN
-  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/media/jellyfin/SERVICE_NAME
----
 name: doco-cd-vm-01-main
 working_dir: apps/doco-cd
 compose_files:
