@@ -108,3 +108,13 @@ external_secrets:
   EMAIL_PROVIDER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_PROVIDER
   MANIFEST_ENCRYPTION_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/MANIFEST_ENCRYPTION_KEY
   POSTGRES_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/POSTGRES_PASSWORD
+---
+name: jellyfin
+working_dir: apps/jellyfin
+compose_files:
+  - compose.jellyfin.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/media/jellyfin/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/media/jellyfin/SERVICE_NAME
