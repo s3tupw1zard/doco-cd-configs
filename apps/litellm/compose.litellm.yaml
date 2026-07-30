@@ -22,13 +22,14 @@ services:
       retries: 5
 
   litellm:
-    image: ghcr.io/berriai/litellm:v1.93.0@sha256:a1745e629abfb17d434426ff48b115f54f4f4c4a0f5af241de569e93c63c411e
+    image: ghcr.io/berriai/litellm:v1.94.0@sha256:65d84a2282137b4dc73bbe184650a7c807177c533e4223b3bfbc87963fe3fabe
     container_name: litellm
     hostname: litellm
     restart: unless-stopped
     environment:
       - OPENAI_API_KEY=${OPENROUTER_API_KEY}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENCODE_GO_API_KEY=${OPENCODE_GO_API_KEY}
       - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY}
       - LITELLM_LOG=INFO
       - OPENAI_BASE_URL=${OPENROUTER_API_URL}
