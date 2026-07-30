@@ -65,6 +65,7 @@ external_secrets:
   ROOT_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ROOT_DOMAIN
   EDGE_TTS_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/EDGE_TTS_API_KEY
   MCPO_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/MCPO_API_KEY
+  PIPELINES_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/PIPELINES_API_KEY
 ---
 name: backrest
 working_dir: apps/backrest
