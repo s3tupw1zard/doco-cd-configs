@@ -149,7 +149,7 @@ services:
       - "traefik.docker.network=traefik"
 
   redis:
-    image: docker.io/redis:7@sha256:595cc6f2bb3af6e03347b90deb6123c6aa2c81dea05ce08128de8a174b6ac67b
+    image: docker.io/redis:8@sha256:c88d347edef6249a6d2293f926f1eeb48bd40c57cbcd02c07f52e7f1fd2cb46b
     container_name: langfuse-redis
     hostname: langfuse-redis
     restart: always
