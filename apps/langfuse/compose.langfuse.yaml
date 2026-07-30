@@ -1,0 +1,212 @@
+services:
+  langfuse-worker:
+    image: ghcr.io/langfuse/langfuse-worker:4.1.0
+    container_name: langfuse-worker
+    hostname: langfuse-worker
+    restart: always
+    depends_on: &langfuse-depends-on
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+    ports:
+      - 127.0.0.1:3030:3030
+    environment: &langfuse-worker-env
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      DATABASE_URL: ${DATABASE_URL}
+      SALT: ${SALT}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      TELEMETRY_ENABLED: true
+      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: ${LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES}
+      CLICKHOUSE_MIGRATION_URL: ${CLICKHOUSE_MIGRATION_URL}
+      CLICKHOUSE_URL: ${CLICKHOUSE_URL}
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+      CLICKHOUSE_CLUSTER_ENABLED: false
+      LANGFUSE_USE_AZURE_BLOB: false
+      LANGFUSE_USE_OCI_NATIVE_OBJECT_STORAGE: false
+      LANGFUSE_OCI_AUTH_TYPE: ${LANGFUSE_OCI_AUTH_TYPE}
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: ${LANGFUSE_S3_EVENT_UPLOAD_BUCKET}
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID}
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY}
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: ${LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT}
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: true
+      LANGFUSE_S3_EVENT_UPLOAD_PREFIX: ${LANGFUSE_S3_EVENT_UPLOAD_PREFIX}
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: ${LANGFUSE_S3_MEDIA_UPLOAD_BUCKET}
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: ${LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID}
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY}
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: ${LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT}
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: true
+      LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: ${LANGFUSE_S3_MEDIA_UPLOAD_PREFIX}
+      LANGFUSE_INGESTION_QUEUE_DELAY_MS: 500
+      LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS: 1000
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: 6379
+      REDIS_AUTH: ${REDIS_AUTH}
+      LANGFUSE_BULLMQ_SKIP_REDIS_VERSION_CHECK: false
+      REDIS_TLS_ENABLED: false
+      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS}
+      SMTP_CONNECTION_URL: ${SMTP_CONNECTION_URL}
+      AUTH_DISABLE_USERNAME_PASSWORD: true
+      AUTH_EMAIL_VERIFICATION_REQUIRED: false
+      AUTH_CUSTOM_CLIENT_ID: ${AUTH_CUSTOM_CLIENT_ID}
+      AUTH_CUSTOM_CLIENT_SECRET: ${AUTH_CUSTOM_CLIENT_SECRET}
+      AUTH_CUSTOM_ISSUER: ${AUTH_CUSTOM_ISSUER}
+      AUTH_CUSTOM_NAME: Pocket ID
+    networks:
+      - langfuse
+
+  langfuse-web:
+    image: ghcr.io/langfuse/langfuse:4.1.0
+    container_name: langfuse-web
+    hostname: langfuse-web
+    restart: always
+    depends_on: *langfuse-depends-on
+    #ports:
+    #  - 3000:3000
+    environment:
+      <<: *langfuse-worker-env
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+    networks:
+      - langfuse
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=3000"
+      - "traefik.docker.network=traefik"
+
+  clickhouse:
+    image: docker.io/clickhouse/clickhouse-server:25.12
+    container_name: langfuse-clickhouse
+    hostname: langfuse-clickhouse
+    restart: always
+    user: "101:101"
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+    volumes:
+      - langfuse_clickhouse_data:/var/lib/clickhouse
+      - langfuse_clickhouse_logs:/var/log/clickhouse-server
+    ports:
+      - 127.0.0.1:8123:8123
+      - 127.0.0.1:9000:9000
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8123/ping || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 1s
+    networks:
+      - langfuse
+
+  minio:
+    image: cgr.dev/chainguard/minio:latest
+    container_name: langfuse-minio
+    hostname: langfuse-minio
+    restart: always
+    entrypoint: sh
+    # create the 'langfuse' bucket before starting the service
+    command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" --console-address ":9001" /data'
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    ports:
+    #  - 9090:9000
+      - 127.0.0.1:9091:9001
+    volumes:
+      - langfuse_minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+      start_period: 1s
+    networks:
+      - langfuse
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minio-${SERVICE_NAME}.rule=Host(`minio.${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.minio-${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.minio-${SERVICE_NAME}.service=minio-${SERVICE_NAME}"
+      - "traefik.http.routers.minio-${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.services.minio-${SERVICE_NAME}.loadbalancer.server.port=9000"
+      - "traefik.docker.network=traefik"
+
+  redis:
+    image: docker.io/redis:7.4.10
+    container_name: langfuse-redis
+    hostname: langfuse-redis
+    restart: always
+    # CHANGEME: row below to secure redis password
+    command: >
+      --requirepass ${REDIS_AUTH}
+      --maxmemory-policy noeviction
+    ports:
+      - 127.0.0.1:6379:6379
+    volumes:
+      - langfuse_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 10s
+      retries: 10
+    networks:
+      - langfuse
+
+  postgres:
+    image: docker.io/postgres:17
+    container_name: langfuse-postgres
+    hostname: langfuse-postgres
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      TZ: Europe/Berlin
+      PGTZ: Europe/Berlin
+    ports:
+      - 127.0.0.1:5432:5432
+    volumes:
+      - langfuse_postgres_data:/var/lib/postgresql/data
+    networks:
+      - langfuse
+
+volumes:
+  langfuse_postgres_data:
+    name: langfuse_postgres_data
+    driver: local
+  langfuse_clickhouse_data:
+    name: langfuse_clickhouse_data
+    driver: local
+  langfuse_clickhouse_logs:
+    name: langfuse_clickhouse_logs
+    driver: local
+  langfuse_minio_data:
+    name: langfuse_minio_data
+    driver: local
+  langfuse_redis_data:
+    name: langfuse_redis_data
+    driver: local
+
+networks:
+  traefik:
+    external: true
+  langfuse:
+    name: langfuse
