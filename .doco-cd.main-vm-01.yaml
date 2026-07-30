@@ -175,3 +175,22 @@ external_secrets:
   SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/vane/SERVICE_DOMAIN
   SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/vane/SERVICE_NAME
   SEARXNG_API_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/vane/SEARXNG_API_URL
+---
+name: manifest
+working_dir: apps/manifest
+compose_files:
+  - compose.manifest.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/SERVICE_NAME
+  BETTER_AUTH_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/BETTER_AUTH_SECRET
+  BETTER_AUTH_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/BETTER_AUTH_URL
+  DATABASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/DATABASE_URL
+  EMAIL_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_API_KEY
+  EMAIL_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_DOMAIN
+  EMAIL_FROM: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_FROM
+  EMAIL_PROVIDER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_PROVIDER
+  MANIFEST_ENCRYPTION_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/MANIFEST_ENCRYPTION_KEY
+  POSTGRES_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/POSTGRES_PASSWORD
