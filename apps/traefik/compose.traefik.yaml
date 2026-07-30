@@ -45,8 +45,8 @@ services:
       - --certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json
       - --entryPoints.websecure.http.tls.domains[0].main=${ROOT_DOMAIN}
       - --entryPoints.websecure.http.tls.domains[0].sans=*.${ROOT_DOMAIN}
-      - --entryPoints.websecure.http.tls.domains[1].main=hermes.${ROOT_DOMAIN}
-      - --entryPoints.websecure.http.tls.domains[1].sans=*.hermes.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[1].main=langfuse.${ROOT_DOMAIN}
+      - --entryPoints.websecure.http.tls.domains[1].sans=*.langfuse.${ROOT_DOMAIN}
       - --entryPoints.websecure.http.tls.domains[2].main=ai.${ROOT_DOMAIN}
       - --entryPoints.websecure.http.tls.domains[2].sans=*.ai.${ROOT_DOMAIN}
       - --entrypoints.web.address=:80
