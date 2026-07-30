@@ -930,8 +930,6 @@
                 "redis"
             ],
             "matchUpdateTypes": [
-                "minor",
-                "patch",
                 "pin",
                 "digest"
             ],
@@ -954,7 +952,10 @@
             "matchPackageNames": [
                 "postgres"
             ],
-            "allowedVersions": "< 18.0.0",
+            "matchUpdateTypes": [
+                "pin",
+                "digest"
+            ],
             "groupName": "langfuse-postgres",
             "labels": [
                 "dependencies",
