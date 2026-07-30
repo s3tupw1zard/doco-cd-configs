@@ -929,10 +929,7 @@
             "matchPackageNames": [
                 "redis"
             ],
-            "matchUpdateTypes": [
-                "pin",
-                "digest"
-            ],
+            "allowedVersions": "< 8.0.0",
             "groupName": "langfuse-redis",
             "labels": [
                 "dependencies",
@@ -952,10 +949,8 @@
             "matchPackageNames": [
                 "postgres"
             ],
-            "matchUpdateTypes": [
-                "pin",
-                "digest"
-            ],
+            "allowedVersions": "< 18.0.0",
+
             "groupName": "langfuse-postgres",
             "labels": [
                 "dependencies",
