@@ -149,7 +149,7 @@ services:
       - "traefik.docker.network=traefik"
 
   redis:
-    image: docker.io/redis:7@sha256:595cc6f2bb3af6e03347b90deb6123c6aa2c81dea05ce08128de8a174b6ac67b
+    image: docker.io/redis:7
     container_name: langfuse-redis
     hostname: langfuse-redis
     restart: always
@@ -170,7 +170,7 @@ services:
       - langfuse
 
   postgres:
-    image: docker.io/postgres:17@sha256:a426e44bac0b759c95894d68e1a0ac03ecc20b619f498a91aae373bf06d8508d
+    image: docker.io/postgres:17
     container_name: langfuse-postgres
     hostname: langfuse-postgres
     restart: always
