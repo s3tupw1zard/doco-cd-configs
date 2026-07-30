@@ -1,6 +1,6 @@
 services:
   langfuse-worker:
-    image: ghcr.io/langfuse/langfuse-worker:4.1.0
+    image: ghcr.io/langfuse/langfuse-worker:4.1.0@sha256:61e9f83f5f1e5b6f8745215db193f5d201b4cba9ed543e539104552c1b3dc106
     container_name: langfuse-worker
     hostname: langfuse-worker
     restart: always
@@ -63,7 +63,7 @@ services:
       - langfuse
 
   langfuse-web:
-    image: ghcr.io/langfuse/langfuse:4.1.0
+    image: ghcr.io/langfuse/langfuse:4.1.0@sha256:cff59a366f9773f9e1d7060655cc63441b1e4ad27e8ad40ebdaebe2151a014cb
     container_name: langfuse-web
     hostname: langfuse-web
     restart: always
@@ -86,7 +86,7 @@ services:
       - "traefik.docker.network=traefik"
 
   clickhouse:
-    image: docker.io/clickhouse/clickhouse-server:25.12
+    image: docker.io/clickhouse/clickhouse-server:25.12@sha256:8a790dd3468db22b1d4e7b18a176f378ff5ff6053b9c48dd4ea1fa71a24c5ba6
     container_name: langfuse-clickhouse
     hostname: langfuse-clickhouse
     restart: always
@@ -111,7 +111,7 @@ services:
       - langfuse
 
   minio:
-    image: cgr.dev/chainguard/minio:latest
+    image: cgr.dev/chainguard/minio:latest@sha256:d386393960d3126c034d6597b752bc33a02a2c237069788aabcf6d035c166b27
     container_name: langfuse-minio
     hostname: langfuse-minio
     restart: always
@@ -145,7 +145,7 @@ services:
       - "traefik.docker.network=traefik"
 
   redis:
-    image: docker.io/redis:7.4.10
+    image: docker.io/redis:7.4.10@sha256:595cc6f2bb3af6e03347b90deb6123c6aa2c81dea05ce08128de8a174b6ac67b
     container_name: langfuse-redis
     hostname: langfuse-redis
     restart: always
@@ -166,7 +166,7 @@ services:
       - langfuse
 
   postgres:
-    image: docker.io/postgres:17
+    image: docker.io/postgres:17@sha256:a426e44bac0b759c95894d68e1a0ac03ecc20b619f498a91aae373bf06d8508d
     container_name: langfuse-postgres
     hostname: langfuse-postgres
     restart: always
