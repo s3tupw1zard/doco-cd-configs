@@ -867,6 +867,126 @@
             ]
         },
         {
+            "description": "Langfuse",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/langfuse/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/langfuse/langfuse",
+                "ghcr.io/langfuse/langfuse-worker"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "langfuse",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "langfuse",
+                "ai",
+                "observability"
+            ]
+        },
+        {
+            "description": "Langfuse ClickHouse",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/langfuse/**"
+            ],
+            "matchPackageNames": [
+                "clickhouse/clickhouse-server"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "langfuse-clickhouse",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "langfuse",
+                "clickhouse"
+            ]
+        },
+        {
+            "description": "Langfuse Redis",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/langfuse/**"
+            ],
+            "matchPackageNames": [
+                "redis"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "langfuse-redis",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "langfuse",
+                "redis"
+            ]
+        },
+        {
+            "description": "Langfuse Postgres",
+            "matchFileNames": [
+                "apps/langfuse/**"
+            ],
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackageNames": [
+                "postgres"
+            ],
+            "allowedVersions": "< 18.0.0",
+            "groupName": "langfuse-postgres",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "langfuse",
+                "postgres"
+            ]
+        },
+        {
+            "description": "Langfuse MinIO",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/langfuse/**"
+            ],
+            "matchPackageNames": [
+                "cgr.dev/chainguard/minio"
+            ],
+            "matchUpdateTypes": [
+                "pin",
+                "digest"
+            ],
+            "groupName": "langfuse-minio",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "langfuse",
+                "minio"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
