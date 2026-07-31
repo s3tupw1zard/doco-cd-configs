@@ -52,7 +52,7 @@ services:
   # Vector database for semantic search.
   # Stores embeddings so the proxy can retrieve semantically similar context.
   qdrant:
-    image: qdrant/qdrant:v1.17.1@sha256:94728574965d17c6485dd361aa3c0818b325b9016dac5ea6afec7b4b2700865f
+    image: qdrant/qdrant:v1.18.3@sha256:0bd98fa7977f1e75694779359ca4e212822e5a71334e28421182f72f209d5286
     container_name: headroom-qdrant
     hostname: headroom-qdrant
     # ports:
