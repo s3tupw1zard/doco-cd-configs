@@ -13,9 +13,10 @@ services:
       # Keep all Headroom read/write state on the named volume below.
       - HEADROOM_WORKSPACE_DIR=/home/nonroot/.headroom
       - HEADROOM_CONFIG_DIR=/home/nonroot/.headroom/config
+      - HEADROOM_COMPRESS_ALLOW_REMOTE=1
       # if you want to use a custom OpenAI-compatible API endpoint,
       # uncomment and set the following line with the desired URL
-      - OPENAI_TARGET_API_URL=${OPENAI_TARGET_API_URL}
+      # - OPENAI_TARGET_API_URL=${OPENAI_TARGET_API_URL}
       # CLI-filtering dashboard figures require the `rtk` binary inside this
       # container; it is not installed by this image. See docs/content/docs/docker-install.mdx.
       - NEO4J_AUTH=${NEO4J_AUTH}
