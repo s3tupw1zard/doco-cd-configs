@@ -2,7 +2,7 @@ services:
   # Headroom proxy — the OpenAI-compatible endpoint your client talks to.
   # Built from the repo Dockerfile so it tracks your local checkout.
   headroom-proxy:
-    image: ghcr.io/headroomlabs-ai/headroom:latest
+    image: ghcr.io/headroomlabs-ai/headroom:latest@sha256:86b2b1a083bbf6cefec8e874a4dd4e89364b1832fb380a03bbd40f8e18eb17e5
     container_name: headroom-proxy
     hostname: headroom-proxy
     # Bind to all interfaces inside the container so the published port is reachable.
@@ -52,7 +52,7 @@ services:
   # Vector database for semantic search.
   # Stores embeddings so the proxy can retrieve semantically similar context.
   qdrant:
-    image: qdrant/qdrant:v1.17.1
+    image: qdrant/qdrant:v1.17.1@sha256:94728574965d17c6485dd361aa3c0818b325b9016dac5ea6afec7b4b2700865f
     container_name: headroom-qdrant
     hostname: headroom-qdrant
     # ports:
@@ -69,7 +69,7 @@ services:
   # Graph database for relationships and multi-hop reasoning.
   # Backs the memory features that traverse links between stored items.
   neo4j:
-    image: neo4j:5.26
+    image: neo4j:5.26@sha256:362542416de6c09a971484d1893878016cc3b5cdec166e54b1c824a220ecd6b9
     container_name: headroom-neo4j
     hostname: headroom-neo4j
     # ports:
