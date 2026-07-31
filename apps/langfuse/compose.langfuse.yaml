@@ -158,18 +158,13 @@ services:
       - "traefik.http.routers.minio-${SERVICE_NAME}.service=minio-${SERVICE_NAME}"
       - "traefik.http.routers.minio-${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.http.services.minio-${SERVICE_NAME}.loadbalancer.server.port=9000"
-      - "traefik.http.services.minio-${SERVICE_NAME}.loadbalancer.server.scheme=http"
       
       - "traefik.http.routers.minio-console-${SERVICE_NAME}.rule=Host(`console.${SERVICE_DOMAIN}`)"
       - "traefik.http.routers.minio-console-${SERVICE_NAME}.entrypoints=websecure"
       - "traefik.http.routers.minio-console-${SERVICE_NAME}.service=minio-console-${SERVICE_NAME}"
       - "traefik.http.routers.minio-console-${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.http.services.minio-console-${SERVICE_NAME}.loadbalancer.server.port=9001"
-      - "traefik.http.services.minio-console-${SERVICE_NAME}.loadbalancer.server.scheme=http"
-      
-      - "traefik.http.middlewares.minio-console-stripprefix.stripprefix.prefixes=/console"
-      - "traefik.http.routers.minio-console-${SERVICE_NAME}.middlewares=minio-console-stripprefix"
-      
+            
       - "traefik.docker.network=traefik"
 
 
