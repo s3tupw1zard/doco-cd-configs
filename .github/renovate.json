@@ -983,6 +983,29 @@
             ]
         },
         {
+            "description": "Headroom",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/headroom/**"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/headroomlabs-ai/headroom"
+            ],
+            "matchUpdateTypes": [
+                "pin",
+                "digest"
+            ],
+            "groupName": "headroom",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "headroom",
+                "litellm"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
