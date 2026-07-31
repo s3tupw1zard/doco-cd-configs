@@ -251,3 +251,15 @@ external_secrets:
   LANGFUSE_LLM_CONNECTION_WHITELISTED_IP_SEGMENTS: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/langfuse/LANGFUSE_LLM_CONNECTION_WHITELISTED_IP_SEGMENTS
   SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/langfuse/SERVICE_DOMAIN
   SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/langfuse/SERVICE_NAME
+---
+name: headroom
+working_dir: apps/headroom
+compose_files:
+  - compose.headroom.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/SERVICE_NAME
+  OPENAI_TARGET_API_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/OPENAI_TARGET_API_URL
+  NEO4J_AUTH: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/NEO4J_AUTH
