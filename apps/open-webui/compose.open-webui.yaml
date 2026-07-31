@@ -57,6 +57,24 @@ services:
       - "traefik.http.routers.mcpo-${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.docker.network=traefik"
 
+  pipelines:
+    image: ghcr.io/open-webui/pipelines:main@sha256:b48e9bc338ce2be0acfbeff01810db72408a12f07739f9e3879c1f2b00952d6e
+    volumes:
+      - /srv/ai/open-webui/pipelines:/app/pipelines
+    restart: always
+    environment:
+      - PIPELINES_API_KEY=${PIPELINES_API_KEY}
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pipelines-${SERVICE_NAME}.rule=Host(`pipelines.${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.pipelines-${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.services.pipelines-${SERVICE_NAME}.loadbalancer.server.port=9099"
+      - "traefik.http.routers.pipelines-${SERVICE_NAME}.service=pipelines-${SERVICE_NAME}"
+      - "traefik.http.routers.pipelines-${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.docker.network=traefik"
+
   tika:
     image: apache/tika:latest@sha256:90b7fa1dc018434075fce9e1d9b88b1e3d0ea6979d0cf86e116c79a8073ae973
     container_name: open-webui-tika

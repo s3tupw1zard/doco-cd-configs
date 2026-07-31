@@ -57,6 +57,7 @@ services:
       LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS: 1000
       LANGFUSE_LLM_CONNECTION_WHITELISTED_HOST: ${LANGFUSE_LLM_CONNECTION_WHITELISTED_HOST}
       LANGFUSE_LLM_CONNECTION_WHITELISTED_IPS: ${LANGFUSE_LLM_CONNECTION_WHITELISTED_IPS}
+      LANGFUSE_LLM_CONNECTION_WHITELISTED_IP_SEGMENTS: ${LANGFUSE_LLM_CONNECTION_WHITELISTED_IP_SEGMENTS}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: 6379
       REDIS_AUTH: ${REDIS_AUTH}
@@ -136,7 +137,7 @@ services:
       MINIO_SERVER_URL: "https://minio.${SERVICE_DOMAIN}"
       MINIO_BROWSER_REDIRECT_URL: "https://minio.${SERVICE_DOMAIN}"
     ports:
-    #  - 9090:9000
+      - 9090:9000
       - 127.0.0.1:9091:9001
     volumes:
       - langfuse_minio_data:/data
@@ -175,7 +176,7 @@ services:
 
 
   redis:
-    image: docker.io/redis:7.4.10@sha256:595cc6f2bb3af6e03347b90deb6123c6aa2c81dea05ce08128de8a174b6ac67b
+    image: docker.io/redis:7@sha256:595cc6f2bb3af6e03347b90deb6123c6aa2c81dea05ce08128de8a174b6ac67b
     container_name: langfuse-redis
     hostname: langfuse-redis
     restart: always
