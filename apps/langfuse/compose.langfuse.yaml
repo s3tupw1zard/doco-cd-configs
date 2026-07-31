@@ -153,7 +153,7 @@ services:
     labels:
       - "traefik.enable=true"
       
-      - "traefik.http.routers.minio-${SERVICE_NAME}.rule=Host(`minio.${SERVICE_DOMAIN}`) && PathPrefix(`/`)"
+      - "traefik.http.routers.minio-${SERVICE_NAME}.rule=Host(`minio.${SERVICE_DOMAIN}`)"
       - "traefik.http.routers.minio-${SERVICE_NAME}.entrypoints=websecure"
       - "traefik.http.routers.minio-${SERVICE_NAME}.service=minio-${SERVICE_NAME}"
       - "traefik.http.routers.minio-${SERVICE_NAME}.tls.certresolver=cloudflare"
