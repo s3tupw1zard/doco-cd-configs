@@ -39,7 +39,7 @@ services:
       - CHATGPT_TOKEN_DIR=/app/chatgpt-tokens
       - LANGFUSE_PUBLIC_KEY=${LANGFUSE_PUBLIC_KEY}
       - LANGFUSE_SECRET_KEY=${LANGFUSE_SECRET_KEY}
-      - LANGFUSE_HOST=${LANGFUSE_HOST}
+      - LANGFUSE_BASE_URL=${LANGFUSE_BASE_URL}
       #- SERVER_ROOT_PATH=/api/
     volumes:
       - /srv/ai/litellm/data:/etc/litellm

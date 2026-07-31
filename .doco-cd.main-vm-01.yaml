@@ -36,7 +36,7 @@ external_secrets:
   OPENCODE_GO_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/OPENCODE_GO_API_KEY
   LANGFUSE_PUBLIC_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LANGFUSE_PUBLIC_KEY
   LANGFUSE_SECRET_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LANGFUSE_SECRET_KEY
-  LANGFUSE_HOST: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LANGFUSE_HOST
+  LANGFUSE_BASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LANGFUSE_BASE_URL
 ---
 name: open-webui
 working_dir: apps/open-webui
