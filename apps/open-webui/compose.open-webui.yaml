@@ -59,6 +59,8 @@ services:
 
   pipelines:
     image: ghcr.io/open-webui/pipelines:main@sha256:b48e9bc338ce2be0acfbeff01810db72408a12f07739f9e3879c1f2b00952d6e
+    container_name: pipelines
+    hostname: pipelines
     volumes:
       - /srv/ai/open-webui/pipelines:/app/pipelines
     restart: always
