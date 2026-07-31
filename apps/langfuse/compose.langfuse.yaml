@@ -44,6 +44,15 @@ services:
       LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: ${LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT}
       LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: true
       LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: ${LANGFUSE_S3_MEDIA_UPLOAD_PREFIX}
+      LANGFUSE_S3_BATCH_EXPORT_ENABLED: true
+      LANGFUSE_S3_BATCH_EXPORT_BUCKET: ${LANGFUSE_S3_BATCH_EXPORT_BUCKET}
+      LANGFUSE_S3_BATCH_EXPORT_PREFIX: ${LANGFUSE_S3_BATCH_EXPORT_PREFIX}
+      LANGFUSE_S3_BATCH_EXPORT_REGION: auto
+      LANGFUSE_S3_BATCH_EXPORT_ENDPOINT: ${LANGFUSE_S3_BATCH_EXPORT_ENDPOINT}
+      LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT: ${LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT}
+      LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID: ${LANGFUSE_S3_BATCH_EXPORT_ACCESS_KEY_ID}
+      LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY: ${LANGFUSE_S3_BATCH_EXPORT_SECRET_ACCESS_KEY}
+      LANGFUSE_S3_BATCH_EXPORT_FORCE_PATH_STYLE: true
       LANGFUSE_INGESTION_QUEUE_DELAY_MS: 500
       LANGFUSE_INGESTION_CLICKHOUSE_WRITE_INTERVAL_MS: 1000
       LANGFUSE_LLM_CONNECTION_WHITELISTED_HOST: ${LANGFUSE_LLM_CONNECTION_WHITELISTED_HOST}
@@ -124,6 +133,8 @@ services:
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_SERVER_URL: "https://minio.${SERVICE_DOMAIN}"
+      MINIO_BROWSER_REDIRECT_URL: "https://minio.${SERVICE_DOMAIN}"
     ports:
     #  - 9090:9000
       - 127.0.0.1:9091:9001
@@ -138,14 +149,30 @@ services:
     networks:
       - langfuse
       - traefik
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.minio-${SERVICE_NAME}.rule=Host(`minio.${SERVICE_DOMAIN}`)"
-      - "traefik.http.routers.minio-${SERVICE_NAME}.entrypoints=websecure"
-      - "traefik.http.routers.minio-${SERVICE_NAME}.service=minio-${SERVICE_NAME}"
-      - "traefik.http.routers.minio-${SERVICE_NAME}.tls.certresolver=cloudflare"
-      - "traefik.http.services.minio-${SERVICE_NAME}.loadbalancer.server.port=9000"
-      - "traefik.docker.network=traefik"
+  labels:
+    - "traefik.enable=true"
+    
+    - "traefik.http.routers.minio-${SERVICE_NAME}.rule=Host(`minio.${SERVICE_DOMAIN}`) && PathPrefix(`/`)"
+    - "traefik.http.routers.minio-${SERVICE_NAME}.entrypoints=websecure"
+    - "traefik.http.routers.minio-${SERVICE_NAME}.service=minio-${SERVICE_NAME}"
+    - "traefik.http.routers.minio-${SERVICE_NAME}.tls.certresolver=cloudflare"
+    - "traefik.http.routers.minio-${SERVICE_NAME}.tls=true"
+    - "traefik.http.services.minio-${SERVICE_NAME}.loadbalancer.server.port=9000"
+    - "traefik.http.services.minio-${SERVICE_NAME}.loadbalancer.server.scheme=http"
+    
+    - "traefik.http.routers.minio-console-${SERVICE_NAME}.rule=Host(`minio.${SERVICE_DOMAIN}`) && PathPrefix(`/console`)"
+    - "traefik.http.routers.minio-console-${SERVICE_NAME}.entrypoints=websecure"
+    - "traefik.http.routers.minio-console-${SERVICE_NAME}.service=minio-console-${SERVICE_NAME}"
+    - "traefik.http.routers.minio-console-${SERVICE_NAME}.tls.certresolver=cloudflare"
+    - "traefik.http.routers.minio-console-${SERVICE_NAME}.tls=true"
+    - "traefik.http.services.minio-console-${SERVICE_NAME}.loadbalancer.server.port=9001"
+    - "traefik.http.services.minio-console-${SERVICE_NAME}.loadbalancer.server.scheme=http"
+    
+    - "traefik.http.middlewares.minio-console-stripprefix.stripprefix.prefixes=/console"
+    - "traefik.http.routers.minio-console-${SERVICE_NAME}.middlewares=minio-console-stripprefix"
+    
+    - "traefik.docker.network=traefik"
+
 
   redis:
     image: docker.io/redis:7.4.10@sha256:595cc6f2bb3af6e03347b90deb6123c6aa2c81dea05ce08128de8a174b6ac67b
