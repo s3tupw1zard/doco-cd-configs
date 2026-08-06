@@ -1,3 +1,17 @@
+name: doco-cd-vm-01-main
+working_dir: apps/doco-cd
+compose_files:
+  - compose.updater-nb-vps.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  POLL_CONFIG_REPO_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/POLL_CONFIG_REPO_URL
+  SECRET_PROVIDER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER
+  SECRET_PROVIDER_SITE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER_SITE_URL
+  SECRET_PROVIDER_CLIENT_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_ID
+  SECRET_PROVIDER_CLIENT_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
+  GIT_ACCESS_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/GIT_ACCESS_TOKEN
+---
 name: netbird
 working_dir: apps/netbird
 compose_files:
