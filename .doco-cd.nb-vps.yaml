@@ -1,0 +1,10 @@
+name: netbird
+working_dir: apps/netbird
+compose_files:
+  - compose.netbird.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/SERVICE_NAME
+  NB_PROXY_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/NB_PROXY_TOKEN
