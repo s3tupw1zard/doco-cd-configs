@@ -1,0 +1,26 @@
+services:
+  doco-cd:
+    image: ghcr.io/kimdre/doco-cd:0.104.0@sha256:a1ff99adaccd8eb29e218d79b30051cec0b4aa1e2451643d0082d04e4b5c4653
+    container_name: doco-cd
+    hostname: doco-cd
+    environment:
+      POLL_CONFIG: |
+        - url: ${POLL_CONFIG_REPO_URL}
+          reference: main
+          interval: 300
+          target: main-nb-vps
+      SECRET_PROVIDER: ${SECRET_PROVIDER}
+      SECRET_PROVIDER_SITE_URL: ${SECRET_PROVIDER_SITE_URL}
+      SECRET_PROVIDER_CLIENT_ID: ${SECRET_PROVIDER_CLIENT_ID}
+      SECRET_PROVIDER_CLIENT_SECRET: ${SECRET_PROVIDER_CLIENT_SECRET}
+      GIT_ACCESS_TOKEN: ${GIT_ACCESS_TOKEN}
+      TZ: Europe/Berlin
+      DOCKER_SWARM_FEATURES: "false"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - data:/data
+    labels:
+      - "traefik.enable=false"
+
+volumes:
+  data:

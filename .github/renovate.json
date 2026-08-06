@@ -16,19 +16,6 @@
      "platformAutomerge": true,
     "packageRules": [
         {
-            "description": "Default for all Compose-Stacks",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchDatasources": [
-                "docker"
-            ],
-            "pinDigests": true,
-            "separateMinorPatch": true,
-            "automerge": true,
-            "automergeType": "pr"
-        },
-        {
             "description": "pelican",
             "matchManagers": [
                 "docker-compose"
@@ -1003,6 +990,54 @@
                 "renovate",
                 "headroom",
                 "litellm"
+            ]
+        },
+        {
+            "description": "Netbird",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/netbird/**"
+            ],
+            "matchPackageNames": [
+                "netbirdio/dashboard",
+                "netbirdio/netbird-server",
+                "netbirdio/reverse-proxy",
+                "crowdsecurity/crowdsec"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "netbird",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "netbird",
+                "networking"
+            ]
+        },
+                {
+            "description": "Netbird Traefik",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/netbird/**"
+            ],
+            "matchPackageNames": [
+                "traefik"
+            ],
+            "allowedVersions": "< v3.7",
+            "groupName": "netbird-traefik",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "netbird",
+                "traefik"
             ]
         },
         {
