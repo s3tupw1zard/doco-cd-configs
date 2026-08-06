@@ -16,19 +16,6 @@
      "platformAutomerge": true,
     "packageRules": [
         {
-            "description": "Default for all Compose-Stacks",
-            "matchManagers": [
-                "docker-compose"
-            ],
-            "matchDatasources": [
-                "docker"
-            ],
-            "pinDigests": true,
-            "separateMinorPatch": true,
-            "automerge": true,
-            "automergeType": "pr"
-        },
-        {
             "description": "pelican",
             "matchManagers": [
                 "docker-compose"
