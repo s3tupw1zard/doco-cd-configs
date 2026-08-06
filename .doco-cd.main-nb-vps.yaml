@@ -23,6 +23,9 @@ external_secrets:
   SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/SERVICE_NAME
   NB_PROXY_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/NB_PROXY_TOKEN
   LETSENCRYPT_EMAIL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/LETSENCRYPT_EMAIL
+  NB_PROXY_CROWDSEC_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/NB_PROXY_CROWDSEC_API_KEY
+  NB_PROXY_ALLOW_INSECURE: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/NB_PROXY_ALLOW_INSECURE
+  NB_PROXY_ACME_CHALLENGE_TYPE: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/NB_PROXY_ACME_CHALLENGE_TYPE
 ---
 name: pocket-id
 working_dir: apps/pocket-id
