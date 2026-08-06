@@ -1,0 +1,43 @@
+name: doco-cd-vm-01-main
+working_dir: apps/doco-cd
+compose_files:
+  - compose.updater-nb-vps.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  POLL_CONFIG_REPO_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/POLL_CONFIG_REPO_URL
+  SECRET_PROVIDER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER
+  SECRET_PROVIDER_SITE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER_SITE_URL
+  SECRET_PROVIDER_CLIENT_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_ID
+  SECRET_PROVIDER_CLIENT_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
+  GIT_ACCESS_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/doco-cd/GIT_ACCESS_TOKEN
+---
+name: netbird
+working_dir: apps/netbird
+compose_files:
+  - compose.netbird.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/SERVICE_NAME
+  NB_PROXY_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/NB_PROXY_TOKEN
+  LETSENCRYPT_EMAIL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/LETSENCRYPT_EMAIL
+  NB_PROXY_CROWDSEC_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/NB_PROXY_CROWDSEC_API_KEY
+  NB_PROXY_ALLOW_INSECURE: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/NB_PROXY_ALLOW_INSECURE
+  NB_PROXY_ACME_CHALLENGE_TYPE: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/netbird/NB_PROXY_ACME_CHALLENGE_TYPE
+---
+name: pocket-id
+working_dir: apps/pocket-id
+compose_files:
+  - compose.pocket-id.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  APP_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/APP_URL
+  ENCRYPTION_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/ENCRYPTION_KEY
+  MAXMIND_LICENSE_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/MAXMIND_LICENSE_KEY
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/security/pocket-id/SERVICE_NAME
+  ROOT_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ROOT_DOMAIN
+  PANGOLIN_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/PANGOLIN_DOMAIN
