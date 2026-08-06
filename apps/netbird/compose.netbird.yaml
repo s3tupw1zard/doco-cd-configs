@@ -91,7 +91,7 @@ services:
       - '3478:3478/udp'
     volumes:
       - netbird_data:/var/lib/netbird
-      - ./config.yaml:/etc/netbird/config.yaml
+      - /srv/security/netbird/config.yaml:/etc/netbird/config.yaml
     command: ["--config", "/etc/netbird/config.yaml"]
     labels:
       - traefik.enable=true
@@ -130,8 +130,24 @@ services:
     depends_on:
       netbird-server:
         condition: service_started
+      crowdsec:
+        condition: service_healthy
     environment:
       - NB_PROXY_TOKEN=${NB_PROXY_TOKEN}
+      - NB_PROXY_DEBUG_LOGS=false
+      - NB_PROXY_MANAGEMENT_ADDRESS=http://netbird-server:80
+      - NB_PROXY_ALLOW_INSECURE=${NB_PROXY_ALLOW_INSECURE}
+      - NB_PROXY_DOMAIN=${SERVICE_DOMAIN}
+      - NB_PROXY_ADDRESS=:8443
+      - NB_PROXY_TOKEN=${NB_PROXY_TOKEN}
+      - NB_PROXY_CERTIFICATE_DIRECTORY=/certs
+      - NB_PROXY_ACME_CERTIFICATES=true
+      - NB_PROXY_ACME_CHALLENGE_TYPE=${NB_PROXY_ACME_CHALLENGE_TYPE}
+      - NB_PROXY_FORWARDED_PROTO=https
+      - NB_PROXY_PROXY_PROTOCOL=true
+      - NB_PROXY_TRUSTED_PROXIES=172.30.0.10
+      - NB_PROXY_CROWDSEC_API_URL=http://crowdsec:8080
+      - NB_PROXY_CROWDSEC_API_KEY=${NB_PROXY_CROWDSEC_API_KEY}
     volumes:
       - netbird_proxy_certs:/certs
     labels:
@@ -150,10 +166,34 @@ services:
         max-size: "500m"
         max-file: "2"
 
+  crowdsec:
+    image: crowdsecurity/crowdsec:v1.7.7
+    container_name: netbird-crowdsec
+    restart: unless-stopped
+    networks: [netbird]
+    environment:
+      COLLECTIONS: crowdsecurity/linux
+    volumes:
+      - ./crowdsec:/etc/crowdsec
+      - crowdsec_db:/var/lib/crowdsec/data
+    healthcheck:
+      test: [CMD, cscli, lapi, status]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+    labels:
+      - traefik.enable=false
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500m"
+        max-file: "2"
+
 volumes:
   netbird_data:
   netbird_traefik_letsencrypt:
   netbird_proxy_certs:
+  crowdsec_db:
 
 networks:
   netbird:
