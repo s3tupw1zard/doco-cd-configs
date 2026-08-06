@@ -174,7 +174,7 @@ services:
     environment:
       COLLECTIONS: crowdsecurity/linux
     volumes:
-      - ./crowdsec:/etc/crowdsec
+      - /srv/security/netbird/crowdsec:/etc/crowdsec
       - crowdsec_db:/var/lib/crowdsec/data
     healthcheck:
       test: [CMD, cscli, lapi, status]
