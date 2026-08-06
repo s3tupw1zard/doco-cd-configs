@@ -20,7 +20,7 @@ services:
       # localtime mount
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - traefik
+      - netbird
     healthcheck:
       test: [ "CMD", "/app/pocket-id", "healthcheck" ]
       interval: 1m30s
