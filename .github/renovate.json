@@ -993,6 +993,54 @@
             ]
         },
         {
+            "description": "Netbird",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/netbird/**"
+            ],
+            "matchPackageNames": [
+                "netbirdio/dashboard",
+                "netbirdio/netbird-server",
+                "netbirdio/reverse-proxy",
+                "crowdsecurity/crowdsec"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "netbird",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "netbird",
+                "networking"
+            ]
+        },
+                {
+            "description": "Netbird Traefik",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/netbird/**"
+            ],
+            "matchPackageNames": [
+                "traefik"
+            ],
+            "allowedVersions": "< v3.7",
+            "groupName": "netbird-traefik",
+            "labels": [
+                "dependencies",
+                "renovate",
+                "netbird",
+                "traefik"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
