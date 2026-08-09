@@ -9,7 +9,7 @@ services:
       - /srv/ai/vane/data:/home/vane/data
     # environment:
     #   SEARXNG_API_URL: ${SEARXNG_API_URL}
-    restart: unless-stopped
+    restart: always
     networks:
       - traefik
     labels:

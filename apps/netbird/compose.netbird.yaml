@@ -3,7 +3,7 @@ services:
   traefik:
     image: traefik:v3.6
     container_name: netbird-traefik
-    restart: unless-stopped
+    restart: always
     networks:
       netbird:
         ipv4_address: 172.30.0.10
@@ -51,7 +51,7 @@ services:
   dashboard:
     image: netbirdio/dashboard:v2.90.9
     container_name: netbird-dashboard
-    restart: unless-stopped
+    restart: always
     networks: [netbird]
     environment:
       - NETBIRD_MGMT_API_ENDPOINT=https://${SERVICE_DOMAIN}
@@ -85,7 +85,7 @@ services:
   netbird-server:
     image: netbirdio/netbird-server:0.76.1
     container_name: netbird-server
-    restart: unless-stopped
+    restart: always
     networks: [netbird]
     ports:
       - '3478:3478/udp'
@@ -125,7 +125,7 @@ services:
     container_name: netbird-proxy
     ports:
     - 51820:51820/udp
-    restart: unless-stopped
+    restart: always
     networks: [netbird]
     depends_on:
       netbird-server:
@@ -169,7 +169,7 @@ services:
   crowdsec:
     image: crowdsecurity/crowdsec:v1.7.8
     container_name: netbird-crowdsec
-    restart: unless-stopped
+    restart: always
     networks: [netbird]
     environment:
       COLLECTIONS: crowdsecurity/linux
