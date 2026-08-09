@@ -31,7 +31,7 @@ services:
     image: nousresearch/hermes-agent:v2026.7.7.2@sha256:9c841866021c54c4596849f6135717e8a4d52ba510b7f52c50aef1de1a283973
     container_name: hermes
     hostname: hermes
-    restart: unless-stopped
+    restart: always
     networks:
       - hermes
       - traefik
@@ -78,7 +78,7 @@ services:
     image: nousresearch/hermes-agent:v2026.7.7.2@sha256:9c841866021c54c4596849f6135717e8a4d52ba510b7f52c50aef1de1a283973
     container_name: hermes-dashboard
     hostname: hermes-dashboard
-    restart: unless-stopped
+    restart: always
     networks:
       - hermes
       - traefik
@@ -121,7 +121,7 @@ services:
     container_name: camofox-browser
     hostname: camofox-browser
     user: 1000:1000
-    restart: unless-stopped
+    restart: always
     ports:
       - 9377:9377
     #  - 6080:6080
@@ -143,7 +143,7 @@ services:
     image: bbernhard/signal-cli-rest-api@sha256:2399d449123cdad56c4d859277e3b9127e1a00c4d2ab4601c239882609286cf8
     container_name: signal-api
     hostname: signal-api
-    restart: unless-stopped
+    restart: always
     networks:
       - hermes
     volumes:

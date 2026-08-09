@@ -3,7 +3,7 @@ services:
     image: ghcr.io/s3tupw1zard/open-webui-computer:0.9.15-browser@sha256:c890b7a9a5de1116756b0372df3e207c113539bb116e3234cf5d2e09d19ae113
     container_name: computer
     hostname: computer
-    restart: unless-stopped
+    restart: always
     environment:
       - TZ=Europe/Berlin
     #ports:
@@ -32,7 +32,7 @@ services:
     image: ghcr.io/open-webui/mcpo:main@sha256:1e82c9555c19e50b80745705f32b47a2647589f35279527b5118ecd3a71bd467
     container_name: mcpo
     hostname: mcpo
-    restart: unless-stopped
+    restart: always
     volumes:
       - /srv/ai/open-webui/mcpo/config:/config
       - /srv/ai/open-webui/mcpo/data:/mcpo-data
@@ -81,7 +81,7 @@ services:
     image: apache/tika:latest@sha256:90b7fa1dc018434075fce9e1d9b88b1e3d0ea6979d0cf86e116c79a8073ae973
     container_name: open-webui-tika
     hostname: open-webui-tika
-    restart: unless-stopped
+    restart: always
     networks:
       - open-webui
 #    ports:
@@ -103,7 +103,7 @@ services:
     volumes:
       # localtime mount
       - /etc/localtime:/etc/localtime:ro
-    restart: unless-stopped
+    restart: always
     networks:
       - open-webui
       - traefik
@@ -120,7 +120,7 @@ services:
     image: ghcr.io/open-webui/open-webui:main@sha256:6a773e5c3a246b65cbe74ce942b294292c0e5f81c138f703d111bc162f7d7c3d
     container_name: open-webui
     hostname: open-webui
-    restart: unless-stopped
+    restart: always
     volumes:
       - /srv/ai/open-webui/open-webui-data:/app/backend/data
       #- /srv/ai/open-webui/prompt-plus/custom.css:/app/build/static/custom.css
@@ -182,7 +182,7 @@ services:
 #    image: git.${ROOT_DOMAIN}/s3tupw1zard/open-terminal:custom-full
 #    container_name: open-terminal
 #    hostname: open-terminal
-#    restart: unless-stopped
+#    restart: always
 #    user: "0:0"
 #    #ports:
 #    #  - 8000:8000
@@ -208,7 +208,7 @@ services:
     image: postgres:15-alpine@sha256:3d0f7584ed7d04e27fa050d6683a74746608faf21f202be78460d679cc56461f
     container_name: open-webui-postgres
     hostname: postgres
-    restart: unless-stopped
+    restart: always
     command: postgres -c shared_buffers=256MB -c work_mem=16MB -c maintenance_work_mem=128MB -c effective_cache_size=512MB -c max_connections=100
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
@@ -233,7 +233,7 @@ services:
     environment:
       - QDRANT__SERVICE__API_KEY=${QDRANT_API_KEY}
       - QDRANT__SERVICE__ENABLE_API_KEY_AUTHORIZATION=true
-    restart: unless-stopped
+    restart: always
     volumes:
       - /srv/ai/open-webui/qdrant-data:/qdrant/storage
       
@@ -248,7 +248,7 @@ services:
     image: redis:alpine@sha256:978f0e01593e65eed801f2402944efcd936d43b5027e4908a7897baf88ed6241
     container_name: open-webui-redis
     hostname: redis
-    restart: unless-stopped
+    restart: always
     command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
       - /srv/ai/open-webui/redis-data:/data

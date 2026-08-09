@@ -4,7 +4,7 @@ services:
     image: jez500/pricebuddy:v1.0.53@sha256:583f8794328bbec4d0a3eab49d9af4ed7c0aaaee96f26811cc8bf8c3b47ae34c
     container_name: pricebuddy
     hostname: pricebuddy
-    restart: unless-stopped
+    restart: always
     volumes:
       - /srv/automation/pricebuddy/storage:/app/storage
       
@@ -41,7 +41,7 @@ services:
     image: mysql:9.7@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d
     container_name: pricebuddy-database
     hostname: pricebuddy-database
-    restart: unless-stopped
+    restart: always
     environment:
       MYSQL_DATABASE: pricebuddy
       MYSQL_USER: pricebuddy
@@ -65,7 +65,7 @@ services:
     image: jez500/seleniumbase-scrapper:v1.0@sha256:501895ba8e1f592b0480c870d10113b94f1a2ba3185dfaf89b41b9e36fe8f25f
     container_name: pricebuddy-scraper
     hostname: pricebuddy-scraper
-    restart: unless-stopped
+    restart: always
     networks:
       - default
     volumes:

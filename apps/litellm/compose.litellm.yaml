@@ -3,7 +3,7 @@ services:
     image: postgres:15@sha256:6eb0add3b77c081df18aa518ce43df58fdcc40f2e6d868a6fd08038dc7acd425
     container_name: litellm-db
     hostname: litellm-db
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_DB: litellm
       POSTGRES_USER: litellm
@@ -25,7 +25,7 @@ services:
     image: ghcr.io/berriai/litellm:v1.95.0@sha256:af806882b7a6ced41658db5b6a7e98ed7b9b51d03b935e0417bf1c8552d688af
     container_name: litellm
     hostname: litellm
-    restart: unless-stopped
+    restart: always
     environment:
       - OPENAI_API_KEY=${OPENROUTER_API_KEY}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}

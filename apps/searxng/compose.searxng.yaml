@@ -4,7 +4,7 @@ services:
     image: valkey/valkey:9-alpine@sha256:ee91f7a174ac4d6a6b0685b3a60e321f0a9dbbb691f9b0e285be2ba1d1be8328
     container_name: searxng-redis
     hostname: searxng-redis
-    restart: unless-stopped
+    restart: always
     command: valkey-server --save 30 1 --loglevel warning
 
     networks:
@@ -24,7 +24,7 @@ services:
     image: searxng/searxng:latest@sha256:f4c8e59de166ed71f6380c0847c312ca51f0d41996e31d0559163b6b09ecde52
     container_name: searxng
     hostname: searxng
-    restart: unless-stopped
+    restart: always
     networks:
       - searxng
       - traefik
