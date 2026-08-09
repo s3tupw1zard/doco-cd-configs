@@ -6,7 +6,7 @@ services:
     init: true
     #ports:
     #  - 3000:3000
-    restart: unless-stopped
+    restart: always
     environment:
       # See README.md and config.default.yml for all config options
       WAKAPI_DB_TYPE: "postgres"
@@ -37,7 +37,7 @@ services:
     image: postgres:18@sha256:22c89fe0d0f507606260237fd55e51f6137f58b2d5bcf6152242b96d9fe8f9a4
     container_name: wakapi-db
     hostname: wakapi-db
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_USER: "wakapi"
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

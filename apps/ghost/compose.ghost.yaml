@@ -3,7 +3,7 @@ services:
     image: caddy:2.11.4-alpine@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648
     container_name: caddy
     hostname: caddy
-    restart: unless-stopped
+    restart: always
     ports:
       - "80:80"
       - "443:443"
@@ -27,7 +27,7 @@ services:
     image: ghost:6.56.0-alpine@sha256:57cd95050d3ca05a098c9ae1275c8d62ace1c844aa653494204d1c0e77c0900a
     container_name: ghost
     hostname: ghost
-    restart: unless-stopped
+    restart: always
     # This is required to import current config when migrating
     environment:
       NODE_ENV: production
@@ -73,7 +73,7 @@ services:
     image: mysql:8.4.11@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb
     container_name: ghost-db
     hostname: ghost-db
-    restart: unless-stopped
+    restart: always
     expose:
       - "3306"
     environment:
@@ -98,7 +98,7 @@ services:
     image: ghost/traffic-analytics:1.0.322@sha256:92086d15d351fb3fb3511a005be9115162072f9dea792650e93274c065646413
     container_name: traffic-analytics
     hostname: traffic-analytics
-    restart: unless-stopped
+    restart: always
     expose:
       - "3000"
     volumes:
@@ -118,7 +118,7 @@ services:
     image: ghcr.io/tryghost/activitypub:1.2.7@sha256:f677e8af8df41418c3bfd63b4ec76b9bf2bbd85bde7da0aa9ecd86e41a230835
     container_name: activitypub
     hostname: activitypub
-    restart: unless-stopped
+    restart: always
     expose:
       - "8080"
     volumes:

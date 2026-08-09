@@ -11,7 +11,7 @@ services:
       - /srv/tools/obsidian-livesync/couchdb/etc:/opt/couchdb/etc/local.d
     ports:
       - "5984:5984"
-    restart: unless-stopped
+    restart: always
     networks:
       - traefik
     labels:

@@ -3,7 +3,7 @@ services:
     image: traefik:v3.7@sha256:9c3b91d5fb7770853ca5c1124a23c34bf2d9b47ffaebeab2614cbaf410dcb2ac
     container_name: traefik
     hostname: traefik
-    restart: unless-stopped
+    restart: always
     labels:
       - "traefik.http.middlewares.to-https.redirectscheme.scheme=https"
       - "traefik.http.routers.to-https.entrypoints=web"
