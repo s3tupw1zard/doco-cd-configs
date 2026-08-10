@@ -1020,7 +1020,7 @@
                 "networking"
             ]
         },
-                {
+        {
             "description": "Netbird Traefik",
             "matchManagers": [
                 "docker-compose"
@@ -1029,7 +1029,7 @@
                 "apps/netbird/**"
             ],
             "matchPackageNames": [
-                "traefik"
+            "traefik"
             ],
             "allowedVersions": "< v3.7",
             "groupName": "netbird-traefik",
@@ -1039,6 +1039,61 @@
                 "netbird",
                 "traefik"
             ]
+        },
+        {
+            "description": "Plane",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/plane/**"
+            ],
+            "matchPackageNames": [
+                "makeplane/plane-aio-community"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "plane",
+            "labels": [
+                "renovate",
+                "plane",
+                "git-ops",
+                "issue-tracking"
+            ]
+        },
+        {
+            "description": "Plane PostgreSQL compatibility",
+            "matchFileNames": [
+                "apps/plane/**"
+            ],
+            "matchPackageNames": [
+                "postgres"
+            ],
+            "allowedVersions": "<16.0.0"
+            },
+            {
+            "description": "Plane Valkey compatibility",
+            "matchFileNames": [
+                "apps/plane/**"
+            ],
+            "matchPackageNames": [
+                "valkey/valkey"
+            ],
+            "allowedVersions": "<8.0.0"
+            },
+            {
+            "description": "Plane RabbitMQ compatibility",
+            "matchFileNames": [
+                "apps/plane/**"
+            ],
+            "matchPackageNames": [
+                "rabbitmq"
+            ],
+            "allowedVersions": "<4.0.0"
         },
         {
             "description": "doco-cd",
