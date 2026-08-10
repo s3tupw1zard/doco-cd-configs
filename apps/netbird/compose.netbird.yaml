@@ -49,7 +49,7 @@ services:
 
   # UI dashboard
   dashboard:
-    image: netbirdio/dashboard:v2.90.9
+    image: netbirdio/dashboard:v2.90.10
     container_name: netbird-dashboard
     restart: always
     networks: [netbird]
