@@ -148,6 +148,20 @@ services:
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.scheme=http"
       - "traefik.docker.network=traefik"
 
+  plane-init:
+    image: makeplane/plane-aio-community:v1.4.1
+    container_name: plane-init
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        mkdir -p /app/logs/{access,error}
+    volumes:
+      - /srv/ops/plane/data:/app/data
+      - /srv/ops/plane/logs:/app/logs
+    restart: "no"
+
+
 networks:
   plane-internal:
   traefik:
