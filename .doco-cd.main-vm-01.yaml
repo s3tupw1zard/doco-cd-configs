@@ -258,7 +258,6 @@ force_image_pull: false
 external_secrets:
   SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/SERVICE_NAME
   SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/SERVICE_DOMAIN
-  PLANE_VERSION: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/PLANE_VERSION
   DOMAIN_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/DOMAIN_NAME
   POSTGRES_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/POSTGRES_USER
   POSTGRES_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/POSTGRES_PASSWORD
