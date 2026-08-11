@@ -24,7 +24,7 @@ services:
 
   ghost:
     # Do not alter this without updating the Tinybird Sync container as well
-    image: ghost:6.56.0-alpine@sha256:57cd95050d3ca05a098c9ae1275c8d62ace1c844aa653494204d1c0e77c0900a
+    image: ghost:6.57.0-alpine@sha256:a8d293f62c23fefdd2b71f26f631aad7c83891be45f946fcab9b6b881761160c
     container_name: ghost
     hostname: ghost
     restart: always
@@ -95,7 +95,7 @@ services:
       - ghost_network
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.333@sha256:84ed9fdcc5028f081595b298bd7ae65ff189a7aa63b2d138fa3ada104da537c1
+    image: ghost/traffic-analytics:1.0.336@sha256:13ca3b62c1334fba8fc3c9486290ef42d1f8fb6c628e19dd75356f30cea9733d
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: always
@@ -160,7 +160,7 @@ services:
 
   tinybird-sync:
     # Do not alter this without updating the Ghost container as well
-    image: ghost:6.56.0-alpine@sha256:57cd95050d3ca05a098c9ae1275c8d62ace1c844aa653494204d1c0e77c0900a
+    image: ghost:6.57.0-alpine@sha256:a8d293f62c23fefdd2b71f26f631aad7c83891be45f946fcab9b6b881761160c
     container_name: tinybird-sync
     hostname: tinybird-sync
     command: >
