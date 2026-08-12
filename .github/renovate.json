@@ -859,7 +859,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/langfuse/**"
+                "archive/langfuse/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/langfuse/langfuse",
@@ -886,7 +886,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/langfuse/**"
+                "archive/langfuse/**"
             ],
             "matchPackageNames": [
                 "clickhouse/clickhouse-server"
@@ -911,7 +911,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/langfuse/**"
+                "archive/langfuse/**"
             ],
             "matchPackageNames": [
                 "redis"
@@ -928,7 +928,7 @@
         {
             "description": "Langfuse Postgres",
             "matchFileNames": [
-                "apps/langfuse/**"
+                "archive/langfuse/**"
             ],
             "matchDatasources": [
                 "docker"
@@ -952,7 +952,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/langfuse/**"
+                "archive/langfuse/**"
             ],
             "matchPackageNames": [
                 "cgr.dev/chainguard/minio"
