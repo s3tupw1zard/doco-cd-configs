@@ -196,31 +196,3 @@ external_secrets:
   SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/SERVICE_NAME
   OPENAI_TARGET_API_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/OPENAI_TARGET_API_URL
   NEO4J_AUTH: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/NEO4J_AUTH
----
-name: plane
-working_dir: apps/plane
-compose_files:
-  - compose.plane.yaml
-remove_orphans: true
-force_image_pull: false
-external_secrets:
-  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/SERVICE_NAME
-  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/SERVICE_DOMAIN
-  DOMAIN_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/DOMAIN_NAME
-  POSTGRES_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/POSTGRES_USER
-  POSTGRES_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/POSTGRES_PASSWORD
-  POSTGRES_DB: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/POSTGRES_DB
-  DATABASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/DATABASE_URL
-  REDIS_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/REDIS_URL
-  RABBITMQ_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/RABBITMQ_USER
-  RABBITMQ_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/RABBITMQ_PASSWORD
-  RABBITMQ_VHOST: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/RABBITMQ_VHOST
-  AMQP_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/AMQP_URL
-  AWS_REGION: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/AWS_REGION
-  AWS_ACCESS_KEY_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/AWS_ACCESS_KEY_ID
-  AWS_SECRET_ACCESS_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/AWS_SECRET_ACCESS_KEY
-  AWS_S3_BUCKET_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/AWS_S3_BUCKET_NAME
-  AWS_S3_ENDPOINT_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/AWS_S3_ENDPOINT_URL
-  SECRET_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/SECRET_KEY
-  LIVE_SERVER_SECRET_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/LIVE_SERVER_SECRET_KEY
-  API_KEY_RATE_LIMIT: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ops/plane/API_KEY_RATE_LIMIT
