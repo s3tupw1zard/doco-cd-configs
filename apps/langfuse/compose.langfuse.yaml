@@ -1,6 +1,6 @@
 services:
   langfuse-worker:
-    image: ghcr.io/langfuse/langfuse-worker:4.9.0@sha256:c79673bb4e6487ea448bcef5084b1822398abacdf88bcbef761516da9833cb4e
+    image: ghcr.io/langfuse/langfuse-worker:4.8.0@sha256:abbefbddc1aec3287c236a4da297771115fcfb7bee847d8bd087d82ae346f8be
     container_name: langfuse-worker
     hostname: langfuse-worker
     restart: always
@@ -75,7 +75,7 @@ services:
       - langfuse
 
   langfuse-web:
-    image: ghcr.io/langfuse/langfuse:4.9.0@sha256:debadf4c00c494a4b26117cb2922b7617c1e9c2b5fe17a5ab6164b79516448cb
+    image: ghcr.io/langfuse/langfuse:4.8.0@sha256:01d0ba432c12835abc094a6a498bba3c9eb3f6179a25a747805932b5a26e9fe4
     container_name: langfuse-web
     hostname: langfuse-web
     restart: always
