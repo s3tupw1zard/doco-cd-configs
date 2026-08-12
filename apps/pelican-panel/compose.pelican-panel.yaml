@@ -33,8 +33,8 @@ services:
 
   mariadb:
     image: mariadb:11.8
-    container_name: mariadb
-    hostname: mariadb
+    container_name: pelican-mariadb
+    hostname: pelican-mariadb
     restart: always
     ports:
       - "3306:3306"
