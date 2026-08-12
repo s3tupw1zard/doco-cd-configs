@@ -8,6 +8,9 @@ external_secrets:
   SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-panel/SERVICE_DOMAIN
   SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-panel/SERVICE_NAME
   ADMIN_EMAIL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-panel/ADMIN_EMAIL
+  MARIADB_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-panel/MARIADB_PASSWORD
+  MARIADB_ROOT_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-panel/MARIADB_ROOT_PASSWORD
+  MARIADB_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/gaming/pelican-panel/MARIADB_USER
 ---
 name: pelican-wings
 working_dir: apps/pelican-wings
