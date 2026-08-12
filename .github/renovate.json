@@ -1046,7 +1046,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/plane/**"
+                "archive/plane/**"
             ],
             "matchPackageNames": [
                 "makeplane/plane-aio-community"
@@ -1068,7 +1068,7 @@
         {
             "description": "Plane PostgreSQL compatibility",
             "matchFileNames": [
-                "apps/plane/**"
+                "archive/plane/**"
             ],
             "matchPackageNames": [
                 "postgres"
@@ -1078,7 +1078,7 @@
             {
             "description": "Plane Valkey compatibility",
             "matchFileNames": [
-                "apps/plane/**"
+                "archive/plane/**"
             ],
             "matchPackageNames": [
                 "valkey/valkey"
@@ -1088,7 +1088,7 @@
             {
             "description": "Plane RabbitMQ compatibility",
             "matchFileNames": [
-                "apps/plane/**"
+                "archive/plane/**"
             ],
             "matchPackageNames": [
                 "rabbitmq"
