@@ -3,6 +3,7 @@ services:
     image: ghcr.io/kimdre/doco-cd:0.108.0@sha256:7b444cbd9b350e0d65a93942cfa025ae62fe52d5f00b7b791d93630ef6909cef
     container_name: doco-cd-updater
     hostname: doco-cd-updater
+    restart: always
     environment:
       POLL_CONFIG: |
         - url: ${POLL_CONFIG_REPO_URL}
