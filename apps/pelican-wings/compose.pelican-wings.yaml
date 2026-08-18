@@ -1,6 +1,6 @@
 services:
   wings:
-    image: ghcr.io/pelican-dev/wings:v1.0.0-beta27@sha256:172c03ca00da3c962a72333af00c00a15b6e0e3e68743594b215585ebff262a0
+    image: ghcr.io/pelican/wings:v1.0.0-beta27@sha256:172c03ca00da3c962a72333af00c00a15b6e0e3e68743594b215585ebff262a0
     container_name: pelican-wings
     hostname: pelican-wings
     restart: always
