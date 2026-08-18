@@ -1,6 +1,6 @@
 services:
   panel:
-    image: ghcr.io/pelican/panel:v1.0.0-beta36@sha256:45cecf27176630ac628ebc9badc0ad273bdaa9bf441648c363dd8daeb9cc3bff
+    image: ghcr.io/pelican/panel:1.0.0-beta38@sha256:ae9dce9ffa43bf24deef6dcf08e280700e77c9bb0db8cb2b657dc9812bb11967
     container_name: pelican-panel
     hostname: pelican-panel
     restart: always
