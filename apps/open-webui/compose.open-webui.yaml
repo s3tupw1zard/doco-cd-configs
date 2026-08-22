@@ -78,7 +78,7 @@ services:
       - "traefik.docker.network=traefik"
 
   tika:
-    image: apache/tika:latest@sha256:90b7fa1dc018434075fce9e1d9b88b1e3d0ea6979d0cf86e116c79a8073ae973
+    image: apache/tika:latest@sha256:a8b442501f601fb15015de974f9afe13dd242b0f14e49a2b144fadcb214a555b
     container_name: open-webui-tika
     hostname: open-webui-tika
     restart: always
@@ -245,7 +245,7 @@ services:
       - "traefik.enable=false"
 
   redis:
-    image: redis:alpine@sha256:978f0e01593e65eed801f2402944efcd936d43b5027e4908a7897baf88ed6241
+    image: redis:alpine@sha256:becdda6c7f4b3fb42e42fd7f120bbf5c54c4caaaf16f26da24e4563d2c1f0576
     container_name: open-webui-redis
     hostname: redis
     restart: always
