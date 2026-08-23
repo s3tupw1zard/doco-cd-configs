@@ -6,6 +6,7 @@ services:
     restart: always
     environment:
       - TZ=Europe/Berlin
+      - GIT_CONFIG_GLOBAL=/home/cptr/.git-config
     #ports:
     #  - 8000:8000
     volumes:
@@ -15,8 +16,8 @@ services:
       - /srv/ai/open-webui/computer/home/cptr/.cache:/home/cptr/.cache
       - /srv/ai/open-webui/computer/home/cptr/.config:/home/cptr/.config
       - /srv/ai/open-webui/computer/home/cptr/.local:/home/cptr/.local
-      - /srv/ai/open-webui/computer/home/cptr/.gitconfig:/home/cptr/.gitconfig
-      - /srv/ai/open-webui/computer/home/cptr/.git-credentials:/home/cptr/.git-credentials
+      - /srv/ai/open-webui/computer/home/cptr/gitconfig:/home/cptr/.git-config
+      - /srv/ai/open-webui/computer/home/cptr/gitauth:/home/cptr/.git-auth
       # localtime mount
       - /etc/localtime:/etc/localtime:ro
     working_dir: /workspace
