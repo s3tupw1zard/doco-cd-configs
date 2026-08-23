@@ -1,6 +1,6 @@
 services:
   litellm-db:
-    image: postgres:15@sha256:6eb0add3b77c081df18aa518ce43df58fdcc40f2e6d868a6fd08038dc7acd425
+    image: postgres:15@sha256:5f72c7b5bd616308ccfd2e74d6be16fb06364e5eecbb815fe9dc6ab9761d2111
     container_name: litellm-db
     hostname: litellm-db
     restart: always
@@ -22,7 +22,7 @@ services:
       retries: 5
 
   litellm:
-    image: ghcr.io/berriai/litellm:v1.96.0@sha256:90d8de0ea6fbb3cad145d1019d00a0149ae400b1e18e2011a60f1988f143f672
+    image: ghcr.io/berriai/litellm:v1.97.0@sha256:468c25f35f3e5ec4e414974f00deab93337b1b4d9953cabcfd3722e59415f834
     container_name: litellm
     hostname: litellm
     restart: always
