@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       - TZ=Europe/Berlin
-      - GIT_CONFIG_GLOBAL=/home/cptr/.git-config
+      - GIT_CONFIG_GLOBAL=/home/cptr/.gitconfig
     #ports:
     #  - 8000:8000
     volumes:
