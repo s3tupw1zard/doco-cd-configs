@@ -96,8 +96,9 @@
                 "apache/tika",
                 "ghcr.io/open-webui/open-webui",
                 "ghcr.io/open-webui/computer",
-                "ghcr.io/s3tupw1zard/open-webui-computer",
+                "ghcr.io/s3tupw1zard/open-webui-computer-custom",
                 "ghcr.io/open-webui/mcpo",
+                "ghcr.io/open-webui/open-terminal",
                 "qdrant/qdrant",
                 "redis"
             ],
