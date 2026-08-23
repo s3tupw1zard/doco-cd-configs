@@ -16,7 +16,7 @@ services:
       - /srv/ai/open-webui/computer/home/cptr/.cache:/home/cptr/.cache
       - /srv/ai/open-webui/computer/home/cptr/.config:/home/cptr/.config
       - /srv/ai/open-webui/computer/home/cptr/.local:/home/cptr/.local
-      - /srv/ai/open-webui/computer/home/cptr/gitconfig:/home/cptr/.git-config
+      - /srv/ai/open-webui/computer/home/cptr/gitconfig:/home/cptr/.gitconfig
       - /srv/ai/open-webui/computer/home/cptr/gitauth:/home/cptr/.git-auth
       # localtime mount
       - /etc/localtime:/etc/localtime:ro
