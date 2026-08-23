@@ -11,8 +11,12 @@ services:
     volumes:
       - /srv/ai/open-webui/computer/data:/data
       - /srv/ai/open-webui/computer/workspace:/workspace
-      - /srv/ai/open-webui/computer/home/cptr:/home/cptr
-      
+      - /srv/ai/open-webui/computer/home/cptr/workspaces:/home/cptr/workspaces
+      - /srv/ai/open-webui/computer/home/cptr/.cache:/home/cptr/.cache
+      - /srv/ai/open-webui/computer/home/cptr/.config:/home/cptr/.config
+      - /srv/ai/open-webui/computer/home/cptr/.local:/home/cptr/.local
+      - /srv/ai/open-webui/computer/home/cptr/.gitconfig:/home/cptr/.gitconfig
+      - /srv/ai/open-webui/computer/home/cptr/.git-credentials:/home/cptr/.git-credentials
       # localtime mount
       - /etc/localtime:/etc/localtime:ro
     working_dir: /workspace
