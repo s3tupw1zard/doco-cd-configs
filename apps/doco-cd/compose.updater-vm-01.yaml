@@ -1,6 +1,6 @@
 services:
   doco-cd:
-    image: ghcr.io/kimdre/doco-cd:0.111.0@sha256:8c31f63f6bde1b67f0802619bad0599bf5e41503f5532be9cc58d0f063b1eeea
+    image: ghcr.io/kimdre/doco-cd:0.115.0@sha256:c816fd7d4bac3e02fb5b650e2cca2104b058200fa57432be9a992a9591504381
     container_name: doco-cd-updater
     hostname: doco-cd-updater
     restart: always
