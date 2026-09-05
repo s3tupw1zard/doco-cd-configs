@@ -24,7 +24,7 @@ services:
 
   ghost:
     # Do not alter this without updating the Tinybird Sync container as well
-    image: ghost:6.57.1-alpine@sha256:6e37900accfb12e16fbc15bf94500e09829cb17e6448b3051e9c76446b4fbf53
+    image: ghost:6.62.0-alpine@sha256:30c93265df67ea4fd27acf231dd7da15a891e5da4838f00f6a54bc8fb379244b
     container_name: ghost
     hostname: ghost
     restart: always
@@ -95,7 +95,7 @@ services:
       - ghost_network
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.354@sha256:e539e992b938c5f77bd842d2aec635e9eb6b7c3e99abc638820f68dfd7b6f3ee
+    image: ghost/traffic-analytics:1.0.377@sha256:a96a8563d2d194e92fb3a437a488cf693337e799834343d1036899533465356e
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: always
@@ -115,7 +115,7 @@ services:
       - ghost_network
 
   activitypub:
-    image: ghcr.io/tryghost/activitypub:1.2.7@sha256:f677e8af8df41418c3bfd63b4ec76b9bf2bbd85bde7da0aa9ecd86e41a230835
+    image: ghcr.io/tryghost/activitypub:1.2.9@sha256:f950017169c778f90bc1d4097c0c83735dd88ee26a7dfacda56fb6325d4053a0
     container_name: activitypub
     hostname: activitypub
     restart: always
@@ -160,7 +160,7 @@ services:
 
   tinybird-sync:
     # Do not alter this without updating the Ghost container as well
-    image: ghost:6.57.1-alpine@sha256:6e37900accfb12e16fbc15bf94500e09829cb17e6448b3051e9c76446b4fbf53
+    image: ghost:6.62.0-alpine@sha256:30c93265df67ea4fd27acf231dd7da15a891e5da4838f00f6a54bc8fb379244b
     container_name: tinybird-sync
     hostname: tinybird-sync
     command: >
@@ -204,7 +204,7 @@ services:
     tty: true
 
   activitypub-migrate:
-    image: ghcr.io/tryghost/activitypub-migrations:1.2.7@sha256:19724eca7b7669b01047c746738bf34c46dfa587e2be5b8641067d9ab707a7bb
+    image: ghcr.io/tryghost/activitypub-migrations:1.2.9@sha256:f8a376e83187cc927fd6286a9e825b71056b2ac7dd8afcd1af1c8c7dc4657a8e
     container_name: activitypub-migrate
     hostname: activitypub-migrate
     environment:
