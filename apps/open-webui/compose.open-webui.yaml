@@ -122,7 +122,7 @@ services:
       - "traefik.docker.network=traefik"
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:main@sha256:6a773e5c3a246b65cbe74ce942b294292c0e5f81c138f703d111bc162f7d7c3d
+    image: ghcr.io/open-webui/open-webui:main@sha256:1a6399d237dc392a2313e0ca826020b3fd5d22536357840eb63393d18dc8b924
     container_name: open-webui
     hostname: open-webui
     restart: always
@@ -184,7 +184,7 @@ services:
       - "traefik.docker.network=traefik"
 
   open-terminal:
-    image: ghcr.io/open-webui/open-terminal:0.12.1-alpine
+    image: ghcr.io/open-webui/open-terminal:0.12.3-alpine
     container_name: open-terminal
     hostname: open-terminal
     restart: always
@@ -232,7 +232,7 @@ services:
       - "traefik.enable=false"
 
   qdrant:
-    image: qdrant/qdrant:latest@sha256:057ee3a8da769fe7310dd3537b4dc7583bf87a95ce8ac43c0af5a46bc580d1fc
+    image: qdrant/qdrant:latest@sha256:12364fe851b9f17356fc88189fc06d1b521262e04659ec7345975b00c9246a10
     container_name: open-webui-qdrant
     hostname: qdrant
     environment:
