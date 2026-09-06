@@ -207,5 +207,5 @@ compose_files:
 remove_orphans: true
 force_image_pull: false
 external_secrets:
-  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/jenkins/SERVICE_DOMAIN
-  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/jenkins/SERVICE_NAME
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/jenkins/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/automation/jenkins/SERVICE_NAME
