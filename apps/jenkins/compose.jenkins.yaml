@@ -1,0 +1,23 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:2.580
+    container_name: jenkins
+    privileged: true
+    user: root
+    # ports:
+    #   - 8080:8080
+    #   - 50000:50000
+    volumes:
+      - /srv/automation/jenkins/home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/libexec/docker:/usr/libexec/docker
+      - /etc/localtime:/etc/localtime:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
+      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
+      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
+      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8080"
+      - "traefik.docker.network=traefik"
