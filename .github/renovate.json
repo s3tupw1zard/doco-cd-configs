@@ -13,8 +13,13 @@
         "dependencies",
         "renovate"
     ],
-     "platformAutomerge": true,
+    "platformAutomerge": true,
     "packageRules": [
+        {
+            "matchUpdateTypes": ["patch", "minor", "pin", "digest"],
+            "automerge": true,
+            "automergeType": "pr"
+        },
         {
             "description": "pelican",
             "matchManagers": [
