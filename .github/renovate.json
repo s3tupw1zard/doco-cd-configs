@@ -1098,6 +1098,30 @@
             "allowedVersions": "<4.0.0"
         },
         {
+            "description": "Jenkins",
+            "matchManagers": [
+                "docker-compose"
+            ],
+            "matchFileNames": [
+                "apps/jenkins/**"
+            ],
+            "matchPackageNames": [
+                "jenkins/jenkins"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "groupName": "jenkins",
+            "labels": [
+                "renovate",
+                "jenkins",
+                "automation"
+            ]
+        },
+        {
             "description": "doco-cd",
             "matchManagers": [
                 "docker-compose"
