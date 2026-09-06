@@ -13,6 +13,8 @@ services:
       - /usr/bin/docker:/usr/bin/docker
       - /usr/libexec/docker:/usr/libexec/docker
       - /etc/localtime:/etc/localtime:ro
+    networks:
+      - traefik
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
@@ -21,3 +23,7 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8080"
       - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true
