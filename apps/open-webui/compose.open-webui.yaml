@@ -184,7 +184,7 @@ services:
       - "traefik.docker.network=traefik"
 
   open-terminal:
-    image: ghcr.io/open-webui/open-terminal:0.12.3-alpine
+    image: ghcr.io/open-webui/open-terminal:0.12.4-alpine
     container_name: open-terminal
     hostname: open-terminal
     restart: always
