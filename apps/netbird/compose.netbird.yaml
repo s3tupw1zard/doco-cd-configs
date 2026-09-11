@@ -149,7 +149,7 @@ services:
       - NB_PROXY_FORWARDED_PROTO=https
       - NB_PROXY_PROXY_PROTOCOL=true
       - NB_PROXY_TRUSTED_PROXIES=172.30.0.10
-      - NB_PROXY_CROWDSEC_API_URL=http://crowdsec:8080
+      - NB_PROXY_CROWDSEC_API_URL=http://netbird-crowdsec:8080
       - NB_PROXY_CROWDSEC_API_KEY=${NB_PROXY_CROWDSEC_API_KEY}
     volumes:
       - netbird_proxy_certs:/certs
