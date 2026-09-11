@@ -126,8 +126,7 @@ services:
     ports:
       - 51820:51820/udp
       - 19132:19132/udp
-      - 25565:25565/tcp
-      - 25565:25565/udp
+      - 25565:25565
     restart: always
     networks: [netbird]
     depends_on:
@@ -146,7 +145,7 @@ services:
       - NB_PROXY_ACME_CERTIFICATES=true
       - NB_PROXY_ACME_CHALLENGE_TYPE=${NB_PROXY_ACME_CHALLENGE_TYPE}
       - NB_PROXY_FORWARDED_PROTO=https
-      - NB_PROXY_PROXY_PROTOCOL=false
+      - NB_PROXY_PROXY_PROTOCOL=true
       - NB_PROXY_TRUSTED_PROXIES=172.30.0.10
       - NB_PROXY_CROWDSEC_API_URL=http://netbird-crowdsec:8080
       - NB_PROXY_CROWDSEC_API_KEY=${NB_PROXY_CROWDSEC_API_KEY}
