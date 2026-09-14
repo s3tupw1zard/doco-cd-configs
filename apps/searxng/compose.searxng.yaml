@@ -21,7 +21,7 @@ services:
         max-file: "1"
 
   searxng:
-    image: searxng/searxng:latest@sha256:e084201aa606fafce2151c8dc2844c9c3309025e90fbe7163b4f5e5183e474f0
+    image: searxng/searxng:latest@sha256:e0e0557627cc3e46cc82d8c23bb3a3a74eb203ae42f73142db555551af336096
     container_name: searxng
     hostname: searxng
     restart: always
