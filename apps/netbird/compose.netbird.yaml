@@ -126,6 +126,7 @@ services:
     ports:
       - 51820:51820/udp
       - 19132:19132/udp
+      - 19133:19133/udp
       - 25565:25565
     restart: always
     networks: [netbird]
