@@ -32,7 +32,7 @@ services:
       - "traefik.docker.network=traefik"
 
   mariadb:
-    image: mariadb:11.8
+    image: mariadb:13.0
     container_name: pelican-mariadb
     hostname: pelican-mariadb
     restart: always
