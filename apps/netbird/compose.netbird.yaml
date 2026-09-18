@@ -127,7 +127,9 @@ services:
       - 51820:51820/udp
       - 19132:19132/udp
       - 19133:19133/udp
+      - 19140:19140/udp
       - 25565:25565
+      - 25570:25570
     restart: always
     networks: [netbird]
     depends_on:
