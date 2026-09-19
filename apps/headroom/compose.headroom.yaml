@@ -70,7 +70,7 @@ services:
   # Graph database for relationships and multi-hop reasoning.
   # Backs the memory features that traverse links between stored items.
   neo4j:
-    image: neo4j:5.26@sha256:bb268a2f1b4f3c79e4bd1a00a82a6e63bbd4fcc4088da03c1b2380655f256cb2
+    image: neo4j:5.26@sha256:3388e05ee53c8313d01acdf33e63ad175af95a92226dc8551160564439ce2c8c
     container_name: headroom-neo4j
     hostname: headroom-neo4j
     # ports:
