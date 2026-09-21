@@ -179,3 +179,129 @@ external_secrets:
   LANGFUSE_LLM_CONNECTION_WHITELISTED_IP_SEGMENTS: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/langfuse/LANGFUSE_LLM_CONNECTION_WHITELISTED_IP_SEGMENTS
   SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/langfuse/SERVICE_DOMAIN
   SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/langfuse/SERVICE_NAME
+---
+name: litellm
+working_dir: apps/litellm
+compose_files:
+  - compose.litellm.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  LITELLM_DB_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LITELLM_DB_PASSWORD
+  LITELLM_DB_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LITELLM_DB_URL
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/SERVICE_NAME
+  LITELLM_MASTER_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LITELLM_MASTER_KEY
+  OPENROUTER_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/OPENROUTER_API_KEY
+  OPENROUTER_API_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/OPENROUTER_API_URL
+  OPENCODE_GO_API_KEY_1: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/OPENCODE_GO_API_KEY_1
+  OPENCODE_GO_API_KEY_2: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/OPENCODE_GO_API_KEY_2
+  # LANGFUSE_PUBLIC_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LANGFUSE_PUBLIC_KEY
+  # LANGFUSE_SECRET_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LANGFUSE_SECRET_KEY
+  # LANGFUSE_BASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/litellm/LANGFUSE_BASE_URL
+---
+name: open-webui
+working_dir: apps/open-webui
+compose_files:
+  - compose.open-webui.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/SERVICE_NAME
+  DATABASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/DATABASE_URL
+  POSTGRES_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/POSTGRES_USER
+  POSTGRES_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/POSTGRES_PASSWORD
+  POSTGRES_DB: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/POSTGRES_DB
+  POSTGRES_MULTIPLE_DATABASES: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/POSTGRES_MULTIPLE_DATABASES
+  QDRANT_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/QDRANT_API_KEY
+  REDIS_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/REDIS_PASSWORD
+  REDIS_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/REDIS_URL
+  OPENID_PROVIDER_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OPENID_PROVIDER_URL
+  OAUTH_CLIENT_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OAUTH_CLIENT_ID
+  OAUTH_CLIENT_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OAUTH_CLIENT_SECRET
+  OPENAI_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OPENAI_API_KEY
+  OPENAI_API_BASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OPENAI_API_BASE_URL
+  WEBUI_SECRET_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/WEBUI_SECRET_KEY
+  OPEN_TERMINAL_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/OPEN_TERMINAL_API_KEY
+  ROOT_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ROOT_DOMAIN
+  EDGE_TTS_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/EDGE_TTS_API_KEY
+  MCPO_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/MCPO_API_KEY
+  PIPELINES_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/open-webui/PIPELINES_API_KEY
+---
+name: vaultwarden
+working_dir: apps/vaultwarden
+compose_files:
+  - compose.vaultwarden.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  ADMIN_TOKEN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/ADMIN_TOKEN
+  EXPERIMENTAL_CLIENT_FEATURE_FLAGS: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/EXPERIMENTAL_CLIENT_FEATURE_FLAGS
+  DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/DOMAIN
+  SMTP_HOST: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SMTP_HOST
+  SMTP_FROM: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SMTP_FROM
+  SMTP_USERNAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SMTP_USERNAME
+  SMTP_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SMTP_PASSWORD
+  SSO_AUTHORITY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SSO_AUTHORITY
+  SSO_CLIENT_ID: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SSO_CLIENT_ID
+  SSO_CLIENT_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SSO_CLIENT_SECRET
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/SERVICE_NAME
+  OIDC_PROVIDER_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/OIDC_PROVIDER_DOMAIN
+  VAULTWARDEN_BASIC_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/VAULTWARDEN_BASIC_USER
+  VAULTWARDEN_BASIC_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/core/vaultwarden/VAULTWARDEN_BASIC_PASSWORD
+---
+name: obsidian-livesync
+working_dir: apps/obsidian-livesync
+compose_files:
+  - compose.obsidian-livesync.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/SERVICE_NAME
+  COUCHDB_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/COUCHDB_PASSWORD
+  COUCHDB_USER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/tools/obsidian-livesync/COUCHDB_USER
+---
+name: vane
+working_dir: apps/vane
+compose_files:
+  - compose.vane.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/vane/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/vane/SERVICE_NAME
+  SEARXNG_API_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/vane/SEARXNG_API_URL
+---
+name: manifest
+working_dir: apps/manifest
+compose_files:
+  - compose.manifest.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/SERVICE_NAME
+  BETTER_AUTH_SECRET: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/BETTER_AUTH_SECRET
+  BETTER_AUTH_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/BETTER_AUTH_URL
+  DATABASE_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/DATABASE_URL
+  EMAIL_API_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_API_KEY
+  EMAIL_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_DOMAIN
+  EMAIL_FROM: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_FROM
+  EMAIL_PROVIDER: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/EMAIL_PROVIDER
+  MANIFEST_ENCRYPTION_KEY: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/MANIFEST_ENCRYPTION_KEY
+  POSTGRES_PASSWORD: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/manifest/POSTGRES_PASSWORD
+---
+name: headroom
+working_dir: apps/headroom
+compose_files:
+  - compose.headroom.yaml
+remove_orphans: true
+force_image_pull: false
+external_secrets:
+  SERVICE_DOMAIN: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/SERVICE_DOMAIN
+  SERVICE_NAME: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/SERVICE_NAME
+  OPENAI_TARGET_API_URL: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/OPENAI_TARGET_API_URL
+  NEO4J_AUTH: a1db37a1-167f-46f0-b63f-657d5afe43c5:prod:/ai/headroom/NEO4J_AUTH
