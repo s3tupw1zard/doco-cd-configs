@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:2.11.4-alpine@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648
+    image: caddy:2.11.4-alpine@sha256:de23def33b17fb5d1290b0f6c2add1d70780e52341896c00a4c8a2a2fe9d355e
     container_name: caddy
     hostname: caddy
     restart: always
@@ -24,7 +24,7 @@ services:
 
   ghost:
     # Do not alter this without updating the Tinybird Sync container as well
-    image: ghost:6.64.0-alpine@sha256:8f8f350272c9b581a91b83e81edcb191791db47b1b75c9abf603e18fdbc1f027
+    image: ghost:6.64.0-alpine@sha256:47ecbe856dd06dcd20cb9410e1c4d532fc085eba776cfabc203609c7d15d8320
     container_name: ghost
     hostname: ghost
     restart: always
@@ -95,7 +95,7 @@ services:
       - ghost_network
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.415@sha256:eb1931e7a574682e39e946a2d1cb7a8ecd63a4b91eda94346d1e0121b5758d0d
+    image: ghost/traffic-analytics:1.0.423@sha256:b9839823135682458e3e72526574be2cbe3c79320e84de14f4e18cc62efa7279
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: always
@@ -160,7 +160,7 @@ services:
 
   tinybird-sync:
     # Do not alter this without updating the Ghost container as well
-    image: ghost:6.64.0-alpine@sha256:8f8f350272c9b581a91b83e81edcb191791db47b1b75c9abf603e18fdbc1f027
+    image: ghost:6.64.0-alpine@sha256:47ecbe856dd06dcd20cb9410e1c4d532fc085eba776cfabc203609c7d15d8320
     container_name: tinybird-sync
     hostname: tinybird-sync
     command: >
@@ -218,7 +218,7 @@ services:
     restart: no
 
   tinybird-local:
-    image: tinybirdco/tinybird-local:beta@sha256:9a46a577c8e5c523f1b51f6c5ee6e291d2b91f386940e76d44c73b65aca1e728
+    image: tinybirdco/tinybird-local:beta@sha256:f1bab9d92ad7de088bce4fb147df5f63be4c71ed1c3bd43614548ea75e8482fe
     container_name: tinybird-local
     hostname: tinybird-local
     # If you want to limit container resources
