@@ -132,7 +132,6 @@ services:
       - 25565:25565
       - 25570:25570
       - 42021:42021/tcp
-      - 42022:42022/tcp
       - 42023:42023/tcp
     restart: always
     networks: [netbird]
