@@ -1,0 +1,50 @@
+# Recreates the effective Renovate behavior:
+#   patch + minor (+ digest-only where the tag version itself did not change) => auto-merge
+#   major => manual merge
+#
+# This workflow intentionally does NOT check out PR code. Using pull_request_target gives
+# the workflow enough permission to enable auto-merge for Dependabot PRs.
+#
+# Repository setting required:
+#   Settings -> General -> Pull Requests -> Allow auto-merge
+#
+# Place this file at:
+#   .github/workflows/dependabot-automerge.yml
+
+name: Dependabot auto-merge
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Read Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v3
+        with:
+          github-token: "${{ github.token }}"
+
+      - name: Enable auto-merge for patch, minor and digest-only updates
+        if: >-
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-minor' ||
+          (
+            steps.metadata.outputs.previous-version != '' &&
+            steps.metadata.outputs.previous-version == steps.metadata.outputs.new-version
+          )
+        env:
+          GH_TOKEN: "${{ github.token }}"
+          PR_URL: "${{ github.event.pull_request.html_url }}"
+        run: gh pr merge --auto --merge "$PR_URL"
