@@ -35,6 +35,11 @@ services:
       - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=letsencrypt"
       - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=1411"
       - "traefik.docker.network=netbird"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
 networks:
   netbird:

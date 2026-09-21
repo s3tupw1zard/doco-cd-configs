@@ -67,6 +67,10 @@ services:
     # Uncomment if using `ENABLE_FAIL2BAN=1`:
     cap_add:
       - NET_ADMIN
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
 
   autodiscover:
     image: monogramm/autodiscover-email-settings:latest@sha256:4a9706ab469aff8e610bb2a4e22fe9c19216c571d2471e85941b2d3d5f4e6f28
@@ -86,6 +90,11 @@ services:
       - SMTP_SOCKET=STARTTLS
     networks:
       - dms_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
 networks:
   dms_network:
