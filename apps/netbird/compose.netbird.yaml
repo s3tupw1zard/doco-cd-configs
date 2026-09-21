@@ -44,8 +44,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "500m"
-        max-file: "2"
+        max-size: "50m"
+        max-file: "1"
 
   # UI dashboard
   dashboard:
@@ -78,8 +78,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "500m"
-        max-file: "2"
+        max-size: "50m"
+        max-file: "1"
 
   # Combined server (Management + Signal + Relay + STUN)
   netbird-server:
@@ -116,8 +116,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "500m"
-        max-file: "2"
+        max-size: "50m"
+        max-file: "1"
 
   # NetBird Proxy - exposes internal resources to the internet
   proxy:
@@ -168,8 +168,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "500m"
-        max-file: "2"
+        max-size: "50m"
+        max-file: "1"
 
   crowdsec:
     image: crowdsecurity/crowdsec:v1.8.1
@@ -191,8 +191,8 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "500m"
-        max-file: "2"
+        max-size: "50m"
+        max-file: "1"
 
 volumes:
   netbird_data:

@@ -21,6 +21,11 @@ services:
       - ghost_network
       - tinybird_network
       - dms_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
   ghost:
     # Do not alter this without updating the Tinybird Sync container as well
@@ -68,6 +73,11 @@ services:
         required: false
     networks:
       - ghost_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
   db:
     image: mysql:8.4.11@sha256:85b9bf2e29cf836ecb8c2a15a935d4ba0c606631dff1dd79531a11983c638f2a
@@ -93,6 +103,11 @@ services:
       retries: 120
     networks:
       - ghost_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
   traffic-analytics:
     image: ghost/traffic-analytics:1.0.423@sha256:b9839823135682458e3e72526574be2cbe3c79320e84de14f4e18cc62efa7279
@@ -113,6 +128,11 @@ services:
     profiles: [analytics]
     networks:
       - ghost_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
   activitypub:
     image: ghcr.io/tryghost/activitypub:1.2.9@sha256:f950017169c778f90bc1d4097c0c83735dd88ee26a7dfacda56fb6325d4053a0
@@ -140,6 +160,11 @@ services:
     profiles: [activitypub]
     networks:
       - ghost_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
   # Supporting Services
 
@@ -157,6 +182,11 @@ services:
       - ghost_network
     tty: false
     restart: no
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
   tinybird-sync:
     # Do not alter this without updating the Ghost container as well
@@ -182,6 +212,11 @@ services:
       - ghost_network
     profiles: [analytics]
     restart: no
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
   tinybird-deploy:
     image: ghcr.io/s3tupw1zard/ghost-tinybird:6.53.0-tinybird.20260719@sha256:e873f98d9c4ee366f0f6e1fb909ff6b5e742f8acc7e5c5f6073e8c3fc385f84e
@@ -202,6 +237,11 @@ services:
     networks:
       - ghost_network
     tty: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
   activitypub-migrate:
     image: ghcr.io/tryghost/activitypub-migrations:1.2.9@sha256:f8a376e83187cc927fd6286a9e825b71056b2ac7dd8afcd1af1c8c7dc4657a8e
@@ -216,6 +256,11 @@ services:
         condition: service_healthy
     profiles: [activitypub]
     restart: no
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
   tinybird-local:
     image: tinybirdco/tinybird-local:beta@sha256:f1bab9d92ad7de088bce4fb147df5f63be4c71ed1c3bd43614548ea75e8482fe
@@ -240,7 +285,11 @@ services:
     profiles: [tinybird-local]
     networks:
       - tinybird_network
-
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "1"
 
 volumes:
   caddy_data:
