@@ -1,15 +1,3 @@
-# Migrated from renovate.json
-#
-# Important:
-# - The source config uses includePaths: ["apps/**"], so archive/** rules were not active.
-# - Dependabot requires an explicit schedule; "daily" is used as the closest practical
-#   equivalent to Renovate being continuously eligible to create update PRs.
-# - Renovate custom versioning regexes cannot be represented 1:1 in Dependabot.
-# - Dependabot group update-types only understands major/minor/patch. Digest-only updates
-#   may therefore be emitted separately for groups that intentionally exclude majors.
-#
-# Place this file at: .github/dependabot.yml
-
 version: 2
 
 updates:
