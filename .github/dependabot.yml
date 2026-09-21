@@ -214,18 +214,3 @@ updates:
         update-types:
           - "minor"
           - "patch"
-
-  # whoami for testing dependabot
-  - package-ecosystem: "docker-compose"
-    directory: "/archive/whoami"
-    schedule:
-      interval: "daily"
-    labels:
-      - "testing"
-    groups:
-      whoami:
-        patterns:
-          - "traefik/whoami"
-        update-types:
-          - "minor"
-          - "patch"
