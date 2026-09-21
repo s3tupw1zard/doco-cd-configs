@@ -49,7 +49,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/litellm/**"
+                "archive/litellm/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/berriai/litellm"
@@ -71,7 +71,7 @@
         {
             "description": "litellm Postgres",
             "matchFileNames": [
-                "apps/litellm/**"
+                "archive/litellm/**"
             ],
             "matchDatasources": [
                 "docker"
@@ -95,7 +95,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/open-webui/**"
+                "archive/open-webui/**"
             ],
             "matchPackageNames": [
                 "apache/tika",
@@ -128,7 +128,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/open-webui/**"
+                "archive/open-webui/**"
             ],
             "matchPackageNames": [
                 "postgres"
@@ -272,7 +272,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/vaultwarden/**"
+                "archive/vaultwarden/**"
             ],
             "matchPackageNames": [
                 "vaultwarden/server"
@@ -765,7 +765,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/manifest/**"
+                "archive/manifest/**"
             ],
             "matchPackageNames": [
                 "manifestdotbuild/manifest"
@@ -792,7 +792,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/manifest/**"
+                "archive/manifest/**"
             ],
             "matchPackageNames": [
                 "postgres"
@@ -814,7 +814,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/obsidian-livesync/**"
+                "archive/obsidian-livesync/**"
             ],
             "matchPackageNames": [
                 "couchdb"
@@ -841,7 +841,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/vane/**"
+                "archive/vane/**"
             ],
             "matchPackageNames": [
                 "itzcrazykns1337/vane"
@@ -982,7 +982,7 @@
                 "docker-compose"
             ],
             "matchFileNames": [
-                "apps/headroom/**"
+                "archive/headroom/**"
             ],
             "matchPackageNames": [
                 "ghcr.io/headroomlabs-ai/headroom"
