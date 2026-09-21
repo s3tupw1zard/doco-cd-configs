@@ -1,0 +1,216 @@
+version: 2
+
+updates:
+  # Pelican Panel + Wings
+  - package-ecosystem: "docker-compose"
+    directories:
+      - "/apps/pelican-panel"
+      - "/apps/pelican-wings"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "pelican"
+      - "gaming"
+    groups:
+      pelican:
+        patterns:
+          - "*pelican/panel"
+          - "*pelican/wings"
+
+  # SearXNG
+  - package-ecosystem: "docker-compose"
+    directory: "/apps/searxng"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "automation"
+      - "web-search"
+    groups:
+      searxng:
+        patterns:
+          - "valkey/valkey"
+          - "searxng/searxng"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Backrest
+  - package-ecosystem: "docker-compose"
+    directory: "/apps/backrest"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "core"
+    groups:
+      backrest:
+        patterns:
+          - "*garethgeorge/backrest"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Traefik
+  - package-ecosystem: "docker-compose"
+    directory: "/apps/traefik"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "core"
+      - "network"
+    groups:
+      traefik:
+        patterns:
+          - "traefik"
+        update-types:
+          - "patch"
+
+  # Pocket ID
+  - package-ecosystem: "docker-compose"
+    directory: "/apps/pocket-id"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "security"
+    groups:
+      pocket-id:
+        patterns:
+          - "*pocket-id/pocket-id"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Docker Mailserver
+  - package-ecosystem: "docker-compose"
+    directory: "/apps/dms"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "core"
+      - "mail"
+      - "autodiscover-mail"
+    groups:
+      dms:
+        patterns:
+          - "*docker-mailserver/docker-mailserver"
+          - "monogramm/autodiscover-email-settings"
+
+  # Ghost stack
+  - package-ecosystem: "docker-compose"
+    directory: "/apps/ghost"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "blog"
+      - "ghost"
+    groups:
+      ghost:
+        patterns:
+          - "ghost"
+          - "caddy"
+          - "ghost/traffic-analytics"
+          - "*tryghost/activitypub"
+          - "*tryghost/activitypub-migrations"
+
+      # Renovate used a custom regex:
+      # ^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)-(?<compatibility>tinybird)\.(?<build>\d{8})$
+      # Dependabot has no equivalent custom versioning parser, so this relies on
+      # Dependabot's Docker Compose prerelease/SemVer handling.
+      ghost-tinybird:
+        patterns:
+          - "*s3tupw1zard/ghost-tinybird"
+
+      tinybird-local:
+        patterns:
+          - "tinybirdco/tinybird-local"
+
+      ghost-mysql:
+        patterns:
+          - "mysql"
+
+    # Renovate allowed only MySQL 8.x.
+    # Docker ignores use Bundler-style version ranges in Dependabot.
+    ignore:
+      - dependency-name: "mysql"
+        versions:
+          - ">= 9"
+
+  # NetBird
+  - package-ecosystem: "docker-compose"
+    directory: "/apps/netbird"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "netbird"
+      - "networking"
+    groups:
+      netbird:
+        patterns:
+          - "netbirdio/dashboard"
+          - "netbirdio/netbird-server"
+          - "netbirdio/reverse-proxy"
+          - "crowdsecurity/crowdsec"
+        update-types:
+          - "minor"
+          - "patch"
+
+      netbird-traefik:
+        patterns:
+          - "traefik"
+
+    # Renovate: allowedVersions "< v3.7"
+    ignore:
+      - dependency-name: "traefik"
+        versions:
+          - ">= 3.7"
+
+  # Jenkins
+  - package-ecosystem: "docker-compose"
+    directory: "/apps/jenkins"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "jenkins"
+      - "automation"
+    groups:
+      jenkins:
+        patterns:
+          - "jenkins/jenkins"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # doco-cd
+  - package-ecosystem: "docker-compose"
+    directory: "/apps/doco-cd"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+      - "dependabot"
+      - "core"
+      - "gitops"
+    groups:
+      doco-cd:
+        patterns:
+          - "*kimdre/doco-cd"
+        update-types:
+          - "minor"
+          - "patch"
