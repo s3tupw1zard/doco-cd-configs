@@ -11,7 +11,7 @@ services:
           interval: 300
           target: main-vm-01
       SECRET_PROVIDER: ${SECRET_PROVIDER}
-      SECRET_PROVIDER_SITE_URL: ${SECRET_PROVIDER_SITE_URL}
+      SECRET_PROVIDER_SITE_URL: https://${SECRET_PROVIDER_SITE_DOMAIN}
       SECRET_PROVIDER_CLIENT_ID: ${SECRET_PROVIDER_CLIENT_ID}
       SECRET_PROVIDER_CLIENT_SECRET: ${SECRET_PROVIDER_CLIENT_SECRET}
       GIT_ACCESS_TOKEN: ${GIT_ACCESS_TOKEN}
@@ -27,6 +27,8 @@ services:
       options:
         max-size: "50m"
         max-file: "1"
+    extra_hosts:
+      - "${SECRET_PROVIDER_SITE_DOMAIN}:100.64.64.100"
 
 volumes:
   data:
