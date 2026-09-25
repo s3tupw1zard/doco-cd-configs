@@ -110,7 +110,7 @@ services:
         max-file: "1"
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.423@sha256:b9839823135682458e3e72526574be2cbe3c79320e84de14f4e18cc62efa7279
+    image: ghost/traffic-analytics:1.0.428@sha256:8fbf08668c6d8ed6d6eaaee418286bf578c5e9e51bbc943d9fb99a347590ccab
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: always
@@ -135,7 +135,7 @@ services:
         max-file: "1"
 
   activitypub:
-    image: ghcr.io/tryghost/activitypub:1.2.9@sha256:f950017169c778f90bc1d4097c0c83735dd88ee26a7dfacda56fb6325d4053a0
+    image: ghcr.io/tryghost/activitypub:1.2.10@sha256:3205bbf7c0f26d5145f2714458183c1e5a725438dd4c7e4de63c480064e82289
     container_name: activitypub
     hostname: activitypub
     restart: always
@@ -244,7 +244,7 @@ services:
         max-file: "1"
 
   activitypub-migrate:
-    image: ghcr.io/tryghost/activitypub-migrations:1.2.9@sha256:f8a376e83187cc927fd6286a9e825b71056b2ac7dd8afcd1af1c8c7dc4657a8e
+    image: ghcr.io/tryghost/activitypub-migrations:1.2.10@sha256:ca203fca38e1e772fc6c7db5d5625ebfe2b5ff03be03f6b2573025787ac492b4
     container_name: activitypub-migrate
     hostname: activitypub-migrate
     environment:
