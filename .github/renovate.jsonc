@@ -1,0 +1,571 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["docker-compose"],
+  "includePaths": ["apps/**", "archive/**"],
+  "labels": ["renovate"],
+  "platformAutomerge": true,
+
+  "packageRules": [
+    // -------------------------------------------------------------------------
+    // Shared behavior
+    // -------------------------------------------------------------------------
+
+    {
+      "description": "Automerge non-major Docker updates",
+      "matchUpdateTypes": ["patch", "minor", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+
+    {
+      "description": "Mark archived application updates",
+      "matchFileNames": ["archive/**"],
+      "addLabels": ["archived"]
+    },
+
+    // -------------------------------------------------------------------------
+    // Active applications (apps/**) — primary application containers
+    // -------------------------------------------------------------------------
+
+    {
+      "matchFileNames": ["apps/pelican-panel/**", "apps/pelican-wings/**"],
+      "matchPackageNames": ["ghcr.io/pelican/panel", "ghcr.io/pelican/wings"],
+      "description": "Pelican Panel and Wings",
+      "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>beta\\d+)$",
+      "ignoreUnstable": false,
+      "groupName": "pelican",
+      "addLabels": ["pelican", "gaming"]
+    },
+
+    {
+      "matchFileNames": ["apps/searxng/**"],
+      "matchPackageNames": ["searxng/searxng"],
+      "description": "SearXNG",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "searxng",
+      "addLabels": ["searxng", "web-search"]
+    },
+
+    {
+      "matchFileNames": ["apps/backrest/**"],
+      "matchPackageNames": ["ghcr.io/garethgeorge/backrest"],
+      "description": "Backrest",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "backrest",
+      "addLabels": ["backrest", "backup"]
+    },
+
+    {
+      "matchFileNames": ["apps/traefik/**"],
+      "matchPackageNames": ["traefik"],
+      "description": "Traefik",
+      "matchUpdateTypes": ["patch", "pin", "digest"],
+      "groupName": "traefik",
+      "addLabels": ["traefik", "networking", "reverse-proxy"]
+    },
+
+    {
+      "matchFileNames": ["apps/pocket-id/**"],
+      "matchPackageNames": ["ghcr.io/pocket-id/pocket-id"],
+      "description": "Pocket ID",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "pocket-id",
+      "addLabels": ["pocket-id", "identity", "security"]
+    },
+
+    {
+      "matchFileNames": ["apps/dms/**"],
+      "matchPackageNames": ["ghcr.io/docker-mailserver/docker-mailserver"],
+      "description": "Docker Mailserver",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "dms",
+      "addLabels": ["docker-mailserver", "mail"]
+    },
+
+    {
+      "matchFileNames": ["apps/ghost/**"],
+      "matchPackageNames": ["ghost"],
+      "description": "Ghost",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "ghost",
+      "addLabels": ["ghost", "blog"]
+    },
+
+    {
+      "matchFileNames": ["apps/netbird/**"],
+      "matchPackageNames": ["netbirdio/dashboard", "netbirdio/netbird-server", "netbirdio/reverse-proxy"],
+      "description": "NetBird",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "netbird",
+      "addLabels": ["netbird", "networking", "vpn"]
+    },
+
+    {
+      "matchFileNames": ["apps/jenkins/**"],
+      "matchPackageNames": ["jenkins/jenkins"],
+      "description": "Jenkins",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "jenkins",
+      "addLabels": ["jenkins", "ci"]
+    },
+
+    {
+      "matchFileNames": ["apps/doco-cd/**"],
+      "matchPackageNames": ["ghcr.io/kimdre/doco-cd"],
+      "description": "doco-cd",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "doco-cd",
+      "addLabels": ["doco-cd", "gitops"]
+    },
+
+    // -------------------------------------------------------------------------
+    // Active applications (apps/**) — dependencies, sidecars and compatibility
+    // -------------------------------------------------------------------------
+
+    {
+      "matchFileNames": ["apps/searxng/**"],
+      "matchPackageNames": ["valkey/valkey"],
+      "description": "SearXNG Valkey",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "searxng",
+      "addLabels": ["searxng", "cache", "valkey"]
+    },
+
+    {
+      "matchFileNames": ["apps/dms/**"],
+      "matchPackageNames": ["monogramm/autodiscover-email-settings"],
+      "description": "Docker Mailserver autodiscover",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "dms",
+      "addLabels": ["docker-mailserver", "mail", "autodiscover"]
+    },
+
+    {
+      "matchFileNames": ["apps/ghost/**"],
+      "matchPackageNames": ["caddy"],
+      "description": "Ghost Caddy",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "ghost",
+      "addLabels": ["ghost", "caddy", "reverse-proxy"]
+    },
+
+    {
+      "matchFileNames": ["apps/ghost/**"],
+      "matchPackageNames": ["ghost/traffic-analytics"],
+      "description": "Ghost Traffic Analytics",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "ghost",
+      "addLabels": ["ghost", "analytics"]
+    },
+
+    {
+      "matchFileNames": ["apps/ghost/**"],
+      "matchPackageNames": ["ghcr.io/tryghost/activitypub", "ghcr.io/tryghost/activitypub-migrations"],
+      "description": "Ghost ActivityPub",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "ghost",
+      "addLabels": ["ghost", "activitypub", "federation"]
+    },
+
+    {
+      "matchFileNames": ["apps/ghost/**"],
+      "matchPackageNames": ["ghcr.io/s3tupw1zard/ghost-tinybird"],
+      "description": "Ghost Tinybird integration",
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>tinybird)\\.(?<build>\\d{8})$",
+      "ignoreUnstable": true,
+      "groupName": "ghost-tinybird",
+      "addLabels": ["ghost", "tinybird", "analytics"]
+    },
+
+    {
+      "matchFileNames": ["apps/ghost/**"],
+      "matchPackageNames": ["tinybirdco/tinybird-local"],
+      "description": "Ghost Tinybird Local",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "tinybird-local",
+      "addLabels": ["ghost", "tinybird", "analytics"]
+    },
+
+    {
+      "matchFileNames": ["apps/ghost/**"],
+      "matchPackageNames": ["mysql"],
+      "description": "Ghost MySQL",
+      "ignoreUnstable": true,
+      "allowedVersions": "/^8(\\.|$)/",
+      "groupName": "ghost-mysql",
+      "addLabels": ["ghost", "database", "mysql"]
+    },
+
+    {
+      "matchFileNames": ["apps/netbird/**"],
+      "matchPackageNames": ["crowdsecurity/crowdsec"],
+      "description": "NetBird CrowdSec",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "netbird",
+      "addLabels": ["netbird", "security", "crowdsec"]
+    },
+
+    {
+      "matchFileNames": ["apps/netbird/**"],
+      "matchPackageNames": ["traefik"],
+      "description": "NetBird Traefik",
+      "allowedVersions": "< v3.7",
+      "groupName": "netbird-traefik",
+      "addLabels": ["netbird", "traefik", "reverse-proxy"]
+    },
+
+    // -------------------------------------------------------------------------
+    // Archived / inactive applications (archive/**) — primary application containers
+    // -------------------------------------------------------------------------
+
+    {
+      "matchFileNames": ["archive/litellm/**"],
+      "matchPackageNames": ["ghcr.io/berriai/litellm"],
+      "description": "LiteLLM",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "litellm",
+      "addLabels": ["litellm", "ai"]
+    },
+
+    {
+      "matchFileNames": ["archive/open-webui/**"],
+      "matchPackageNames": ["ghcr.io/open-webui/open-webui", "ghcr.io/open-webui/computer", "ghcr.io/s3tupw1zard/open-webui-computer-custom", "ghcr.io/open-webui/mcpo", "ghcr.io/open-webui/open-terminal"],
+      "description": "Open WebUI",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "open-webui",
+      "addLabels": ["open-webui", "ai", "chatbot"]
+    },
+
+    {
+      "matchFileNames": ["archive/n8n/**"],
+      "matchPackageNames": ["n8nio/n8n"],
+      "description": "n8n",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "n8n",
+      "addLabels": ["n8n", "automation"]
+    },
+
+    {
+      "matchFileNames": ["archive/pricebuddy/**"],
+      "matchPackageNames": ["jez500/pricebuddy", "jez500/seleniumbase-scrapper"],
+      "description": "PriceBuddy",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "pricebuddy",
+      "addLabels": ["pricebuddy", "price-monitoring"]
+    },
+
+    {
+      "matchFileNames": ["archive/vaultwarden/**"],
+      "matchPackageNames": ["vaultwarden/server"],
+      "description": "Vaultwarden",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "vaultwarden",
+      "addLabels": ["vaultwarden", "security", "password-manager"]
+    },
+
+    {
+      "matchFileNames": ["archive/whoami/**"],
+      "matchPackageNames": ["traefik/whoami"],
+      "description": "Whoami",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "whoami",
+      "addLabels": ["whoami", "networking", "diagnostics"]
+    },
+
+    {
+      "matchFileNames": ["archive/speedtest-tracker/**"],
+      "matchPackageNames": ["lscr.io/linuxserver/speedtest-tracker", "linuxserver/speedtest-tracker"],
+      "description": "Speedtest Tracker",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "speedtest-tracker",
+      "addLabels": ["speedtest-tracker", "monitoring", "networking"]
+    },
+
+    {
+      "matchFileNames": ["archive/forgejo/**"],
+      "matchPackageNames": ["codeberg.org/forgejo/forgejo"],
+      "description": "Forgejo",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "forgejo",
+      "addLabels": ["forgejo", "git", "devops"]
+    },
+
+    {
+      "matchFileNames": ["archive/nexus/**"],
+      "matchPackageNames": ["sonatype/nexus3"],
+      "description": "Nexus Repository",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "nexus",
+      "addLabels": ["nexus", "artifact-registry", "devops"]
+    },
+
+    {
+      "matchFileNames": ["archive/wakapi/**"],
+      "matchPackageNames": ["ghcr.io/muety/wakapi"],
+      "description": "Wakapi",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "wakapi",
+      "addLabels": ["wakapi", "coding", "analytics"]
+    },
+
+    {
+      "matchFileNames": ["archive/crowdsec/**"],
+      "matchPackageNames": ["crowdsec/crowdsec"],
+      "description": "CrowdSec",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "crowdsec",
+      "addLabels": ["crowdsec", "security"]
+    },
+
+    {
+      "matchFileNames": ["archive/immich/**"],
+      "matchPackageNames": ["ghcr.io/immich-app/immich-server", "ghcr.io/immich-app/immich-machine-learning"],
+      "description": "Immich",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "immich",
+      "addLabels": ["immich", "photos", "media"]
+    },
+
+    {
+      "matchFileNames": ["archive/homebox/**"],
+      "matchPackageNames": ["ghcr.io/sysadminsmedia/homebox"],
+      "description": "Homebox",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "homebox",
+      "addLabels": ["homebox", "inventory"]
+    },
+
+    {
+      "matchFileNames": ["archive/jellyfin/**"],
+      "matchPackageNames": ["jellyfin/jellyfin"],
+      "description": "Jellyfin",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "jellyfin",
+      "addLabels": ["jellyfin", "media"]
+    },
+
+    {
+      "matchFileNames": ["archive/hermes/**"],
+      "matchPackageNames": ["nousresearch/hermes-agent", "ghcr.io/jo-inc/camofox-browser", "bbernhard/signal-cli-rest-api"],
+      "description": "Hermes Agent",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "hermes",
+      "addLabels": ["hermes", "ai", "agent"]
+    },
+
+    {
+      "matchFileNames": ["archive/openclaw/**"],
+      "matchPackageNames": ["coollabsio/openclaw", "coollabsio/openclaw-browser"],
+      "description": "OpenClaw",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "openclaw",
+      "addLabels": ["openclaw", "ai", "agent"]
+    },
+
+    {
+      "matchFileNames": ["archive/manifest/**"],
+      "matchPackageNames": ["manifestdotbuild/manifest"],
+      "description": "Manifest",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "manifest",
+      "addLabels": ["manifest", "ai", "gateway", "routing"]
+    },
+
+    {
+      "matchFileNames": ["archive/obsidian-livesync/**"],
+      "matchPackageNames": ["couchdb"],
+      "description": "Obsidian LiveSync",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "obsidian-livesync",
+      "addLabels": ["obsidian", "sync", "couchdb"]
+    },
+
+    {
+      "matchFileNames": ["archive/vane/**"],
+      "matchPackageNames": ["itzcrazykns1337/vane"],
+      "description": "Vane",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "vane",
+      "addLabels": ["vane", "ai", "search"]
+    },
+
+    {
+      "matchFileNames": ["archive/langfuse/**"],
+      "matchPackageNames": ["ghcr.io/langfuse/langfuse", "ghcr.io/langfuse/langfuse-worker"],
+      "description": "Langfuse",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "langfuse",
+      "addLabels": ["langfuse", "ai", "observability"]
+    },
+
+    {
+      "matchFileNames": ["archive/headroom/**"],
+      "matchPackageNames": ["ghcr.io/headroomlabs-ai/headroom"],
+      "description": "Headroom",
+      "matchUpdateTypes": ["pin", "digest"],
+      "groupName": "headroom",
+      "addLabels": ["headroom", "litellm", "ai"]
+    },
+
+    {
+      "matchFileNames": ["archive/plane/**"],
+      "matchPackageNames": ["makeplane/plane-aio-community"],
+      "description": "Plane",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "plane",
+      "addLabels": ["plane", "project-management", "issue-tracking"]
+    },
+
+    // -------------------------------------------------------------------------
+    // Archived / inactive applications (archive/**) — dependencies, sidecars and compatibility
+    // -------------------------------------------------------------------------
+
+    {
+      "matchFileNames": ["archive/litellm/**"],
+      "matchPackageNames": ["postgres"],
+      "description": "LiteLLM PostgreSQL",
+      "matchDatasources": ["docker"],
+      "allowedVersions": "< 16.0.0",
+      "groupName": "litellm-postgres",
+      "addLabels": ["litellm", "database", "postgres"]
+    },
+
+    {
+      "matchFileNames": ["archive/open-webui/**"],
+      "matchPackageNames": ["apache/tika"],
+      "description": "Open WebUI Tika",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "open-webui",
+      "addLabels": ["open-webui", "document-processing", "tika"]
+    },
+
+    {
+      "matchFileNames": ["archive/open-webui/**"],
+      "matchPackageNames": ["qdrant/qdrant"],
+      "description": "Open WebUI Qdrant",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "open-webui",
+      "addLabels": ["open-webui", "vector-database", "qdrant"]
+    },
+
+    {
+      "matchFileNames": ["archive/open-webui/**"],
+      "matchPackageNames": ["redis"],
+      "description": "Open WebUI Redis",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "groupName": "open-webui",
+      "addLabels": ["open-webui", "cache", "redis"]
+    },
+
+    {
+      "matchFileNames": ["archive/open-webui/**"],
+      "matchPackageNames": ["postgres"],
+      "description": "Open WebUI PostgreSQL",
+      "allowedVersions": "15-alpine",
+      "groupName": "open-webui-postgres",
+      "addLabels": ["open-webui", "database", "postgres"]
+    },
+
+    {
+      "matchFileNames": ["archive/pricebuddy/**"],
+      "matchPackageNames": ["mysql"],
+      "description": "PriceBuddy MySQL",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "pricebuddy",
+      "addLabels": ["pricebuddy", "database", "mysql"]
+    },
+
+    {
+      "matchFileNames": ["archive/immich/**"],
+      "matchPackageNames": ["valkey/valkey"],
+      "description": "Immich Valkey digest",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["digest"],
+      "automerge": true,
+      "automergeType": "pr-comment",
+      "automergeComment": "bors: r+",
+      "addLabels": ["immich", "cache", "valkey"]
+    },
+
+    {
+      "matchFileNames": ["archive/immich/**"],
+      "matchPackageNames": ["ghcr.io/immich-app/postgres"],
+      "description": "Immich PostgreSQL",
+      "matchDatasources": ["docker"],
+      "allowedVersions": "/^14-.+$/",
+      "addLabels": ["immich", "database", "postgres"]
+    },
+
+    {
+      "matchFileNames": ["archive/manifest/**"],
+      "matchPackageNames": ["postgres"],
+      "description": "Manifest PostgreSQL",
+      "allowedVersions": "< 17.0.0",
+      "groupName": "manifest-postgres",
+      "addLabels": ["manifest", "database", "postgres"]
+    },
+
+    {
+      "matchFileNames": ["archive/langfuse/**"],
+      "matchPackageNames": ["clickhouse/clickhouse-server"],
+      "description": "Langfuse ClickHouse",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "langfuse-clickhouse",
+      "addLabels": ["langfuse", "database", "clickhouse"]
+    },
+
+    {
+      "matchFileNames": ["archive/langfuse/**"],
+      "matchPackageNames": ["redis"],
+      "description": "Langfuse Redis",
+      "allowedVersions": "< 8.0.0",
+      "groupName": "langfuse-redis",
+      "addLabels": ["langfuse", "cache", "redis"]
+    },
+
+    {
+      "matchFileNames": ["archive/langfuse/**"],
+      "matchPackageNames": ["postgres"],
+      "description": "Langfuse PostgreSQL",
+      "matchDatasources": ["docker"],
+      "allowedVersions": "< 18.0.0",
+      "groupName": "langfuse-postgres",
+      "addLabels": ["langfuse", "database", "postgres"]
+    },
+
+    {
+      "matchFileNames": ["archive/langfuse/**"],
+      "matchPackageNames": ["cgr.dev/chainguard/minio"],
+      "description": "Langfuse MinIO",
+      "matchUpdateTypes": ["pin", "digest"],
+      "groupName": "langfuse-minio",
+      "addLabels": ["langfuse", "object-storage", "minio"]
+    },
+
+    {
+      "matchFileNames": ["archive/plane/**"],
+      "matchPackageNames": ["postgres"],
+      "description": "Plane PostgreSQL compatibility",
+      "allowedVersions": "<16.0.0",
+      "addLabels": ["plane", "database", "postgres"]
+    },
+
+    {
+      "matchFileNames": ["archive/plane/**"],
+      "matchPackageNames": ["valkey/valkey"],
+      "description": "Plane Valkey compatibility",
+      "allowedVersions": "<8.0.0",
+      "addLabels": ["plane", "cache", "valkey"]
+    },
+
+    {
+      "matchFileNames": ["archive/plane/**"],
+      "matchPackageNames": ["rabbitmq"],
+      "description": "Plane RabbitMQ compatibility",
+      "allowedVersions": "<4.0.0",
+      "addLabels": ["plane", "message-queue", "rabbitmq"]
+    }
+
+  ]
+}
