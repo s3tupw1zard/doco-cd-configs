@@ -38,7 +38,7 @@ services:
       - bw-services
 
   bunkerweb-scheduler:
-    image: bunkerity/bunkerweb-scheduler:1.6.12@sha256:687d5810a2b42dd3cae2d95f3e887ebccdbaa4a08fcfd33cc9052f84ed361020
+    image: bunkerity/bunkerweb-scheduler:1.6.15@sha256:321867d8db44d3a4ca1edfa3ff2c5b50163d3ebd5c67ed0d107161319d5ee860
     container_name: bunkerweb-scheduler
     hostname: bunkerweb-scheduler
     environment:
