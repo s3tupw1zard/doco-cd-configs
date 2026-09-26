@@ -104,7 +104,7 @@ services:
       - "traefik.docker.network=traefik"
 
   hermes-dind:
-    image: docker:dind@sha256:66d292e5c26bd33a6f6f61cacb880de2186339a524ecba1ce098dbbaceed6515
+    image: docker:dind@sha256:3f3c01aaaebf7cce837356b688b7c059a4749f10bd7660dec7c58fc454a283f0
     container_name: hermes-dind
     hostname: hermes-dind
     privileged: true
