@@ -28,7 +28,7 @@
 #
 services:
   gateway:
-    image: nousresearch/hermes-agent:v2026.7.7.2@sha256:9c841866021c54c4596849f6135717e8a4d52ba510b7f52c50aef1de1a283973
+    image: nousresearch/hermes-agent:v2026.8.16.2@sha256:a39fc11620213e3669a327aff5c6cb1eb2b8a238c6044e33e7ef8885833d89a7
     container_name: hermes
     hostname: hermes
     restart: always
@@ -75,7 +75,7 @@ services:
       - "traefik.docker.network=traefik"
 
   dashboard:
-    image: nousresearch/hermes-agent:v2026.7.7.2@sha256:9c841866021c54c4596849f6135717e8a4d52ba510b7f52c50aef1de1a283973
+    image: nousresearch/hermes-agent:v2026.8.16.2@sha256:a39fc11620213e3669a327aff5c6cb1eb2b8a238c6044e33e7ef8885833d89a7
     container_name: hermes-dashboard
     hostname: hermes-dashboard
     restart: always
@@ -117,7 +117,7 @@ services:
       - /srv/ai/hermes/dind:/var/lib/docker
 
   camofox-browser:
-    image: ghcr.io/jo-inc/camofox-browser:1.11.2@sha256:826da04c4ec75b3eb450bc7cf2513176ba408f92b862b89f768ca30563171137
+    image: ghcr.io/jo-inc/camofox-browser:1.16.0@sha256:3cc29763d3c784ae71a7d56853a12c43e100ff2f13da1e2eb88322b08e12d6a0
     container_name: camofox-browser
     hostname: camofox-browser
     user: 1000:1000
@@ -140,7 +140,7 @@ services:
       - /srv/ai/hermes/camofox.config.json:/app/camofox.config.json
 
   signal-cli-rest-api:
-    image: bbernhard/signal-cli-rest-api@sha256:2399d449123cdad56c4d859277e3b9127e1a00c4d2ab4601c239882609286cf8
+    image: bbernhard/signal-cli-rest-api@sha256:2cf09d66a86fdd210e42ee91662216364acc27da1163a8c44167a77ea3a6559a
     container_name: signal-api
     hostname: signal-api
     restart: always
