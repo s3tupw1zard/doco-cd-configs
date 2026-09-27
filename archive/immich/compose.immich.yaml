@@ -1,6 +1,6 @@
 services:
   immich:
-    image: ghcr.io/immich-app/immich-server:v3.0.2@sha256:14390f3dc9512dc3273b12ccee6363d9be16c388699abc3f3fe0498bb9829937
+    image: ghcr.io/immich-app/immich-server:v3.2.2@sha256:79cc1623323d5894922686d8743b4780181428f98eecbfb58ce12c41ef02d1ea
     container_name: immich
     hostname: immich
     restart: always
@@ -39,7 +39,7 @@ services:
   immich-machine-learning:
     # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
     # Example tag: ${IMMICH_VERSION:-release}-cuda
-    image: ghcr.io/immich-app/immich-machine-learning:v3.0.2@sha256:412f68e46e1966d0f87a8733a430369ee184b3a83e7b1e2db536dff291a34aa7
+    image: ghcr.io/immich-app/immich-machine-learning:v3.2.2@sha256:60dfcf266a9ef3b7376f5678e8c980d4fb61db5fc48c078fe8a326ab1535d60d
     container_name: immich-machine-learning
     hostname: immich-machine-learning
     restart: always
