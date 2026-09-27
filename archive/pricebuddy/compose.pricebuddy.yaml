@@ -1,7 +1,7 @@
 services:
 
   pricebuddy:
-    image: jez500/pricebuddy:v1.0.53@sha256:583f8794328bbec4d0a3eab49d9af4ed7c0aaaee96f26811cc8bf8c3b47ae34c
+    image: jez500/pricebuddy:v1.0.54@sha256:3c4ab8897260afd70cdc572b4c382c5fb482e1426c3e1f35155c900678d6cfd4
     container_name: pricebuddy
     hostname: pricebuddy
     restart: always
@@ -38,7 +38,7 @@ services:
       - "traefik.docker.network=traefik"
 
   database:
-    image: mysql:9.7@sha256:cbade841779f1661300e705721f9d2ff159865cc7a8a291affbff43ac6ec7f1d
+    image: mysql:9.7@sha256:30a0abfa7b502a496e12339b54cd07aaa70363396dc4b8e8a72a92804a505cd6
     container_name: pricebuddy-database
     hostname: pricebuddy-database
     restart: always
