@@ -122,7 +122,7 @@ services:
       - "traefik.docker.network=traefik"
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:main@sha256:1a6399d237dc392a2313e0ca826020b3fd5d22536357840eb63393d18dc8b924
+    image: ghcr.io/open-webui/open-webui:main@sha256:8b432fe0a65b91116afc7961365c6cca5379cc923171386a96691f3471f3cae9
     container_name: open-webui
     hostname: open-webui
     restart: always
@@ -184,7 +184,7 @@ services:
       - "traefik.docker.network=traefik"
 
   open-terminal:
-    image: ghcr.io/open-webui/open-terminal:0.13.0-alpine
+    image: ghcr.io/open-webui/open-terminal:0.14.0-alpine
     container_name: open-terminal
     hostname: open-terminal
     restart: always
@@ -250,7 +250,7 @@ services:
       - "traefik.enable=false"
 
   redis:
-    image: redis:alpine@sha256:bd999b5cfee25fb24b8320a31fddbd69f462df44c8138c66e369582937beebc0
+    image: redis:alpine@sha256:3811787313eba226a2ef38658c6ccb91cd5e110edc89c37767de373120a0e5a0
     container_name: open-webui-redis
     hostname: redis
     restart: always
