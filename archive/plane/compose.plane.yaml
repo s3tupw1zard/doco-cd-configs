@@ -99,7 +99,7 @@ services:
       - plane-internal
 
   plane:
-    image: makeplane/plane-aio-community:v1.4.1
+    image: makeplane/plane-aio-community:v1.4.2
     container_name: plane
     hostname: plane
     environment:
@@ -149,7 +149,7 @@ services:
       - "traefik.docker.network=traefik"
 
   plane-init:
-    image: makeplane/plane-aio-community:v1.4.1
+    image: makeplane/plane-aio-community:v1.4.2
     container_name: plane-init
     entrypoint:
       - /bin/sh
