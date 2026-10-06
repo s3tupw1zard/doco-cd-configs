@@ -1,7 +1,7 @@
 services:
 
   pricebuddy:
-    image: jez500/pricebuddy:v1.0.54@sha256:3c4ab8897260afd70cdc572b4c382c5fb482e1426c3e1f35155c900678d6cfd4
+    image: jez500/pricebuddy:v1.0.55@sha256:a9c84c612f937a0831b178de69a1c857e0ccbe823a4e76c1d4bcd5e52b3dd348
     container_name: pricebuddy
     hostname: pricebuddy
     restart: always
