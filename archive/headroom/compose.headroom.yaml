@@ -2,7 +2,7 @@ services:
   # Headroom proxy — the OpenAI-compatible endpoint your client talks to.
   # Built from the repo Dockerfile so it tracks your local checkout.
   headroom-proxy:
-    image: ghcr.io/headroomlabs-ai/headroom:latest@sha256:90c21af0f32a314b1758ac3904be802ab32af517c701c3542ee9671925109f5e
+    image: ghcr.io/headroomlabs-ai/headroom:latest@sha256:d37d8867abe7a464c4d4e121f6ebc2cc42935670fa888ca58a5d67b2dc21a4f3
     container_name: headroom-proxy
     hostname: headroom-proxy
     # Bind to all interfaces inside the container so the published port is reachable.
