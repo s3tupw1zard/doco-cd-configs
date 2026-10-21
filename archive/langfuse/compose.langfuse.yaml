@@ -169,7 +169,7 @@ services:
 
 
   redis:
-    image: docker.io/redis:7@sha256:4fa24486b8bcca8eec45ee0eb166edc674795e53a2b53d1a9ef263eecebaac85
+    image: docker.io/redis:7@sha256:efb4bc8cc3cbc82f847f1c166d41c8d8757778b4397c915a05d011a947aa5427
     container_name: langfuse-redis
     hostname: langfuse-redis
     restart: always
