@@ -99,7 +99,7 @@ services:
       - "traefik.docker.network=traefik"
 
   clickhouse:
-    image: docker.io/clickhouse/clickhouse-server:26.9@sha256:0e5b46d063fcf17702473c8ac3688fa93bc2cdb6f290d8916be502ba41c29544
+    image: docker.io/clickhouse/clickhouse-server:26.9@sha256:19bfacb135479a892551a8155cfbbc8211aedf2aa888cd91950b9ee7e76cc7e3
     container_name: langfuse-clickhouse
     hostname: langfuse-clickhouse
     restart: always
