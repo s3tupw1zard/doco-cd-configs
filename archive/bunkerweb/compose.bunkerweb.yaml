@@ -16,7 +16,7 @@ x-bw-env: &bw-env
 
 services:
   bunkerweb:
-    image: bunkerity/bunkerweb:1.6.16@sha256:1d82de75139943c15a1daba8d2b51753fe5dfee529b3c76b4b40d0fee30fcf64
+    image: bunkerity/bunkerweb:1.6.17@sha256:3ee159b5428c0a51b672ef8aaecb1b2af270ea1793565021700dac71f7f438ab
     container_name: bunkerweb
     hostname: bunkerweb
     ports:
