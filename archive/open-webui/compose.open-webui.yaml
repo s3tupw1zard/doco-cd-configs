@@ -83,7 +83,7 @@ services:
       - "traefik.docker.network=traefik"
 
   tika:
-    image: apache/tika:latest@sha256:fe2c6e3fca77b986ff3368107a20fa5060a3eefd03d14c12b45c0334626335d2
+    image: apache/tika:latest@sha256:b99f19c4fd76237dafe7d22f719b9bddfa9a449da687c597a41e2f6d9a595418
     container_name: open-webui-tika
     hostname: open-webui-tika
     restart: always
@@ -184,7 +184,7 @@ services:
       - "traefik.docker.network=traefik"
 
   open-terminal:
-    image: ghcr.io/open-webui/open-terminal:0.14.5-alpine
+    image: ghcr.io/open-webui/open-terminal:0.14.6-alpine
     container_name: open-terminal
     hostname: open-terminal
     restart: always
