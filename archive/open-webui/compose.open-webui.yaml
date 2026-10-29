@@ -122,7 +122,7 @@ services:
       - "traefik.docker.network=traefik"
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:main@sha256:096c8f3d3132016210ca87b0b4dff01d2d66d9fe4fee088fae13fc30f9ac54f3
+    image: ghcr.io/open-webui/open-webui:main@sha256:0b399a8ba34558e181d316750455f2a95376a38cd60a61b9c942e138898944bd
     container_name: open-webui
     hostname: open-webui
     restart: always
@@ -250,7 +250,7 @@ services:
       - "traefik.enable=false"
 
   redis:
-    image: redis:alpine@sha256:47b08295737773de3b711fb86f13ae802f5074e96a9a2d29f5f80164ac08c046
+    image: redis:alpine@sha256:21090af93f8324db2f0f0f4f38a7c60369d47d917e000c3423d89d2ae2883537
     container_name: open-webui-redis
     hostname: redis
     restart: always
