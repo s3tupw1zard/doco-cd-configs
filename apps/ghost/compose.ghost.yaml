@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:2.11.7-alpine@sha256:eb4d35b7452d1ab6171fbdbe8d9275b2301dad6dad92115d91e19fb9b24d510f
+    image: caddy:2.11.7-alpine@sha256:e70b164da81ef698b3ad19af799ea6086ce6d9e48ed4079eb9fe26f6fbf14ee5
     container_name: caddy
     hostname: caddy
     restart: always
@@ -29,7 +29,7 @@ services:
 
   ghost:
     # Do not alter this without updating the Tinybird Sync container as well
-    image: ghost:6.72.0-alpine@sha256:cd617a0901e659cda978b9063f449535d105f5f1a0340ffac415db2c42d22606
+    image: ghost:6.73.0-alpine@sha256:4195f6c405e40230cd10c0770425cf500c1f542a96e9f6584c11649c150e5a89
     container_name: ghost
     hostname: ghost
     restart: always
@@ -110,7 +110,7 @@ services:
         max-file: "1"
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.508@sha256:4bbf976c722aff71cd80b7d2ef4808a6dcc40ce0d652d66dbac895e43b39538b
+    image: ghost/traffic-analytics:1.0.512@sha256:fe89739e78a6e456a3d8c51e6bd014e349ff96cf61fd543d3d83569300df5ced
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: always
@@ -190,7 +190,7 @@ services:
 
   tinybird-sync:
     # Do not alter this without updating the Ghost container as well
-    image: ghost:6.72.0-alpine@sha256:cd617a0901e659cda978b9063f449535d105f5f1a0340ffac415db2c42d22606
+    image: ghost:6.73.0-alpine@sha256:4195f6c405e40230cd10c0770425cf500c1f542a96e9f6584c11649c150e5a89
     container_name: tinybird-sync
     hostname: tinybird-sync
     command: >
