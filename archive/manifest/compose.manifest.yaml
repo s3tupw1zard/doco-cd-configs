@@ -1,6 +1,6 @@
 services:
   manifest:
-    image: manifestdotbuild/manifest:6.28.10@sha256:7913f1839bba9392647019b60b4dfce2141f15e55164ebcb616c662b69866cd0
+    image: manifestdotbuild/manifest:6.28.11@sha256:0498b2cab7e3558aa8e913c0987872c5bf4c2b8d1e5f98de81e5352b7ed4269e
     container_name: manifest
     hostname: manifest
     #ports:
