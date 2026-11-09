@@ -1,6 +1,6 @@
 services:
   openclaw:
-    image: coollabsio/openclaw:2026.11.1@sha256:a13f7b9a8a81ff42038fe7f11a91bf003437bbeac799c096e4c3926798047dc7
+    image: coollabsio/openclaw:2026.11.2@sha256:5228c123449946e8c38518689f4f348361e925e74db8cc61435fb18a9e1c1b87
     container_name: openclaw
     hostname: openclaw
     restart: always
