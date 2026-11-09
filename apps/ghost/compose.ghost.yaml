@@ -110,7 +110,7 @@ services:
         max-file: "1"
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.529@sha256:3bf2b6597ad1d19a09cf3fc52e2f9741824694dd0022042c1235670afa54b841
+    image: ghost/traffic-analytics:1.0.532@sha256:64a020020e80dcb14972ea3bfc6f81d2aabab19b17435e20d35d44a4dc2849e4
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: always
