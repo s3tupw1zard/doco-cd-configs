@@ -263,7 +263,7 @@ services:
         max-file: "1"
 
   tinybird-local:
-    image: tinybirdco/tinybird-local:beta@sha256:fbd5bb3d13fc52d4168c97538b967fa1c7f2c0401180c52a4872d270cfef14b7
+    image: tinybirdco/tinybird-local:beta@sha256:174145219be6c52f41c0743c8dffd917eaba0c4d1535066adc0e2619030ef0a3
     container_name: tinybird-local
     hostname: tinybird-local
     # If you want to limit container resources
