@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:2.11.9-alpine@sha256:0bbb055bda6793c999bde78b1b5ce3e89f829fb031af2cf50056ea1246559fee
+    image: caddy:2.11.9-alpine@sha256:003a97808e781aa9f7e75cc2f43d34d461099031faf5e20faefb9f61126836f0
     container_name: caddy
     hostname: caddy
     restart: always
@@ -110,7 +110,7 @@ services:
         max-file: "1"
 
   traffic-analytics:
-    image: ghost/traffic-analytics:1.0.538@sha256:1ca36b5f19bf0b00faabbc68dbd1a95d3a558d89d90031c47a013a9f9a0af939
+    image: ghost/traffic-analytics:1.0.546@sha256:ea073ff53e6d50974f358d79f7f3d7e627396440f9e0d60bc238f35021460944
     container_name: traffic-analytics
     hostname: traffic-analytics
     restart: always
