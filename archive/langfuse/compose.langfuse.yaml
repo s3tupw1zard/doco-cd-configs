@@ -124,7 +124,7 @@ services:
       - langfuse
 
   minio:
-    image: cgr.dev/chainguard/minio:latest@sha256:96b6cf3e14084d3427ec46de10c2873af61b945ad9272eec266cfc8df551cba5
+    image: cgr.dev/chainguard/minio:latest@sha256:ddfab4c402bf32e7701600d16d8c40dbccfab4c4e5340eef4c324394349c7926
     container_name: langfuse-minio
     hostname: langfuse-minio
     restart: always
