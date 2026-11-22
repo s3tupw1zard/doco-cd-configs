@@ -1,6 +1,6 @@
 services:
   mailserver:
-    image: ghcr.io/docker-mailserver/docker-mailserver:16.0.1@sha256:bcadff942ec7e2afe1881cada582f439f0f82d62b207f437ecafdea6a784ac4d
+    image: ghcr.io/docker-mailserver/docker-mailserver:16.0.1@sha256:108cc91626c00125302a1e89288e4ce2b731310a6c09ef417c336dd05c9ad9bc
     container_name: mailserver
     # Provide the FQDN of your mail server here (Your DNS MX record should point to this value)
     hostname: ${MAILSERVER_HOSTNAME}
