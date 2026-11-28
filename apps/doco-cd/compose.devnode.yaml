@@ -1,0 +1,25 @@
+services:
+  doco-cd:
+    image: ghcr.io/kimdre/doco-cd:0.138.0@sha256:9d8d10b795f7ef4372088475fd16277d7b79a0e85434fbfc34270e26fb90ddea
+    restart: unless-stopped
+    environment:
+      POLL_CONFIG: |
+        - url: https://github.com/s3tupw1zard/doco-cd-configs.git
+          reference: main
+          interval: 300
+          target: devnode
+      SECRET_PROVIDER: infisical
+      SECRET_PROVIDER_SITE_URL: ${SECRET_PROVIDER_SITE_URL:?required}
+      SECRET_PROVIDER_CLIENT_ID: ${SECRET_PROVIDER_CLIENT_ID:?required}
+      SECRET_PROVIDER_CLIENT_SECRET: ${SECRET_PROVIDER_CLIENT_SECRET:?required}
+      TZ: Europe/Berlin
+      DOCKER_SWARM_FEATURES: "false"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - data:/data
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+volumes:
+  data:

@@ -1,59 +1,34 @@
 services:
-
-  searxng-redis:
-    image: valkey/valkey:9-alpine@sha256:3ad5a213cb1bc2fd4a113c89b6248a88655a6bf1dda69519d04e03cd3e3d2742
-    container_name: searxng-redis
-    hostname: searxng-redis
-    restart: always
-    command: valkey-server --save 30 1 --loglevel warning
-
-    networks:
-      - searxng
-    volumes:
-      - /srv/automation/searxng/valkey-data2:/data
-      
-      # localtime mount
-      - /etc/localtime:/etc/localtime:ro
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-        max-file: "1"
-
   searxng:
     image: searxng/searxng:latest@sha256:a31763b7af3caf6ae9aac1816ba774214eb550252e06a4998f276ded8d60461b
-    container_name: searxng
-    hostname: searxng
-    restart: always
-    networks:
-      - searxng
-      - traefik
-    #ports:
-    #  - "127.0.0.1:8002:8080"
-    volumes:
-      - /srv/automation/searxng/config:/etc/searxng:rw
-      - /srv/automation/searxng/data:/var/cache/searxng:rw
-      
-      # localtime mount
-      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8002:8080"
     environment:
-      - SEARXNG_BASE_URL=https://${SERVICE_DOMAIN}/
+      SEARXNG_SECRET: ${SEARXNG_SECRET:?required}
+      SEARXNG_BASE_URL: https://search.s3tupw1zard.dev/
+      SEARXNG_VALKEY_URL: valkey://valkey:6379/0
+    volumes:
+      - ./settings.yml:/etc/searxng/settings.yml:ro
+      - cache:/var/cache/searxng
+    depends_on:
+      valkey:
+        condition: service_healthy
     logging:
-      driver: "json-file"
       options:
         max-size: "10m"
-        max-file: "1"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_DOMAIN}`)"
-      - "traefik.http.routers.${SERVICE_NAME}.entrypoints=websecure"
-      - "traefik.http.routers.${SERVICE_NAME}.service=${SERVICE_NAME}"
-      - "traefik.http.routers.${SERVICE_NAME}.tls.certresolver=cloudflare"
-      # - "traefik.http.routers.${SERVICE_NAME}.middlewares=cloudflarewarp@file,crowdsec@file"
-      - "traefik.http.services.${SERVICE_NAME}.loadbalancer.server.port=8080"
-      - "traefik.docker.network=traefik"
-
-networks:
-  traefik:
-    external: true
-  searxng:
+        max-file: "3"
+  valkey:
+    image: valkey/valkey:9-alpine@sha256:3ad5a213cb1bc2fd4a113c89b6248a88655a6bf1dda69519d04e03cd3e3d2742
+    restart: unless-stopped
+    command: ["valkey-server", "--save", "30", "1"]
+    volumes:
+      - valkey:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  cache:
+  valkey:

@@ -7,6 +7,14 @@
   "platformAutomerge": true,
 
   "packageRules": [
+    {
+      "matchFileNames": ["apps/crawl4ai/**"],
+      "matchPackageNames": ["unclecode/crawl4ai"],
+      "groupName": "crawl4ai",
+      "addLabels": ["crawl4ai", "web-search"],
+      "automerge": false,
+      "pinDigests": true
+    },
     // -------------------------------------------------------------------------
     // Shared behavior
     // -------------------------------------------------------------------------
@@ -567,5 +575,9 @@
       "addLabels": ["plane", "message-queue", "rabbitmq"]
     }
 
+    ,{
+      "matchFileNames": ["apps/crawl4ai/**"],
+      "automerge": false
+    }
   ]
 }
