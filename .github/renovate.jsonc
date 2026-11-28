@@ -25,11 +25,11 @@
     },
 
     // -------------------------------------------------------------------------
-    // Active applications (apps/**) — primary application containers
+    // Application containers (active and archived)
     // -------------------------------------------------------------------------
 
     {
-      "matchFileNames": ["apps/pelican-panel/**", "apps/pelican-wings/**"],
+      "matchFileNames": ["archive/pelican-panel/**", "archive/pelican-wings/**"],
       "matchPackageNames": ["ghcr.io/pelican/panel", "ghcr.io/pelican/wings"],
       "description": "Pelican Panel and Wings",
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>beta\\d+)$",
@@ -48,7 +48,7 @@
     },
 
     {
-      "matchFileNames": ["apps/backrest/**"],
+      "matchFileNames": ["archive/backrest/**"],
       "matchPackageNames": ["ghcr.io/garethgeorge/backrest"],
       "description": "Backrest",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
@@ -57,7 +57,7 @@
     },
 
     {
-      "matchFileNames": ["apps/traefik/**"],
+      "matchFileNames": ["archive/traefik/**"],
       "matchPackageNames": ["traefik"],
       "description": "Traefik",
       "matchUpdateTypes": ["patch", "pin", "digest"],
@@ -66,7 +66,7 @@
     },
 
     {
-      "matchFileNames": ["apps/pocket-id/**"],
+      "matchFileNames": ["archive/pocket-id/**"],
       "matchPackageNames": ["ghcr.io/pocket-id/pocket-id"],
       "description": "Pocket ID",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
@@ -75,7 +75,7 @@
     },
 
     {
-      "matchFileNames": ["apps/dms/**"],
+      "matchFileNames": ["archive/dms/**"],
       "matchPackageNames": ["ghcr.io/docker-mailserver/docker-mailserver"],
       "description": "Docker Mailserver",
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
@@ -84,7 +84,7 @@
     },
 
     {
-      "matchFileNames": ["apps/ghost/**"],
+      "matchFileNames": ["archive/ghost/**"],
       "matchPackageNames": ["ghost"],
       "description": "Ghost",
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
@@ -93,7 +93,7 @@
     },
 
     {
-      "matchFileNames": ["apps/netbird/**"],
+      "matchFileNames": ["archive/netbird/**"],
       "matchPackageNames": ["netbirdio/dashboard", "netbirdio/netbird-server", "netbirdio/reverse-proxy"],
       "description": "NetBird",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
@@ -102,7 +102,7 @@
     },
 
     {
-      "matchFileNames": ["apps/jenkins/**"],
+      "matchFileNames": ["archive/jenkins/**"],
       "matchPackageNames": ["jenkins/jenkins"],
       "description": "Jenkins",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
@@ -120,7 +120,7 @@
     },
 
     // -------------------------------------------------------------------------
-    // Active applications (apps/**) — dependencies, sidecars and compatibility
+    // Application dependencies, sidecars and compatibility
     // -------------------------------------------------------------------------
 
     {
@@ -133,7 +133,7 @@
     },
 
     {
-      "matchFileNames": ["apps/dms/**"],
+      "matchFileNames": ["archive/dms/**"],
       "matchPackageNames": ["monogramm/autodiscover-email-settings"],
       "description": "Docker Mailserver autodiscover",
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
@@ -142,7 +142,7 @@
     },
 
     {
-      "matchFileNames": ["apps/ghost/**"],
+      "matchFileNames": ["archive/ghost/**"],
       "matchPackageNames": ["caddy"],
       "description": "Ghost Caddy",
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
@@ -151,7 +151,7 @@
     },
 
     {
-      "matchFileNames": ["apps/ghost/**"],
+      "matchFileNames": ["archive/ghost/**"],
       "matchPackageNames": ["ghost/traffic-analytics"],
       "description": "Ghost Traffic Analytics",
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
@@ -160,7 +160,7 @@
     },
 
     {
-      "matchFileNames": ["apps/ghost/**"],
+      "matchFileNames": ["archive/ghost/**"],
       "matchPackageNames": ["ghcr.io/tryghost/activitypub", "ghcr.io/tryghost/activitypub-migrations"],
       "description": "Ghost ActivityPub",
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
@@ -169,7 +169,7 @@
     },
 
     {
-      "matchFileNames": ["apps/ghost/**"],
+      "matchFileNames": ["archive/ghost/**"],
       "matchPackageNames": ["ghcr.io/s3tupw1zard/ghost-tinybird"],
       "description": "Ghost Tinybird integration",
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<compatibility>tinybird)\\.(?<build>\\d{8})$",
@@ -179,7 +179,7 @@
     },
 
     {
-      "matchFileNames": ["apps/ghost/**"],
+      "matchFileNames": ["archive/ghost/**"],
       "matchPackageNames": ["tinybirdco/tinybird-local"],
       "description": "Ghost Tinybird Local",
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
@@ -188,7 +188,7 @@
     },
 
     {
-      "matchFileNames": ["apps/ghost/**"],
+      "matchFileNames": ["archive/ghost/**"],
       "matchPackageNames": ["mysql"],
       "description": "Ghost MySQL",
       "ignoreUnstable": true,
@@ -198,7 +198,7 @@
     },
 
     {
-      "matchFileNames": ["apps/netbird/**"],
+      "matchFileNames": ["archive/netbird/**"],
       "matchPackageNames": ["crowdsecurity/crowdsec"],
       "description": "NetBird CrowdSec",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
@@ -207,7 +207,7 @@
     },
 
     {
-      "matchFileNames": ["apps/netbird/**"],
+      "matchFileNames": ["archive/netbird/**"],
       "matchPackageNames": ["traefik"],
       "description": "NetBird Traefik",
       "allowedVersions": "< v3.7",
