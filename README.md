@@ -5,20 +5,20 @@
 Active targets: `main-devnode` (applications and updater) and `updater-devnode` (main controller only). Previous targets and retired apps are preserved in `archive/`. Archiving repository files does not stop containers; review existing deployments before switching targets. Never run down -v to migrate.
 
 ### Infisical
-Create folders in the new Production environment: /searxng, /crawl4ai, /litellm, /scira and /doco-cd. The new project UUID is 249698ea-20b9-43f5-9066-95a0af265dac; the environment slug is prod. Grant the Doco-CD machine identity read access only to the needed folders. Bootstrap Doco-CD manually using apps/doco-cd/compose.main-devnode.yaml and SECRET_PROVIDER_SITE_URL, SECRET_PROVIDER_CLIENT_ID, SECRET_PROVIDER_CLIENT_SECRET from the new identity. Do not commit the bootstrap environment. Verify container DNS can resolve the Infisical host.
+Create folders in the new Production environment: /searxng, /crawl4ai, /litellm, /morphic and /doco-cd. The new project UUID is 249698ea-20b9-43f5-9066-95a0af265dac; the environment slug is prod. Grant the Doco-CD machine identity read access only to the needed folders. Bootstrap Doco-CD manually using apps/doco-cd/compose.main-devnode.yaml and SECRET_PROVIDER_SITE_URL, SECRET_PROVIDER_CLIENT_ID, SECRET_PROVIDER_CLIENT_SECRET from the new identity. Do not commit the bootstrap environment. Verify container DNS can resolve the Infisical host.
 
 Generate once per new app, in a private terminal, and paste the output into the matching Infisical folder:
 
     bash scripts/generate-secrets.sh searxng
     bash scripts/generate-secrets.sh crawl4ai
 
-Do not regenerate secrets for existing deployments. The script also offers litellm and scira for future use, but reuse existing LiteLLM keys and database credentials when migrating.
+Do not regenerate secrets for existing deployments. The script also offers litellm and morphic, but reuse existing LiteLLM keys and database credentials when migrating.
 
 ### Network
-Host Nginx and NetBird are external. Traefik binds only to loopback port 8080; SearXNG routes through Traefik. Crawl4AI remains on loopback 11235. See apps/traefik/README.md for required shared network and Nginx configuration. SearXNG JSON is enabled and the limiter is disabled for private use only. Do not expose publicly. Configure NetBird-only Nginx vhosts with TLS if remote access is needed. Crawl4AI requires bearer authentication; never allow crawling private or link-local destinations. Verify outbound restrictions and API authentication before enabling the service. No Docker socket is mounted into crawler.
+Host Nginx and NetBird are external. Traefik binds only to loopback port 8080; SearXNG routes through Traefik. Crawl4AI remains on host loopback 11235 and a dedicated internal Docker network for Morphic. See apps/traefik/README.md for required shared network and Nginx configuration. SearXNG JSON is enabled and the limiter is disabled for private use only. Do not expose publicly. Configure NetBird-only Nginx vhosts with TLS if remote access is needed. Crawl4AI requires bearer authentication; never allow crawling private or link-local destinations. Verify outbound restrictions and API authentication before enabling the service. No Docker socket is mounted into crawler.
 
 ### Deployment status
-Search services are prepared, not runtime-tested. Verify image versions/digests, settings mounts, health and JSON search. The new Infisical UUID is configured; secrets still need to be created. Doco-CD bootstrap requires explicit manual setup. LiteLLM is registered in the main devnode target. Before merging the activation change, migrate or stop the existing standalone instance and verify Infisical secrets, database and routing; the prior configuration stays archived. Scira remains in the main target, but only its local PostgreSQL and Valkey dependencies are enabled. The application is disabled (profile and scale 0) until local-only upstream support is available or source adaptations are explicitly approved. No object storage, billing, specialized APIs, or social login are configured.
+Search services are prepared, not runtime-tested. Verify image versions/digests, settings mounts, health and JSON search. The new Infisical UUID is configured; secrets still need to be created. Doco-CD bootstrap requires explicit manual setup. LiteLLM is registered in the main devnode target. Before merging the activation change, migrate or stop the existing standalone instance and verify Infisical secrets, database and routing; the prior configuration stays archived. Morphic replaces Scira in the main target. No separate cloud APIs, storage, billing, or source fork. See apps/morphic/README.md for prerequisites and account bootstrap. Removing Scira from the repo does not stop old containers; stop the old project explicitly without deleting volumes.
 
 ### Smoke tests
     curl -fsS -H 'Host: search.s3tupw1zard.dev' 'http://127.0.0.1:8080/search?q=flutter&format=json'
@@ -26,7 +26,7 @@ Search services are prepared, not runtime-tested. Verify image versions/digests,
 
 Verify unauthenticated crawler requests fail and authenticated requests use the intended token. Do not enable public ingress.
 
-LiteLLM manifests are in apps/litellm/ and registered in the main target; see its migration prerequisites before merging. Scira requirements are in apps/scira/README.md.
+LiteLLM manifests are in apps/litellm/ and registered in the main target; see its migration prerequisites before merging. Morphic setup is in apps/morphic/README.md.
 
 ### Controller bootstrap
 Store SECRET_PROVIDER_SITE_URL (full HTTPS URL), SECRET_PROVIDER_CLIENT_ID and SECRET_PROVIDER_CLIENT_SECRET in Production /doco-cd, and in a local chmod 600 bootstrap env file. From the repository root run:
@@ -41,10 +41,10 @@ Requires Python 3 and an access token with folder/secret list and create permiss
     bash scripts/generate-secrets.sh --infisical all
     bash scripts/generate-secrets.sh --infisical all --apply --prompt
 
-Only POST create operations are used; existing keys are skipped, no values are printed. Missing manual values are skipped if empty. LiteLLM/Scira random secrets are not generated by default: reuse existing credentials via --prompt; for genuinely fresh installations run the selected app with --apply --fresh --prompt. Revoke the provisioning token after use. API v4 secrets and v2 folders must be supported by your server. No live provisioning is performed by this repository change.
+Only POST create operations are used; existing keys are skipped, no values are printed. Missing manual values are skipped if empty. LiteLLM/Morphic random secrets are not generated by default: reuse existing credentials via --prompt; for genuinely fresh installations run the selected app with --apply --fresh --prompt. Revoke the provisioning token after use. API v4 secrets and v2 folders must be supported by your server. No live provisioning is performed by this repository change.
 
 ### Image updates
 Renovate scans only apps/**; archive/** is explicitly excluded. Dependabot tracks only active application directories. Archived manifests are historical snapshots and receive no automated image updates.
 
 ### Service connectivity
-Docker service DNS names are fixed inside each Compose project (postgres, valkey, socket-proxy); do not store them as secrets. LiteLLM connects to SearXNG via SEARXNG_API_BASE=http://searxng:8080 on the shared traefik network. Crawl4AI stays at http://127.0.0.1:11235 on the host, not reachable using container localhost; no current app has a verified Crawl4AI adapter. Scira uses its own PostgreSQL/Valkey, not shared databases. Its application remains disabled because the pinned source requires incompatible external services. Do not substitute SearXNG or Crawl4AI for incompatible cloud APIs. See each app README for activation prerequisites.
+Docker service DNS names are fixed inside each Compose project (postgres, valkey, socket-proxy); do not store them as secrets. LiteLLM and Morphic use the existing HTTPS SearXNG subdomain; Morphic uses the HTTPS LiteLLM subdomain. Ensure DNS and TLS from containers work. Existing /litellm/SEARXNG_API_BASE must be updated manually to https://search.s3tupw1zard.dev, because provisioning never overwrites values. Crawl4AI retains host loopback and is reachable from Morphic on the dedicated morphic-crawler network. Create that network before merging. Morphic uses its own PostgreSQL/Valkey. See each app README for activation prerequisites.

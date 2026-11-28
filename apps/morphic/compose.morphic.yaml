@@ -1,0 +1,88 @@
+services:
+  morphic:
+    # Official upstream image tag matching reviewed release v1.11.0.
+    image: ghcr.io/miurla/morphic:e6c36d8bd0da12b9acb7faa95c99d673974ba383
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://morphic:${POSTGRES_PASSWORD:?required}@postgres:5432/morphic
+      DATABASE_RESTRICTED_URL: postgresql://morphic:${POSTGRES_PASSWORD:?required}@postgres:5432/morphic
+      DATABASE_SSL_DISABLED: "true"
+      LOCAL_REDIS_URL: redis://:${REDIS_PASSWORD:?required}@valkey:6379/0
+      ENABLE_AUTH: "true"
+      AUTH_PROVIDER: better-auth
+      AUTH_SIGNUP_MODE: open
+      OIDC_PROVIDER_ID: pocket-id
+      OIDC_PROVIDER_NAME: Pocket ID
+      OIDC_SCOPE: "openid profile email"
+      OPENAI_COMPATIBLE_PROVIDER_NAME: LiteLLM
+      SEARCH_API: searxng
+      MORPHIC_CLOUD_DEPLOYMENT: "false"
+      ENABLE_GUEST_CHAT: "false"
+      ENABLE_SHARE: "false"
+      ENABLE_LANGFUSE_TRACING: "false"
+      FETCH_ALLOW_PRIVATE_NETWORK: "false"
+      FAVICON_PROVIDER_URL: "off"
+      MORPHIC_UPDATE_CHECK_DISABLED: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?required}
+      OPENAI_COMPATIBLE_API_KEY: ${OPENAI_COMPATIBLE_API_KEY:?required}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:?required}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:?required}
+      BOOTSTRAP_ADMIN_EMAIL: ${BOOTSTRAP_ADMIN_EMAIL:?required}
+      OPENAI_COMPATIBLE_API_BASE_URL: ${OPENAI_COMPATIBLE_API_BASE_URL:?required}
+      SEARXNG_API_URL: ${SEARXNG_API_URL:?required}
+      CRAWL4AI_BASE_URL: ${CRAWL4AI_BASE_URL:?required}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:?required}
+      OIDC_ISSUER: ${OIDC_ISSUER:?required}
+      CRAWL4AI_API_KEY: ${CRAWL4AI_API_KEY:?required}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      valkey:
+        condition: service_healthy
+    networks:
+      - default
+      - traefik
+      - morphic-crawler
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: traefik
+      traefik.http.routers.morphic.rule: Host(`morphic.s3tupw1zard.dev`)
+      traefik.http.routers.morphic.entrypoints: web
+      traefik.http.routers.morphic.service: morphic
+      traefik.http.services.morphic.loadbalancer.server.port: "3000"
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: morphic
+      POSTGRES_DB: morphic
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U morphic -d morphic"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  valkey:
+    image: valkey/valkey:9-alpine
+    restart: unless-stopped
+    environment:
+      VALKEY_PASSWORD: ${REDIS_PASSWORD:?required}
+    command: ["sh", "-ec", "exec valkey-server --appendonly yes --requirepass \"$$VALKEY_PASSWORD\""]
+    volumes:
+      - valkey:/data
+    healthcheck:
+      test: ["CMD-SHELL", "VALKEYCLI_AUTH=\"$$VALKEY_PASSWORD\" valkey-cli ping | grep -qx PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  postgres:
+  valkey:
+networks:
+  traefik:
+    external: true
+  morphic-crawler:
+    external: true

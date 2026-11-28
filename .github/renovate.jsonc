@@ -139,6 +139,18 @@
       "pinDigests": true
     },
     {
+      "matchFileNames": [
+        "apps/morphic/**"
+      ],
+      "groupName": "morphic",
+      "addLabels": [
+        "morphic",
+        "ai"
+      ],
+      "automerge": false,
+      "pinDigests": true
+    },
+    {
       "description": "Never update archived applications",
       "matchFileNames": [
         "archive/**"

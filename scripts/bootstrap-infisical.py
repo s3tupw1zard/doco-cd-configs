@@ -16,18 +16,36 @@ GENERATED = {
     "searxng": {"SEARXNG_SECRET": ""},
     "crawl4ai": {"CRAWL4AI_API_TOKEN": ""},
     "litellm": {"LITELLM_MASTER_KEY": "sk-", "LITELLM_SALT_KEY": "sk-", "POSTGRES_PASSWORD": "", "UI_PASSWORD": ""},
-    "scira": {"BETTER_AUTH_SECRET": "", "CRON_SECRET": "", "MCP_CREDENTIALS_ENCRYPTION_KEY": "", "POSTGRES_PASSWORD": "", "REDIS_PASSWORD": ""},
+    "morphic": {"BETTER_AUTH_SECRET": "", "POSTGRES_PASSWORD": "", "REDIS_PASSWORD": ""},
     "doco-cd": {},
     "traefik": {},
 }
 MANUAL = {
+    "morphic": ["OPENAI_COMPATIBLE_API_KEY", "OIDC_CLIENT_ID", "OIDC_CLIENT_SECRET", "BOOTSTRAP_ADMIN_EMAIL"],
     "traefik": ["TRAEFIK_TRUSTED_PROXY_IP"],
     "doco-cd": ["SECRET_PROVIDER_SITE_URL", "SECRET_PROVIDER_CLIENT_ID", "SECRET_PROVIDER_CLIENT_SECRET"],
     "litellm": ["OPENCODE_GO_API_KEY", "OPENROUTER_API_KEY", "GENERIC_CLIENT_ID", "GENERIC_CLIENT_SECRET"],
 }
 
 
-DEFAULTS = {"litellm": {"GENERIC_AUTHORIZATION_ENDPOINT":"https://id.s3tupw1zard.ovh/authorize","GENERIC_TOKEN_ENDPOINT":"https://id.s3tupw1zard.ovh/api/oidc/token","GENERIC_USERINFO_ENDPOINT":"https://id.s3tupw1zard.ovh/api/oidc/userinfo","PROXY_BASE_URL":"https://api.s3tupw1zard.dev","SEARXNG_API_BASE":"http://searxng:8080","UI_USERNAME":"admin","OPENCODE_GO_API_BASE":"https://opencode.ai/inference/go/openai/v1"}}
+DEFAULTS = {
+    "litellm": {
+        "GENERIC_AUTHORIZATION_ENDPOINT": "https://id.s3tupw1zard.ovh/authorize",
+        "GENERIC_TOKEN_ENDPOINT": "https://id.s3tupw1zard.ovh/api/oidc/token",
+        "GENERIC_USERINFO_ENDPOINT": "https://id.s3tupw1zard.ovh/api/oidc/userinfo",
+        "PROXY_BASE_URL": "https://api.s3tupw1zard.dev",
+        "SEARXNG_API_BASE": "https://search.s3tupw1zard.dev",
+        "UI_USERNAME": "admin",
+        "OPENCODE_GO_API_BASE": "https://opencode.ai/inference/go/openai/v1"
+    },
+    "morphic": {
+        "OPENAI_COMPATIBLE_API_BASE_URL": "https://api.s3tupw1zard.dev/v1",
+        "SEARXNG_API_URL": "https://search.s3tupw1zard.dev",
+        "CRAWL4AI_BASE_URL": "http://crawl4ai:11235",
+        "BETTER_AUTH_URL": "https://morphic.s3tupw1zard.dev",
+        "OIDC_ISSUER": "https://id.s3tupw1zard.ovh"
+    }
+}
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -39,7 +57,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("app", choices=["all", *GENERATED])
     parser.add_argument("--apply", action="store_true", help="Actually create missing objects")
-    parser.add_argument("--fresh", action="store_true", help="Allow new random credentials for staged LiteLLM/Scira; never use for migrations")
+    parser.add_argument("--fresh", action="store_true", help="Allow new random credentials for staged LiteLLM/Morphic; never use for migrations")
     parser.add_argument("--prompt", action="store_true", help="Prompt for missing externally issued or existing credentials (hidden input)")
     args = parser.parse_args()
     origin = os.environ.get("INFISICAL_DOMAIN", "").rstrip("/")
@@ -77,7 +95,7 @@ def main():
             if key in existing:
                 print(f"Keep {path}/{key}")
                 continue
-            generate = key in GENERATED[app] and (app not in ("litellm", "scira") or args.fresh)
+            generate = key in GENERATED[app] and (app not in ("litellm", "morphic") or args.fresh)
             default = DEFAULTS.get(app, {}).get(key)
             if not args.apply:
                 print(f"Would {'set configured default for' if default is not None else 'generate' if generate else 'require input for'} {path}/{key}")
