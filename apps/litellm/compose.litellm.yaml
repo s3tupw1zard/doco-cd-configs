@@ -18,7 +18,9 @@ services:
       LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?required}
       LITELLM_SALT_KEY: ${LITELLM_SALT_KEY:?required}
       OPENCODE_GO_API_KEY: ${OPENCODE_GO_API_KEY:?required}
+      OPENCODE_API_KEY: ${OPENCODE_GO_API_KEY:?required}
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:?required}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?required}
       DATABASE_URL: postgresql://litellm:${POSTGRES_PASSWORD:?required}@postgres:5432/litellm
       PROXY_BASE_URL: ${PROXY_BASE_URL:?required}
       GENERIC_CLIENT_ID: ${GENERIC_CLIENT_ID:?required}

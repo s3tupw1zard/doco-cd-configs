@@ -48,6 +48,16 @@ model_list:
     litellm_params:
       model: openrouter/xiaomi/mimo-v2.6-flash
       api_key: os.environ/OPENROUTER_API_KEY
+  - model_name: chat-gpt-6-luna
+    litellm_params:
+      model: openai/gpt-6-luna
+      api_key: os.environ/OPENAI_API_KEY
+      reasoning_effort: "none"
+  - model_name: chat-gpt-5.6-luna
+    litellm_params:
+      model: openai/gpt-5.6-luna
+      api_key: os.environ/OPENAI_API_KEY
+      reasoning_effort: "none"
 search_tools:
   - search_tool_name: searxng-search
     litellm_params:
