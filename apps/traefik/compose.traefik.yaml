@@ -1,5 +1,6 @@
 services:
   traefik:
+    container_name: traefik
     image: traefik:v3.8@sha256:00c9734983e74ae35a1fc18eaee9e9da13f3dde95c4e45b3b8c3b60e0dbd2d17
     restart: unless-stopped
     command:
@@ -26,6 +27,7 @@ services:
         max-size: "10m"
         max-file: "3"
   socket-proxy:
+    container_name: traefik-docker-socket-proxy
     image: ghcr.io/tecnativa/docker-socket-proxy:latest@sha256:be1ac64f33bd82043beb504822a17ba6b71668ea1ad7cf51a9a01d27bb7ab047
     restart: unless-stopped
     environment:
