@@ -35,8 +35,7 @@ DEFAULTS = {
         "GENERIC_USERINFO_ENDPOINT": "https://id.s3tupw1zard.ovh/api/oidc/userinfo",
         "PROXY_BASE_URL": "https://api.s3tupw1zard.dev",
         "SEARXNG_API_BASE": "https://search.s3tupw1zard.dev",
-        "UI_USERNAME": "admin",
-        "OPENCODE_GO_API_BASE": "https://opencode.ai/inference/go/openai/v1"
+        "UI_USERNAME": "admin"
     },
     "morphic": {
         "OPENAI_COMPATIBLE_API_BASE_URL": "https://api.s3tupw1zard.dev/v1",
