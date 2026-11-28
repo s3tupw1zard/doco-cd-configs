@@ -38,7 +38,7 @@ services:
       - bw-services
 
   bunkerweb-scheduler:
-    image: bunkerity/bunkerweb-scheduler:1.6.17@sha256:1506e75b7ebfe06ff02e937d41eb64c9e39eb789635c12fc43672e73e89565d5
+    image: bunkerity/bunkerweb-scheduler:1.6.18@sha256:17b7f2da29b9cb828481fbbc7fa731527b9ce4e6972266e834bea5ef0e6837ad
     container_name: bunkerweb-scheduler
     hostname: bunkerweb-scheduler
     environment:
@@ -184,7 +184,7 @@ services:
       - bw-db
 
   bunkerweb-autoconf:
-    image: bunkerity/bunkerweb-autoconf:1.6.17@sha256:dbe2e3c37f6e70351b3be98dcaa904285b626fe73f12979cf0a549cd47867d43
+    image: bunkerity/bunkerweb-autoconf:1.6.18@sha256:5e5be37a19516a45ea160d177b35f5af1939dcce1dbe0a2e977dbaa60b28aafb
     container_name: bunkerweb-autoconf
     hostname: bunkerweb-autoconf
     depends_on:
@@ -214,7 +214,7 @@ services:
       - bw-docker
 
   bunkerweb-ui:
-    image: bunkerity/bunkerweb-ui:1.6.17@sha256:86e192a96642fd82746a8bf771ed5f1b378cda706f5263f2c5b607cca547731c
+    image: bunkerity/bunkerweb-ui:1.6.18@sha256:ce83a0364a1d59248169fd948638d818558e164ec519714200d6569334788738
     container_name: bunkerweb-ui
     hostname: bunkerweb-ui
     environment:
