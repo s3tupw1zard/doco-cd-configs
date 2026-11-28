@@ -57,7 +57,6 @@ external_secrets:
   PROXY_BASE_URL: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/PROXY_BASE_URL
   SEARXNG_API_BASE: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/SEARXNG_API_BASE
   UI_USERNAME: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/UI_USERNAME
-  OPENCODE_GO_API_BASE: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/OPENCODE_GO_API_BASE
   UI_PASSWORD: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/UI_PASSWORD
 ---
 name: morphic

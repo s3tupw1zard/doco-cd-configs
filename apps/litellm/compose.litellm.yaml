@@ -37,13 +37,13 @@ services:
       GENERIC_USER_LAST_NAME_ATTRIBUTE: family_name
       UI_USERNAME: ${UI_USERNAME:?required}
       UI_PASSWORD: ${UI_PASSWORD:?required}
-      OPENCODE_GO_API_BASE: ${OPENCODE_GO_API_BASE:?required}
       SEARXNG_API_BASE: ${SEARXNG_API_BASE:?required}
       STORE_MODEL_IN_DB: "True"
       PYTHONPATH: /app
     volumes:
       - ./config.yaml:/app/config.yaml:ro
       - ./opencode_guard.py:/app/opencode_guard.py:ro
+      - ./openrouter_prices.py:/app/openrouter_prices.py:ro
     depends_on:
       postgres:
         condition: service_healthy

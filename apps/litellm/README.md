@@ -11,7 +11,7 @@ Native generic OIDC, free for up to five SSO users according to LiteLLM document
 
 Create a confidential OIDC client in https://id.s3tupw1zard.ovh with exact redirect URI https://api.s3tupw1zard.dev/sso/callback, PKCE S256, and access restricted to your intended administrator group. Do not enable public client or unrestricted group access.
 
-In Infisical prod /litellm add GENERIC_CLIENT_ID and GENERIC_CLIENT_SECRET from Pocket ID. Run `bash scripts/generate-secrets.sh --infisical litellm --apply --prompt` (without --fresh for migration). Existing values are kept. Endpoint URLs, proxy base URL and provider base URL are configured in Infisical; scopes remain in Compose. The provisioning script creates missing non-secret defaults, but never overwrites existing entries.
+In Infisical prod /litellm add GENERIC_CLIENT_ID and GENERIC_CLIENT_SECRET from Pocket ID. Run `bash scripts/generate-secrets.sh --infisical litellm --apply --prompt` (without --fresh for migration). Existing values are kept. Endpoint URLs and proxy base URL are configured in Infisical; scopes remain in Compose. The provisioning script creates missing non-secret defaults, but never overwrites existing entries.
 
 Verify discovery from devnode:
 ```sh
@@ -24,7 +24,7 @@ Before enabling, keep a verified local break-glass admin and test /fallback/logi
 References: https://docs.litellm.ai/docs/proxy/admin_ui_sso and https://pocket-id.org/docs/setup/connect-an-app
 
 ## Local service connectivity and configuration
-Required /litellm keys are exactly the entries in .doco-cd.main-devnode.yaml. In addition to existing credentials, UI_PASSWORD is the separate bootstrap UI password (use an existing value when migrating, or generate with --fresh only for new installs). UI_USERNAME defaults to admin via provisioning. Create and verify a named break-glass admin, then disable environment credential login when safe. STORE_MODEL_IN_DB enables Admin UI persistence; do not duplicate static YAML model names in the database. The existing Go endpoint is now configurable via OPENCODE_GO_API_BASE; verify actual endpoint/model IDs before use. SearXNG search tool searxng-search uses SEARXNG_API_BASE=https://search.s3tupw1zard.dev via the existing HTTPS reverse proxy. No separate host port or API token is required for this private SearXNG connection. Search is explicit, not an automatic fallback. Verify /v1/search/searxng-search with a restricted virtual key. Crawl4AI is not a native LiteLLM search provider; it retains host loopback and a separate Morphic network; do not add an unused URL or pretend a Firecrawl API key can connect to it.
+Required /litellm keys are exactly the entries in .doco-cd.main-devnode.yaml. In addition to existing credentials, UI_PASSWORD is the separate bootstrap UI password (use an existing value when migrating, or generate with --fresh only for new installs). UI_USERNAME defaults to admin via provisioning. Create and verify a named break-glass admin, then disable environment credential login when safe. STORE_MODEL_IN_DB enables Admin UI persistence; do not duplicate static YAML model names in the database. The native OpenCode Go provider selects its upstream endpoint per model; do not set OPENCODE_GO_API_BASE. SearXNG search tool searxng-search uses SEARXNG_API_BASE=https://search.s3tupw1zard.dev via the existing HTTPS reverse proxy. No separate host port or API token is required for this private SearXNG connection. Search is explicit, not an automatic fallback. Verify /v1/search/searxng-search with a restricted virtual key. Crawl4AI is not a native LiteLLM search provider; it retains host loopback and a separate Morphic network; do not add an unused URL or pretend a Firecrawl API key can connect to it.
 
 Existing Infisical values are preserved by provisioning. Set /litellm/SEARXNG_API_BASE to https://search.s3tupw1zard.dev manually if it still points to Docker DNS. Verify DNS, TLS and routing from the LiteLLM container.
 
@@ -35,3 +35,27 @@ Create OPENAI_API_KEY in Infisical prod /litellm before merging this branch; use
 The branch uses LiteLLM's native opencode_go provider with os.environ/OPENCODE_API_KEY. Compose now exposes that environment variable from the existing OPENCODE_GO_API_KEY secret; no new OpenCode secret is needed.
 
 References: https://developers.openai.com/api/docs/models/gpt-6-luna and https://developers.openai.com/api/docs/models/gpt-5.6-luna
+
+## OpenCode Go: session affinity and cache verification
+
+The pinned LiteLLM 1.111.0 native provider resolves the upstream protocol from its model catalog. OPENCODE_GO_API_BASE was removed from Compose, Doco-CD and provisioning; the old Infisical entry can be deleted after deployment (not required). Keep the existing OPENCODE_GO_API_KEY. The guard sends the original User-Agent and x-opencode-session (preferred), x-session-affinity or explicitly provided x-litellm-session-id, mapped to x-opencode-session. It never generates session IDs, forwards client credentials, or uses a request/trace ID. The optional x-opencode-client is copied unchanged if valid. OpenCode 2.3.2 already sends affinity headers, including parent/fork affinity. Other clients must provide a truthful client User-Agent and stable caller session header. Go is for coding-agent traffic only; use separate restricted virtual keys for go-* and chat-* models. Keep forward_client_headers_to_llm_api=false.
+
+All eight configured Go IDs are listed in the OpenCode model catalog on 2026-11-28; context/output limits in tokens: DeepSeek V4.1 Flash 1,000,000/384,000; MiMo V2.6 Flash 1,048,576/131,072; GLM 5.3 Flash and GLM 5.3 1,000,000/131,072; Qwen 3.8 Flash 1,000,000/131,072; Qwen 3.7 Plus 1,000,000/65,536; MiniMax M3 and LongCat 2.0 1,000,000/131,072. All list reasoning and tool calling. These are provider maximums, not recommended client context budgets. Do not hard-code reasoning variants, cache rates or protocol overrides; verify them against the provider catalog and the pinned LiteLLM model info. Account privacy/region settings may restrict available models. Keep model selection unchanged. Disable Go Extra Usage in the OpenCode Console if you want a hard subscription-only limit.
+
+After deployment, run a real OpenChamber coding session using a restricted LiteLLM key and the same go-* model for multiple turns. Keep a stable prompt prefix and affinity; inspect the LiteLLM spend log and OpenCode session usage for cached input/read/write tokens, including streaming/tool calls. Compare with a direct Go session using a comparable prefix. Cache hits depend on model, prefix, upstream routing, TTL and compaction; there is no guarantee on every turn. The OpenCode Console remains authoritative for actual subscription quotas. Test missing and invalid session headers with a local mock or a controlled request (must reject before inference). For model metadata from the deployed image:
+```sh
+docker exec litellm python -c 'import litellm; from litellm.llms.opencode.common_utils import go_api_base; ids="deepseek-v4.1-flash mimo-v2.6-flash glm-5.3-flash glm-5.3 qwen3.8-flash qwen3.7-plus minimax-m3 longcat-2.0".split(); [(print(m,go_api_base(None,m), {k:v for k,v in litellm.model_cost.get("opencode_go/"+m,{}).items() if k in ("max_input_tokens","max_output_tokens","supports_reasoning","supports_function_calling","supports_prompt_caching","supported_endpoints")})) for m in ids]'
+```
+
+## OpenRouter price catalog and spend
+
+LiteLLM 1.111.0 reads the provider-reported usage.cost for OpenRouter (including streaming usage when provided), rather than requiring a static map for actual spend. The public OpenRouter /api/v1/models JSON is additionally read at proxy callback initialization by openrouter_prices.py, with a bounded response and timeout. Only configured OpenRouter models are registered in the normal provider model catalog, preserving other provider rows and native cost reporting; no deployment custom pricing is configured. The rates describe default list pricing and may differ from routed/discounted actual cost. On catalog failure the proxy continues with native LiteLLM data. Refresh occurs on proxy restart, not for each request. No third-party full-map override is used (CloudPrice offers one but could change unrelated provider routing/capability metadata). No new credentials are required. Verify /model/info and a non-streaming and streaming OpenRouter call in the live proxy; compare spend with OpenRouter Activity. A streaming request should request usage; cost may be logged on completion instead of being available in initial response headers. Do not treat an absent cost or zero estimate as proof of a free request.
+
+References:
+- https://opencode.ai/docs/console/go
+- https://models.opencode.ai/providers/opencode-go/
+- https://github.com/anomalyco/opencode/blob/v2.3.2/packages/core/src/session/model-request.ts
+- https://github.com/BerriAI/litellm/blob/v1.111.0/litellm/llms/opencode/common_utils.py
+- https://docs.litellm.ai/docs/providers/openrouter
+- https://openrouter.ai/api/v1/models
+- https://cloudprice.net/content/about

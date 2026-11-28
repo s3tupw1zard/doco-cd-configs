@@ -71,6 +71,7 @@ general_settings:
 litellm_settings:
   callbacks:
     - opencode_guard.proxy_handler_instance
+    - openrouter_prices.proxy_handler_instance
   drop_params: false
   turn_off_message_logging: true
   num_retries: 0
