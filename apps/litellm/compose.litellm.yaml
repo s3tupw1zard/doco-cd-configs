@@ -19,12 +19,12 @@ services:
       OPENCODE_GO_API_KEY: ${OPENCODE_GO_API_KEY:?required}
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:?required}
       DATABASE_URL: postgresql://litellm:${POSTGRES_PASSWORD:?required}@postgres:5432/litellm
-      PROXY_BASE_URL: https://api.s3tupw1zard.dev
+      PROXY_BASE_URL: ${PROXY_BASE_URL:?required}
       GENERIC_CLIENT_ID: ${GENERIC_CLIENT_ID:?required}
       GENERIC_CLIENT_SECRET: ${GENERIC_CLIENT_SECRET:?required}
-      GENERIC_AUTHORIZATION_ENDPOINT: https://id.s3tupw1zard.ovh/authorize
-      GENERIC_TOKEN_ENDPOINT: https://id.s3tupw1zard.ovh/api/oidc/token
-      GENERIC_USERINFO_ENDPOINT: https://id.s3tupw1zard.ovh/api/oidc/userinfo
+      GENERIC_AUTHORIZATION_ENDPOINT: ${GENERIC_AUTHORIZATION_ENDPOINT:?required}
+      GENERIC_TOKEN_ENDPOINT: ${GENERIC_TOKEN_ENDPOINT:?required}
+      GENERIC_USERINFO_ENDPOINT: ${GENERIC_USERINFO_ENDPOINT:?required}
       GENERIC_SCOPE: "openid profile email"
       GENERIC_CLIENT_USE_PKCE: "true"
       GENERIC_USER_ID_ATTRIBUTE: sub
@@ -32,6 +32,11 @@ services:
       GENERIC_USER_DISPLAY_NAME_ATTRIBUTE: name
       GENERIC_USER_FIRST_NAME_ATTRIBUTE: given_name
       GENERIC_USER_LAST_NAME_ATTRIBUTE: family_name
+      UI_USERNAME: ${UI_USERNAME:?required}
+      UI_PASSWORD: ${UI_PASSWORD:?required}
+      OPENCODE_GO_API_BASE: ${OPENCODE_GO_API_BASE:?required}
+      SEARXNG_API_BASE: ${SEARXNG_API_BASE:?required}
+      STORE_MODEL_IN_DB: "True"
       PYTHONPATH: /app
     volumes:
       - ./config.yaml:/app/config.yaml:ro
