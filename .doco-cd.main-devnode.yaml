@@ -35,3 +35,18 @@ remove_orphans: false
 force_image_pull: false
 external_secrets:
   CRAWL4AI_API_TOKEN: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/crawl4ai/CRAWL4AI_API_TOKEN
+---
+name: litellm
+working_dir: apps/litellm
+compose_files:
+  - compose.litellm.yaml
+remove_orphans: false
+force_image_pull: false
+external_secrets:
+  LITELLM_MASTER_KEY: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/LITELLM_MASTER_KEY
+  LITELLM_SALT_KEY: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/LITELLM_SALT_KEY
+  POSTGRES_PASSWORD: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/POSTGRES_PASSWORD
+  OPENCODE_GO_API_KEY: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/OPENCODE_GO_API_KEY
+  OPENROUTER_API_KEY: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/OPENROUTER_API_KEY
+  GENERIC_CLIENT_ID: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/GENERIC_CLIENT_ID
+  GENERIC_CLIENT_SECRET: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/litellm/GENERIC_CLIENT_SECRET
