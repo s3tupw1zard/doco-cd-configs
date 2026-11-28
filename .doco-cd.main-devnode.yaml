@@ -1,3 +1,12 @@
+name: traefik
+working_dir: apps/traefik
+compose_files:
+  - compose.traefik.yaml
+remove_orphans: false
+force_image_pull: false
+external_secrets:
+  TRAEFIK_TRUSTED_PROXY_IP: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/traefik/TRAEFIK_TRUSTED_PROXY_IP
+---
 name: doco-cd-updater-devnode
 working_dir: apps/doco-cd
 compose_files:

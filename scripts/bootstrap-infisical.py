@@ -18,8 +18,10 @@ GENERATED = {
     "litellm": {"LITELLM_MASTER_KEY": "sk-", "LITELLM_SALT_KEY": "sk-", "POSTGRES_PASSWORD": ""},
     "scira": {"BETTER_AUTH_SECRET": "", "CRON_SECRET": "", "MCP_CREDENTIALS_ENCRYPTION_KEY": "", "POSTGRES_PASSWORD": "", "REDIS_PASSWORD": ""},
     "doco-cd": {},
+    "traefik": {},
 }
 MANUAL = {
+    "traefik": ["TRAEFIK_TRUSTED_PROXY_IP"],
     "doco-cd": ["SECRET_PROVIDER_SITE_URL", "SECRET_PROVIDER_CLIENT_ID", "SECRET_PROVIDER_CLIENT_SECRET"],
     "litellm": ["OPENCODE_GO_API_KEY", "OPENROUTER_API_KEY"],
     "scira": ["LITELLM_API_KEY", "CRAWL4AI_API_TOKEN"],
