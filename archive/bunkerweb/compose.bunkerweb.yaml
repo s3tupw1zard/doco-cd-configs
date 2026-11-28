@@ -214,7 +214,7 @@ services:
       - bw-docker
 
   bunkerweb-ui:
-    image: bunkerity/bunkerweb-ui:1.6.17@sha256:86e192a96642fd82746a8bf771ed5f1b378cda706f5263f2c5b607cca547731c
+    image: bunkerity/bunkerweb-ui:1.6.18@sha256:ce83a0364a1d59248169fd948638d818558e164ec519714200d6569334788738
     container_name: bunkerweb-ui
     hostname: bunkerweb-ui
     environment:
