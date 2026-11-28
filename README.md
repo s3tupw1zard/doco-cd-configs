@@ -18,7 +18,7 @@ Do not regenerate secrets for existing deployments. The script also offers litel
 Host Nginx and NetBird are external. Traefik binds only to loopback port 8080; SearXNG routes through Traefik. Crawl4AI remains on loopback 11235. See apps/traefik/README.md for required shared network and Nginx configuration. SearXNG JSON is enabled and the limiter is disabled for private use only. Do not expose publicly. Configure NetBird-only Nginx vhosts with TLS if remote access is needed. Crawl4AI requires bearer authentication; never allow crawling private or link-local destinations. Verify outbound restrictions and API authentication before enabling the service. No Docker socket is mounted into crawler.
 
 ### Deployment status
-Search services are prepared, not runtime-tested. Verify image versions/digests, settings mounts, health and JSON search. The new Infisical UUID is configured; secrets still need to be created. Doco-CD bootstrap requires explicit manual setup. LiteLLM is registered in the main devnode target. Before merging the activation change, migrate or stop the existing standalone instance and verify Infisical secrets, database and routing; the prior configuration stays archived. Scira requires a dedicated source fork for LiteLLM routing, session headers, local search, auth, storage and cloud dependency removal. No unmodified Scira deployment is activated. Garage and pgvector are deferred until Scira integration defines their actual contracts.
+Search services are prepared, not runtime-tested. Verify image versions/digests, settings mounts, health and JSON search. The new Infisical UUID is configured; secrets still need to be created. Doco-CD bootstrap requires explicit manual setup. LiteLLM is registered in the main devnode target. Before merging the activation change, migrate or stop the existing standalone instance and verify Infisical secrets, database and routing; the prior configuration stays archived. Scira has a staged unmodified upstream Compose and separate unpolled devnode target; cloud credentials and upstream migration issues still block activation. No fork is created. Garage and pgvector are deferred until Scira integration defines their actual contracts.
 
 ### Smoke tests
     curl -fsS -H 'Host: search.s3tupw1zard.dev' 'http://127.0.0.1:8080/search?q=flutter&format=json'
@@ -45,3 +45,5 @@ Only POST create operations are used; existing keys are skipped, no values are p
 
 ### Image updates
 Renovate scans only apps/**; archive/** is explicitly excluded. Dependabot tracks only active application directories. Archived manifests are historical snapshots and receive no automated image updates.
+
+Scira staging: see apps/scira/README.md and .doco-cd.scira-devnode.yaml. Do not activate until the documented blockers are resolved.

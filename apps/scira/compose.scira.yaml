@@ -1,0 +1,115 @@
+services:
+  scira:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: "no"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+      BETTER_AUTH_BASE_URL: https://scira.s3tupw1zard.dev
+      ALLOWED_ORIGINS: https://scira.s3tupw1zard.dev
+      MCP_OAUTH_CALLBACK_ORIGIN: https://scira.s3tupw1zard.dev
+      DATABASE_URL: postgresql://scira:${POSTGRES_PASSWORD:?required}@postgres:5432/scira
+      READ_DB_1: postgresql://scira:${POSTGRES_PASSWORD:?required}@postgres:5432/scira
+      READ_DB_2: postgresql://scira:${POSTGRES_PASSWORD:?required}@postgres:5432/scira
+      REDIS_URL: redis://:${REDIS_PASSWORD:?required}@valkey:6379/0
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?required}
+      CRON_SECRET: ${CRON_SECRET:?required}
+      MCP_CREDENTIALS_ENCRYPTION_KEY: ${MCP_CREDENTIALS_ENCRYPTION_KEY:?required}
+      AMADEUS_API_KEY: ${AMADEUS_API_KEY:?required}
+      AMADEUS_API_SECRET: ${AMADEUS_API_SECRET:?required}
+      BLOB_READ_WRITE_TOKEN: ${BLOB_READ_WRITE_TOKEN:?required}
+      COINGECKO_API_KEY: ${COINGECKO_API_KEY:?required}
+      DAYTONA_API_KEY: ${DAYTONA_API_KEY:?required}
+      DODO_PAYMENTS_API_KEY: ${DODO_PAYMENTS_API_KEY:?required}
+      DODO_PAYMENTS_WEBHOOK_SECRET: ${DODO_PAYMENTS_WEBHOOK_SECRET:?required}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY:?required}
+      EXA_API_KEY: ${EXA_API_KEY:?required}
+      FIRECRAWL_API_KEY: ${FIRECRAWL_API_KEY:?required}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:?required}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:?required}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:?required}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:?required}
+      GOOGLE_GENERATIVE_AI_API_KEY: ${GOOGLE_GENERATIVE_AI_API_KEY:?required}
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY:?required}
+      GROQ_API_KEY: ${GROQ_API_KEY:?required}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID:?required}
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET:?required}
+      NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:?required}
+      NEXT_PUBLIC_MAX_SLUG: ${NEXT_PUBLIC_MAX_SLUG:?required}
+      NEXT_PUBLIC_MAX_TIER: ${NEXT_PUBLIC_MAX_TIER:?required}
+      NEXT_PUBLIC_PREMIUM_SLUG: ${NEXT_PUBLIC_PREMIUM_SLUG:?required}
+      NEXT_PUBLIC_PREMIUM_TIER: ${NEXT_PUBLIC_PREMIUM_TIER:?required}
+      NEXT_PUBLIC_STARTER_SLUG: ${NEXT_PUBLIC_STARTER_SLUG:?required}
+      NEXT_PUBLIC_STARTER_TIER: ${NEXT_PUBLIC_STARTER_TIER:?required}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?required}
+      OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY:?required}
+      PARALLEL_API_KEY: ${PARALLEL_API_KEY:?required}
+      POLAR_ACCESS_TOKEN: ${POLAR_ACCESS_TOKEN:?required}
+      POLAR_WEBHOOK_SECRET: ${POLAR_WEBHOOK_SECRET:?required}
+      QSTASH_TOKEN: ${QSTASH_TOKEN:?required}
+      RESEND_API_KEY: ${RESEND_API_KEY:?required}
+      SMITHERY_API_KEY: ${SMITHERY_API_KEY:?required}
+      SPOTIFY_CLIENT_ID: ${SPOTIFY_CLIENT_ID:?required}
+      SPOTIFY_CLIENT_SECRET: ${SPOTIFY_CLIENT_SECRET:?required}
+      SUPADATA_API_KEY: ${SUPADATA_API_KEY:?required}
+      SUPERMEMORY_API_KEY: ${SUPERMEMORY_API_KEY:?required}
+      TAVILY_API_KEY: ${TAVILY_API_KEY:?required}
+      TMDB_API_KEY: ${TMDB_API_KEY:?required}
+      TWITTER_CLIENT_ID: ${TWITTER_CLIENT_ID:?required}
+      TWITTER_CLIENT_SECRET: ${TWITTER_CLIENT_SECRET:?required}
+      UPSTASH_REDIS_REST_TOKEN: ${UPSTASH_REDIS_REST_TOKEN:?required}
+      UPSTASH_REDIS_REST_URL: ${UPSTASH_REDIS_REST_URL:?required}
+      VALYU_API_KEY: ${VALYU_API_KEY:?required}
+      XAI_API_KEY: ${XAI_API_KEY:?required}
+      YT_ENDPOINT: ${YT_ENDPOINT:?required}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      valkey:
+        condition: service_healthy
+    networks:
+      - default
+      - traefik
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: traefik
+      traefik.http.routers.scira.rule: Host(`scira.s3tupw1zard.dev`)
+      traefik.http.routers.scira.entrypoints: web
+      traefik.http.routers.scira.service: scira
+      traefik.http.services.scira.loadbalancer.server.port: "3000"
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: scira
+      POSTGRES_USER: scira
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scira -d scira"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  valkey:
+    image: valkey/valkey:9-alpine
+    restart: unless-stopped
+    environment:
+      VALKEY_PASSWORD: ${REDIS_PASSWORD:?required}
+    command: ["sh", "-ec", "exec valkey-server --appendonly yes --requirepass \"$$VALKEY_PASSWORD\""]
+    volumes:
+      - valkey:/data
+    healthcheck:
+      test: ["CMD-SHELL", "VALKEYCLI_AUTH=\"$$VALKEY_PASSWORD\" valkey-cli ping | grep -qx PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  postgres:
+  valkey:
+networks:
+  traefik:
+    external: true
