@@ -2,7 +2,7 @@
 
 Do not start alongside the existing LiteLLM on port 4000. Back up and migrate its database first; reuse its master key, salt and database password. Do not attach a PostgreSQL 15 data directory to PostgreSQL 16. Verify all model IDs and endpoints against live provider catalogs; this config is a candidate based on the prior design. Verify the guard rejects missing session headers and that actual upstream headers survive streaming/tool requests. Go models are only for personal coding-related traffic; general chat and research use chat-* models. Create separate virtual keys for clients.
 
-Infisical Production /litellm: LITELLM_MASTER_KEY, LITELLM_SALT_KEY, POSTGRES_PASSWORD, OPENCODE_GO_API_KEY, OPENROUTER_API_KEY. Never commit actual values.
+Infisical Production /litellm: LITELLM_MASTER_KEY, LITELLM_SALT_KEY, POSTGRES_PASSWORD, OPENCODE_GO_API_KEY, OPENROUTER_API_KEY, OPENAI_API_KEY. Never commit actual values.
 
 The deployment is now registered in .doco-cd.main-devnode.yaml. Before merging the activation PR, ensure all required Infisical entries exist and the previous installation has been backed up and migrated or stopped. Doco-CD tracks main and will attempt deployment automatically after merge.
 
@@ -27,3 +27,11 @@ References: https://docs.litellm.ai/docs/proxy/admin_ui_sso and https://pocket-i
 Required /litellm keys are exactly the entries in .doco-cd.main-devnode.yaml. In addition to existing credentials, UI_PASSWORD is the separate bootstrap UI password (use an existing value when migrating, or generate with --fresh only for new installs). UI_USERNAME defaults to admin via provisioning. Create and verify a named break-glass admin, then disable environment credential login when safe. STORE_MODEL_IN_DB enables Admin UI persistence; do not duplicate static YAML model names in the database. The existing Go endpoint is now configurable via OPENCODE_GO_API_BASE; verify actual endpoint/model IDs before use. SearXNG search tool searxng-search uses SEARXNG_API_BASE=https://search.s3tupw1zard.dev via the existing HTTPS reverse proxy. No separate host port or API token is required for this private SearXNG connection. Search is explicit, not an automatic fallback. Verify /v1/search/searxng-search with a restricted virtual key. Crawl4AI is not a native LiteLLM search provider; it retains host loopback and a separate Morphic network; do not add an unused URL or pretend a Firecrawl API key can connect to it.
 
 Existing Infisical values are preserved by provisioning. Set /litellm/SEARXNG_API_BASE to https://search.s3tupw1zard.dev manually if it still points to Docker DNS. Verify DNS, TLS and routing from the LiteLLM container.
+
+## Low-cost direct OpenAI models
+
+Create OPENAI_API_KEY in Infisical prod /litellm before merging this branch; use a restricted OpenAI project API key, not a LiteLLM master key or a ChatGPT subscription token. The existing provisioning script prompts for it; never commit the value. Both chat-gpt-6-luna and chat-gpt-5.6-luna use the native openai provider directly, not OpenRouter or OpenCode Go. GPT-6 Luna defaults to reasoning_effort none for tool calling via Chat Completions (Morphic); GPT-5.6 Luna uses the same low-cost default. Do not interpret this as a hard per-request budget or a restriction on client-supplied parameters. Standard short-context input/cached input/output prices per million tokens as of 2026-11-28: GPT-6 Luna $0.10/$0.01/$0.50; GPT-5.6 Luna $0.20/$0.02/$1.20. Long contexts and higher service tiers may cost more. No expensive fallback models are added. Add these aliases to existing restricted Morphic virtual keys explicitly if desired; do not grant go-* access. Test streaming and tool calling using a restricted key after deployment; account-level model access and the pinned LiteLLM runtime were not tested.
+
+The branch uses LiteLLM's native opencode_go provider with os.environ/OPENCODE_API_KEY. Compose now exposes that environment variable from the existing OPENCODE_GO_API_KEY secret; no new OpenCode secret is needed.
+
+References: https://developers.openai.com/api/docs/models/gpt-6-luna and https://developers.openai.com/api/docs/models/gpt-5.6-luna

@@ -2,44 +2,36 @@
 model_list:
   - model_name: go-deepseek-v4.1-flash
     litellm_params:
-      model: openai/deepseek-v4.1-flash
-      api_base: os.environ/OPENCODE_GO_API_BASE
-      api_key: os.environ/OPENCODE_GO_API_KEY
+      model: opencode_go/deepseek-v4.1-flash
+      api_key: os.environ/OPENCODE_API_KEY
   - model_name: go-mimo-v2.6-flash
     litellm_params:
-      model: openai/mimo-v2.6-flash
-      api_base: os.environ/OPENCODE_GO_API_BASE
-      api_key: os.environ/OPENCODE_GO_API_KEY
+      model: opencode_go/mimo-v2.6-flash
+      api_key: os.environ/OPENCODE_API_KEY
   - model_name: go-glm-5.3-flash
     litellm_params:
-      model: openai/glm-5.3-flash
-      api_base: os.environ/OPENCODE_GO_API_BASE
-      api_key: os.environ/OPENCODE_GO_API_KEY
+      model: opencode_go/glm-5.3-flash
+      api_key: os.environ/OPENCODE_API_KEY
   - model_name: go-glm-5.3
     litellm_params:
-      model: openai/glm-5.3
-      api_base: os.environ/OPENCODE_GO_API_BASE
-      api_key: os.environ/OPENCODE_GO_API_KEY
+      model: opencode_go/glm-5.3
+      api_key: os.environ/OPENCODE_API_KEY
   - model_name: go-qwen3.8-flash
     litellm_params:
-      model: openai/qwen3.8-flash
-      api_base: os.environ/OPENCODE_GO_API_BASE
-      api_key: os.environ/OPENCODE_GO_API_KEY
+      model: opencode_go/qwen3.8-flash
+      api_key: os.environ/OPENCODE_API_KEY
   - model_name: go-qwen3.7-plus
     litellm_params:
-      model: openai/qwen3.7-plus
-      api_base: os.environ/OPENCODE_GO_API_BASE
-      api_key: os.environ/OPENCODE_GO_API_KEY
+      model: opencode_go/qwen3.7-plus
+      api_key: os.environ/OPENCODE_API_KEY
   - model_name: go-minimax-m3
     litellm_params:
-      model: openai/minimax-m3
-      api_base: os.environ/OPENCODE_GO_API_BASE
-      api_key: os.environ/OPENCODE_GO_API_KEY
+      model: opencode_go/minimax-m3
+      api_key: os.environ/OPENCODE_API_KEY
   - model_name: go-longcat-2.0
     litellm_params:
-      model: openai/longcat-2.0
-      api_base: os.environ/OPENCODE_GO_API_BASE
-      api_key: os.environ/OPENCODE_GO_API_KEY
+      model: opencode_go/longcat-2.0
+      api_key: os.environ/OPENCODE_API_KEY
   - model_name: chat-glm-5.3-flash
     litellm_params:
       model: openrouter/z-ai/glm-5.3-flash
@@ -56,6 +48,16 @@ model_list:
     litellm_params:
       model: openrouter/xiaomi/mimo-v2.6-flash
       api_key: os.environ/OPENROUTER_API_KEY
+  - model_name: chat-gpt-6-luna
+    litellm_params:
+      model: openai/gpt-6-luna
+      api_key: os.environ/OPENAI_API_KEY
+      reasoning_effort: "none"
+  - model_name: chat-gpt-5.6-luna
+    litellm_params:
+      model: openai/gpt-5.6-luna
+      api_key: os.environ/OPENAI_API_KEY
+      reasoning_effort: "none"
 search_tools:
   - search_tool_name: searxng-search
     litellm_params:
