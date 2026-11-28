@@ -18,7 +18,7 @@ Do not regenerate secrets for existing deployments. The script also offers litel
 Host Nginx and NetBird are external. Traefik binds only to loopback port 8080; SearXNG routes through Traefik. Crawl4AI remains on loopback 11235. See apps/traefik/README.md for required shared network and Nginx configuration. SearXNG JSON is enabled and the limiter is disabled for private use only. Do not expose publicly. Configure NetBird-only Nginx vhosts with TLS if remote access is needed. Crawl4AI requires bearer authentication; never allow crawling private or link-local destinations. Verify outbound restrictions and API authentication before enabling the service. No Docker socket is mounted into crawler.
 
 ### Deployment status
-Search services are prepared, not runtime-tested. Verify image versions/digests, settings mounts, health and JSON search. The new Infisical UUID is configured; secrets still need to be created. Doco-CD bootstrap requires explicit manual setup. Existing LiteLLM remains external until a data-preserving migration is prepared; its prior configuration stays archived. Scira requires a dedicated source fork for LiteLLM routing, session headers, local search, auth, storage and cloud dependency removal. No unmodified Scira deployment is activated. Garage and pgvector are deferred until Scira integration defines their actual contracts.
+Search services are prepared, not runtime-tested. Verify image versions/digests, settings mounts, health and JSON search. The new Infisical UUID is configured; secrets still need to be created. Doco-CD bootstrap requires explicit manual setup. LiteLLM is registered in the main devnode target. Before merging the activation change, migrate or stop the existing standalone instance and verify Infisical secrets, database and routing; the prior configuration stays archived. Scira requires a dedicated source fork for LiteLLM routing, session headers, local search, auth, storage and cloud dependency removal. No unmodified Scira deployment is activated. Garage and pgvector are deferred until Scira integration defines their actual contracts.
 
 ### Smoke tests
     curl -fsS -H 'Host: search.s3tupw1zard.dev' 'http://127.0.0.1:8080/search?q=flutter&format=json'
@@ -26,7 +26,7 @@ Search services are prepared, not runtime-tested. Verify image versions/digests,
 
 Verify unauthenticated crawler requests fail and authenticated requests use the intended token. Do not enable public ingress.
 
-Staged replacement manifests for LiteLLM are in apps/litellm/; they are deliberately not in the active target. Scira requirements are in apps/scira/README.md.
+LiteLLM manifests are in apps/litellm/ and registered in the main target; see its migration prerequisites before merging. Scira requirements are in apps/scira/README.md.
 
 ### Controller bootstrap
 Store SECRET_PROVIDER_SITE_URL (full HTTPS URL), SECRET_PROVIDER_CLIENT_ID and SECRET_PROVIDER_CLIENT_SECRET in Production /doco-cd, and in a local chmod 600 bootstrap env file. From the repository root run:
