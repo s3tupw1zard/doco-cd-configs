@@ -4,14 +4,14 @@ Do not start alongside the existing LiteLLM on port 4000. Back up and migrate it
 
 Infisical Production /litellm: LITELLM_MASTER_KEY, LITELLM_SALT_KEY, POSTGRES_PASSWORD, OPENCODE_GO_API_KEY, OPENROUTER_API_KEY. Never commit actual values.
 
-The deployment is now registered in .doco-cd.main-devnode.yaml. Before merging the activation PR, ensure all seven Infisical secrets exist and the previous installation has been backed up and migrated or stopped. Doco-CD tracks main and will attempt deployment automatically after merge.
+The deployment is now registered in .doco-cd.main-devnode.yaml. Before merging the activation PR, ensure all required Infisical entries exist and the previous installation has been backed up and migrated or stopped. Doco-CD tracks main and will attempt deployment automatically after merge.
 
 ## Pocket ID SSO
 Native generic OIDC, free for up to five SSO users according to LiteLLM documentation. No OAuth proxy or enterprise license required within that limit.
 
 Create a confidential OIDC client in https://id.s3tupw1zard.ovh with exact redirect URI https://api.s3tupw1zard.dev/sso/callback, PKCE S256, and access restricted to your intended administrator group. Do not enable public client or unrestricted group access.
 
-In Infisical prod /litellm add GENERIC_CLIENT_ID and GENERIC_CLIENT_SECRET from Pocket ID. Run `bash scripts/generate-secrets.sh --infisical litellm --apply --prompt` (without --fresh for migration). Existing values are kept. Endpoint URLs and scopes are set in compose, not secrets.
+In Infisical prod /litellm add GENERIC_CLIENT_ID and GENERIC_CLIENT_SECRET from Pocket ID. Run `bash scripts/generate-secrets.sh --infisical litellm --apply --prompt` (without --fresh for migration). Existing values are kept. Endpoint URLs, proxy base URL and provider base URL are configured in Infisical; scopes remain in Compose. The provisioning script creates missing non-secret defaults, but never overwrites existing entries.
 
 Verify discovery from devnode:
 ```sh
@@ -22,3 +22,6 @@ The expected endpoints are /authorize, /api/oidc/token, /api/oidc/userinfo. Live
 Before enabling, keep a verified local break-glass admin and test /fallback/login. OIDC sub is the stable user ID; assign admin role explicitly through existing admin access, do not grant all SSO users administrator permissions. Restrict Pocket ID client access. Test browser sign-in, logout, administrator role, and existing virtual-key API requests; no change to API-key auth or model routing is intended. The old standalone instance is not automatically migrated or stopped. Do not merge the activation PR until DB migration and routing are verified.
 
 References: https://docs.litellm.ai/docs/proxy/admin_ui_sso and https://pocket-id.org/docs/setup/connect-an-app
+
+## Local service connectivity and configuration
+Required /litellm keys are exactly the entries in .doco-cd.main-devnode.yaml. In addition to existing credentials, UI_PASSWORD is the separate bootstrap UI password (use an existing value when migrating, or generate with --fresh only for new installs). UI_USERNAME defaults to admin via provisioning. Create and verify a named break-glass admin, then disable environment credential login when safe. STORE_MODEL_IN_DB enables Admin UI persistence; do not duplicate static YAML model names in the database. The existing Go endpoint is now configurable via OPENCODE_GO_API_BASE; verify actual endpoint/model IDs before use. SearXNG search tool searxng-search uses SEARXNG_API_BASE=http://searxng:8080 via the external traefik network. No separate host port or API token is required for this private SearXNG connection. Search is explicit, not an automatic fallback. Verify /v1/search/searxng-search with a restricted virtual key. Crawl4AI is not a native LiteLLM search provider and remains host-loopback only; do not add an unused URL or pretend a Firecrawl API key can connect to it.
