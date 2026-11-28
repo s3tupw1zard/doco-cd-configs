@@ -29,3 +29,9 @@ References:
 - https://github.com/miurla/morphic/blob/v1.11.0/docs/DOCKER.md
 - https://github.com/miurla/morphic/blob/v1.11.0/.github/workflows/docker-build.yml
 - https://docs.crawl4ai.com/core/self-hosting/
+
+## Login-first landing page
+
+Traefik redirects GET/HEAD requests to / and /search to /auth/login when the production Better Auth session cookie (__Secure-better-auth.session_token) is absent. Login, signup, OIDC callback, assets and API routes are not redirected. The redirect is temporary and intentionally drops the initial search query. This is a UX rule, not an authorization boundary: cookie presence does not verify authenticity or expiry. Morphic's server-side AUTH_PROVIDER=better-auth and ENABLE_GUEST_CHAT=false remain the actual chat protection; the upstream chat API rejects unauthenticated requests with HTTP 401. An expired or forged cookie may still show the landing page, but cannot authorize a chat. This is not a blanket auth gate for every API (upstream advanced-search does not check sessions), so retain private NetBird ingress. No new auth service, source modifications or secrets.
+
+After deployment verify in a private browser: / and /search redirect to /auth/login, Pocket ID and local login succeed and return to the chat page, logout then reload redirects, and unauthenticated chat requests are rejected. Confirm the actual cookie name and the authenticated home page does not redirect. Upstream may change cookie naming on updates; review this rule when upgrading. If the ingress redirects valid sessions unexpectedly, remove the morphic-login router and middleware labels (the original chat authentication stays enforced).

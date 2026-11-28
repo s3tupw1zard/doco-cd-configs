@@ -52,6 +52,16 @@ services:
       traefik.http.routers.morphic.entrypoints: web
       traefik.http.routers.morphic.service: morphic
       traefik.http.services.morphic.loadbalancer.server.port: "3000"
+      # UX redirect only: Better Auth and the chat API validate the actual session.
+      # Never treat cookie presence as proof of authentication.
+      traefik.http.routers.morphic-login.rule: 'Host(`morphic.s3tupw1zard.dev`) && (Path(`/`) || Path(`/search`)) && (Method(`GET`) || Method(`HEAD`)) && !HeaderRegexp(`Cookie`, `(^|;[[:space:]]*)__Secure-better-auth[.]session_token=[^;]+`)'
+      traefik.http.routers.morphic-login.entrypoints: web
+      traefik.http.routers.morphic-login.priority: "100"
+      traefik.http.routers.morphic-login.service: morphic
+      traefik.http.routers.morphic-login.middlewares: morphic-login
+      traefik.http.middlewares.morphic-login.redirectregex.regex: '^https?://morphic[.]s3tupw1zard[.]dev/.*'
+      traefik.http.middlewares.morphic-login.redirectregex.replacement: https://morphic.s3tupw1zard.dev/auth/login
+      traefik.http.middlewares.morphic-login.redirectregex.permanent: "false"
   postgres:
     container_name: morphic-postgres
     image: postgres:17-alpine@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73
