@@ -59,3 +59,18 @@ References:
 - https://docs.litellm.ai/docs/providers/openrouter
 - https://openrouter.ai/api/v1/models
 - https://cloudprice.net/content/about
+
+## Temporary OpenCode Go reasoning workaround (LiteLLM 1.111.0)
+
+Native OpenCode Go Chat Completions rejects or drops reasoning_effort in 1.111.0 (upstream issue #51871, fixed by PR #52156, listed in 1.112.0rc1). Allow only reasoning_effort in the five configured OpenAI-compatible Go chat deployments: DeepSeek V4.1 Flash, MiMo V2.6 Flash, GLM 5.3 Flash, GLM 5.3 and LongCat 2.0. Keep drop_params=false, no default effort, and no protocol overrides. The caller chooses the effort; upstream support and valid levels remain model-specific. Qwen3.8 Flash, Qwen3.7 Plus and MiniMax M3 use the native Messages transformation and are deliberately unchanged; the upstream fix does not modify that path. The allowance is temporary: remove it after deploying a stable LiteLLM release containing #52156 and validating native reasoning. The Compose config-revision label forces proxy recreation so its bind-mounted configuration is reloaded.
+
+Run the existing offline tests and the new wire smoke test against the installed LiteLLM SDK (dummy API key, loopback mock upstream, no real model calls):
+
+```sh
+python3 -m unittest discover -s apps/litellm/tests
+docker exec -i -e LITELLM_LOCAL_MODEL_COST_MAP=True -e DO_NOT_TRACK=True -e LITELLM_TELEMETRY=False litellm python - < apps/litellm/tests/smoke_go_reasoning.py
+```
+
+Then test OpenChamber with DeepSeek low/high and verify no UnsupportedParamsError. A mock wire test proves forwarding, not that every effort level has distinct effects for each upstream model. For any native Messages model, inspect its actual supported variants rather than forcing an OpenAI wire parameter onto the Messages endpoint. Existing OpenRouter/OpenAI deployments, pricing, session guard, secrets and model aliases stay unchanged.
+
+References: https://github.com/BerriAI/litellm/pull/52156 and https://docs.litellm.ai/release_notes/v1.112.0rc1/v1-112-0-rc-1
