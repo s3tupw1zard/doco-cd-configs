@@ -52,6 +52,54 @@ services:
       traefik.http.routers.morphic.entrypoints: web
       traefik.http.routers.morphic.service: morphic
       traefik.http.services.morphic.loadbalancer.server.port: "3000"
+      # UX redirect only: Better Auth and the chat API validate the actual session.
+      # Never treat cookie presence as proof of authentication.
+      traefik.http.routers.morphic-login.rule: 'Host(`morphic.s3tupw1zard.dev`) && (Path(`/`) || Path(`/search`)) && (Method(`GET`) || Method(`HEAD`)) && !HeaderRegexp(`Cookie`, `(^|;[[:space:]]*)__Secure-better-auth[.]session_token=[^;]+`)'
+      traefik.http.routers.morphic-login.entrypoints: web
+      traefik.http.routers.morphic-login.priority: "100"
+      traefik.http.routers.morphic-login.service: morphic
+      traefik.http.routers.morphic-login.middlewares: morphic-login
+      traefik.http.middlewares.morphic-login.redirectregex.regex: '^https?://morphic[.]s3tupw1zard[.]dev/.*
+  postgres:
+    container_name: morphic-postgres
+    image: postgres:17-alpine@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: morphic
+      POSTGRES_DB: morphic
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U morphic -d morphic"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  valkey:
+    container_name: morphic-valkey
+    image: valkey/valkey:9-alpine@sha256:3ad5a213cb1bc2fd4a113c89b6248a88655a6bf1dda69519d04e03cd3e3d2742
+    restart: unless-stopped
+    environment:
+      VALKEY_PASSWORD: ${REDIS_PASSWORD:?required}
+    command: ["sh", "-ec", "exec valkey-server --appendonly yes --requirepass \"$$VALKEY_PASSWORD\""]
+    volumes:
+      - valkey:/data
+    healthcheck:
+      test: ["CMD-SHELL", "VALKEYCLI_AUTH=\"$$VALKEY_PASSWORD\" valkey-cli ping | grep -qx PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  postgres:
+  valkey:
+networks:
+  traefik:
+    external: true
+  morphic-crawler:
+    external: true
+
+      traefik.http.middlewares.morphic-login.redirectregex.replacement: https://morphic.s3tupw1zard.dev/auth/login
+      traefik.http.middlewares.morphic-login.redirectregex.permanent: "false"
   postgres:
     container_name: morphic-postgres
     image: postgres:17-alpine@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73
