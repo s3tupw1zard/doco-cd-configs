@@ -1,0 +1,27 @@
+# Install in host Nginx only after replacing NETBIRD_IP.
+# Do not use wildcard server_name or a public listener.
+# Remove existing duplicate server blocks for these names before enabling.
+server {
+    listen NETBIRD_IP:443 ssl;
+    server_name search.s3tupw1zard.dev;
+    ssl_certificate /etc/letsencrypt/live/s3tupw1zard.dev/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/s3tupw1zard.dev/privkey.pem;
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port 443;
+        proxy_set_header Connection "";
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_read_timeout 600s;
+        proxy_send_timeout 600s;
+    }
+}
+# Keep existing api.s3tupw1zard.dev Nginx vhost pointing to port 4000
+# until the staged LiteLLM migration is complete. Then adapt the block
+# above to the API hostname, preserving User-Agent and x-opencode-session.

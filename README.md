@@ -15,13 +15,13 @@ Generate once per new app, in a private terminal, and paste the output into the 
 Do not regenerate secrets for existing deployments. The script also offers litellm and scira for future use, but reuse existing LiteLLM keys and database credentials when migrating.
 
 ### Network
-Host Nginx and NetBird are external. Services bind only to loopback: SearXNG 8002, Crawl4AI 11235. SearXNG JSON is enabled and the limiter is disabled for private use only. Do not expose publicly. Configure NetBird-only Nginx vhosts with TLS if remote access is needed. Crawl4AI requires bearer authentication; never allow crawling private or link-local destinations. Verify outbound restrictions and API authentication before enabling the service. No Docker socket is mounted into crawler.
+Host Nginx and NetBird are external. Traefik binds only to loopback port 8080; SearXNG routes through Traefik. Crawl4AI remains on loopback 11235. See apps/traefik/README.md for required shared network and Nginx configuration. SearXNG JSON is enabled and the limiter is disabled for private use only. Do not expose publicly. Configure NetBird-only Nginx vhosts with TLS if remote access is needed. Crawl4AI requires bearer authentication; never allow crawling private or link-local destinations. Verify outbound restrictions and API authentication before enabling the service. No Docker socket is mounted into crawler.
 
 ### Deployment status
 Search services are prepared, not runtime-tested. Verify image versions/digests, settings mounts, health and JSON search. The new Infisical UUID is configured; secrets still need to be created. Doco-CD bootstrap requires explicit manual setup. Existing LiteLLM remains external until a data-preserving migration is prepared; its prior configuration stays archived. Scira requires a dedicated source fork for LiteLLM routing, session headers, local search, auth, storage and cloud dependency removal. No unmodified Scira deployment is activated. Garage and pgvector are deferred until Scira integration defines their actual contracts.
 
 ### Smoke tests
-    curl -fsS 'http://127.0.0.1:8002/search?q=flutter&format=json'
+    curl -fsS -H 'Host: search.s3tupw1zard.dev' 'http://127.0.0.1:8080/search?q=flutter&format=json'
     curl -fsS http://127.0.0.1:11235/health
 
 Verify unauthenticated crawler requests fail and authenticated requests use the intended token. Do not enable public ingress.

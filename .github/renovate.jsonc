@@ -123,6 +123,22 @@
       "pinDigests": true
     },
     {
+      "matchFileNames": [
+        "apps/traefik/**"
+      ],
+      "matchPackageNames": [
+        "traefik",
+        "ghcr.io/tecnativa/docker-socket-proxy"
+      ],
+      "groupName": "traefik",
+      "addLabels": [
+        "traefik",
+        "networking"
+      ],
+      "automerge": false,
+      "pinDigests": true
+    },
+    {
       "description": "Never update archived applications",
       "matchFileNames": [
         "archive/**"
