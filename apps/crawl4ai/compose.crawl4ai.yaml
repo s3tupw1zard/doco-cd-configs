@@ -1,7 +1,10 @@
 services:
   crawl4ai:
-    image: unclecode/crawl4ai:latest
+    image: unclecode/crawl4ai:0.9.6
     restart: unless-stopped
+    networks:
+      - default
+      - morphic-crawler
     ports:
       - "127.0.0.1:11235:11235"
     environment:
@@ -31,3 +34,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+
+networks:
+  morphic-crawler:
+    external: true
