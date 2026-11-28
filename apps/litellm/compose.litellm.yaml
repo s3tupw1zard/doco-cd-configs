@@ -1,0 +1,37 @@
+services:
+  litellm:
+    image: ghcr.io/berriai/litellm:v1.109.1@sha256:11175975a3093e05e92faee2fe2fe3412a3ae2fcaa849eb0fe25d5f0d8bcb2e9
+    restart: unless-stopped
+    command: ["--config", "/app/config.yaml", "--port", "4000"]
+    ports:
+      - "127.0.0.1:4000:4000"
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?required}
+      LITELLM_SALT_KEY: ${LITELLM_SALT_KEY:?required}
+      OPENCODE_GO_API_KEY: ${OPENCODE_GO_API_KEY:?required}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:?required}
+      DATABASE_URL: postgresql://litellm:${POSTGRES_PASSWORD:?required}@postgres:5432/litellm
+      PROXY_BASE_URL: https://api.s3tupw1zard.dev
+      PYTHONPATH: /app
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./opencode_guard.py:/app/opencode_guard.py:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: litellm
+      POSTGRES_USER: litellm
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U litellm -d litellm"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  postgres:
