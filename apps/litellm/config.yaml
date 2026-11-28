@@ -73,6 +73,8 @@ general_settings:
   database_url: os.environ/DATABASE_URL
   forward_client_headers_to_llm_api: false
   disable_env_credential_login: true
+  store_model_in_db: true
+  store_prompts_in_spend_logs: true
 litellm_settings:
   callbacks:
     - opencode_guard.proxy_handler_instance
