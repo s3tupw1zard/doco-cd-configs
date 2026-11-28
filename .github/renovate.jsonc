@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "docker:pinDigests"
   ],
   "enabledManagers": [
     "docker-compose"
@@ -9,11 +10,29 @@
   "includePaths": [
     "apps/**"
   ],
-  "labels": [
-    "renovate"
+  "ignorePaths": [
+    "archive/**"
   ],
-  "platformAutomerge": true,
+  "labels": [
+    "renovate",
+    "dependencies"
+  ],
+  "automerge": false,
   "packageRules": [
+    {
+      "description": "Keep both mutually updating Doco-CD controllers on the same image",
+      "matchFileNames": [
+        "apps/doco-cd/**"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/kimdre/doco-cd"
+      ],
+      "groupName": "doco-cd-controllers",
+      "addLabels": [
+        "doco-cd",
+        "gitops"
+      ]
+    },
     {
       "matchFileNames": [
         "apps/litellm/**"
@@ -34,24 +53,22 @@
       "matchPackageNames": [
         "unclecode/crawl4ai"
       ],
-      "groupName": "crawl4ai",
       "addLabels": [
         "crawl4ai",
         "web-search"
-      ],
-      "automerge": false,
-      "pinDigests": true
+      ]
     },
     {
-      "description": "Automerge non-major Docker updates",
-      "matchUpdateTypes": [
-        "patch",
-        "minor",
-        "pin",
-        "digest"
+      "matchFileNames": [
+        "apps/morphic/**"
       ],
-      "automerge": true,
-      "automergeType": "pr"
+      "matchPackageNames": [
+        "ghcr.io/miurla/morphic"
+      ],
+      "addLabels": [
+        "morphic",
+        "ai"
+      ]
     },
     {
       "matchFileNames": [
@@ -60,67 +77,10 @@
       "matchPackageNames": [
         "searxng/searxng"
       ],
-      "description": "SearXNG",
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "groupName": "searxng",
       "addLabels": [
         "searxng",
         "web-search"
       ]
-    },
-    {
-      "matchFileNames": [
-        "apps/doco-cd/**"
-      ],
-      "matchPackageNames": [
-        "ghcr.io/kimdre/doco-cd"
-      ],
-      "description": "doco-cd",
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "groupName": "doco-cd",
-      "addLabels": [
-        "doco-cd",
-        "gitops"
-      ]
-    },
-    {
-      "matchFileNames": [
-        "apps/searxng/**"
-      ],
-      "matchPackageNames": [
-        "valkey/valkey"
-      ],
-      "description": "SearXNG Valkey",
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "groupName": "searxng",
-      "addLabels": [
-        "searxng",
-        "cache",
-        "valkey"
-      ]
-    },
-    {
-      "matchFileNames": [
-        "apps/crawl4ai/**",
-        "apps/litellm/**"
-      ],
-      "automerge": false,
-      "pinDigests": true
     },
     {
       "matchFileNames": [
@@ -130,25 +90,60 @@
         "traefik",
         "ghcr.io/tecnativa/docker-socket-proxy"
       ],
-      "groupName": "traefik",
       "addLabels": [
         "traefik",
         "networking"
-      ],
-      "automerge": false,
-      "pinDigests": true
+      ]
     },
     {
+      "description": "LiteLLM PostgreSQL: maintain major 16, including same-tag digest updates; major changes require separate data migration",
+      "matchFileNames": [
+        "apps/litellm/**"
+      ],
+      "matchPackageNames": [
+        "postgres"
+      ],
+      "allowedVersions": "/^16(?:\\.\\d+)?-alpine$/",
+      "addLabels": [
+        "postgres",
+        "database"
+      ]
+    },
+    {
+      "description": "Morphic PostgreSQL: maintain major 17, including same-tag digest updates; major changes require separate data migration",
       "matchFileNames": [
         "apps/morphic/**"
       ],
-      "groupName": "morphic",
-      "addLabels": [
-        "morphic",
-        "ai"
+      "matchPackageNames": [
+        "postgres"
       ],
-      "automerge": false,
-      "pinDigests": true
+      "allowedVersions": "/^17(?:\\.\\d+)?-alpine$/",
+      "addLabels": [
+        "postgres",
+        "database"
+      ]
+    },
+    {
+      "description": "Do not propose automatic major PostgreSQL or Valkey upgrades",
+      "matchPackageNames": [
+        "postgres",
+        "valkey/valkey"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Valkey data compatibility: retain major 9, allow patch and digest updates",
+      "matchPackageNames": [
+        "valkey/valkey"
+      ],
+      "allowedVersions": "/^9(?:\\.\\d+){0,2}-alpine$/",
+      "addLabels": [
+        "valkey",
+        "cache"
+      ]
     },
     {
       "description": "Never update archived applications",
@@ -157,8 +152,5 @@
       ],
       "enabled": false
     }
-  ],
-  "ignorePaths": [
-    "archive/**"
   ]
 }
