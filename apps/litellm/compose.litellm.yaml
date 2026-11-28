@@ -1,5 +1,6 @@
 services:
   litellm:
+    container_name: litellm
     image: ghcr.io/berriai/litellm:1.111.0@sha256:ce00096d012719d58c52cecfa373f7c6256dd1b0ff08f6fa607e10e9628f1f46
     restart: unless-stopped
     command: ["--config", "/app/config.yaml", "--port", "4000"]
@@ -45,6 +46,7 @@ services:
       postgres:
         condition: service_healthy
   postgres:
+    container_name: litellm-postgres
     image: postgres:16-alpine@sha256:f2f98726820d0342055351c6e9d36e705f5bfffb3dd53ff556325114b08afb6d
     restart: unless-stopped
     environment:

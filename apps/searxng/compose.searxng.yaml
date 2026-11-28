@@ -1,5 +1,6 @@
 services:
   searxng:
+    container_name: searxng
     image: searxng/searxng:latest@sha256:a31763b7af3caf6ae9aac1816ba774214eb550252e06a4998f276ded8d60461b
     restart: unless-stopped
     networks:
@@ -27,6 +28,7 @@ services:
         max-size: "10m"
         max-file: "3"
   valkey:
+    container_name: searxng-valkey
     image: valkey/valkey:9-alpine@sha256:3ad5a213cb1bc2fd4a113c89b6248a88655a6bf1dda69519d04e03cd3e3d2742
     restart: unless-stopped
     command: ["valkey-server", "--save", "30", "1"]
