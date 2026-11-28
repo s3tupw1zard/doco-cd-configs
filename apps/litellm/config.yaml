@@ -1,0 +1,72 @@
+# Staged configuration: verify upstream IDs and endpoints before activation.
+model_list:
+  - model_name: go-deepseek-v4.1-flash
+    litellm_params:
+      model: openai/deepseek-v4.1-flash
+      api_base: https://opencode.ai/inference/go/openai/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+  - model_name: go-mimo-v2.6-flash
+    litellm_params:
+      model: openai/mimo-v2.6-flash
+      api_base: https://opencode.ai/inference/go/openai/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+  - model_name: go-glm-5.3-flash
+    litellm_params:
+      model: openai/glm-5.3-flash
+      api_base: https://opencode.ai/inference/go/openai/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+  - model_name: go-glm-5.3
+    litellm_params:
+      model: openai/glm-5.3
+      api_base: https://opencode.ai/inference/go/openai/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+  - model_name: go-qwen3.8-flash
+    litellm_params:
+      model: openai/qwen3.8-flash
+      api_base: https://opencode.ai/inference/go/openai/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+  - model_name: go-qwen3.7-plus
+    litellm_params:
+      model: openai/qwen3.7-plus
+      api_base: https://opencode.ai/inference/go/openai/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+  - model_name: go-minimax-m3
+    litellm_params:
+      model: openai/minimax-m3
+      api_base: https://opencode.ai/inference/go/openai/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+  - model_name: go-longcat-2.0
+    litellm_params:
+      model: openai/longcat-2.0
+      api_base: https://opencode.ai/inference/go/openai/v1
+      api_key: os.environ/OPENCODE_GO_API_KEY
+  - model_name: chat-glm-5.3-flash
+    litellm_params:
+      model: openrouter/z-ai/glm-5.3-flash
+      api_key: os.environ/OPENROUTER_API_KEY
+  - model_name: chat-deepseek-v4.1-flash
+    litellm_params:
+      model: openrouter/deepseek/deepseek-v4.1-flash
+      api_key: os.environ/OPENROUTER_API_KEY
+  - model_name: chat-deepseek-v4.1-flash-1017
+    litellm_params:
+      model: openrouter/deepseek/deepseek-v4.1-flash-1017
+      api_key: os.environ/OPENROUTER_API_KEY
+  - model_name: chat-mimo-v2.6-flash
+    litellm_params:
+      model: openrouter/xiaomi/mimo-v2.6-flash
+      api_key: os.environ/OPENROUTER_API_KEY
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/DATABASE_URL
+  forward_client_headers_to_llm_api: false
+litellm_settings:
+  callbacks:
+    - opencode_guard.proxy_handler_instance
+  drop_params: false
+  turn_off_message_logging: true
+  num_retries: 0
+router_settings:
+  num_retries: 0
+  timeout: 600
+  fallbacks: []

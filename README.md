@@ -25,3 +25,5 @@ Search services are prepared, not runtime-tested. Verify image versions/digests,
     curl -fsS http://127.0.0.1:11235/health
 
 Verify unauthenticated crawler requests fail and authenticated requests use the intended token. Do not enable public ingress.
+
+Staged replacement manifests for LiteLLM are in apps/litellm/; they are deliberately not in the active target. Scira requirements are in apps/scira/README.md.

@@ -8,6 +8,12 @@
 
   "packageRules": [
     {
+      "matchFileNames": ["apps/litellm/**"],
+      "matchPackageNames": ["ghcr.io/berriai/litellm"],
+      "groupName": "litellm-devnode",
+      "addLabels": ["litellm", "ai"]
+    },
+    {
       "matchFileNames": ["apps/crawl4ai/**"],
       "matchPackageNames": ["unclecode/crawl4ai"],
       "groupName": "crawl4ai",
@@ -573,11 +579,11 @@
       "description": "Plane RabbitMQ compatibility",
       "allowedVersions": "<4.0.0",
       "addLabels": ["plane", "message-queue", "rabbitmq"]
-    }
-
-    ,{
-      "matchFileNames": ["apps/crawl4ai/**"],
-      "automerge": false
+    },
+    {
+      "matchFileNames": ["apps/crawl4ai/**", "apps/litellm/**"],
+      "automerge": false,
+      "pinDigests": true
     }
   ]
 }
