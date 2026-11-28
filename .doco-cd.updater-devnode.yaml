@@ -1,0 +1,10 @@
+name: doco-cd-main-devnode
+working_dir: apps/doco-cd
+compose_files:
+  - compose.main-devnode.yaml
+remove_orphans: false
+force_image_pull: false
+external_secrets:
+  SECRET_PROVIDER_SITE_URL: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/doco-cd/SECRET_PROVIDER_SITE_URL
+  SECRET_PROVIDER_CLIENT_ID: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/doco-cd/SECRET_PROVIDER_CLIENT_ID
+  SECRET_PROVIDER_CLIENT_SECRET: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/doco-cd/SECRET_PROVIDER_CLIENT_SECRET

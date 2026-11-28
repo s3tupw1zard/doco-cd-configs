@@ -1,0 +1,28 @@
+name: doco-cd-updater-devnode
+working_dir: apps/doco-cd
+compose_files:
+  - compose.updater-devnode.yaml
+remove_orphans: false
+force_image_pull: false
+external_secrets:
+  SECRET_PROVIDER_SITE_URL: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/doco-cd/SECRET_PROVIDER_SITE_URL
+  SECRET_PROVIDER_CLIENT_ID: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/doco-cd/SECRET_PROVIDER_CLIENT_ID
+  SECRET_PROVIDER_CLIENT_SECRET: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/doco-cd/SECRET_PROVIDER_CLIENT_SECRET
+---
+name: searxng
+working_dir: apps/searxng
+compose_files:
+  - compose.searxng.yaml
+remove_orphans: false
+force_image_pull: false
+external_secrets:
+  SEARXNG_SECRET: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/searxng/SEARXNG_SECRET
+---
+name: crawl4ai
+working_dir: apps/crawl4ai
+compose_files:
+  - compose.crawl4ai.yaml
+remove_orphans: false
+force_image_pull: false
+external_secrets:
+  CRAWL4AI_API_TOKEN: 249698ea-20b9-43f5-9066-95a0af265dac:prod:/crawl4ai/CRAWL4AI_API_TOKEN
