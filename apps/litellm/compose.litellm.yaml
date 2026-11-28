@@ -20,6 +20,18 @@ services:
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:?required}
       DATABASE_URL: postgresql://litellm:${POSTGRES_PASSWORD:?required}@postgres:5432/litellm
       PROXY_BASE_URL: https://api.s3tupw1zard.dev
+      GENERIC_CLIENT_ID: ${GENERIC_CLIENT_ID:?required}
+      GENERIC_CLIENT_SECRET: ${GENERIC_CLIENT_SECRET:?required}
+      GENERIC_AUTHORIZATION_ENDPOINT: https://id.s3tupw1zard.ovh/authorize
+      GENERIC_TOKEN_ENDPOINT: https://id.s3tupw1zard.ovh/api/oidc/token
+      GENERIC_USERINFO_ENDPOINT: https://id.s3tupw1zard.ovh/api/oidc/userinfo
+      GENERIC_SCOPE: "openid profile email"
+      GENERIC_CLIENT_USE_PKCE: "true"
+      GENERIC_USER_ID_ATTRIBUTE: sub
+      GENERIC_USER_EMAIL_ATTRIBUTE: email
+      GENERIC_USER_DISPLAY_NAME_ATTRIBUTE: name
+      GENERIC_USER_FIRST_NAME_ATTRIBUTE: given_name
+      GENERIC_USER_LAST_NAME_ATTRIBUTE: family_name
       PYTHONPATH: /app
     volumes:
       - ./config.yaml:/app/config.yaml:ro
