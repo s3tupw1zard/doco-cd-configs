@@ -1,7 +1,7 @@
 services:
   morphic:
     # Official upstream image tag matching reviewed release v1.11.0.
-    image: ghcr.io/miurla/morphic:e6c36d8bd0da12b9acb7faa95c99d673974ba383
+    image: ghcr.io/miurla/morphic:e6c36d8bd0da12b9acb7faa95c99d673974ba383@sha256:7fd343f456efd47c8f26c6de3cee713cf720121dad058b5ee7f7da5b2dfa5890
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql://morphic:${POSTGRES_PASSWORD:?required}@postgres:5432/morphic
@@ -52,7 +52,7 @@ services:
       traefik.http.routers.morphic.service: morphic
       traefik.http.services.morphic.loadbalancer.server.port: "3000"
   postgres:
-    image: postgres:17-alpine
+    image: postgres:17-alpine@sha256:f9cf3e1f0066f0eb0c48707d864f0ac5941e9ff454a072077d97a4d278d07d73
     restart: unless-stopped
     environment:
       POSTGRES_USER: morphic
@@ -66,7 +66,7 @@ services:
       timeout: 5s
       retries: 10
   valkey:
-    image: valkey/valkey:9-alpine
+    image: valkey/valkey:9-alpine@sha256:3ad5a213cb1bc2fd4a113c89b6248a88655a6bf1dda69519d04e03cd3e3d2742
     restart: unless-stopped
     environment:
       VALKEY_PASSWORD: ${REDIS_PASSWORD:?required}
